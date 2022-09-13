@@ -1,0 +1,9 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "more_slabs_stairs_and_walls:block/glass/glass_slab",
+	"textures": {
+		"glass": "block/cyan_stained_glass",
+		"slab": "more_slabs_stairs_and_walls:block/cyan_stained_glass_slab_side",
+		"particle": "block/cyan_stained_glass"
+	}
+}

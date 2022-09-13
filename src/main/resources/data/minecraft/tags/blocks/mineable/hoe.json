@@ -7,6 +7,10 @@
 
     "more_slabs_stairs_and_walls:moss_stairs",
     "more_slabs_stairs_and_walls:moss_wall",
-    "more_slabs_stairs_and_walls:moss_slab"
+    "more_slabs_stairs_and_walls:moss_slab",
+
+    "more_slabs_stairs_and_walls:sculk_stairs",
+    "more_slabs_stairs_and_walls:sculk_wall",
+    "more_slabs_stairs_and_walls:sculk_slab"
   ]
 }

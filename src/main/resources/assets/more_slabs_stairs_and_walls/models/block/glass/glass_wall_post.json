@@ -1,0 +1,22 @@
+{
+	"texture_size": [40, 16],
+	"textures": {
+		"wall": "more_slabs_stairs_and_walls:block/glass_wall",
+		"particle": "block/glass"
+	},
+	"elements": [
+		{
+			"name": "Center post",
+			"from": [4, 0, 4],
+			"to": [12, 16, 12],
+			"faces": {
+				"north": {"uv": [0, 0, 3.2, 16], "texture": "#wall"},
+				"east": {"uv": [0, 16, 3.2, 0], "texture": "#wall"},
+				"south": {"uv": [0, 0, 3.2, 16], "texture": "#wall"},
+				"west": {"uv": [0, 16, 3.2, 0], "texture": "#wall"},
+				"up": {"uv": [10.8, 8, 14, 16], "texture": "#wall", "cullface": "up"},
+				"down": {"uv": [10.8, 8, 14, 16], "texture": "#wall", "cullface": "down"}
+			}
+		}
+	]
+}

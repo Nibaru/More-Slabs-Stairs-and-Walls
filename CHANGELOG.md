@@ -1,5 +1,37 @@
 # Changelog
 
+## [1.19.2 - Fabric] - 2022-09-13
+
+### Added
+- Stairs, Slabs and Walls for:
+  - glass (All Colors)
+  - mushroom (All Variants)
+  - sculk
+  - smooth basalt
+  - quartz bricks
+  - netherrack
+  - mud
+  - packed mud
+  - dirt
+  - coarse dirt
+  - rooted dirt
+  - honeycomb
+  - snow
+
+- Stairs for:
+  
+- Walls for:
+  - quartz 
+  - smooth quartz 
+  - polished andesite
+  - polished granite
+  - polished diorite
+  - polished blackstone bricks
+  - purpur
+- Slabs for:
+  - reinforced deepslate
+
+
 ## [1.19 - Fabric] - 2022-07-13
 
 ### Added

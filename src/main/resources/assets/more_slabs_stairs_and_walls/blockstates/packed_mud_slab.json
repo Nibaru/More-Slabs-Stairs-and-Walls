@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "more_slabs_stairs_and_walls:block/packed_mud_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/packed_mud"
+    },
+    "type=top": {
+      "model": "more_slabs_stairs_and_walls:block/packed_mud_slab_top"
+    }
+  }
+}

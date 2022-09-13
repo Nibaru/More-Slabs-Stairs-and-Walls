@@ -1,0 +1,1 @@
+{"type": "minecraft:block", "pools": [{"rolls": 1, "entries": [{"type": "minecraft:item", "name": "more_slabs_stairs_and_walls:purple_stained_glass_stairs"}], "conditions": [{"condition": "minecraft:survives_explosion"}]}]}

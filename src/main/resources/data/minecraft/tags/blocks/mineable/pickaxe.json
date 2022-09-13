@@ -144,9 +144,29 @@
     "more_slabs_stairs_and_walls:dark_prismarine_wall",
     "more_slabs_stairs_and_walls:stone_wall",
     "more_slabs_stairs_and_walls:smooth_stone_wall",
-    "more_slabs_stairs_and_walls:smooth_stone_stairs"
+    "more_slabs_stairs_and_walls:smooth_stone_stairs",
 
+    "more_slabs_stairs_and_walls:smooth_basalt_stairs",
+    "more_slabs_stairs_and_walls:smooth_basalt_wall",
+    "more_slabs_stairs_and_walls:smooth_basalt_slab",
 
+    "more_slabs_stairs_and_walls:quartz_bricks_stairs",
+    "more_slabs_stairs_and_walls:quartz_bricks_wall",
+    "more_slabs_stairs_and_walls:quartz_bricks_slab",
 
+    "more_slabs_stairs_and_walls:netherrack_stairs",
+    "more_slabs_stairs_and_walls:netherrack_wall",
+    "more_slabs_stairs_and_walls:netherrack_slab",
+
+    "more_slabs_stairs_and_walls:packed_mud_stairs",
+    "more_slabs_stairs_and_walls:packed_mud_wall",
+    "more_slabs_stairs_and_walls:packed_mud_slab",
+
+    "more_slabs_stairs_and_walls:quartz_wall",
+    "more_slabs_stairs_and_walls:smooth_quartz_wall",
+    "more_slabs_stairs_and_walls:polished_andesite_wall",
+    "more_slabs_stairs_and_walls:polished_diorite_wall",
+    "more_slabs_stairs_and_walls:polished_granite_wall",
+    "more_slabs_stairs_and_walls:polished_blackstone_bricks_wall"
   ]
 }

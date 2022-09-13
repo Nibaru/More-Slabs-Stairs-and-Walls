@@ -1,0 +1,7 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "more_slabs_stairs_and_walls:block/glass/glass_wall_low_full",
+	"textures": {
+		"wall": "more_slabs_stairs_and_walls:block/green_stained_glass_wall"
+	}
+}
