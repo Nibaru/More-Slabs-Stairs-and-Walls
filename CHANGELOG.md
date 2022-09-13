@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.19.2 - Fabric] - 2022-09-13
+## [1.1.0 for 1.19.2 - Fabric] - 2022-09-13
 
 ### Added
 - Stairs, Slabs and Walls for:
