@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.1 for 1.19.2 - Fabric] - 2022-09-16
+
+### Fixed
+- Crash on server instance
+
+
 ## [1.1.0 for 1.19.2 - Fabric] - 2022-09-13
 
 ### Added

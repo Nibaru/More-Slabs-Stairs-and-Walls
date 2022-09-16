@@ -19,6 +19,9 @@
   "entrypoints": {
     "main": [
       "games.twinhead.MoreBuildingBlocks"
+    ],
+    "client": [
+      "games.twinhead.Client"
     ]
   },
   "depends": {
