@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "minecraft:pearlescent_froglight"
+  },
+  "result": "more_slabs_stairs_and_walls:pearlescent_froglight_wall"
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "minecraft:amethyst_block"
+  },
+  "result": "more_slabs_stairs_and_walls:amethyst_block_slab"
+}

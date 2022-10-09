@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "more_slabs_stairs_and_walls:block/birch_leaves_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/birch_leaves"
+    },
+    "type=top": {
+      "model": "more_slabs_stairs_and_walls:block/birch_leaves_slab_top"
+    }
+  }
+}

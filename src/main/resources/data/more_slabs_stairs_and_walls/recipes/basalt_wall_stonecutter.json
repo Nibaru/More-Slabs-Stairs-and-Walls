@@ -1,8 +1,0 @@
-{
-    "type": "minecraft:stonecutting",
-    "ingredient": {
-        "item": "minecraft:basalt"
-    },
-    "result": "more_slabs_stairs_and_walls:basalt_wall",
-    "count": 1
-}

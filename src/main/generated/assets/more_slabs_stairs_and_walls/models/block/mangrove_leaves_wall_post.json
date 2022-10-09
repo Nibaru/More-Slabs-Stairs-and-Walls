@@ -1,0 +1,6 @@
+{
+  "parent": "more_slabs_stairs_and_walls:block/leaves_template_wall_post",
+  "textures": {
+    "wall": "minecraft:block/mangrove_leaves"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "more_slabs_stairs_and_walls:block/emerald_block_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/emerald_block"
+    },
+    "type=top": {
+      "model": "more_slabs_stairs_and_walls:block/emerald_block_slab_top"
+    }
+  }
+}

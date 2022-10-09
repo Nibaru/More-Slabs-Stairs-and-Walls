@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "more_slabs_stairs_and_walls:obsidian_slab",
+    "more_slabs_stairs_and_walls:obsidian_stairs",
+    "more_slabs_stairs_and_walls:obsidian_wall",
+    "more_slabs_stairs_and_walls:crying_obsidian_slab",
+    "more_slabs_stairs_and_walls:crying_obsidian_stairs",
+    "more_slabs_stairs_and_walls:crying_obsidian_wall"
+  ]
+}

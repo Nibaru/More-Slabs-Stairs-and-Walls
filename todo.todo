@@ -1,0 +1,14 @@
+Make use of a configuration file to make make the blocks, then we can make modded textures too.
+
+
+
+Custom blocks to add
+   - Grass Like Blocks
+   - Coral Blocks
+   - Make Copper Block Oxizize
+   - Slime Blocks
+   - Honey Blocks
+        -Checkout PistonHandler.java
+   - KElp BLock
+   - Redstone Lamp
+   - Metal Blocks

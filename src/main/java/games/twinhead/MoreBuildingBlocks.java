@@ -8,6 +8,7 @@ public class MoreBuildingBlocks implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        BlockRegistry.RegisterAllBlocks();
+        BlockRegistry.register();
+        ModFuelRegistry.register();
     }
 }

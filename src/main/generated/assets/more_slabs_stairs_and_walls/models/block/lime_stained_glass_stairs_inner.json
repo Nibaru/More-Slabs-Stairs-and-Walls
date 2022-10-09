@@ -1,0 +1,9 @@
+{
+  "parent": "more_slabs_stairs_and_walls:block/glass/glass_stairs_inner",
+  "textures": {
+    "bottom": "minecraft:block/lime_stained_glass",
+    "front": "more_slabs_stairs_and_walls:block/lime_stained_glass_slab_side",
+    "side": "more_slabs_stairs_and_walls:block/lime_stained_glass_stair_side",
+    "top": "more_slabs_stairs_and_walls:block/lime_stained_glass_stair_small"
+  }
+}

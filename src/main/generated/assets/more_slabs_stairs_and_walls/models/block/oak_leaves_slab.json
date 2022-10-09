@@ -1,0 +1,8 @@
+{
+  "parent": "more_slabs_stairs_and_walls:block/leaves_slab",
+  "textures": {
+    "bottom": "minecraft:block/oak_leaves",
+    "side": "minecraft:block/oak_leaves",
+    "top": "minecraft:block/oak_leaves"
+  }
+}

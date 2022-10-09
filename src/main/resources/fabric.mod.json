@@ -12,7 +12,7 @@
     "sources": "https://github.com/Nibaru/more_slabs_stairs_and_walls/tree/1.19-fabric"
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/more_slabs_stairs_and_walls/icon.png",
 
   "environment": "*",
@@ -22,8 +22,14 @@
     ],
     "client": [
       "games.twinhead.Client"
+    ],
+    "fabric-datagen": [
+      "games.twinhead.datagen.ModDatagen"
     ]
   },
+  "mixins": [
+    "MoreSlabsStairsandWalls.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=0.14.6",
     "fabric": "*",

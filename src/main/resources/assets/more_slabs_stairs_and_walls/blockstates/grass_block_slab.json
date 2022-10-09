@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "more_slabs_stairs_and_walls:block/grass_block_slab"
+    },
+    "type=double,snowy=false": {
+      "model": "minecraft:block/grass_block"
+    },
+    "type=double,snowy=true": {
+      "model": "minecraft:block/grass_block_snow"
+    },
+    "type=top,snowy=false": {
+      "model": "more_slabs_stairs_and_walls:block/grass_block_slab_top"
+    },
+    "type=top,snowy=true": {
+      "model": "more_slabs_stairs_and_walls:block/grass_slab_snowy"
+    }
+  }
+}

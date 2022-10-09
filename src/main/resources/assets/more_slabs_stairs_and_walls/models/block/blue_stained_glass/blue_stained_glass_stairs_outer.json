@@ -1,9 +1,0 @@
-{
-	"parent": "more_slabs_stairs_and_walls:block/glass/glass_stairs_outer",
-	"textures": {
-		"particle": "block/glass",
-		"slab": "more_slabs_stairs_and_walls:block/blue_stained_glass_slab_side",
-		"side": "more_slabs_stairs_and_walls:block/blue_stained_glass_stair_side",
-		"glass": "block/blue_stained_glass"
-	}
-}

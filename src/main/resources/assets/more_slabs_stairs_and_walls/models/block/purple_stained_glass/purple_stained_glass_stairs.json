@@ -1,9 +1,0 @@
-{
-	"credit": "Made with Blockbench",
-	"parent": "more_slabs_stairs_and_walls:block/glass/glass_stairs",
-	"textures": {
-		"slab": "more_slabs_stairs_and_walls:block/purple_stained_glass_slab_side",
-		"side": "more_slabs_stairs_and_walls:block/purple_stained_glass_stair_side",
-		"glass": "block/purple_stained_glass"
-	}
-}

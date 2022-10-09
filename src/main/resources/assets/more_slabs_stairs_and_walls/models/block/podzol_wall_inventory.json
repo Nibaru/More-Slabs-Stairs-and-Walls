@@ -1,0 +1,10 @@
+{
+	"parent": "more_slabs_stairs_and_walls:block/wall_inventory_side_bottom_top",
+	"textures": {
+		"particle": "block/dirt",
+		"bottom": "block/dirt",
+		"top": "block/podzol_top",
+		"side": "block/podzol_side",
+		"overlay": "block/podzol_side"
+	}
+}

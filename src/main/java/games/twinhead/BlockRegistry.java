@@ -1,155 +1,187 @@
 package games.twinhead;
 
+import games.twinhead.block.*;
+import games.twinhead.block.coral.CoralSlabBlock;
+import games.twinhead.block.coral.CoralStairsBlock;
+import games.twinhead.block.coral.CoralWallBlock;
+import games.twinhead.block.culled.CulledSlabBlock;
+import games.twinhead.block.culled.CulledStainedSlabBlock;
+import games.twinhead.block.culled.CulledStainedStairsBlock;
+import games.twinhead.block.culled.CulledStairsBlock;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import java.util.HashMap;
 
 public class BlockRegistry {
-    public static final String[] colorNames = new String[]{"white", "yellow", "black", "red", "purple", "pink", "orange", "magenta", "lime", "light_gray", "light_blue", "green", "gray", "cyan", "brown", "blue"};
+    public static HashMap<ModBlocks, Block> SLABS = new HashMap<>();
+    public static HashMap<ModBlocks, Block> STAIRS = new HashMap<>();
+    public static HashMap<ModBlocks, Block> WALLS = new HashMap<>();
 
-    public static HashMap<String, Block> blocks = new HashMap<>();
-
-    public static void RegisterAllBlocks(){
-        registerColorBlock("concrete");
-        registerColorBlock("terracotta");
-        registerColorBlock("wool");
-
-        registerColorBlock("stained_glass");
-        registerAll("glass", Blocks.GLASS);
-
-        registerAll("sculk", Blocks.SCULK);
-
-        registerAll("smooth_basalt", Blocks.SMOOTH_BASALT);
-
-        registerAll("quartz_bricks", Blocks.QUARTZ_BRICKS);
-        registerAll("netherrack", Blocks.NETHERRACK);
-        registerAll("packed_mud", Blocks.PACKED_MUD);
-        registerAll("mud", Blocks.MUD);
-
-        registerAll("dirt", Blocks.DIRT);
-        registerAll("coarse_dirt", Blocks.COARSE_DIRT);
-        registerAll("honeycomb", Blocks.HONEYCOMB_BLOCK);
-        registerAll("rooted_dirt", Blocks.ROOTED_DIRT);
-        registerAll("snow", Blocks.SNOW_BLOCK);
-
-        registerAll("mushroom_stem", Blocks.MUSHROOM_STEM);
-        registerAll("brown_mushroom_block", Blocks.BROWN_MUSHROOM_BLOCK);
-        registerAll("red_mushroom_block", Blocks.RED_MUSHROOM_BLOCK);
-
-        registerBlock("purpur_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.PURPUR_BLOCK)));
-
-        registerBlock("reinforced_deepslate_slab", new SlabBlock(AbstractBlock.Settings.copy(Blocks.REINFORCED_DEEPSLATE)));
-
-
-        registerAll("moss", Blocks.MOSS_BLOCK);
-        registerAll("calcite", Blocks.CALCITE);
-        registerAll("terracotta", Blocks.TERRACOTTA);
-        registerAll("glowstone", Blocks.GLOWSTONE, AbstractBlock.Settings.copy(Blocks.GLOWSTONE).luminance((i) -> 15));
-        registerAll("cracked_stone_bricks", Blocks.CRACKED_STONE_BRICKS);
-
-        registerAll("tuff", Blocks.TUFF);
-        registerAll("dripstone_block", Blocks.DRIPSTONE_BLOCK);
-
-        registerAll("sea_lantern", Blocks.SEA_LANTERN, AbstractBlock.Settings.copy(Blocks.SEA_LANTERN).luminance((i) -> 15));
-        registerAll("shroomlight", Blocks.SHROOMLIGHT, AbstractBlock.Settings.copy(Blocks.SHROOMLIGHT).luminance((i) -> 15));
-
-        registerAll("end_stone", Blocks.END_STONE);
-
-        registerAll("oak_wood", Blocks.OAK_WOOD);
-        registerAll("birch_wood", Blocks.BIRCH_WOOD);
-        registerAll("spruce_wood", Blocks.SPRUCE_WOOD);
-        registerAll("jungle_wood", Blocks.JUNGLE_WOOD);
-        registerAll("dark_oak_wood", Blocks.DARK_OAK_WOOD);
-        registerAll("acacia_wood", Blocks.ACACIA_WOOD);
-        registerAll("mangrove_wood", Blocks.MANGROVE_WOOD);
-        registerAll("crimson_hyphae", Blocks.CRIMSON_HYPHAE);
-        registerAll("warped_hyphae", Blocks.WARPED_HYPHAE);
-
-        registerAll("stripped_oak_wood", Blocks.OAK_WOOD);
-        registerAll("stripped_birch_wood", Blocks.BIRCH_WOOD);
-        registerAll("stripped_spruce_wood", Blocks.SPRUCE_WOOD);
-        registerAll("stripped_jungle_wood", Blocks.JUNGLE_WOOD);
-        registerAll("stripped_dark_oak_wood", Blocks.DARK_OAK_WOOD);
-        registerAll("stripped_acacia_wood", Blocks.ACACIA_WOOD);
-        registerAll("stripped_mangrove_wood", Blocks.MANGROVE_WOOD);
-        registerAll("stripped_crimson_hyphae", Blocks.CRIMSON_HYPHAE);
-        registerAll("stripped_warped_hyphae", Blocks.WARPED_HYPHAE);
-
-
-        registerBlock("basalt_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.BASALT)));
-
-        registerBlock("basalt_slab", new SlabBlock(AbstractBlock.Settings.copy(Blocks.BASALT)));
-
-        registerBlock("cut_copper_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.CUT_COPPER)));
-        registerBlock("exposed_cut_copper_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.EXPOSED_CUT_COPPER)));
-        registerBlock("weathered_cut_copper_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.WEATHERED_CUT_COPPER)));
-        registerBlock("oxidized_cut_copper_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.OXIDIZED_CUT_COPPER)));
-
-        registerBlock("smooth_quartz_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.SMOOTH_QUARTZ)));
-        registerBlock("quartz_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.QUARTZ_BLOCK)));
-
-        registerBlock("polished_blackstone_bricks_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.POLISHED_BLACKSTONE_BRICKS)));
-
-        registerBlock("polished_andesite_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.POLISHED_ANDESITE)));
-        registerBlock("polished_granite_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.POLISHED_GRANITE)));
-        registerBlock("polished_diorite_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.POLISHED_DIORITE)));
-
-        registerBlock("smooth_sandstone_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.SMOOTH_SANDSTONE)));
-        registerBlock("smooth_red_sandstone_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.SMOOTH_RED_SANDSTONE)));
-        registerBlock( "dark_prismarine_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.DARK_PRISMARINE)));
-        registerBlock( "prismarine_bricks_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.PRISMARINE_BRICKS)));
-        registerBlock( "stone_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.STONE)));
-        registerBlock( "smooth_stone_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.SMOOTH_STONE)));
-        registerBlock( "smooth_stone_stairs", new StairsBlock(Blocks.SMOOTH_STONE.getDefaultState(), AbstractBlock.Settings.copy(Blocks.SMOOTH_STONE)));
-
-        registerAll("obsidian", Blocks.OBSIDIAN, AbstractBlock.Settings.copy(Blocks.OBSIDIAN).strength(50f, 1200f));
-
-
-
-
-
-    }
-
-
-    public static void registerColorBlock(String blockName){
-        for (String color: colorNames) {
-            Block copyBlock = switch (blockName){
-                case "concrete" -> Blocks.BLACK_CONCRETE;
-                case "wool" -> Blocks.BLACK_WOOL;
-                case "terracotta" -> Blocks.TERRACOTTA;
-                case "stained_glass" -> Blocks.GLASS;
-                default -> Blocks.DIRT;
-            };
-            registerAll(color + "_" + blockName, copyBlock);
+    public static void register(){
+        for (ModBlocks block: ModBlocks.values()) {
+            registerBlock(block, block.getCopyBlock(), block.hasSlab, block.hasStairs, block.hasWall);
         }
     }
 
-    public static void registerAll(String name, Block block, AbstractBlock.Settings settings){
-        registerBlock(name + "_stairs", new StairsBlock(block.getDefaultState(), settings));
-        registerBlock(name + "_wall", new WallBlock(settings));
-        registerBlock(name + "_slab", new SlabBlock(settings));
-
+    public static void registerBlock(ModBlocks block, Block copyBlock, boolean slab, boolean stairs, boolean wall){
+        if(slab)
+            registerSlab(block, copyBlock);
+        if(stairs)
+            registerStairs(block, copyBlock);
+        if(wall)
+            registerWall(block, copyBlock);
     }
 
-    public static void registerAll(String name, Block block){
-        registerBlock(name + "_stairs", new StairsBlock(block.getDefaultState(), AbstractBlock.Settings.copy(block)));
-        registerBlock(name + "_wall", new WallBlock(AbstractBlock.Settings.copy(block)));
-        registerBlock(name + "_slab", new SlabBlock(AbstractBlock.Settings.copy(block)));
+    public static void registerItem(ModBlocks block, Block blockItem, ModBlocks.BlockType type){
+        Registry.register(Registry.ITEM, block.getIdentifier(type), new BlockItem(blockItem, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
     }
 
+    public static void registerSlab(ModBlocks block, Block copyBlock){
+        Block slab = switch (block){
+            case GLASS -> new CulledSlabBlock(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+            case WHITE_STAINED_GLASS,
+            YELLOW_STAINED_GLASS,
+            BLACK_STAINED_GLASS,
+            RED_STAINED_GLASS,
+            PURPLE_STAINED_GLASS,
+            PINK_STAINED_GLASS,
+            ORANGE_STAINED_GLASS,
+            MAGENTA_STAINED_GLASS,
+            LIME_STAINED_GLASS,
+            LIGHT_GRAY_STAINED_GLASS,
+            LIGHT_BLUE_STAINED_GLASS,
+            GREEN_STAINED_GLASS,
+            GRAY_STAINED_GLASS,
+            CYAN_STAINED_GLASS,
+            BROWN_STAINED_GLASS,
+            BLUE_STAINED_GLASS -> new CulledStainedSlabBlock(block.getDyeColor(), AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+            case BUBBLE_CORAL_BLOCK,
+                    HORN_CORAL_BLOCK,
+                    BRAIN_CORAL_BLOCK,
+                    FIRE_CORAL_BLOCK,
+                    TUBE_CORAL_BLOCK -> new CoralSlabBlock(block.deadCoralBlock.getSlabBlock(), AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+            case SLIME_BLOCK -> new SlimeBlockSlab(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+            case HONEY_BLOCK -> new HoneyBlockSlab(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
 
-    public static void registerBlock(String name, Block block){
-        String id = MoreBuildingBlocks.mod_id + ":" + name;
-        Registry.register(Registry.BLOCK , id, block);
-        registerItem(id, block);
-        blocks.put(id, block);
+            case GRASS_BLOCK,
+                    MYCELIUM,
+                    CRIMSON_NYLIUM,
+                    WARPED_NYLIUM -> new SpreadableSlabBlock(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+            case SPRUCE_LOG,
+                    ACACIA_LOG,
+                    BIRCH_LOG,
+                    DARK_OAK_LOG,
+                    JUNGLE_LOG,
+                    MANGROVE_LOG,
+                    OAK_LOG,
+                    WARPED_STEM,
+                    CRIMSON_STEM ->  new SlabBlock(AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).luminance((i) -> block.getLuminance()));
+
+            case BONE_BLOCK -> new SlabBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.PALE_YELLOW).sounds(BlockSoundGroup.BONE).luminance((i) -> block.getLuminance()));
+
+            default -> new SlabBlock(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+        };
+
+        registerItem(block, slab, ModBlocks.BlockType.SLAB);
+        SLABS.put(block, slab);
+        Registry.register(Registry.BLOCK, new Identifier(MoreBuildingBlocks.mod_id, block.toString().toLowerCase() + "_slab"), slab);
     }
 
-    public static void registerItem(String id, Block item){
-        Registry.register(Registry.ITEM, id, new BlockItem(item, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
+    public static void registerStairs(ModBlocks block, Block copyBlock){
+        StairsBlock stairs = switch (block){
+            case GLASS -> new CulledStairsBlock(copyBlock.getDefaultState(), AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+            case WHITE_STAINED_GLASS,
+                    YELLOW_STAINED_GLASS,
+                    BLACK_STAINED_GLASS,
+                    RED_STAINED_GLASS,
+                    PURPLE_STAINED_GLASS,
+                    PINK_STAINED_GLASS,
+                    ORANGE_STAINED_GLASS,
+                    MAGENTA_STAINED_GLASS,
+                    LIME_STAINED_GLASS,
+                    LIGHT_GRAY_STAINED_GLASS,
+                    LIGHT_BLUE_STAINED_GLASS,
+                    GREEN_STAINED_GLASS,
+                    GRAY_STAINED_GLASS,
+                    CYAN_STAINED_GLASS,
+                    BROWN_STAINED_GLASS,
+                    BLUE_STAINED_GLASS -> new CulledStainedStairsBlock(copyBlock.getDefaultState(), block.getDyeColor(), AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+            case OAK_LEAVES,
+                    ACACIA_LEAVES,
+                    BIRCH_LEAVES,
+                    DARK_OAK_LEAVES,
+                    JUNGLE_LEAVES,
+                    MANGROVE_LEAVES,
+                    SPRUCE_LEAVES,
+                    AZALEA_LEAVES,
+                    FLOWERING_AZALEA_LEAVES -> new StairsBlock(Blocks.GRASS_BLOCK.getDefaultState(),AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+            case BUBBLE_CORAL_BLOCK,
+                    HORN_CORAL_BLOCK,
+                    BRAIN_CORAL_BLOCK,
+                    FIRE_CORAL_BLOCK,
+                    TUBE_CORAL_BLOCK -> new CoralStairsBlock(block.deadCoralBlock.getStairsBlock(), AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+            case SLIME_BLOCK -> new SlimeBlockStairs(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+            case GRASS_BLOCK,
+                    MYCELIUM,
+                    CRIMSON_NYLIUM,
+                    WARPED_NYLIUM -> new SpreadableStairsBlock(copyBlock.getDefaultState(),AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()).ticksRandomly());
+            case SPRUCE_LOG,
+                    ACACIA_LOG,
+                    BIRCH_LOG,
+                    DARK_OAK_LOG,
+                    JUNGLE_LOG,
+                    MANGROVE_LOG,
+                    OAK_LOG,
+                    WARPED_STEM,
+                    CRIMSON_STEM ->  new StairsBlock(copyBlock.getDefaultState(), AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).luminance((i) -> block.getLuminance()));
+
+            case BONE_BLOCK -> new StairsBlock(copyBlock.getDefaultState(), AbstractBlock.Settings.of(Material.STONE, MapColor.PALE_YELLOW).sounds(BlockSoundGroup.BONE).luminance((i) -> block.getLuminance()));
+
+
+            default -> new StairsBlock(copyBlock.getDefaultState(),AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+        };
+
+        registerItem(block, stairs, ModBlocks.BlockType.STAIRS);
+        STAIRS.put(block, stairs);
+        Registry.register(Registry.BLOCK, new Identifier(MoreBuildingBlocks.mod_id, block.toString().toLowerCase() + "_stairs"), stairs);
+    }
+
+    public static void registerWall(ModBlocks block, Block copyBlock){
+        WallBlock wall = switch (block){
+            case BUBBLE_CORAL_BLOCK,
+                    HORN_CORAL_BLOCK,
+                    BRAIN_CORAL_BLOCK,
+                    FIRE_CORAL_BLOCK,
+                    TUBE_CORAL_BLOCK -> new CoralWallBlock(block.deadCoralBlock.getWallBlock(), AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+            case GRASS_BLOCK,
+                    MYCELIUM,
+                    CRIMSON_NYLIUM,
+                    WARPED_NYLIUM -> new SpreadableWallBlock(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()).ticksRandomly());
+            case SPRUCE_LOG,
+                    ACACIA_LOG,
+                    BIRCH_LOG,
+                    DARK_OAK_LOG,
+                    JUNGLE_LOG,
+                    MANGROVE_LOG,
+                    OAK_LOG,
+                    WARPED_STEM,
+                    CRIMSON_STEM ->  new WallBlock(AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).luminance((i) -> block.getLuminance()));
+
+            case BONE_BLOCK -> new WallBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.PALE_YELLOW).sounds(BlockSoundGroup.BONE).luminance((i) -> block.getLuminance()));
+
+
+            default -> new WallBlock(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+        };
+
+
+        registerItem(block, wall, ModBlocks.BlockType.WALL);
+        WALLS.put(block, wall);
+        Registry.register(Registry.BLOCK, new Identifier(MoreBuildingBlocks.mod_id, block.toString().toLowerCase() + "_wall"), wall);
     }
 }

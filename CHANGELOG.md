@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.0.0 for 1.19.2 - Fabric]
+
+### Changed
+- All mod assets and data are now generated dynamically allowing for easier creation of blocks
+- Glass Slabs, Stairs and Walls will now cull textures properly like vanilla glass
+
+
+### Fixed
+- Unable to craft glass panes (glass wall recipe conflict)
+
+
+
 ## [1.1.1 for 1.19.2 - Fabric] - 2022-09-16
 
 ### Fixed

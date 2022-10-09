@@ -1,7 +1,7 @@
 {
 	"parent": "block/block",
 	"textures": {
-		"glass": "block/glass",
+		"bottom": "block/glass",
 		"slab": "more_slabs_stairs_and_walls:block/glass_slab_side",
 		"particle": "#glass"
 	},

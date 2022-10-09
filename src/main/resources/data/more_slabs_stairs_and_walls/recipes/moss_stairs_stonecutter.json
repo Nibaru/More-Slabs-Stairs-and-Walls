@@ -1,8 +1,0 @@
-{
-    "type": "minecraft:stonecutting",
-    "ingredient": {
-        "item": "minecraft:moss_block"
-    },
-    "result": "more_slabs_stairs_and_walls:moss_stairs",
-    "count": 1
-}

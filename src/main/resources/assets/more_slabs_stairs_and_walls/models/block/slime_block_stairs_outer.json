@@ -1,0 +1,119 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"particle": "block/slime_block",
+		"texture": "block/slime_block"
+	},
+	"elements": [
+		{
+			"from": [8, 0, 0],
+			"to": [16, 8, 8],
+			"faces": {
+				"north": {"texture": "#texture", "cullface": "north"},
+				"east": {"texture": "#texture", "cullface": "east"},
+				"up": {"texture": "#texture"},
+				"down": {"texture": "#texture"}
+			}
+		},
+		{
+			"from": [8, 8, 8],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"texture": "#texture"},
+				"east": {"texture": "#texture", "cullface": "east"},
+				"south": {"texture": "#texture", "cullface": "south"},
+				"west": {"texture": "#texture"},
+				"up": {"texture": "#texture", "cullface": "up"}
+			}
+		},
+		{
+			"from": [8, 0, 8],
+			"to": [16, 8, 16],
+			"faces": {
+				"east": {"texture": "#texture", "cullface": "east"},
+				"south": {"texture": "#texture", "cullface": "south"},
+				"down": {"texture": "#texture"}
+			}
+		},
+		{
+			"from": [0, 0, 0],
+			"to": [8, 8, 16],
+			"faces": {
+				"north": {"texture": "#texture", "cullface": "north"},
+				"south": {"texture": "#texture", "cullface": "south"},
+				"west": {"texture": "#texture", "cullface": "west"},
+				"up": {"texture": "#texture"},
+				"down": {"texture": "#texture"}
+			}
+		},
+		{
+			"name": "inside_back",
+			"from": [10, 2, 3],
+			"to": [13, 6, 10],
+			"faces": {
+				"north": {"texture": "#texture"},
+				"east": {"texture": "#texture"},
+				"up": {"texture": "#texture"},
+				"down": {"texture": "#texture"}
+			}
+		},
+		{
+			"name": "inside_top",
+			"from": [10, 6, 10],
+			"to": [13, 14, 13],
+			"faces": {
+				"north": {"texture": "#texture"},
+				"east": {"texture": "#texture"},
+				"south": {"texture": "#texture"},
+				"west": {"texture": "#texture"},
+				"up": {"texture": "#texture"}
+			}
+		},
+		{
+			"name": "inside_top",
+			"from": [10, 2, 10],
+			"to": [13, 6, 13],
+			"faces": {
+				"east": {"texture": "#texture"},
+				"south": {"texture": "#texture"},
+				"west": {"texture": "#texture"},
+				"down": {"texture": "#texture"}
+			}
+		},
+		{
+			"name": "inside_front",
+			"from": [3, 2, 3],
+			"to": [10, 6, 13],
+			"faces": {
+				"north": {"texture": "#texture"},
+				"south": {"texture": "#texture"},
+				"west": {"texture": "#texture"},
+				"up": {"texture": "#texture"},
+				"down": {"texture": "#texture"}
+			}
+		}
+	],
+	"display": {
+		"gui": {
+			"rotation": [30, 135, 0],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"fixed": {
+			"rotation": [0, 90, 0],
+			"scale": [0.5, 0.5, 0.5]
+		}
+	},
+	"groups": [
+		0,
+		1,
+		2,
+		3,
+		{
+			"name": "inside",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"children": [4, 5, 6, 7]
+		}
+	]
+}

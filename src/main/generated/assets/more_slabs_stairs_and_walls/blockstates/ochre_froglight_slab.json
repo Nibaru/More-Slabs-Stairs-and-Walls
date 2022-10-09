@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "more_slabs_stairs_and_walls:block/ochre_froglight_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/ochre_froglight"
+    },
+    "type=top": {
+      "model": "more_slabs_stairs_and_walls:block/ochre_froglight_slab_top"
+    }
+  }
+}

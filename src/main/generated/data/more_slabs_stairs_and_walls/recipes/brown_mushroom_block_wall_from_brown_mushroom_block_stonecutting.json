@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "minecraft:brown_mushroom_block"
+  },
+  "result": "more_slabs_stairs_and_walls:brown_mushroom_block_wall"
+}

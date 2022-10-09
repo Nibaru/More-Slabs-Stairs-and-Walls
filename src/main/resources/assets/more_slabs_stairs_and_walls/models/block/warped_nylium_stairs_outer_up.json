@@ -1,0 +1,10 @@
+{
+	"parent": "more_slabs_stairs_and_walls:block/grass_stairs_outer",
+	"textures": {
+		"particle": "block/netherrack",
+		"bottom": "block/netherrack",
+		"top": "block/warped_nylium",
+		"side": "block/warped_nylium_side",
+		"overlay": "block/warped_nylium_side"
+	}
+}

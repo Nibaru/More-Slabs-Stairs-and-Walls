@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "more_slabs_stairs_and_walls:iron_block_stairs",
+    "more_slabs_stairs_and_walls:gold_block_stairs",
+    "more_slabs_stairs_and_walls:diamond_block_stairs",
+    "more_slabs_stairs_and_walls:netherite_block_stairs",
+    "more_slabs_stairs_and_walls:emerald_block_stairs"
+  ]
+}

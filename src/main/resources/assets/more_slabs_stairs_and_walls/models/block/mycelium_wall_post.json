@@ -1,0 +1,11 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "more_slabs_stairs_and_walls:block/wall_post_side_bottom_top",
+	"textures": {
+		"particle": "block/dirt",
+		"bottom": "block/dirt",
+		"top": "block/mycelium_top",
+		"side": "block/mycelium_side",
+		"overlay": "block/mycelium_side"
+	}
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "minecraft:coarse_dirt"
+  },
+  "result": "more_slabs_stairs_and_walls:coarse_dirt_wall"
+}
