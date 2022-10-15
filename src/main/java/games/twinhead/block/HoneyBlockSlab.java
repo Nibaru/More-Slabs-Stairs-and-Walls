@@ -32,7 +32,7 @@ public class HoneyBlockSlab extends SlabBlock {
         return entity instanceof LivingEntity || entity instanceof AbstractMinecartEntity || entity instanceof TntEntity || entity instanceof BoatEntity;
     }
 
-
+    @SuppressWarnings("deprecation")
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return state.get(TYPE).equals(SlabType.BOTTOM) ? SHAPE : SHAPE_TOP;
     }
@@ -49,6 +49,7 @@ public class HoneyBlockSlab extends SlabBlock {
 
     }
 
+    @SuppressWarnings("deprecation")
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (this.isSliding(pos, entity)) {
             this.triggerAdvancement(entity, pos);

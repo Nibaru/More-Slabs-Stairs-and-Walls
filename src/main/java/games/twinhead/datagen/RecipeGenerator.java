@@ -32,6 +32,8 @@ public class RecipeGenerator extends FabricRecipeProvider {
 
     @Override
     protected void generateRecipes(Consumer<RecipeJsonProvider> exporter) {
+
+
         for (ModBlocks block: ModBlocks.values()) {
             if(block.hasSlab()){
                 RecipeProvider.offerSlabRecipe(exporter, block.getSlabBlock(), block.getCopyBlock());

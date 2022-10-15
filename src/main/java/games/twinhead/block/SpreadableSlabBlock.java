@@ -193,6 +193,7 @@ public class SpreadableSlabBlock extends GrassBlock implements Waterloggable {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public boolean canReplace(BlockState state, ItemPlacementContext context) {
         ItemStack itemStack = context.getStack();
         SlabType slabType = (SlabType)state.get(TYPE);
@@ -234,17 +235,12 @@ public class SpreadableSlabBlock extends GrassBlock implements Waterloggable {
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
+    @SuppressWarnings("deprecation")
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
-        switch (type) {
-            case LAND:
-                return false;
-            case WATER:
-                return world.getFluidState(pos).isIn(FluidTags.WATER);
-            case AIR:
-                return false;
-            default:
-                return false;
-        }
+        return switch (type) {
+            case WATER -> world.getFluidState(pos).isIn(FluidTags.WATER);
+            default -> false;
+        };
     }
 
     static {

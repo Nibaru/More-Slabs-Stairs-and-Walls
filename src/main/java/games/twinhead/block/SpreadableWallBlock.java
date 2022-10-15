@@ -47,6 +47,7 @@ public class SpreadableWallBlock extends WallBlock implements Waterloggable {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (!canSurvive(state, world, pos)) {
             if(state.isOf(ModBlocks.GRASS_BLOCK.getWallBlock())) {

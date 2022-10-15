@@ -47,16 +47,12 @@ public class CulledStainedSlabBlock extends SlabBlock implements Stainable {
             return true;
 
         switch(direction_1) {
-            case UP:
-            case DOWN:
+            case UP, DOWN:
                 if(type1 != type2)
                     return true;
                 break;
 
-            case NORTH:
-            case EAST:
-            case SOUTH:
-            case WEST:
+            case NORTH,EAST,SOUTH,WEST:
                 if(type1 == type2)
                     return true;
                 break;
@@ -65,9 +61,7 @@ public class CulledStainedSlabBlock extends SlabBlock implements Stainable {
         return false;
     }
 
-    private boolean isInvisibleToGlassStairs(BlockState blockState_1,
-                                             BlockState blockState_2, Direction direction_1)
-    {
+    private boolean isInvisibleToGlassStairs(BlockState blockState_1, BlockState blockState_2, Direction direction_1) {
         SlabType type1 = blockState_1.get(SlabBlock.TYPE);
         BlockHalf half2 = blockState_2.get(StairsBlock.HALF);
         Direction facing2 = blockState_2.get(StairsBlock.FACING);
@@ -91,9 +85,7 @@ public class CulledStainedSlabBlock extends SlabBlock implements Stainable {
         {
             if(type1 == SlabType.BOTTOM && half2 == BlockHalf.BOTTOM)
                 return true;
-
-            if(type1 == SlabType.TOP && half2 == BlockHalf.TOP)
-                return true;
+            return type1 == SlabType.TOP && half2 == BlockHalf.TOP;
         }
 
         return false;
