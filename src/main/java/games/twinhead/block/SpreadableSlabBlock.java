@@ -3,7 +3,9 @@ package games.twinhead.block;
 import games.twinhead.ModBlockTags;
 import games.twinhead.ModBlocks;
 import net.minecraft.block.*;
+import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.SlabType;
+import net.minecraft.block.enums.StairShape;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
@@ -44,10 +46,21 @@ public class SpreadableSlabBlock extends GrassBlock implements Waterloggable {
         super(settings);
     }
 
-    private static boolean canSurvive(BlockState state, WorldView world, BlockPos pos) {
+    public static boolean canSurvive(BlockState state, WorldView world, BlockPos pos) {
         BlockPos blockPos = pos.up();
         BlockState blockState = world.getBlockState(blockPos);
-        if (!blockState.isOpaqueFullCube(world, pos) || state.get(SlabBlock.TYPE) == SlabType.BOTTOM) {
+
+        if(blockState.isOf(Blocks.SNOW) && (Integer)blockState.get(SnowBlock.LAYERS) == 1){
+            return true;
+        }else if (!blockState.isOpaqueFullCube(world, pos) &&
+                (blockState.getBlock() instanceof SpreadableSlabBlock && blockState.get(SlabBlock.TYPE) == SlabType.TOP)
+                || (blockState.getBlock() instanceof SpreadableStairsBlock && blockState.get(StairsBlock.HALF) == BlockHalf.TOP))
+        {
+            return true;
+
+        } else if (state.getBlock() instanceof SpreadableSlabBlock && state.get(SlabBlock.TYPE) == SlabType.BOTTOM){
+            return true;
+        } else if (state.getBlock() instanceof SpreadableSlabBlock && state.get(SlabBlock.TYPE) == SlabType.TOP && !blockState.isSideSolid(world, pos, Direction.DOWN, SideShapeType.FULL)){
             return true;
         } else if (blockState.getFluidState().getLevel() == 8) {
             return false;
@@ -142,6 +155,7 @@ public class SpreadableSlabBlock extends GrassBlock implements Waterloggable {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public boolean hasSidedTransparency(BlockState state) {
         return state.get(TYPE) != SlabType.DOUBLE;
     }
@@ -151,6 +165,7 @@ public class SpreadableSlabBlock extends GrassBlock implements Waterloggable {
     }
 
 
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         SlabType slabType = (SlabType)state.get(TYPE);
@@ -198,6 +213,7 @@ public class SpreadableSlabBlock extends GrassBlock implements Waterloggable {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state) {
         return (Boolean)state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }

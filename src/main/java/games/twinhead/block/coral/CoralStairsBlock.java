@@ -26,7 +26,7 @@ public class CoralStairsBlock extends StairsBlock {
 
     @SuppressWarnings("deprecation")
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (!this.isInWater(world, pos)) {
+        if (!this.isInWater(world, pos) && !state.get(WATERLOGGED)) {
             world.setBlockState(pos, this.deadCoralBlock.getDefaultState().with(FACING, state.get(FACING)).with(SHAPE, state.get(SHAPE)).with(HALF, state.get(HALF)), Block.NOTIFY_LISTENERS);
         }
     }

@@ -2,7 +2,6 @@ package games.twinhead;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 
@@ -98,14 +97,14 @@ public enum ModBlocks {
     SEA_LANTERN(Blocks.SEA_LANTERN, ToolType.NONE),
     SHROOMLIGHT(Blocks.SHROOMLIGHT, ToolType.HOE),
     END_STONE(Blocks.END_STONE, ToolType.PICKAXE),
-    OAK_WOOD(Blocks.OAK_WOOD, ToolType.AXE, "oak_log"),
-    BIRCH_WOOD(Blocks.BIRCH_WOOD, ToolType.AXE, "birch_log"),
-    SPRUCE_WOOD(Blocks.SPRUCE_WOOD, ToolType.AXE, "spruce_log"),
-    JUNGLE_WOOD(Blocks.JUNGLE_WOOD, ToolType.AXE, "jungle_log"),
-    DARK_OAK_WOOD(Blocks.DARK_OAK_WOOD, ToolType.AXE, "dark_oak_log"),
-    ACACIA_WOOD(Blocks.ACACIA_WOOD, ToolType.AXE, "acacia_log"),
-    CRIMSON_HYPHAE(Blocks.CRIMSON_HYPHAE, ToolType.AXE, "crimson_stem"),
-    WARPED_HYPHAE(Blocks.WARPED_HYPHAE, ToolType.AXE, "warped_stem"),
+    OAK_WOOD(Blocks.OAK_WOOD, ToolType.AXE,true, true, false, "oak_log"),
+    BIRCH_WOOD(Blocks.BIRCH_WOOD, ToolType.AXE,true, true, false, "birch_log"),
+    SPRUCE_WOOD(Blocks.SPRUCE_WOOD, ToolType.AXE,true, true, false, "spruce_log"),
+    JUNGLE_WOOD(Blocks.JUNGLE_WOOD, ToolType.AXE,true, true, false, "jungle_log"),
+    DARK_OAK_WOOD(Blocks.DARK_OAK_WOOD, ToolType.AXE,true, true, false, "dark_oak_log"),
+    ACACIA_WOOD(Blocks.ACACIA_WOOD, ToolType.AXE,true, true, false, "acacia_log"),
+    CRIMSON_HYPHAE(Blocks.CRIMSON_HYPHAE, ToolType.AXE,true, true, false, "crimson_stem"),
+    WARPED_HYPHAE(Blocks.WARPED_HYPHAE, ToolType.AXE,true, true, false, "warped_stem"),
     STRIPPED_OAK_WOOD(Blocks.STRIPPED_OAK_WOOD, ToolType.AXE,"stripped_oak_log"),
     STRIPPED_BIRCH_WOOD(Blocks.STRIPPED_BIRCH_WOOD, ToolType.AXE,"stripped_birch_log"),
     STRIPPED_SPRUCE_WOOD(Blocks.STRIPPED_SPRUCE_WOOD, ToolType.AXE,"stripped_spruce_log"),
@@ -115,7 +114,7 @@ public enum ModBlocks {
     STRIPPED_CRIMSON_HYPHAE(Blocks.STRIPPED_CRIMSON_HYPHAE, ToolType.AXE, "stripped_crimson_stem"),
     STRIPPED_WARPED_HYPHAE(Blocks.STRIPPED_WARPED_HYPHAE, ToolType.AXE, "stripped_warped_stem"),
 
-    BASALT(Blocks.BASALT, ToolType.PICKAXE, true, false, true, "basalt_side"),
+    BASALT(Blocks.BASALT, ToolType.PICKAXE, true, false, true, "basalt_side", "basalt_top", "basalt_top"),
     SMOOTH_BASALT(Blocks.SMOOTH_BASALT, ToolType.PICKAXE),
 
     CUT_COPPER(Blocks.CUT_COPPER, ToolType.PICKAXE, false, false, true),
@@ -227,25 +226,34 @@ public enum ModBlocks {
 
     BOOKSHELF(Blocks.BOOKSHELF, ToolType.AXE, true, true, false, "bookshelf", "oak_planks", "oak_planks"),
 
-    OAK_LOG(Blocks.OAK_LOG, ToolType.AXE, true, true, false, "oak_log", "oak_log_top", "oak_log_top"),
-    DARK_OAK_LOG(Blocks.DARK_OAK_LOG, ToolType.AXE, true, true, false, "dark_oak_log", "dark_oak_log_top", "dark_oak_log_top"),
-    ACACIA_LOG(Blocks.ACACIA_LOG, ToolType.AXE, true, true, false, "acacia_log", "acacia_log_top", "acacia_log_top"),
-    BIRCH_LOG(Blocks.BIRCH_LOG, ToolType.AXE, true, true, false, "birch_log", "birch_log_top", "birch_log_top"),
-    JUNGLE_LOG(Blocks.JUNGLE_LOG, ToolType.AXE, true, true, false, "jungle_log", "jungle_log_top", "jungle_log_top"),
-    SPRUCE_LOG(Blocks.SPRUCE_LOG, ToolType.AXE, true, true, false, "spruce_log", "spruce_log_top", "spruce_log_top"),
+    OAK_LOG(Blocks.OAK_LOG, ToolType.AXE, Layer.SOLID, "oak_log", "oak_log_top", "oak_log_top"),
+    DARK_OAK_LOG(Blocks.DARK_OAK_LOG, ToolType.AXE, Layer.SOLID, "dark_oak_log", "dark_oak_log_top", "dark_oak_log_top"),
+    ACACIA_LOG(Blocks.ACACIA_LOG, ToolType.AXE, Layer.SOLID, "acacia_log", "acacia_log_top", "acacia_log_top"),
+    BIRCH_LOG(Blocks.BIRCH_LOG, ToolType.AXE, Layer.SOLID, "birch_log", "birch_log_top", "birch_log_top"),
+    JUNGLE_LOG(Blocks.JUNGLE_LOG, ToolType.AXE, Layer.SOLID, "jungle_log", "jungle_log_top", "jungle_log_top"),
+    SPRUCE_LOG(Blocks.SPRUCE_LOG, ToolType.AXE, Layer.SOLID, "spruce_log", "spruce_log_top", "spruce_log_top"),
 
-    CRIMSON_STEM(Blocks.CRIMSON_STEM, ToolType.AXE, Layer.SOLID, "crimson_stem", "crimson_stem_top", "crimson_stem_top"),
-    WARPED_STEM(Blocks.WARPED_STEM, ToolType.AXE, Layer.SOLID, "warped_stem", "warped_stem_top", "warped_stem_top"),
+    CRIMSON_STEM(Blocks.CRIMSON_STEM, ToolType.AXE, true, true, false, "crimson_stem", "crimson_stem_top", "crimson_stem_top"),
+    WARPED_STEM(Blocks.WARPED_STEM, ToolType.AXE, true, true, false, "warped_stem", "warped_stem_top", "warped_stem_top"),
 
+    OAK_PLANKS(Blocks.OAK_PLANKS, ToolType.AXE, false, false, true),
+    BIRCH_PLANKS(Blocks.BIRCH_PLANKS, ToolType.AXE, false, false, true),
+    SPRUCE_PLANKS(Blocks.SPRUCE_PLANKS, ToolType.AXE, false, false, true),
+    JUNGLE_PLANKS(Blocks.JUNGLE_PLANKS, ToolType.AXE, false, false, true),
+    ACACIA_PLANKS(Blocks.ACACIA_PLANKS, ToolType.AXE, false, false, true),
+    DARK_OAK_PLANKS(Blocks.DARK_OAK_PLANKS, ToolType.AXE, false, false, true),
+    WARPED_PLANKS(Blocks.WARPED_PLANKS, ToolType.AXE, false, false, true),
+    CRIMSON_PLANKS(Blocks.CRIMSON_PLANKS, ToolType.AXE, false, false, true),
 
     //1.19
     SCULK(Blocks.SCULK, ToolType.HOE),
     PACKED_MUD(Blocks.PACKED_MUD, ToolType.SHOVEL),
 
     MANGROVE_LOG(Blocks.MANGROVE_LOG, ToolType.AXE,Layer.SOLID,  "mangrove_log", "mangrove_log_top", "mangrove_log_top"),
-    MANGROVE_WOOD(Blocks.MANGROVE_WOOD, ToolType.AXE, "mangrove_log"),
+    MANGROVE_WOOD(Blocks.MANGROVE_WOOD, ToolType.AXE, true, true, false, "mangrove_log"),
     STRIPPED_MANGROVE_WOOD(Blocks.MANGROVE_WOOD, ToolType.AXE, "stripped_mangrove_log"),
     MANGROVE_LEAVES(Blocks.MANGROVE_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED, "mangrove_leaves"),
+    MANGROVE_PLANKS(Blocks.MANGROVE_PLANKS, ToolType.AXE, false, false, true),
     MUD(Blocks.MUD, ToolType.SHOVEL),
 
     ;
@@ -259,7 +267,7 @@ public enum ModBlocks {
     private Layer renderLayer;
     private boolean customTexture;
     public final ToolType toolType;
-    private String textureName, sideTexture, topTexture, bottomTexture;
+    private String sideTexture, topTexture, bottomTexture;
     private DyeColor color = null;
 
     ModBlocks(Block copyBlock, ToolType toolType){
@@ -393,16 +401,8 @@ public enum ModBlocks {
         return this.color;
     }
 
-    public boolean hasDyeColor(){
-        return this.color != null;
-    }
-
     public int getLuminance() {
         return this.getCopyBlock().getDefaultState().getLuminance();
-    }
-
-    public String getTextureName(){
-        return textureName;
     }
 
     public String getSideTexture(){

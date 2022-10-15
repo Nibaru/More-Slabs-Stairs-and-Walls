@@ -27,7 +27,7 @@ public class CoralWallBlock extends WallBlock {
 
     @SuppressWarnings("deprecation")
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (!this.isInWater(world, pos)) {
+        if (!this.isInWater(world, pos) && !state.get(WATERLOGGED)) {
             world.setBlockState(pos, this.deadCoralBlock.getDefaultState()
                     .with(UP, state.get(UP))
                     .with(NORTH_SHAPE, state.get(NORTH_SHAPE))

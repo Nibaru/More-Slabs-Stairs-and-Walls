@@ -27,13 +27,10 @@ public class CoralSlabBlock extends SlabBlock {
 
     @SuppressWarnings("deprecation")
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (!this.isInWater(world, pos)) {
+        if (!this.isInWater(world, pos) && !state.get(WATERLOGGED)) {
             world.setBlockState(pos, this.deadCoralBlock.getDefaultState().with(TYPE, state.get(TYPE)), Block.NOTIFY_LISTENERS);
         }
     }
-
-
-
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (!this.isInWater(world, pos)) {

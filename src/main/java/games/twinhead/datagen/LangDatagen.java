@@ -15,6 +15,7 @@ public class LangDatagen extends FabricLanguageProvider {
 
     @Override
     public void generateTranslations(TranslationBuilder translationBuilder) {
+        translationBuilder.add(MoreBuildingBlocks.modGroup, "More Slabs, Stairs, and Walls");
         for (ModBlocks block: ModBlocks.values()) {
             if(block.hasSlab()) translationBuilder.add(block.getSlabBlock(), formatName(block.toString().toLowerCase() + "_slab"));
             if(block.hasStairs()) translationBuilder.add(block.getStairsBlock(), formatName(block.toString().toLowerCase() + "_stairs"));

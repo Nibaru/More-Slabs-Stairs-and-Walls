@@ -34,7 +34,7 @@ public class SpreadableStairsBlock extends StairsBlock implements Waterloggable 
     private static boolean canSurvive(BlockState state, WorldView world, BlockPos pos) {
         BlockPos blockPos = pos.up();
         BlockState blockState = world.getBlockState(blockPos);
-        if (!blockState.isOpaqueFullCube(world, pos)) {
+        if (!blockState.isSideSolid(world, pos, Direction.DOWN, SideShapeType.FULL)) {
             return true;
         } else if (blockState.getFluidState().getLevel() == 8) {
             return false;
@@ -43,6 +43,7 @@ public class SpreadableStairsBlock extends StairsBlock implements Waterloggable 
             return i < world.getMaxLightLevel();
         }
     }
+
 
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (!canSurvive(state, world, pos)) {

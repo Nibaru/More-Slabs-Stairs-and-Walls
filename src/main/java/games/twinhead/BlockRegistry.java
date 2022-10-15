@@ -11,12 +11,12 @@ import games.twinhead.block.culled.CulledStairsBlock;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class BlockRegistry {
     public static HashMap<ModBlocks, Block> SLABS = new HashMap<>();
@@ -39,7 +39,7 @@ public class BlockRegistry {
     }
 
     public static void registerItem(ModBlocks block, Block blockItem, ModBlocks.BlockType type){
-        Registry.register(Registry.ITEM, block.getIdentifier(type), new BlockItem(blockItem, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
+        Registry.register(Registry.ITEM, block.getIdentifier(type), new BlockItem(blockItem, new Item.Settings().group(MoreBuildingBlocks.modGroup)));
     }
 
     public static void registerSlab(ModBlocks block, Block copyBlock){
@@ -125,7 +125,7 @@ public class BlockRegistry {
                     HORN_CORAL_BLOCK,
                     BRAIN_CORAL_BLOCK,
                     FIRE_CORAL_BLOCK,
-                    TUBE_CORAL_BLOCK -> new CoralStairsBlock(block.deadCoralBlock.getStairsBlock(), AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+                    TUBE_CORAL_BLOCK -> new CoralStairsBlock(Objects.requireNonNull(block.deadCoralBlock.getStairsBlock()), AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
             case SLIME_BLOCK -> new SlimeBlockStairs(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
             case GRASS_BLOCK,
                     MYCELIUM,

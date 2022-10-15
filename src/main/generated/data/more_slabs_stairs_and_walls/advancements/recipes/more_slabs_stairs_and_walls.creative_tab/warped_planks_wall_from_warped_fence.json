@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:warped_planks_wall_from_warped_fence"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_warped_fence": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:warped_fence"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_warped_fence",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:warped_planks_wall_from_warped_fence"
+    ]
+  }
+}

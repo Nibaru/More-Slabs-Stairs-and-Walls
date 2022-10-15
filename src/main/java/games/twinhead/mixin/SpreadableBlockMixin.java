@@ -2,6 +2,7 @@ package games.twinhead.mixin;
 
 import games.twinhead.ModBlockTags;
 import games.twinhead.ModBlocks;
+import games.twinhead.block.SpreadableSlabBlock;
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.FluidTags;
@@ -20,10 +21,10 @@ public class SpreadableBlockMixin extends SnowyBlock {
 
 
 
-
+    @SuppressWarnings("deprecation")
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (!canSurvive(state, world, pos)) {
+        if (!SpreadableSlabBlock.canSurvive(state, world, pos)) {
             world.setBlockState(pos, Blocks.DIRT.getDefaultState());
         } else {
             if (world.getLightLevel(pos.up()) >= 9) {
@@ -65,21 +66,8 @@ public class SpreadableBlockMixin extends SnowyBlock {
         }
     }
 
-    private static boolean canSurvive(BlockState state, WorldView world, BlockPos pos) {
-        BlockPos blockPos = pos.up();
-        BlockState blockState = world.getBlockState(blockPos);
-        if (blockState.isOf(Blocks.SNOW) && (Integer)blockState.get(SnowBlock.LAYERS) == 1) {
-            return true;
-        } else if (blockState.getFluidState().getLevel() == 8) {
-            return false;
-        } else {
-            int i = ChunkLightProvider.getRealisticOpacity(world, state, pos, blockState, blockPos, Direction.UP, blockState.getOpacity(world, blockPos));
-            return i < world.getMaxLightLevel();
-        }
-    }
-
     private static boolean canSpread(BlockState state, WorldView world, BlockPos pos) {
         BlockPos blockPos = pos.up();
-        return canSurvive(state, world, pos) && !world.getFluidState(blockPos).isIn(FluidTags.WATER);
+        return SpreadableSlabBlock.canSurvive(state, world, pos) && !world.getFluidState(blockPos).isIn(FluidTags.WATER);
     }
 }
