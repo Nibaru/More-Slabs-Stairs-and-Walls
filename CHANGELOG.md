@@ -66,6 +66,15 @@
   - hay block
   - all log blocks
 
+- Slabs:
+  - Bookshelf
+  - 
+- Stairs
+  - Bookshelf
+- Walls:
+  - All plank variants
+
+
 ## [1.1.1 for 1.19.2 - Fabric] - 2022-09-16
 
 ### Fixed
