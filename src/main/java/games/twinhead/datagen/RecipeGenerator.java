@@ -32,9 +32,11 @@ public class RecipeGenerator extends FabricRecipeProvider {
 
     @Override
     protected void generateRecipes(Consumer<RecipeJsonProvider> exporter) {
-
-
         for (ModBlocks block: ModBlocks.values()) {
+            if(block != ModBlocks.SNOW_BLOCK){
+
+
+
             if(block.hasSlab()){
                 RecipeProvider.offerSlabRecipe(exporter, block.getSlabBlock(), block.getCopyBlock());
                 RecipeProvider.offerStonecuttingRecipe(exporter, block.getSlabBlock(), block.getCopyBlock(), 2);
@@ -63,6 +65,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
                     RecipeProvider.offerWallRecipe(exporter, block.getWallBlock(), block.getCopyBlock());
                 }
                 RecipeProvider.offerStonecuttingRecipe(exporter, block.getWallBlock(), block.getCopyBlock());
+            }
             }
         }
     }
