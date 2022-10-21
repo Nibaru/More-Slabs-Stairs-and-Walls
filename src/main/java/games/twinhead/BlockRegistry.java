@@ -96,7 +96,7 @@ public class BlockRegistry {
     public static void registerStairs(ModBlocks block, Block copyBlock){
         StairsBlock stairs = switch (block){
             case GLASS -> new CulledStairsBlock(copyBlock.getDefaultState(), AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
-            case WHITE_STAINED_GLASS,
+            case    WHITE_STAINED_GLASS,
                     YELLOW_STAINED_GLASS,
                     BLACK_STAINED_GLASS,
                     RED_STAINED_GLASS,

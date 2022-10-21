@@ -30,6 +30,25 @@ public class RecipeGenerator extends FabricRecipeProvider {
             ModBlocks.WARPED_PLANKS,
             ModBlocks.MANGROVE_PLANKS});
 
+    public final List<ModBlocks> glass = List.of(new ModBlocks[]{
+            ModBlocks.GLASS,
+            ModBlocks.WHITE_STAINED_GLASS,
+            ModBlocks.YELLOW_STAINED_GLASS,
+            ModBlocks.BLACK_STAINED_GLASS,
+            ModBlocks.RED_STAINED_GLASS,
+            ModBlocks.PURPLE_STAINED_GLASS,
+            ModBlocks.PINK_STAINED_GLASS,
+            ModBlocks.ORANGE_STAINED_GLASS,
+            ModBlocks.MAGENTA_STAINED_GLASS,
+            ModBlocks.LIME_STAINED_GLASS,
+            ModBlocks.LIGHT_GRAY_STAINED_GLASS,
+            ModBlocks.LIGHT_BLUE_STAINED_GLASS,
+            ModBlocks.GREEN_STAINED_GLASS,
+            ModBlocks.GRAY_STAINED_GLASS,
+            ModBlocks.CYAN_STAINED_GLASS,
+            ModBlocks.BROWN_STAINED_GLASS,
+            ModBlocks.BLUE_STAINED_GLASS});
+
     @Override
     protected void generateRecipes(Consumer<RecipeJsonProvider> exporter) {
         for (ModBlocks block: ModBlocks.values()) {
@@ -61,7 +80,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
                         default -> Blocks.OAK_FENCE;
                     };
                     RecipeProvider.offerShapelessRecipe(exporter, block.getWallBlock(), fence, "plank_walls", 1);
-                } else {
+                } else if(!glass.contains(block)){
                     RecipeProvider.offerWallRecipe(exporter, block.getWallBlock(), block.getCopyBlock());
                 }
                 RecipeProvider.offerStonecuttingRecipe(exporter, block.getWallBlock(), block.getCopyBlock());

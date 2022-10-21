@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item": "more_slabs_stairs_and_walls:blue_stained_glass_wall"
+      "item": "minecraft:red_stained_glass_pane"
     }
   },
   "pattern": [
@@ -10,7 +10,7 @@
     "###"
   ],
   "result": {
-    "count": 16,
-    "item": "minecraft:blue_stained_glass_pane"
+    "count": 2,
+    "item": "more_slabs_stairs_and_walls:red_stained_glass_wall"
   }
 }

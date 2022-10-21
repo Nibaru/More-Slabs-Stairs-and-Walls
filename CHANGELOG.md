@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.0.1 for 1.19.2 - Fabric]
+
+## Changed
+- recipe for glass wall variants changed to no longer override the vanilla glass pane recipe.
+
 ## [2.0.0 for 1.19.2 - Fabric]
 
 ### Changed
