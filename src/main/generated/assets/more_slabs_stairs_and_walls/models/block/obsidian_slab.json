@@ -2,7 +2,7 @@
   "parent": "minecraft:block/slab",
   "textures": {
     "bottom": "minecraft:block/obsidian",
-    "side": "minecraft:block/obsidian",
-    "top": "minecraft:block/obsidian"
+    "top": "minecraft:block/obsidian",
+    "side": "minecraft:block/obsidian"
   }
 }

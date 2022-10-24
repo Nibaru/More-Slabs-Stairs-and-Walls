@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "item": "minecraft:terracotta"
-    }
-  },
   "pattern": [
     "#  ",
     "## ",
     "###"
   ],
+  "key": {
+    "#": {
+      "item": "minecraft:terracotta"
+    }
+  },
   "result": {
-    "count": 4,
-    "item": "more_slabs_stairs_and_walls:terracotta_stairs"
+    "item": "more_slabs_stairs_and_walls:terracotta_stairs",
+    "count": 4
   }
 }

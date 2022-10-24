@@ -2,7 +2,7 @@
   "parent": "minecraft:block/stairs",
   "textures": {
     "bottom": "minecraft:block/blue_wool",
-    "side": "minecraft:block/blue_wool",
-    "top": "minecraft:block/blue_wool"
+    "top": "minecraft:block/blue_wool",
+    "side": "minecraft:block/blue_wool"
   }
 }

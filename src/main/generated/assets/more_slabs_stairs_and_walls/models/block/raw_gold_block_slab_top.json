@@ -2,7 +2,7 @@
   "parent": "minecraft:block/slab_top",
   "textures": {
     "bottom": "minecraft:block/raw_gold_block",
-    "side": "minecraft:block/raw_gold_block",
-    "top": "minecraft:block/raw_gold_block"
+    "top": "minecraft:block/raw_gold_block",
+    "side": "minecraft:block/raw_gold_block"
   }
 }

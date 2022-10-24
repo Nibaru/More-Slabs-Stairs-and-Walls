@@ -1,7 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:sea_lantern_wall_from_sea_lantern_stonecutting"
+    ]
+  },
   "criteria": {
     "has_sea_lantern": {
+      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -10,14 +16,13 @@
             ]
           }
         ]
-      },
-      "trigger": "minecraft:inventory_changed"
+      }
     },
     "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "minecraft:sea_lantern_wall_from_sea_lantern_stonecutting"
-      },
-      "trigger": "minecraft:recipe_unlocked"
+      }
     }
   },
   "requirements": [
@@ -25,10 +30,5 @@
       "has_sea_lantern",
       "has_the_recipe"
     ]
-  ],
-  "rewards": {
-    "recipes": [
-      "minecraft:sea_lantern_wall_from_sea_lantern_stonecutting"
-    ]
-  }
+  ]
 }

@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "item": "minecraft:rooted_dirt"
-    }
-  },
   "pattern": [
     "#  ",
     "## ",
     "###"
   ],
+  "key": {
+    "#": {
+      "item": "minecraft:rooted_dirt"
+    }
+  },
   "result": {
-    "count": 4,
-    "item": "more_slabs_stairs_and_walls:rooted_dirt_stairs"
+    "item": "more_slabs_stairs_and_walls:rooted_dirt_stairs",
+    "count": 4
   }
 }

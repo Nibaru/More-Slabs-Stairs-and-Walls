@@ -2,7 +2,7 @@
   "parent": "minecraft:block/slab",
   "textures": {
     "bottom": "minecraft:block/magenta_stained_glass",
-    "side": "more_slabs_stairs_and_walls:block/magenta_stained_glass_slab_side",
-    "top": "minecraft:block/magenta_stained_glass"
+    "top": "minecraft:block/magenta_stained_glass",
+    "side": "more_slabs_stairs_and_walls:block/magenta_stained_glass_slab_side"
   }
 }

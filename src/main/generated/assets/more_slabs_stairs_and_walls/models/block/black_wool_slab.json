@@ -2,7 +2,7 @@
   "parent": "minecraft:block/slab",
   "textures": {
     "bottom": "minecraft:block/black_wool",
-    "side": "minecraft:block/black_wool",
-    "top": "minecraft:block/black_wool"
+    "top": "minecraft:block/black_wool",
+    "side": "minecraft:block/black_wool"
   }
 }

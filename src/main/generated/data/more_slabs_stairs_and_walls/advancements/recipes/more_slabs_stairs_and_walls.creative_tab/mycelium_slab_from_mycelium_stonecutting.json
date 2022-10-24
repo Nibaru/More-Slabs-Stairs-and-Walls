@@ -1,7 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:mycelium_slab_from_mycelium_stonecutting"
+    ]
+  },
   "criteria": {
     "has_mycelium": {
+      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -10,14 +16,13 @@
             ]
           }
         ]
-      },
-      "trigger": "minecraft:inventory_changed"
+      }
     },
     "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "minecraft:mycelium_slab_from_mycelium_stonecutting"
-      },
-      "trigger": "minecraft:recipe_unlocked"
+      }
     }
   },
   "requirements": [
@@ -25,10 +30,5 @@
       "has_mycelium",
       "has_the_recipe"
     ]
-  ],
-  "rewards": {
-    "recipes": [
-      "minecraft:mycelium_slab_from_mycelium_stonecutting"
-    ]
-  }
+  ]
 }

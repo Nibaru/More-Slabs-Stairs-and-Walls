@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "item": "minecraft:warped_nylium"
-    }
-  },
   "pattern": [
     "#  ",
     "## ",
     "###"
   ],
+  "key": {
+    "#": {
+      "item": "minecraft:warped_nylium"
+    }
+  },
   "result": {
-    "count": 4,
-    "item": "more_slabs_stairs_and_walls:warped_nylium_stairs"
+    "item": "more_slabs_stairs_and_walls:warped_nylium_stairs",
+    "count": 4
   }
 }

@@ -1,7 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "more_slabs_stairs_and_walls:smooth_red_sandstone_wall"
+    ]
+  },
   "criteria": {
     "has_smooth_red_sandstone": {
+      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -10,14 +16,13 @@
             ]
           }
         ]
-      },
-      "trigger": "minecraft:inventory_changed"
+      }
     },
     "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "more_slabs_stairs_and_walls:smooth_red_sandstone_wall"
-      },
-      "trigger": "minecraft:recipe_unlocked"
+      }
     }
   },
   "requirements": [
@@ -25,10 +30,5 @@
       "has_smooth_red_sandstone",
       "has_the_recipe"
     ]
-  ],
-  "rewards": {
-    "recipes": [
-      "more_slabs_stairs_and_walls:smooth_red_sandstone_wall"
-    ]
-  }
+  ]
 }

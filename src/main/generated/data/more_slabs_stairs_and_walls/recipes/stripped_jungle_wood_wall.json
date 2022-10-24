@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
   "key": {
     "#": {
       "item": "minecraft:stripped_jungle_wood"
     }
   },
-  "pattern": [
-    "###",
-    "###"
-  ],
   "result": {
-    "count": 6,
-    "item": "more_slabs_stairs_and_walls:stripped_jungle_wood_wall"
+    "item": "more_slabs_stairs_and_walls:stripped_jungle_wood_wall",
+    "count": 6
   }
 }

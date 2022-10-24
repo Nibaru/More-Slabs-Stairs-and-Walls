@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "minecraft:block/verdant_froglight_side",
-    "side": "minecraft:block/verdant_froglight_side",
-    "top": "minecraft:block/verdant_froglight_side"
-  }
-}

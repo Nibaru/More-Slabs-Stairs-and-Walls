@@ -2,7 +2,7 @@
   "parent": "minecraft:block/stairs",
   "textures": {
     "bottom": "minecraft:block/jungle_log_top",
-    "side": "minecraft:block/jungle_log",
-    "top": "minecraft:block/jungle_log_top"
+    "top": "minecraft:block/jungle_log_top",
+    "side": "minecraft:block/jungle_log"
   }
 }

@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "item": "minecraft:stripped_crimson_hyphae"
-    }
-  },
   "pattern": [
     "#  ",
     "## ",
     "###"
   ],
+  "key": {
+    "#": {
+      "item": "minecraft:stripped_crimson_hyphae"
+    }
+  },
   "result": {
-    "count": 4,
-    "item": "more_slabs_stairs_and_walls:stripped_crimson_hyphae_stairs"
+    "item": "more_slabs_stairs_and_walls:stripped_crimson_hyphae_stairs",
+    "count": 4
   }
 }

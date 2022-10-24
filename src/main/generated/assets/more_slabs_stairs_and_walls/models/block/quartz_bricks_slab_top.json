@@ -2,7 +2,7 @@
   "parent": "minecraft:block/slab_top",
   "textures": {
     "bottom": "minecraft:block/quartz_bricks",
-    "side": "minecraft:block/quartz_bricks",
-    "top": "minecraft:block/quartz_bricks"
+    "top": "minecraft:block/quartz_bricks",
+    "side": "minecraft:block/quartz_bricks"
   }
 }

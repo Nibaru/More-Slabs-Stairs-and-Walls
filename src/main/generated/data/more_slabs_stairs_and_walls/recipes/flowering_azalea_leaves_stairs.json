@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "item": "minecraft:flowering_azalea_leaves"
-    }
-  },
   "pattern": [
     "#  ",
     "## ",
     "###"
   ],
+  "key": {
+    "#": {
+      "item": "minecraft:flowering_azalea_leaves"
+    }
+  },
   "result": {
-    "count": 4,
-    "item": "more_slabs_stairs_and_walls:flowering_azalea_leaves_stairs"
+    "item": "more_slabs_stairs_and_walls:flowering_azalea_leaves_stairs",
+    "count": 4
   }
 }

@@ -2,7 +2,7 @@
   "parent": "minecraft:block/slab",
   "textures": {
     "bottom": "minecraft:block/birch_log_top",
-    "side": "minecraft:block/birch_log",
-    "top": "minecraft:block/birch_log_top"
+    "top": "minecraft:block/birch_log_top",
+    "side": "minecraft:block/birch_log"
   }
 }

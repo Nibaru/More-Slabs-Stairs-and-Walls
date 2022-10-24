@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
   "key": {
     "#": {
       "item": "minecraft:polished_granite"
     }
   },
-  "pattern": [
-    "###",
-    "###"
-  ],
   "result": {
-    "count": 6,
-    "item": "more_slabs_stairs_and_walls:polished_granite_wall"
+    "item": "more_slabs_stairs_and_walls:polished_granite_wall",
+    "count": 6
   }
 }

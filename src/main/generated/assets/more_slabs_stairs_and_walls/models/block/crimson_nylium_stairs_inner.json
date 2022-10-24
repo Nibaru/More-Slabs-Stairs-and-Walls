@@ -2,7 +2,7 @@
   "parent": "minecraft:block/inner_stairs",
   "textures": {
     "bottom": "minecraft:block/netherrack",
-    "side": "minecraft:block/crimson_nylium_side",
-    "top": "minecraft:block/crimson_nylium"
+    "top": "minecraft:block/crimson_nylium",
+    "side": "minecraft:block/crimson_nylium_side"
   }
 }

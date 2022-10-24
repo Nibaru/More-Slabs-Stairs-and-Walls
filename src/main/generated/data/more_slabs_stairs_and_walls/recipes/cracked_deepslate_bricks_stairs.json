@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "item": "minecraft:cracked_deepslate_bricks"
-    }
-  },
   "pattern": [
     "#  ",
     "## ",
     "###"
   ],
+  "key": {
+    "#": {
+      "item": "minecraft:cracked_deepslate_bricks"
+    }
+  },
   "result": {
-    "count": 4,
-    "item": "more_slabs_stairs_and_walls:cracked_deepslate_bricks_stairs"
+    "item": "more_slabs_stairs_and_walls:cracked_deepslate_bricks_stairs",
+    "count": 4
   }
 }

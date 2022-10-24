@@ -11,6 +11,5 @@ public class ModDatagen implements DataGeneratorEntrypoint {
         fabricDataGenerator.addProvider(TagGenerator::new);
         fabricDataGenerator.addProvider(LootTableGenerator::new);
         fabricDataGenerator.addProvider(RecipeGenerator::new);
-        fabricDataGenerator.addProvider(LangDatagen::new);
     }
 }

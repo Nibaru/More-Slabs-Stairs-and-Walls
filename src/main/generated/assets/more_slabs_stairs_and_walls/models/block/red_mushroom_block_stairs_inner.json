@@ -2,7 +2,7 @@
   "parent": "minecraft:block/inner_stairs",
   "textures": {
     "bottom": "minecraft:block/red_mushroom_block",
-    "side": "minecraft:block/red_mushroom_block",
-    "top": "minecraft:block/red_mushroom_block"
+    "top": "minecraft:block/red_mushroom_block",
+    "side": "minecraft:block/red_mushroom_block"
   }
 }

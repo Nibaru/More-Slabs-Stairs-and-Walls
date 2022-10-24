@@ -51,8 +51,7 @@ public class Client implements ClientModInitializer {
                         OAK_LEAVES,
                                 JUNGLE_LEAVES,
                                 ACACIA_LEAVES,
-                                DARK_OAK_LEAVES,
-                                MANGROVE_LEAVES
+                                DARK_OAK_LEAVES
                         -> ((state, world, pos, tintIndex) ->
                         world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.getDefaultColor());
 
@@ -72,7 +71,6 @@ public class Client implements ClientModInitializer {
 
                 case SPRUCE_LEAVES -> (stack, tintIndex) -> FoliageColors.getSpruceColor();
                 case BIRCH_LEAVES -> (stack, tintIndex) -> FoliageColors.getBirchColor();
-                case MANGROVE_LEAVES -> (stack, tintIndex) -> FoliageColors.getMangroveColor();
                 case GRASS_BLOCK -> (stack, tintIndex) -> GrassColors.getColor(0.5, 1.0);
                 default -> null;
             };

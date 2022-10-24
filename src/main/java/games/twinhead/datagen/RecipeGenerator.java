@@ -27,8 +27,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
             ModBlocks.JUNGLE_PLANKS,
             ModBlocks.OAK_PLANKS,
             ModBlocks.SPRUCE_PLANKS,
-            ModBlocks.WARPED_PLANKS,
-            ModBlocks.MANGROVE_PLANKS});
+            ModBlocks.WARPED_PLANKS});
 
     public final List<ModBlocks> glass = List.of(new ModBlocks[]{
             ModBlocks.GLASS,
@@ -76,7 +75,6 @@ public class RecipeGenerator extends FabricRecipeProvider {
                         case OAK_PLANKS -> Blocks.OAK_FENCE;
                         case SPRUCE_PLANKS -> Blocks.SPRUCE_FENCE;
                         case WARPED_PLANKS -> Blocks.WARPED_FENCE;
-                        case MANGROVE_PLANKS -> Blocks.MANGROVE_FENCE;
                         default -> Blocks.OAK_FENCE;
                     };
                     RecipeProvider.offerShapelessRecipe(exporter, block.getWallBlock(), fence, "plank_walls", 1);

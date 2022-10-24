@@ -2,7 +2,7 @@
   "parent": "minecraft:block/inner_stairs",
   "textures": {
     "bottom": "minecraft:block/crimson_stem_top",
-    "side": "minecraft:block/crimson_stem",
-    "top": "minecraft:block/crimson_stem_top"
+    "top": "minecraft:block/crimson_stem_top",
+    "side": "minecraft:block/crimson_stem"
   }
 }

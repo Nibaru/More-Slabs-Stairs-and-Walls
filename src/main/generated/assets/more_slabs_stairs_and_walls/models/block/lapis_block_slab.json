@@ -2,7 +2,7 @@
   "parent": "minecraft:block/slab",
   "textures": {
     "bottom": "minecraft:block/lapis_block",
-    "side": "minecraft:block/lapis_block",
-    "top": "minecraft:block/lapis_block"
+    "top": "minecraft:block/lapis_block",
+    "side": "minecraft:block/lapis_block"
   }
 }

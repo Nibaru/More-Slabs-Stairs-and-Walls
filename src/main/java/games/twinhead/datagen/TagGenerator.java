@@ -20,7 +20,7 @@ public class TagGenerator extends FabricTagProvider<Block> {
      * @param dataGenerator T    The backing registry for the Tag type.
      */
     public TagGenerator(FabricDataGenerator dataGenerator) {
-        super(dataGenerator, Registry.BLOCK);
+        super(dataGenerator, Registry.BLOCK, "");
     }
 
     @Override

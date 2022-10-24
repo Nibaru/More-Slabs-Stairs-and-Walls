@@ -2,7 +2,7 @@
   "parent": "minecraft:block/inner_stairs",
   "textures": {
     "bottom": "minecraft:block/honeycomb_block",
-    "side": "minecraft:block/honeycomb_block",
-    "top": "minecraft:block/honeycomb_block"
+    "top": "minecraft:block/honeycomb_block",
+    "side": "minecraft:block/honeycomb_block"
   }
 }

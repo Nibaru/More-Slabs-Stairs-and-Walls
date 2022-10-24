@@ -5,7 +5,6 @@ import games.twinhead.ModBlocks;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.SlabType;
-import net.minecraft.block.enums.StairShape;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
@@ -21,7 +20,7 @@ import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
+import java.util.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -29,9 +28,7 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.chunk.light.ChunkLightProvider;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.NetherConfiguredFeatures;
-import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
 import org.jetbrains.annotations.Nullable;
 
 public class SpreadableSlabBlock extends GrassBlock implements Waterloggable {

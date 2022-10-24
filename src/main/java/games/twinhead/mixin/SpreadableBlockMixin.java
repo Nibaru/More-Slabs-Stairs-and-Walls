@@ -7,11 +7,10 @@ import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.world.WorldView;
-import net.minecraft.world.chunk.light.ChunkLightProvider;
 import org.spongepowered.asm.mixin.Mixin;
+
+import java.util.Random;
 
 @Mixin(SpreadableBlock.class)
 public class SpreadableBlockMixin extends SnowyBlock {

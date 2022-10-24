@@ -78,7 +78,6 @@ public class BlockRegistry {
                     BIRCH_LOG,
                     DARK_OAK_LOG,
                     JUNGLE_LOG,
-                    MANGROVE_LOG,
                     OAK_LOG,
                     WARPED_STEM,
                     CRIMSON_STEM ->  new SlabBlock(AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).luminance((i) -> block.getLuminance()));
@@ -117,7 +116,6 @@ public class BlockRegistry {
                     BIRCH_LEAVES,
                     DARK_OAK_LEAVES,
                     JUNGLE_LEAVES,
-                    MANGROVE_LEAVES,
                     SPRUCE_LEAVES,
                     AZALEA_LEAVES,
                     FLOWERING_AZALEA_LEAVES -> new StairsBlock(Blocks.GRASS_BLOCK.getDefaultState(),AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
@@ -136,7 +134,6 @@ public class BlockRegistry {
                     BIRCH_LOG,
                     DARK_OAK_LOG,
                     JUNGLE_LOG,
-                    MANGROVE_LOG,
                     OAK_LOG,
                     WARPED_STEM,
                     CRIMSON_STEM ->  new StairsBlock(copyBlock.getDefaultState(), AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).luminance((i) -> block.getLuminance()));
@@ -168,14 +165,9 @@ public class BlockRegistry {
                     BIRCH_LOG,
                     DARK_OAK_LOG,
                     JUNGLE_LOG,
-                    MANGROVE_LOG,
                     OAK_LOG,
                     WARPED_STEM,
                     CRIMSON_STEM ->  new WallBlock(AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).luminance((i) -> block.getLuminance()));
-
-            case BONE_BLOCK -> new WallBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.PALE_YELLOW).sounds(BlockSoundGroup.BONE).luminance((i) -> block.getLuminance()));
-
-
             default -> new WallBlock(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
         };
 

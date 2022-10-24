@@ -1,8 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 2,
   "ingredient": {
     "item": "minecraft:black_wool"
   },
-  "result": "more_slabs_stairs_and_walls:black_wool_slab"
+  "result": "more_slabs_stairs_and_walls:black_wool_slab",
+  "count": 2
 }

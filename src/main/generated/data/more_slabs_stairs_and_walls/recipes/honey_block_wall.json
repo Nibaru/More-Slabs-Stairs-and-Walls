@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
   "key": {
     "#": {
       "item": "minecraft:honey_block"
     }
   },
-  "pattern": [
-    "###",
-    "###"
-  ],
   "result": {
-    "count": 6,
-    "item": "more_slabs_stairs_and_walls:honey_block_wall"
+    "item": "more_slabs_stairs_and_walls:honey_block_wall",
+    "count": 6
   }
 }

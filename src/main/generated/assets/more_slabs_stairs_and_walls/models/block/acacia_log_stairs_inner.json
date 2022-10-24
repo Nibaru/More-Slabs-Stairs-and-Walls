@@ -2,7 +2,7 @@
   "parent": "minecraft:block/inner_stairs",
   "textures": {
     "bottom": "minecraft:block/acacia_log_top",
-    "side": "minecraft:block/acacia_log",
-    "top": "minecraft:block/acacia_log_top"
+    "top": "minecraft:block/acacia_log_top",
+    "side": "minecraft:block/acacia_log"
   }
 }

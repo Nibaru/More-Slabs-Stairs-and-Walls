@@ -2,7 +2,7 @@
   "parent": "minecraft:block/inner_stairs",
   "textures": {
     "bottom": "minecraft:block/yellow_terracotta",
-    "side": "minecraft:block/yellow_terracotta",
-    "top": "minecraft:block/yellow_terracotta"
+    "top": "minecraft:block/yellow_terracotta",
+    "side": "minecraft:block/yellow_terracotta"
   }
 }

@@ -2,7 +2,7 @@
   "parent": "minecraft:block/outer_stairs",
   "textures": {
     "bottom": "minecraft:block/end_stone",
-    "side": "minecraft:block/end_stone",
-    "top": "minecraft:block/end_stone"
+    "top": "minecraft:block/end_stone",
+    "side": "minecraft:block/end_stone"
   }
 }
