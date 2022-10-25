@@ -18,13 +18,13 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "games.twinhead.MoreBuildingBlocks"
+      "games.twinhead.moreslabsstairsandwalls.MoreBuildingBlocks"
     ],
     "client": [
-      "games.twinhead.Client"
+      "games.twinhead.moreslabsstairsandwalls.client.Client"
     ],
     "fabric-datagen": [
-      "games.twinhead.datagen.ModDatagen"
+      "games.twinhead.moreslabsstairsandwalls.datagen.ModDatagen"
     ]
   },
   "mixins": [
