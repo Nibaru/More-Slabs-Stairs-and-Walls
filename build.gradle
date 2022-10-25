@@ -8,7 +8,7 @@ plugins {
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
-archivesBaseName = project.archives_base_name
+archivesBaseName = project.archives_base_name +"-"+ project.minecraft_version
 version = project.mod_version
 group = project.maven_group
 
@@ -100,7 +100,7 @@ sourceSets {
 }
 
 curseforge {
-    apiKey = System.getenv('CURSEFORGE_SECRET')
+    apiKey = System.getenv("CURSEFORGE_KEY").toString()
     project {
         id = "${project.id}"
         mainArtifact (remapJar){
@@ -115,7 +115,7 @@ curseforge {
 }
 
 modrinth {
-    token = System.getenv('MODRINTH_SECRET') // Please use an environment variable for this! The default is `$MODRINTH_TOKEN`.
+    token = System.getenv("MODRINTH_KEY") // Please use an environment variable for this! The default is `$MODRINTH_TOKEN`.
     projectId = project.modrinth_id // The ID of your Modrinth project. Slugs will not work.
     versionNumber = project.mod_version // The (preferably SemVer) version of the mod. If not specified, it'll use the `version` declaration
     versionType = "release" // This is the default -- can also be `beta` or `alpha`
