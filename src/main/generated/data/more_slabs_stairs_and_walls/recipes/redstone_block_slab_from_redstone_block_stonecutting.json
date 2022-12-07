@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "minecraft:redstone_block"
+  },
+  "result": "more_slabs_stairs_and_walls:redstone_block_slab"
+}

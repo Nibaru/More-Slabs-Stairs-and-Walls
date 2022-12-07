@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "coral_slabs",
+  "key": {
+    "#": {
+      "item": "minecraft:dead_horn_coral_block"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "more_slabs_stairs_and_walls:dead_horn_coral_block_slab"
+  }
+}

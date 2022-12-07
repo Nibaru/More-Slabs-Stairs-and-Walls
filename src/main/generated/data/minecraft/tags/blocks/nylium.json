@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "more_slabs_stairs_and_walls:crimson_nylium_slab",
+    "more_slabs_stairs_and_walls:crimson_nylium_stairs",
+    "more_slabs_stairs_and_walls:crimson_nylium_wall",
+    "more_slabs_stairs_and_walls:warped_nylium_slab",
+    "more_slabs_stairs_and_walls:warped_nylium_stairs",
+    "more_slabs_stairs_and_walls:warped_nylium_wall"
+  ]
+}

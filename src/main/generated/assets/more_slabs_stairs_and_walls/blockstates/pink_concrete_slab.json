@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "more_slabs_stairs_and_walls:block/pink_concrete_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/pink_concrete"
+    },
+    "type=top": {
+      "model": "more_slabs_stairs_and_walls:block/pink_concrete_slab_top"
+    }
+  }
+}

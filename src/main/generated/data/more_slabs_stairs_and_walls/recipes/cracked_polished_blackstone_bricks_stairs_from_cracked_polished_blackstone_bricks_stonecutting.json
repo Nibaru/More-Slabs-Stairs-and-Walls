@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "minecraft:cracked_polished_blackstone_bricks"
+  },
+  "result": "more_slabs_stairs_and_walls:cracked_polished_blackstone_bricks_stairs"
+}

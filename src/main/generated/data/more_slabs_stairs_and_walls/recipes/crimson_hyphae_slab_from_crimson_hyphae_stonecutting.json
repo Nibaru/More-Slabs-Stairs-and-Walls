@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "minecraft:crimson_hyphae"
+  },
+  "result": "more_slabs_stairs_and_walls:crimson_hyphae_slab"
+}

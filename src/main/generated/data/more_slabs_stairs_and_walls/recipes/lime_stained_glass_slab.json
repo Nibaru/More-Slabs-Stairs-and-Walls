@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "glass_slabs",
+  "key": {
+    "#": {
+      "item": "minecraft:lime_stained_glass"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "more_slabs_stairs_and_walls:lime_stained_glass_slab"
+  }
+}

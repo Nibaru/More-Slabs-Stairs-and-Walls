@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "dried_kelp_block_stair",
+  "key": {
+    "#": {
+      "item": "minecraft:dried_kelp_block"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "more_slabs_stairs_and_walls:dried_kelp_block_stairs"
+  }
+}

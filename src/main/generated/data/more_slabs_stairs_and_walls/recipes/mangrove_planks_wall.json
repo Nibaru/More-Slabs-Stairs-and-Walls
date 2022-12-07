@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "mangrove_planks_wall",
+  "ingredients": [
+    {
+      "item": "minecraft:mangrove_fence"
+    }
+  ],
+  "result": {
+    "item": "more_slabs_stairs_and_walls:mangrove_planks_wall"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "more_slabs_stairs_and_walls:soul_sand_slab",
+    "more_slabs_stairs_and_walls:soul_sand_stairs",
+    "more_slabs_stairs_and_walls:soul_sand_wall",
+    "more_slabs_stairs_and_walls:soul_soil_slab",
+    "more_slabs_stairs_and_walls:soul_soil_stairs",
+    "more_slabs_stairs_and_walls:soul_soil_wall"
+  ]
+}

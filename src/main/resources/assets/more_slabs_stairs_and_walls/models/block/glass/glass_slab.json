@@ -1,0 +1,22 @@
+{
+	"parent": "block/block",
+	"textures": {
+		"bottom": "block/glass",
+		"slab": "more_slabs_stairs_and_walls:block/glass_slab_side",
+		"particle": "#glass"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 8, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 8], "texture": "#slab"},
+				"east": {"uv": [0, 8, 16, 16], "texture": "#slab"},
+				"south": {"uv": [0, 0, 16, 8], "texture": "#slab"},
+				"west": {"uv": [0, 8, 16, 16], "texture": "#slab"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#glass"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#glass"}
+			}
+		}
+	]
+}
