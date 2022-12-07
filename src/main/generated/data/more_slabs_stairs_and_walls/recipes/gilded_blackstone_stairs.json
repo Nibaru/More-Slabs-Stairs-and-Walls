@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "group": "gilded_blackstone_stair",
   "key": {
     "#": {

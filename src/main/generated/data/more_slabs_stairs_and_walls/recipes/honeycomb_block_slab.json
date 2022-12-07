@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "group": "honeycomb_block_slab",
   "key": {
     "#": {

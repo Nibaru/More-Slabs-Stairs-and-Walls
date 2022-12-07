@@ -1,19 +1,18 @@
 package games.twinhead.moreslabsstairsandwalls.datagen;
 
-import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 
 public class LangDatagen extends FabricLanguageProvider {
 
-    protected LangDatagen(FabricDataGenerator dataGenerator) {
+    protected LangDatagen(FabricDataOutput dataGenerator) {
         super(dataGenerator);
     }
 
     @Override
     public void generateTranslations(TranslationBuilder translationBuilder) {
-        translationBuilder.add(MoreSlabsStairsAndWalls.modGroup, "More Slabs, Stairs, and Walls");
+        translationBuilder.add("itemGroup.more_slabs_stairs_and_walls.creative_tab", "More Slabs, Stairs, and Walls");
         for (ModBlocks block: ModBlocks.values()) {
             if(block.hasSlab()) translationBuilder.add(block.getSlabBlock(), formatName(block.toString().toLowerCase() + "_slab"));
             if(block.hasStairs()) translationBuilder.add(block.getStairsBlock(), formatName(block.toString().toLowerCase() + "_stairs"));

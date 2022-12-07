@@ -4,6 +4,7 @@ package games.twinhead.moreslabsstairsandwalls.datagen;
 import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.enums.BlockHalf;
@@ -19,7 +20,7 @@ import java.util.Optional;
 
 public class ModelGenerator extends FabricModelProvider {
 
-    public ModelGenerator(FabricDataGenerator dataGenerator) {
+    public ModelGenerator(FabricDataOutput dataGenerator) {
         super(dataGenerator);
     }
 
@@ -83,7 +84,8 @@ public class ModelGenerator extends FabricModelProvider {
             slabTop = Models.SLAB_TOP.upload(block.getSlabBlock(), textureMap, blockStateModelGenerator.modelCollector);
         }
 
-        blockStateModelGenerator.blockStateCollector.accept(createSlabBlockState(block.getSlabBlock(), slab, slabTop, new Identifier("minecraft", "block/" + block.toString().toLowerCase())));
+        Identifier fullId = new Identifier("minecraft" , "block/" + (block.toString().toLowerCase().contains("waxed") ? block.toString().toLowerCase().replace("waxed_", "") : block.toString().toLowerCase()));
+        blockStateModelGenerator.blockStateCollector.accept(createSlabBlockState(block.getSlabBlock(), slab, slabTop, fullId));
     }
 
     public static BlockStateSupplier createStairsBlockState(Block stairsBlock, Identifier innerModelId, Identifier regularModelId, Identifier outerModelId, boolean uvLock) {

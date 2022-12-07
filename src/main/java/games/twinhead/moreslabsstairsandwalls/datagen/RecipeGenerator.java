@@ -2,21 +2,21 @@ package games.twinhead.moreslabsstairsandwalls.datagen;
 
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.server.RecipeProvider;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
+import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.util.Identifier;
+import net.minecraft.recipe.book.RecipeCategory;
 
 import java.util.List;
 import java.util.function.Consumer;
 
 public class RecipeGenerator extends FabricRecipeProvider {
-    public RecipeGenerator(FabricDataGenerator dataGenerator) {
+    public RecipeGenerator(FabricDataOutput dataGenerator) {
         super(dataGenerator);
     }
 
@@ -50,19 +50,19 @@ public class RecipeGenerator extends FabricRecipeProvider {
             ModBlocks.BLUE_STAINED_GLASS);
 
     @Override
-    protected void generateRecipes(Consumer<RecipeJsonProvider> exporter) {
+    public void generate(Consumer<RecipeJsonProvider> exporter) {
         for (ModBlocks block: ModBlocks.values()) {
             if(block != ModBlocks.SNOW_BLOCK){
 
             if(block.hasSlab()){
                 //RecipeProvider.offerSlabRecipe(exporter, block.getSlabBlock(), block.getCopyBlock());
-                RecipeProvider.offerStonecuttingRecipe(exporter, block.getSlabBlock(), block.getCopyBlock(), 2);
-                ShapedRecipeJsonBuilder.create(block.getSlabBlock(), 6).criterion(hasItem(block.getCopyBlock()), conditionsFromItem(block.getCopyBlock())).criterion(hasItem(block.getSlabBlock()), conditionsFromItem(block.getSlabBlock())).input('#', block.getCopyBlock()).pattern("###").group(getRecipeGroup(block, BlockType.SLAB)).offerTo(exporter);
+                RecipeProvider.offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, block.getSlabBlock(), block.getCopyBlock(), 2);
+                ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, block.getSlabBlock(), 6).criterion(hasItem(block.getCopyBlock()), conditionsFromItem(block.getCopyBlock())).criterion(hasItem(block.getSlabBlock()), conditionsFromItem(block.getSlabBlock())).input('#', block.getCopyBlock()).pattern("###").group(getRecipeGroup(block, BlockType.SLAB)).offerTo(exporter);
 
             }
             if(block.hasStairs()){
-                ShapedRecipeJsonBuilder.create(block.getStairsBlock(), 4).criterion(hasItem(block.getCopyBlock()), conditionsFromItem(block.getCopyBlock())).criterion(hasItem(block.getStairsBlock()), conditionsFromItem(block.getStairsBlock())).input('#', block.getCopyBlock()).pattern("#  ").pattern("## ").pattern("###").group(getRecipeGroup(block, BlockType.STAIR)).offerTo(exporter);
-                RecipeProvider.offerStonecuttingRecipe(exporter, block.getStairsBlock(), block.getCopyBlock());
+                ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS,block.getStairsBlock(), 4).criterion(hasItem(block.getCopyBlock()), conditionsFromItem(block.getCopyBlock())).criterion(hasItem(block.getStairsBlock()), conditionsFromItem(block.getStairsBlock())).input('#', block.getCopyBlock()).pattern("#  ").pattern("## ").pattern("###").group(getRecipeGroup(block, BlockType.STAIR)).offerTo(exporter);
+                RecipeProvider.offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, block.getStairsBlock(), block.getCopyBlock());
             }
 
             if(block.hasWall()){
@@ -80,11 +80,11 @@ public class RecipeGenerator extends FabricRecipeProvider {
                         default -> Blocks.OAK_FENCE;
                     };
                     //RecipeProvider.offerShapelessRecipe(exporter, block.getWallBlock(), fence, "plank_walls", 1);
-                    ShapelessRecipeJsonBuilder.create(block.getWallBlock(), 1).criterion(hasItem(block.getCopyBlock()), conditionsFromItem(block.getCopyBlock())).criterion(hasItem(block.getWallBlock()), conditionsFromItem(block.getWallBlock())).input(fence).group(getRecipeGroup(block, BlockType.WALL)).offerTo(exporter);
+                    ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, block.getWallBlock(), 1).criterion(hasItem(block.getCopyBlock()), conditionsFromItem(block.getCopyBlock())).criterion(hasItem(block.getWallBlock()), conditionsFromItem(block.getWallBlock())).input(fence).group(getRecipeGroup(block, BlockType.WALL)).offerTo(exporter);
                 } else if(!glass.contains(block)){
-                    ShapedRecipeJsonBuilder.create(block.getWallBlock(), 6).criterion(hasItem(block.getCopyBlock()), conditionsFromItem(block.getCopyBlock())).criterion(hasItem(block.getWallBlock()), conditionsFromItem(block.getWallBlock())).input('#', block.getCopyBlock()).pattern("###").pattern("###").group(getRecipeGroup(block, BlockType.WALL)).offerTo(exporter);
+                    ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, block.getWallBlock(), 6).criterion(hasItem(block.getCopyBlock()), conditionsFromItem(block.getCopyBlock())).criterion(hasItem(block.getWallBlock()), conditionsFromItem(block.getWallBlock())).input('#', block.getCopyBlock()).pattern("###").pattern("###").group(getRecipeGroup(block, BlockType.WALL)).offerTo(exporter);
                 }
-                RecipeProvider.offerStonecuttingRecipe(exporter, block.getWallBlock(), block.getCopyBlock());
+                RecipeProvider.offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, block.getWallBlock(), block.getCopyBlock());
             }
             }
         }
@@ -208,7 +208,15 @@ public class RecipeGenerator extends FabricRecipeProvider {
                     WAXED_EXPOSED_CUT_COPPER,
                     WAXED_OXIDIZED_CUT_COPPER,
                     WAXED_WEATHERED_CUT_COPPER,
-                    WEATHERED_CUT_COPPER -> "copper_"+ blockType+ "s";
+                    WEATHERED_CUT_COPPER,
+                    COPPER_BLOCK,
+                    EXPOSED_COPPER,
+                    WEATHERED_COPPER,
+                    OXIDIZED_COPPER,
+                    WAXED_COPPER,
+                    WAXED_EXPOSED_COPPER,
+                    WAXED_WEATHERED_COPPER,
+                    WAXED_OXIDIZED_COPPER -> "copper_"+ blockType+ "s";
             case MUSHROOM_STEM, BROWN_MUSHROOM_BLOCK, RED_MUSHROOM_BLOCK-> "mushroom_"+ blockType+ "s";
             case RAW_GOLD_BLOCK,RAW_IRON_BLOCK, RAW_COPPER_BLOCK-> "raw_"+ blockType+ "s";
             case SOUL_SAND,SOUL_SOIL ->  "soul_"+ blockType+ "s";

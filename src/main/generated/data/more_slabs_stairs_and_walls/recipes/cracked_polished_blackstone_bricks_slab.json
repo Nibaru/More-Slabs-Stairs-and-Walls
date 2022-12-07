@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "group": "cracked_polished_blackstone_bricks_slab",
   "key": {
     "#": {

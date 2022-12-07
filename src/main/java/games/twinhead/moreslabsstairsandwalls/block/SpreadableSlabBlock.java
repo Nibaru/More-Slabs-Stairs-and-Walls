@@ -10,13 +10,13 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.BlockTags;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -66,7 +66,7 @@ public class SpreadableSlabBlock extends GrassBlock implements Waterloggable {
         }
     }
 
-    @Override
+    //@Override
     public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
         if(state.get(SlabBlock.TYPE) == SlabType.BOTTOM) return false;
 
@@ -78,15 +78,17 @@ public class SpreadableSlabBlock extends GrassBlock implements Waterloggable {
         BlockState blockState = world.getBlockState(pos);
         BlockPos blockPos = pos.up();
         ChunkGenerator chunkGenerator = world.getChunkManager().getChunkGenerator();
-        if (blockState.isOf(ModBlocks.CRIMSON_NYLIUM.getSlabBlock())) {
-            NetherConfiguredFeatures.CRIMSON_FOREST_VEGETATION_BONEMEAL.value().generate(world, chunkGenerator, random, blockPos);
-        } else if (blockState.isOf(ModBlocks.WARPED_NYLIUM.getSlabBlock())) {
-            NetherConfiguredFeatures.WARPED_FOREST_VEGETATION_BONEMEAL.value().generate(world, chunkGenerator, random, blockPos);
-            NetherConfiguredFeatures.NETHER_SPROUTS_BONEMEAL.value().generate(world, chunkGenerator, random, blockPos);
-            if (random.nextInt(8) == 0) {
-                NetherConfiguredFeatures.TWISTING_VINES_BONEMEAL.value().generate(world, chunkGenerator, random, blockPos);
-            }
-        } else if (blockState.isOf(ModBlocks.GRASS_BLOCK.getSlabBlock())) {
+//        if (blockState.isOf(ModBlocks.CRIMSON_NYLIUM.getSlabBlock())) {
+//            NetherConfiguredFeatures.CRIMSON_FOREST_VEGETATION_BONEMEAL.value().generate(world, chunkGenerator, random, blockPos);
+//        } else if (blockState.isOf(ModBlocks.WARPED_NYLIUM.getSlabBlock())) {
+//            NetherConfiguredFeatures.WARPED_FOREST_VEGETATION_BONEMEAL.value().generate(world, chunkGenerator, random, blockPos);
+//            NetherConfiguredFeatures.NETHER_SPROUTS_BONEMEAL.value().generate(world, chunkGenerator, random, blockPos);
+//            if (random.nextInt(8) == 0) {
+//                NetherConfiguredFeatures.TWISTING_VINES_BONEMEAL.value().generate(world, chunkGenerator, random, blockPos);
+//            }
+//        } else
+//
+        if (blockState.isOf(ModBlocks.GRASS_BLOCK.getSlabBlock())) {
             super.grow(world,random,pos,state);
         }
 
@@ -225,7 +227,7 @@ public class SpreadableSlabBlock extends GrassBlock implements Waterloggable {
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(WATERLOGGED)) {
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);

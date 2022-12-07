@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "group": "cracked_deepslate_bricks_stair",
   "key": {
     "#": {

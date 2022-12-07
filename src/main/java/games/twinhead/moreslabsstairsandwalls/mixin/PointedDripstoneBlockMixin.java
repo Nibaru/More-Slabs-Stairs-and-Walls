@@ -2,7 +2,7 @@ package games.twinhead.moreslabsstairsandwalls.mixin;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import net.minecraft.block.*;
-import net.minecraft.tag.FluidTags;
+import net.minecraft.registry.tag.FluidTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
