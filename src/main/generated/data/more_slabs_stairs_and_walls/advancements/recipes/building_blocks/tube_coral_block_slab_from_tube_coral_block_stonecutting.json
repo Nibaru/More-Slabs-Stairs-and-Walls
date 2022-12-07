@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:tube_coral_block_slab_from_tube_coral_block_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tube_coral_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:tube_coral_block"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_tube_coral_block",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:tube_coral_block_slab_from_tube_coral_block_stonecutting"
+    ]
+  }
+}
