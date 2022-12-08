@@ -273,7 +273,17 @@ public enum ModBlocks {
     REDSTONE_BLOCK(Blocks.REDSTONE_BLOCK, ToolType.PICKAXE, true, true, false),
 
     //2.2.0
-    SAND(Blocks.SAND, ToolType.SHOVEL, true, false, false)
+    //SAND(Blocks.SAND, ToolType.SHOVEL, true, false, false)
+
+    COPPER_BLOCK(Blocks.COPPER_BLOCK, ToolType.PICKAXE),
+    EXPOSED_COPPER(Blocks.EXPOSED_COPPER, ToolType.PICKAXE),
+    WEATHERED_COPPER(Blocks.WEATHERED_COPPER, ToolType.PICKAXE),
+    OXIDIZED_COPPER(Blocks.OXIDIZED_COPPER, ToolType.PICKAXE),
+
+    WAXED_COPPER(Blocks.WAXED_COPPER_BLOCK, ToolType.PICKAXE, "copper_block"),
+    WAXED_EXPOSED_COPPER(Blocks.WAXED_EXPOSED_COPPER, ToolType.PICKAXE, "exposed_copper"),
+    WAXED_WEATHERED_COPPER(Blocks.WAXED_WEATHERED_COPPER, ToolType.PICKAXE, "weathered_copper"),
+    WAXED_OXIDIZED_COPPER(Blocks.WAXED_OXIDIZED_COPPER, ToolType.PICKAXE, "oxidized_copper"),
     ;
 
 

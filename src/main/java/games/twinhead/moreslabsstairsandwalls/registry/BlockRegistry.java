@@ -43,6 +43,34 @@ public class BlockRegistry {
         OxidizableBlocksRegistry.registerWaxableBlockPair(ModBlocks.EXPOSED_CUT_COPPER.getWallBlock(), ModBlocks.WAXED_EXPOSED_CUT_COPPER.getWallBlock());
         OxidizableBlocksRegistry.registerWaxableBlockPair(ModBlocks.WEATHERED_CUT_COPPER.getWallBlock(), ModBlocks.WAXED_WEATHERED_CUT_COPPER.getWallBlock());
         OxidizableBlocksRegistry.registerWaxableBlockPair(ModBlocks.OXIDIZED_CUT_COPPER.getWallBlock(), ModBlocks.WAXED_OXIDIZED_CUT_COPPER.getWallBlock());
+
+
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(ModBlocks.COPPER_BLOCK.getSlabBlock(), ModBlocks.EXPOSED_COPPER.getSlabBlock());
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(ModBlocks.EXPOSED_COPPER.getSlabBlock(), ModBlocks.WEATHERED_COPPER.getSlabBlock());
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(ModBlocks.WEATHERED_COPPER.getSlabBlock(), ModBlocks.OXIDIZED_COPPER.getSlabBlock());
+
+        OxidizableBlocksRegistry.registerWaxableBlockPair(ModBlocks.COPPER_BLOCK.getSlabBlock(), ModBlocks.WAXED_COPPER.getSlabBlock());
+        OxidizableBlocksRegistry.registerWaxableBlockPair(ModBlocks.EXPOSED_COPPER.getSlabBlock(), ModBlocks.WAXED_EXPOSED_COPPER.getSlabBlock());
+        OxidizableBlocksRegistry.registerWaxableBlockPair(ModBlocks.WEATHERED_COPPER.getSlabBlock(), ModBlocks.WAXED_WEATHERED_COPPER.getSlabBlock());
+        OxidizableBlocksRegistry.registerWaxableBlockPair(ModBlocks.OXIDIZED_COPPER.getSlabBlock(), ModBlocks.WAXED_OXIDIZED_COPPER.getSlabBlock());
+
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(ModBlocks.COPPER_BLOCK.getStairsBlock(), ModBlocks.EXPOSED_COPPER.getStairsBlock());
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(ModBlocks.EXPOSED_COPPER.getStairsBlock(), ModBlocks.WEATHERED_COPPER.getStairsBlock());
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(ModBlocks.WEATHERED_COPPER.getStairsBlock(), ModBlocks.OXIDIZED_COPPER.getStairsBlock());
+
+        OxidizableBlocksRegistry.registerWaxableBlockPair(ModBlocks.COPPER_BLOCK.getStairsBlock(), ModBlocks.WAXED_COPPER.getStairsBlock());
+        OxidizableBlocksRegistry.registerWaxableBlockPair(ModBlocks.EXPOSED_COPPER.getStairsBlock(), ModBlocks.WAXED_EXPOSED_COPPER.getStairsBlock());
+        OxidizableBlocksRegistry.registerWaxableBlockPair(ModBlocks.WEATHERED_COPPER.getStairsBlock(), ModBlocks.WAXED_WEATHERED_COPPER.getStairsBlock());
+        OxidizableBlocksRegistry.registerWaxableBlockPair(ModBlocks.OXIDIZED_COPPER.getStairsBlock(), ModBlocks.WAXED_OXIDIZED_COPPER.getStairsBlock());
+
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(ModBlocks.COPPER_BLOCK.getWallBlock(), ModBlocks.EXPOSED_COPPER.getWallBlock());
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(ModBlocks.EXPOSED_COPPER.getWallBlock(), ModBlocks.WEATHERED_COPPER.getWallBlock());
+        OxidizableBlocksRegistry.registerOxidizableBlockPair(ModBlocks.WEATHERED_COPPER.getWallBlock(), ModBlocks.OXIDIZED_COPPER.getWallBlock());
+
+        OxidizableBlocksRegistry.registerWaxableBlockPair(ModBlocks.COPPER_BLOCK.getWallBlock(), ModBlocks.WAXED_COPPER.getWallBlock());
+        OxidizableBlocksRegistry.registerWaxableBlockPair(ModBlocks.EXPOSED_COPPER.getWallBlock(), ModBlocks.WAXED_EXPOSED_COPPER.getWallBlock());
+        OxidizableBlocksRegistry.registerWaxableBlockPair(ModBlocks.WEATHERED_COPPER.getWallBlock(), ModBlocks.WAXED_WEATHERED_COPPER.getWallBlock());
+        OxidizableBlocksRegistry.registerWaxableBlockPair(ModBlocks.OXIDIZED_COPPER.getWallBlock(), ModBlocks.WAXED_OXIDIZED_COPPER.getWallBlock());
     }
 
 
@@ -101,6 +129,13 @@ public class BlockRegistry {
                     CRIMSON_STEM ->  new SlabBlock(AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).luminance((i) -> block.getLuminance()));
             case BONE_BLOCK -> new SlabBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.PALE_YELLOW).sounds(BlockSoundGroup.BONE).luminance((i) -> block.getLuminance()));
             case REDSTONE_BLOCK -> new RedstoneSlabBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.BRIGHT_RED).sounds(BlockSoundGroup.STONE).luminance((i) -> block.getLuminance()));
+
+            case COPPER_BLOCK -> new OxidizableSlabBlock(Oxidizable.OxidationLevel.UNAFFECTED, AbstractBlock.Settings.copy(copyBlock));
+            case EXPOSED_COPPER -> new OxidizableSlabBlock(Oxidizable.OxidationLevel.EXPOSED, AbstractBlock.Settings.copy(copyBlock));
+            case WEATHERED_COPPER -> new OxidizableSlabBlock(Oxidizable.OxidationLevel.WEATHERED, AbstractBlock.Settings.copy(copyBlock));
+            case OXIDIZED_COPPER -> new OxidizableSlabBlock(Oxidizable.OxidationLevel.OXIDIZED, AbstractBlock.Settings.copy(copyBlock));
+
+
             default -> new SlabBlock(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
         };
 
@@ -156,6 +191,11 @@ public class BlockRegistry {
                     OAK_LOG,
                     WARPED_STEM,
                     CRIMSON_STEM ->  new StairsBlock(copyBlock.getDefaultState(), AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).luminance((i) -> block.getLuminance()));
+            case COPPER_BLOCK -> new OxidizableStairsBlock(Oxidizable.OxidationLevel.UNAFFECTED, copyBlock.getDefaultState(), AbstractBlock.Settings.copy(copyBlock));
+            case EXPOSED_COPPER -> new OxidizableStairsBlock(Oxidizable.OxidationLevel.EXPOSED, copyBlock.getDefaultState(), AbstractBlock.Settings.copy(copyBlock));
+            case WEATHERED_COPPER -> new OxidizableStairsBlock(Oxidizable.OxidationLevel.WEATHERED, copyBlock.getDefaultState(), AbstractBlock.Settings.copy(copyBlock));
+            case OXIDIZED_COPPER -> new OxidizableStairsBlock(Oxidizable.OxidationLevel.OXIDIZED, copyBlock.getDefaultState(), AbstractBlock.Settings.copy(copyBlock));
+
 
             case BONE_BLOCK -> new StairsBlock(copyBlock.getDefaultState(), AbstractBlock.Settings.of(Material.STONE, MapColor.PALE_YELLOW).sounds(BlockSoundGroup.BONE).luminance((i) -> block.getLuminance()));
             case REDSTONE_BLOCK -> new RedstoneStairsBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.BRIGHT_RED).sounds(BlockSoundGroup.STONE).luminance((i) -> block.getLuminance()));
@@ -187,10 +227,14 @@ public class BlockRegistry {
                     OAK_LOG,
                     WARPED_STEM,
                     CRIMSON_STEM ->  new WallBlock(AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).luminance((i) -> block.getLuminance()));
-            case CUT_COPPER -> new OxidizableWallBlock(Oxidizable.OxidationLevel.UNAFFECTED, AbstractBlock.Settings.copy(copyBlock));
-            case EXPOSED_CUT_COPPER -> new OxidizableWallBlock(Oxidizable.OxidationLevel.EXPOSED, AbstractBlock.Settings.copy(copyBlock));
-            case WEATHERED_CUT_COPPER -> new OxidizableWallBlock(Oxidizable.OxidationLevel.WEATHERED, AbstractBlock.Settings.copy(copyBlock));
-            case OXIDIZED_CUT_COPPER -> new OxidizableWallBlock(Oxidizable.OxidationLevel.OXIDIZED, AbstractBlock.Settings.copy(copyBlock));
+            case CUT_COPPER,
+                    COPPER_BLOCK -> new OxidizableWallBlock(Oxidizable.OxidationLevel.UNAFFECTED, AbstractBlock.Settings.copy(copyBlock));
+            case EXPOSED_CUT_COPPER,
+                    EXPOSED_COPPER -> new OxidizableWallBlock(Oxidizable.OxidationLevel.EXPOSED, AbstractBlock.Settings.copy(copyBlock));
+            case WEATHERED_CUT_COPPER,
+                    WEATHERED_COPPER -> new OxidizableWallBlock(Oxidizable.OxidationLevel.WEATHERED, AbstractBlock.Settings.copy(copyBlock));
+            case OXIDIZED_CUT_COPPER,
+                    OXIDIZED_COPPER -> new OxidizableWallBlock(Oxidizable.OxidationLevel.OXIDIZED, AbstractBlock.Settings.copy(copyBlock));
             case BONE_BLOCK -> new WallBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.PALE_YELLOW).sounds(BlockSoundGroup.BONE).luminance((i) -> block.getLuminance()));
             //case REDSTONE -> new RedstoneWallBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.BRIGHT_RED).sounds(BlockSoundGroup.STONE).luminance((i) -> block.getLuminance()));
             default -> new WallBlock(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
