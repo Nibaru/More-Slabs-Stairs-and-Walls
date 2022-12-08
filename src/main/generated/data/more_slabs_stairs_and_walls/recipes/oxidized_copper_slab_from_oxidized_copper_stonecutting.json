@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "minecraft:oxidized_copper"
+  },
+  "result": "more_slabs_stairs_and_walls:oxidized_copper_slab"
+}

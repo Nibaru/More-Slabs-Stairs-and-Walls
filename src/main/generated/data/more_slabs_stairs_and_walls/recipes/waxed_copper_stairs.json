@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "waxed_copper_stair",
+  "key": {
+    "#": {
+      "item": "minecraft:waxed_copper_block"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "more_slabs_stairs_and_walls:waxed_copper_stairs"
+  }
+}
