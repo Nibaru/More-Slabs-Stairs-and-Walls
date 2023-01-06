@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "mycelium_stair",
+  "key": {
+    "#": {
+      "item": "minecraft:mycelium"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "more_slabs_stairs_and_walls:mycelium_stairs"
+  }
+}

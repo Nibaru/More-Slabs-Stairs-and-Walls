@@ -33,13 +33,13 @@ public abstract class TreeDecoratorGeneratorMixin {
         if (state.isOf(Blocks.PODZOL)){
             for (BlockState modBlockState: podzolReplaceableStairs) {
                 if(world.testBlockState(pos, Predicate.isEqual(modBlockState))){
-                    this.replacer.accept(pos, ModBlocks.PODZOL.getStairsBlock().getDefaultState().with(StairsBlock.FACING, modBlockState.get(StairsBlock.FACING)).with(StairsBlock.SHAPE, modBlockState.get(StairsBlock.SHAPE)).with(StairsBlock.HALF, modBlockState.get(StairsBlock.HALF)));
+                    this.replacer.accept(pos, ModBlocks.PODZOL_STAIRS.get().getDefaultState().with(StairsBlock.FACING, modBlockState.get(StairsBlock.FACING)).with(StairsBlock.SHAPE, modBlockState.get(StairsBlock.SHAPE)).with(StairsBlock.HALF, modBlockState.get(StairsBlock.HALF)));
                     ci.cancel();
                 }
             }
             for (BlockState modBlockState: podzolReplaceableSlabs) {
                 if(world.testBlockState(pos, Predicate.isEqual(modBlockState))){
-                    this.replacer.accept(pos, ModBlocks.PODZOL.getSlabBlock().getDefaultState().with(SlabBlock.TYPE, modBlockState.get(SlabBlock.TYPE)));
+                    this.replacer.accept(pos, ModBlocks.PODZOL_SLAB.get().getDefaultState().with(SlabBlock.TYPE, modBlockState.get(SlabBlock.TYPE)));
                     ci.cancel();
                 }
             }
@@ -48,19 +48,19 @@ public abstract class TreeDecoratorGeneratorMixin {
 
 
     static {
-        podzolReplaceableStairs.addAll(ModBlocks.GRASS_BLOCK.getStairsBlock().getStateManager().getStates());
-        podzolReplaceableStairs.addAll(ModBlocks.PODZOL.getStairsBlock().getStateManager().getStates());
-        podzolReplaceableStairs.addAll(ModBlocks.DIRT.getStairsBlock().getStateManager().getStates());
-        podzolReplaceableStairs.addAll(ModBlocks.COARSE_DIRT.getStairsBlock().getStateManager().getStates());
-        podzolReplaceableStairs.addAll(ModBlocks.MYCELIUM.getStairsBlock().getStateManager().getStates());
-        podzolReplaceableStairs.addAll(ModBlocks.ROOTED_DIRT.getStairsBlock().getStateManager().getStates());
+        podzolReplaceableStairs.addAll(ModBlocks.GRASS_BLOCK_STAIRS.get().getStateManager().getStates());
+        podzolReplaceableStairs.addAll(ModBlocks.PODZOL_STAIRS.get().getStateManager().getStates());
+        podzolReplaceableStairs.addAll(ModBlocks.DIRT_STAIRS.get().getStateManager().getStates());
+        podzolReplaceableStairs.addAll(ModBlocks.COARSE_DIRT_STAIRS.get().getStateManager().getStates());
+        podzolReplaceableStairs.addAll(ModBlocks.MYCELIUM_STAIRS.get().getStateManager().getStates());
+        podzolReplaceableStairs.addAll(ModBlocks.ROOTED_DIRT_STAIRS.get().getStateManager().getStates());
 
-        podzolReplaceableSlabs.addAll(ModBlocks.GRASS_BLOCK.getSlabBlock().getStateManager().getStates());
-        podzolReplaceableSlabs.addAll(ModBlocks.PODZOL.getSlabBlock().getStateManager().getStates());
-        podzolReplaceableSlabs.addAll(ModBlocks.DIRT.getSlabBlock().getStateManager().getStates());
-        podzolReplaceableSlabs.addAll(ModBlocks.COARSE_DIRT.getSlabBlock().getStateManager().getStates());
-        podzolReplaceableSlabs.addAll(ModBlocks.MYCELIUM.getSlabBlock().getStateManager().getStates());
-        podzolReplaceableSlabs.addAll(ModBlocks.ROOTED_DIRT.getSlabBlock().getStateManager().getStates());
+        podzolReplaceableSlabs.addAll(ModBlocks.GRASS_BLOCK_SLAB.get().getStateManager().getStates());
+        podzolReplaceableSlabs.addAll(ModBlocks.PODZOL_SLAB.get().getStateManager().getStates());
+        podzolReplaceableSlabs.addAll(ModBlocks.DIRT_SLAB.get().getStateManager().getStates());
+        podzolReplaceableSlabs.addAll(ModBlocks.COARSE_DIRT_SLAB.get().getStateManager().getStates());
+        podzolReplaceableSlabs.addAll(ModBlocks.MYCELIUM_SLAB.get().getStateManager().getStates());
+        podzolReplaceableSlabs.addAll(ModBlocks.ROOTED_DIRT_SLAB.get().getStateManager().getStates());
 
     }
 }

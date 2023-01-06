@@ -1,6 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"parent": "minecraft:block/slab_top",
+	"render_type": "cutout",
 	"textures": {
 		"particle": "block/dirt",
 		"bottom": "block/dirt",

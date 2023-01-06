@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "concrete_slabs",
+  "key": {
+    "#": {
+      "item": "minecraft:light_gray_concrete"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "more_slabs_stairs_and_walls:light_gray_concrete_slab"
+  }
+}

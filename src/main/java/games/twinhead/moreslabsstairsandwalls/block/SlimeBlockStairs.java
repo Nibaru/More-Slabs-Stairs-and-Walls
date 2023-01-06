@@ -1,7 +1,5 @@
 package games.twinhead.moreslabsstairsandwalls.block;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.SlabType;
@@ -32,14 +30,52 @@ public class SlimeBlockStairs extends StairsBlock {
 
     }
 
+    public boolean isStickyBlock(BlockState state)
+    {
+        return isStateHoney(state) || isStateSlime(state);
+    }
+
+    public boolean canStickTo(BlockState state, BlockState other)
+    {
+        if(isStateHoney(state) && isStateSlime(other)){
+            return false;
+        }
+
+        if(isStateHoney(other) && isStateSlime(state)){
+            return false;
+        }
+
+        return state.isStickyBlock() || other.isStickyBlock();
+    }
+
+    private static boolean isStateHoney(BlockState state){
+        if(state.isOf(ModBlocks.HONEY_BLOCK_SLAB.get())){
+            return true;
+        } else if(state.isOf(ModBlocks.HONEY_BLOCK_STAIRS.get())){
+            return true;
+        } else if(state.isOf(ModBlocks.HONEY_BLOCK_WALL.get())){
+            return true;
+        } else return state.isOf(Blocks.HONEY_BLOCK);
+    }
+
+    private static boolean isStateSlime(BlockState state){
+        if(state.isOf(ModBlocks.SLIME_BLOCK_SLAB.get())){
+            return true;
+        } else if(state.isOf(ModBlocks.SLIME_BLOCK_STAIRS.get())){
+            return true;
+        } else if(state.isOf(ModBlocks.SLIME_BLOCK_WALL.get())){
+            return true;
+        } else return state.isOf(Blocks.SLIME_BLOCK);
+    }
+
+
     @SuppressWarnings("deprecation")
     @Override
-    @Environment(EnvType.CLIENT)
     public boolean isSideInvisible(BlockState blockState_1, BlockState blockState_2, Direction direction_1) {
         if(blockState_2.getBlock() == Blocks.SLIME_BLOCK)
             return true;
 
-        if(blockState_2.getBlock() == ModBlocks.SLIME_BLOCK.getSlabBlock())
+        if(blockState_2.getBlock() == ModBlocks.SLIME_BLOCK_SLAB.get())
             if(isInvisibleToSlimeSlab(blockState_1, blockState_2, direction_1))
                 return true;
 

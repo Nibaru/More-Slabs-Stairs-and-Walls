@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "minecraft:gilded_blackstone"
+  },
+  "result": "more_slabs_stairs_and_walls:gilded_blackstone_slab"
+}

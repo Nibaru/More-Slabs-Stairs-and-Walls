@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": {
+            "modid": "comforts",
+            "type": "forge:mod_loaded"
+          },
+          "type": "forge:not"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:gray_wool"
+          }
+        },
+        "result": {
+          "count": 6,
+          "item": "more_slabs_stairs_and_walls:gray_wool_slab"
+        }
+      }
+    }
+  ]
+}

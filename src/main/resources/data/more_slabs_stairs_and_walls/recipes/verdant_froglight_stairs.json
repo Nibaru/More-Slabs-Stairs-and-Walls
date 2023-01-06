@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "froglight_stairs",
+  "key": {
+    "#": {
+      "item": "minecraft:verdant_froglight"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "more_slabs_stairs_and_walls:verdant_froglight_stairs"
+  }
+}

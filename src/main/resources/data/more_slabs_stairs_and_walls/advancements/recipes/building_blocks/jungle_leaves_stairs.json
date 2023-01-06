@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_jungle_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:jungle_leaves"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_jungle_leaves_stairs": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "more_slabs_stairs_and_walls:jungle_leaves_stairs"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "more_slabs_stairs_and_walls:jungle_leaves_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_jungle_leaves",
+      "has_jungle_leaves_stairs",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "more_slabs_stairs_and_walls:jungle_leaves_stairs"
+    ]
+  }
+}

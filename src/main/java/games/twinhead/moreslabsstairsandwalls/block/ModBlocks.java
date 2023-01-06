@@ -1,479 +1,843 @@
 package games.twinhead.moreslabsstairsandwalls.block;
 
 import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
-import games.twinhead.moreslabsstairsandwalls.registry.BlockRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.DyeColor;
-import net.minecraft.util.Identifier;
-
-public enum ModBlocks {
-    WHITE_CONCRETE(Blocks.WHITE_CONCRETE, ToolType.PICKAXE, DyeColor.WHITE),
-    YELLOW_CONCRETE(Blocks.YELLOW_CONCRETE, ToolType.PICKAXE, DyeColor.YELLOW),
-    BLACK_CONCRETE(Blocks.BLACK_CONCRETE, ToolType.PICKAXE, DyeColor.BLACK),
-    RED_CONCRETE(Blocks.RED_CONCRETE, ToolType.PICKAXE, DyeColor.RED),
-    PURPLE_CONCRETE(Blocks.PURPLE_CONCRETE, ToolType.PICKAXE, DyeColor.PURPLE),
-    PINK_CONCRETE(Blocks.PINK_CONCRETE, ToolType.PICKAXE, DyeColor.PINK),
-    ORANGE_CONCRETE(Blocks.ORANGE_CONCRETE, ToolType.PICKAXE, DyeColor.ORANGE),
-    MAGENTA_CONCRETE(Blocks.MAGENTA_CONCRETE, ToolType.PICKAXE, DyeColor.MAGENTA),
-    LIME_CONCRETE(Blocks.LIME_CONCRETE, ToolType.PICKAXE, DyeColor.LIME),
-    LIGHT_GRAY_CONCRETE(Blocks.LIGHT_GRAY_CONCRETE, ToolType.PICKAXE, DyeColor.LIGHT_GRAY),
-    LIGHT_BLUE_CONCRETE(Blocks.LIGHT_BLUE_CONCRETE, ToolType.PICKAXE, DyeColor.LIGHT_BLUE),
-    GREEN_CONCRETE(Blocks.GREEN_CONCRETE, ToolType.PICKAXE, DyeColor.GREEN),
-    GRAY_CONCRETE(Blocks.GRAY_CONCRETE, ToolType.PICKAXE, DyeColor.GRAY),
-    CYAN_CONCRETE(Blocks.CYAN_CONCRETE, ToolType.PICKAXE, DyeColor.CYAN),
-    BROWN_CONCRETE(Blocks.BROWN_CONCRETE, ToolType.PICKAXE, DyeColor.BROWN),
-    BLUE_CONCRETE(Blocks.BLUE_CONCRETE, ToolType.PICKAXE, DyeColor.BLUE),
-
-    WHITE_TERRACOTTA(Blocks.WHITE_TERRACOTTA, ToolType.PICKAXE, DyeColor.WHITE),
-    YELLOW_TERRACOTTA(Blocks.YELLOW_TERRACOTTA, ToolType.PICKAXE, DyeColor.YELLOW),
-    BLACK_TERRACOTTA(Blocks.BLACK_TERRACOTTA, ToolType.PICKAXE, DyeColor.BLACK),
-    RED_TERRACOTTA(Blocks.RED_TERRACOTTA, ToolType.PICKAXE, DyeColor.RED),
-    PURPLE_TERRACOTTA(Blocks.PURPLE_TERRACOTTA, ToolType.PICKAXE, DyeColor.PURPLE),
-    PINK_TERRACOTTA(Blocks.PINK_TERRACOTTA, ToolType.PICKAXE, DyeColor.PINK),
-    ORANGE_TERRACOTTA(Blocks.ORANGE_TERRACOTTA, ToolType.PICKAXE, DyeColor.ORANGE),
-    MAGENTA_TERRACOTTA(Blocks.MAGENTA_TERRACOTTA, ToolType.PICKAXE, DyeColor.MAGENTA),
-    LIME_TERRACOTTA(Blocks.LIME_TERRACOTTA, ToolType.PICKAXE, DyeColor.LIME),
-    LIGHT_GRAY_TERRACOTTA(Blocks.LIGHT_GRAY_TERRACOTTA, ToolType.PICKAXE, DyeColor.LIGHT_GRAY),
-    LIGHT_BLUE_TERRACOTTA(Blocks.LIGHT_BLUE_TERRACOTTA, ToolType.PICKAXE, DyeColor.LIGHT_BLUE),
-    GREEN_TERRACOTTA(Blocks.GREEN_TERRACOTTA, ToolType.PICKAXE, DyeColor.GREEN),
-    GRAY_TERRACOTTA(Blocks.GRAY_TERRACOTTA, ToolType.PICKAXE, DyeColor.GRAY),
-    CYAN_TERRACOTTA(Blocks.CYAN_TERRACOTTA, ToolType.PICKAXE, DyeColor.CYAN),
-    BROWN_TERRACOTTA(Blocks.BROWN_TERRACOTTA, ToolType.PICKAXE, DyeColor.BROWN),
-    BLUE_TERRACOTTA(Blocks.BLUE_TERRACOTTA, ToolType.PICKAXE, DyeColor.BLUE),
-    TERRACOTTA(Blocks.TERRACOTTA, ToolType.PICKAXE),
-
-    WHITE_WOOL(Blocks.WHITE_WOOL, ToolType.NONE, DyeColor.WHITE),
-    YELLOW_WOOL(Blocks.YELLOW_WOOL, ToolType.NONE, DyeColor.YELLOW),
-    BLACK_WOOL(Blocks.BLACK_WOOL, ToolType.NONE, DyeColor.BLACK),
-    RED_WOOL(Blocks.RED_WOOL, ToolType.NONE, DyeColor.RED),
-    PURPLE_WOOL(Blocks.PURPLE_WOOL, ToolType.NONE, DyeColor.PURPLE),
-    PINK_WOOL(Blocks.PINK_WOOL, ToolType.NONE, DyeColor.PINK),
-    ORANGE_WOOL(Blocks.ORANGE_WOOL, ToolType.NONE, DyeColor.ORANGE),
-    MAGENTA_WOOL(Blocks.MAGENTA_WOOL, ToolType.NONE, DyeColor.MAGENTA),
-    LIME_WOOL(Blocks.LIME_WOOL, ToolType.NONE, DyeColor.LIME),
-    LIGHT_GRAY_WOOL(Blocks.LIGHT_GRAY_WOOL, ToolType.NONE, DyeColor.LIGHT_GRAY),
-    LIGHT_BLUE_WOOL(Blocks.LIGHT_BLUE_WOOL, ToolType.NONE, DyeColor.LIGHT_BLUE),
-    GREEN_WOOL(Blocks.GREEN_WOOL, ToolType.NONE, DyeColor.GREEN),
-    GRAY_WOOL(Blocks.GRAY_WOOL, ToolType.NONE, DyeColor.GRAY),
-    CYAN_WOOL(Blocks.CYAN_WOOL, ToolType.NONE, DyeColor.CYAN),
-    BROWN_WOOL(Blocks.BROWN_WOOL, ToolType.NONE, DyeColor.BROWN),
-    BLUE_WOOL(Blocks.BLUE_WOOL, ToolType.NONE, DyeColor.BLUE),
-
-    WHITE_STAINED_GLASS(Blocks.WHITE_STAINED_GLASS, ToolType.NONE, Layer.TRANSLUCENT, DyeColor.WHITE),
-    YELLOW_STAINED_GLASS(Blocks.YELLOW_STAINED_GLASS, ToolType.NONE, Layer.TRANSLUCENT, DyeColor.YELLOW),
-    BLACK_STAINED_GLASS(Blocks.BLACK_STAINED_GLASS, ToolType.NONE, Layer.TRANSLUCENT, DyeColor.BLACK),
-    RED_STAINED_GLASS(Blocks.RED_STAINED_GLASS, ToolType.NONE, Layer.TRANSLUCENT, DyeColor.RED),
-    PURPLE_STAINED_GLASS(Blocks.PURPLE_STAINED_GLASS, ToolType.NONE, Layer.TRANSLUCENT, DyeColor.PURPLE),
-    PINK_STAINED_GLASS(Blocks.PINK_STAINED_GLASS, ToolType.NONE, Layer.TRANSLUCENT, DyeColor.PINK),
-    ORANGE_STAINED_GLASS(Blocks.ORANGE_STAINED_GLASS, ToolType.NONE, Layer.TRANSLUCENT, DyeColor.ORANGE),
-    MAGENTA_STAINED_GLASS(Blocks.MAGENTA_STAINED_GLASS, ToolType.NONE, Layer.TRANSLUCENT, DyeColor.MAGENTA),
-    LIME_STAINED_GLASS(Blocks.LIME_STAINED_GLASS, ToolType.NONE, Layer.TRANSLUCENT, DyeColor.LIME),
-    LIGHT_GRAY_STAINED_GLASS(Blocks.LIGHT_GRAY_STAINED_GLASS, ToolType.NONE, Layer.TRANSLUCENT, DyeColor.LIGHT_GRAY),
-    LIGHT_BLUE_STAINED_GLASS(Blocks.LIGHT_BLUE_STAINED_GLASS, ToolType.NONE, Layer.TRANSLUCENT, DyeColor.LIGHT_BLUE),
-    GREEN_STAINED_GLASS(Blocks.GREEN_STAINED_GLASS, ToolType.NONE, Layer.TRANSLUCENT, DyeColor.GREEN),
-    GRAY_STAINED_GLASS(Blocks.GRAY_STAINED_GLASS, ToolType.NONE, Layer.TRANSLUCENT, DyeColor.GRAY),
-    CYAN_STAINED_GLASS(Blocks.CYAN_STAINED_GLASS, ToolType.NONE, Layer.TRANSLUCENT, DyeColor.CYAN),
-    BROWN_STAINED_GLASS(Blocks.BROWN_STAINED_GLASS, ToolType.NONE, Layer.TRANSLUCENT, DyeColor.BROWN),
-    BLUE_STAINED_GLASS(Blocks.BLUE_STAINED_GLASS, ToolType.NONE, Layer.TRANSLUCENT, DyeColor.BLUE),
-    GLASS(Blocks.GLASS, ToolType.NONE, Layer.CUTOUT),
-
-    QUARTZ_BRICKS(Blocks.QUARTZ_BRICKS, ToolType.PICKAXE),
-    NETHERRACK(Blocks.NETHERRACK, ToolType.PICKAXE),
-    DIRT(Blocks.DIRT, ToolType.SHOVEL),
-    COARSE_DIRT(Blocks.COARSE_DIRT, ToolType.SHOVEL),
-    HONEYCOMB_BLOCK(Blocks.HONEYCOMB_BLOCK, ToolType.NONE),
-    ROOTED_DIRT(Blocks.ROOTED_DIRT, ToolType.SHOVEL),
-    SNOW_BLOCK(Blocks.SNOW_BLOCK, ToolType.SHOVEL, "snow"),
-    MUSHROOM_STEM(Blocks.MUSHROOM_STEM, ToolType.AXE),
-    BROWN_MUSHROOM_BLOCK(Blocks.BROWN_MUSHROOM_BLOCK, ToolType.AXE),
-    RED_MUSHROOM_BLOCK(Blocks.RED_MUSHROOM_BLOCK, ToolType.AXE),
-
-    PURPUR(Blocks.PURPUR_BLOCK, ToolType.PICKAXE, false, false, true),
-
-    MOSS_BLOCK(Blocks.MOSS_BLOCK, ToolType.HOE),
-    CALCITE(Blocks.CALCITE, ToolType.PICKAXE),
-    GLOWSTONE(Blocks.GLOWSTONE, ToolType.NONE),
-    CRACKED_STONE_BRICKS(Blocks.CRACKED_STONE_BRICKS, ToolType.PICKAXE),
-    TUFF(Blocks.TUFF, ToolType.PICKAXE),
-    DRIPSTONE_BLOCK(Blocks.DRIPSTONE_BLOCK, ToolType.PICKAXE),
-    SEA_LANTERN(Blocks.SEA_LANTERN, ToolType.NONE),
-    SHROOMLIGHT(Blocks.SHROOMLIGHT, ToolType.HOE),
-    END_STONE(Blocks.END_STONE, ToolType.PICKAXE),
-
-    OAK_WOOD(Blocks.OAK_WOOD, ToolType.AXE,true, true, false, "oak_log"),
-    BIRCH_WOOD(Blocks.BIRCH_WOOD, ToolType.AXE,true, true, false, "birch_log"),
-    SPRUCE_WOOD(Blocks.SPRUCE_WOOD, ToolType.AXE,true, true, false, "spruce_log"),
-    JUNGLE_WOOD(Blocks.JUNGLE_WOOD, ToolType.AXE,true, true, false, "jungle_log"),
-    DARK_OAK_WOOD(Blocks.DARK_OAK_WOOD, ToolType.AXE,true, true, false, "dark_oak_log"),
-    ACACIA_WOOD(Blocks.ACACIA_WOOD, ToolType.AXE,true, true, false, "acacia_log"),
-    CRIMSON_HYPHAE(Blocks.CRIMSON_HYPHAE, ToolType.AXE,true, true, false, "crimson_stem"),
-    WARPED_HYPHAE(Blocks.WARPED_HYPHAE, ToolType.AXE,true, true, false, "warped_stem"),
-
-    STRIPPED_OAK_WOOD(Blocks.STRIPPED_OAK_WOOD, ToolType.AXE,"stripped_oak_log"),
-    STRIPPED_BIRCH_WOOD(Blocks.STRIPPED_BIRCH_WOOD, ToolType.AXE,"stripped_birch_log"),
-    STRIPPED_SPRUCE_WOOD(Blocks.STRIPPED_SPRUCE_WOOD, ToolType.AXE,"stripped_spruce_log"),
-    STRIPPED_JUNGLE_WOOD(Blocks.STRIPPED_JUNGLE_WOOD, ToolType.AXE,"stripped_jungle_log"),
-    STRIPPED_DARK_OAK_WOOD(Blocks.STRIPPED_DARK_OAK_WOOD, ToolType.AXE,"stripped_dark_oak_log"),
-    STRIPPED_ACACIA_WOOD(Blocks.STRIPPED_ACACIA_WOOD, ToolType.AXE,"stripped_acacia_log"),
-    STRIPPED_CRIMSON_HYPHAE(Blocks.STRIPPED_CRIMSON_HYPHAE, ToolType.AXE, "stripped_crimson_stem"),
-    STRIPPED_WARPED_HYPHAE(Blocks.STRIPPED_WARPED_HYPHAE, ToolType.AXE, "stripped_warped_stem"),
-
-    BASALT(Blocks.BASALT, ToolType.PICKAXE, true, false, true, "basalt_side", "basalt_top", "basalt_top"),
-    SMOOTH_BASALT(Blocks.SMOOTH_BASALT, ToolType.PICKAXE),
-
-    CUT_COPPER(Blocks.CUT_COPPER, ToolType.PICKAXE, false, false, true),
-    EXPOSED_CUT_COPPER(Blocks.EXPOSED_CUT_COPPER, ToolType.PICKAXE, false, false, true),
-    WEATHERED_CUT_COPPER(Blocks.WEATHERED_CUT_COPPER, ToolType.PICKAXE, false, false, true),
-    OXIDIZED_CUT_COPPER(Blocks.OXIDIZED_CUT_COPPER, ToolType.PICKAXE, false, false, true),
-
-    WAXED_CUT_COPPER(Blocks.WAXED_CUT_COPPER, ToolType.PICKAXE, false, false, true,"cut_copper"),
-    WAXED_EXPOSED_CUT_COPPER(Blocks.WAXED_EXPOSED_CUT_COPPER, ToolType.PICKAXE, false, false, true,"exposed_cut_copper"),
-    WAXED_WEATHERED_CUT_COPPER(Blocks.WAXED_WEATHERED_CUT_COPPER, ToolType.PICKAXE, false, false, true,"weathered_cut_copper"),
-    WAXED_OXIDIZED_CUT_COPPER(Blocks.WAXED_OXIDIZED_CUT_COPPER, ToolType.PICKAXE, false, false, true,"oxidized_cut_copper"),
+import games.twinhead.moreslabsstairsandwalls.block.coral.CoralSlabBlock;
+import games.twinhead.moreslabsstairsandwalls.block.coral.CoralStairsBlock;
+import games.twinhead.moreslabsstairsandwalls.block.coral.CoralWallBlock;
+import games.twinhead.moreslabsstairsandwalls.block.culled.CulledSlabBlock;
+import games.twinhead.moreslabsstairsandwalls.block.culled.CulledStairsBlock;
+import games.twinhead.moreslabsstairsandwalls.block.redstone.RedstoneSlabBlock;
+import games.twinhead.moreslabsstairsandwalls.block.redstone.RedstoneStairsBlock;
+import net.minecraft.block.*;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 
-    SMOOTH_QUARTZ(Blocks.SMOOTH_QUARTZ, ToolType.PICKAXE, false, false, true, "quartz_block_bottom"),
-    QUARTZ(Blocks.QUARTZ_BLOCK, ToolType.PICKAXE, false, false, true, "quartz_block_side"),
+public class ModBlocks {
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MoreSlabsStairsAndWalls.MOD_ID);
 
-    POLISHED_ANDESITE(Blocks.POLISHED_ANDESITE, ToolType.PICKAXE, false, false, true),
-    POLISHED_GRANITE(Blocks.POLISHED_GRANITE, ToolType.PICKAXE, false, false, true),
-    POLISHED_DIORITE(Blocks.POLISHED_DIORITE, ToolType.PICKAXE, false, false, true),
+    public static final RegistryObject<Block> WHITE_CONCRETE_SLAB = createSlabBlock(Blocks.WHITE_CONCRETE);
+    public static final RegistryObject<Block> YELLOW_CONCRETE_SLAB = createSlabBlock(Blocks.YELLOW_CONCRETE);
+    public static final RegistryObject<Block> BLACK_CONCRETE_SLAB = createSlabBlock(Blocks.BLACK_CONCRETE);
+    public static final RegistryObject<Block> RED_CONCRETE_SLAB = createSlabBlock(Blocks.RED_CONCRETE);
+    public static final RegistryObject<Block> PURPLE_CONCRETE_SLAB = createSlabBlock(Blocks.PURPLE_CONCRETE);
+    public static final RegistryObject<Block> PINK_CONCRETE_SLAB = createSlabBlock(Blocks.PINK_CONCRETE);
+    public static final RegistryObject<Block> ORANGE_CONCRETE_SLAB = createSlabBlock(Blocks.ORANGE_CONCRETE);
+    public static final RegistryObject<Block> MAGENTA_CONCRETE_SLAB = createSlabBlock(Blocks.MAGENTA_CONCRETE);
+    public static final RegistryObject<Block> LIME_CONCRETE_SLAB = createSlabBlock(Blocks.LIME_CONCRETE);
+    public static final RegistryObject<Block> LIGHT_GRAY_CONCRETE_SLAB = createSlabBlock(Blocks.LIGHT_GRAY_CONCRETE);
+    public static final RegistryObject<Block> LIGHT_BLUE_CONCRETE_SLAB = createSlabBlock(Blocks.LIGHT_BLUE_CONCRETE);
+    public static final RegistryObject<Block> GREEN_CONCRETE_SLAB = createSlabBlock(Blocks.GREEN_CONCRETE);
+    public static final RegistryObject<Block> GRAY_CONCRETE_SLAB = createSlabBlock(Blocks.GRAY_CONCRETE);
+    public static final RegistryObject<Block> CYAN_CONCRETE_SLAB = createSlabBlock(Blocks.CYAN_CONCRETE);
+    public static final RegistryObject<Block> BROWN_CONCRETE_SLAB = createSlabBlock(Blocks.BROWN_CONCRETE);
+    public static final RegistryObject<Block> BLUE_CONCRETE_SLAB = createSlabBlock(Blocks.BLUE_CONCRETE);
+
+    public static final RegistryObject<Block> WHITE_CONCRETE_STAIRS = createStairsBlock(Blocks.WHITE_CONCRETE);
+    public static final RegistryObject<Block> YELLOW_CONCRETE_STAIRS = createStairsBlock(Blocks.YELLOW_CONCRETE);
+    public static final RegistryObject<Block> BLACK_CONCRETE_STAIRS = createStairsBlock(Blocks.BLACK_CONCRETE);
+    public static final RegistryObject<Block> RED_CONCRETE_STAIRS = createStairsBlock(Blocks.RED_CONCRETE);
+    public static final RegistryObject<Block> PURPLE_CONCRETE_STAIRS = createStairsBlock(Blocks.PURPLE_CONCRETE);
+    public static final RegistryObject<Block> PINK_CONCRETE_STAIRS = createStairsBlock(Blocks.PINK_CONCRETE);
+    public static final RegistryObject<Block> ORANGE_CONCRETE_STAIRS = createStairsBlock(Blocks.ORANGE_CONCRETE);
+    public static final RegistryObject<Block> MAGENTA_CONCRETE_STAIRS = createStairsBlock(Blocks.MAGENTA_CONCRETE);
+    public static final RegistryObject<Block> LIME_CONCRETE_STAIRS = createStairsBlock(Blocks.LIME_CONCRETE);
+    public static final RegistryObject<Block> LIGHT_GRAY_CONCRETE_STAIRS = createStairsBlock(Blocks.LIGHT_GRAY_CONCRETE);
+    public static final RegistryObject<Block> LIGHT_BLUE_CONCRETE_STAIRS = createStairsBlock(Blocks.LIGHT_BLUE_CONCRETE);
+    public static final RegistryObject<Block> GREEN_CONCRETE_STAIRS = createStairsBlock(Blocks.GREEN_CONCRETE);
+    public static final RegistryObject<Block> GRAY_CONCRETE_STAIRS = createStairsBlock(Blocks.GRAY_CONCRETE);
+    public static final RegistryObject<Block> CYAN_CONCRETE_STAIRS = createStairsBlock(Blocks.CYAN_CONCRETE);
+    public static final RegistryObject<Block> BROWN_CONCRETE_STAIRS = createStairsBlock(Blocks.BROWN_CONCRETE);
+    public static final RegistryObject<Block> BLUE_CONCRETE_STAIRS = createStairsBlock(Blocks.BLUE_CONCRETE);
+
+    public static final RegistryObject<Block> WHITE_CONCRETE_WALL = createWallBlock(Blocks.WHITE_CONCRETE);
+    public static final RegistryObject<Block> YELLOW_CONCRETE_WALL = createWallBlock(Blocks.YELLOW_CONCRETE);
+    public static final RegistryObject<Block> BLACK_CONCRETE_WALL = createWallBlock(Blocks.BLACK_CONCRETE);
+    public static final RegistryObject<Block> RED_CONCRETE_WALL = createWallBlock(Blocks.RED_CONCRETE);
+    public static final RegistryObject<Block> PURPLE_CONCRETE_WALL = createWallBlock(Blocks.PURPLE_CONCRETE);
+    public static final RegistryObject<Block> PINK_CONCRETE_WALL = createWallBlock(Blocks.PINK_CONCRETE);
+    public static final RegistryObject<Block> ORANGE_CONCRETE_WALL = createWallBlock(Blocks.ORANGE_CONCRETE);
+    public static final RegistryObject<Block> MAGENTA_CONCRETE_WALL = createWallBlock(Blocks.MAGENTA_CONCRETE);
+    public static final RegistryObject<Block> LIME_CONCRETE_WALL = createWallBlock(Blocks.LIME_CONCRETE);
+    public static final RegistryObject<Block> LIGHT_GRAY_CONCRETE_WALL = createWallBlock(Blocks.LIGHT_GRAY_CONCRETE);
+    public static final RegistryObject<Block> LIGHT_BLUE_CONCRETE_WALL = createWallBlock(Blocks.LIGHT_BLUE_CONCRETE);
+    public static final RegistryObject<Block> GREEN_CONCRETE_WALL = createWallBlock(Blocks.GREEN_CONCRETE);
+    public static final RegistryObject<Block> GRAY_CONCRETE_WALL = createWallBlock(Blocks.GRAY_CONCRETE);
+    public static final RegistryObject<Block> CYAN_CONCRETE_WALL = createWallBlock(Blocks.CYAN_CONCRETE);
+    public static final RegistryObject<Block> BROWN_CONCRETE_WALL = createWallBlock(Blocks.BROWN_CONCRETE);
+    public static final RegistryObject<Block> BLUE_CONCRETE_WALL = createWallBlock(Blocks.BLUE_CONCRETE);
+
+    public static final RegistryObject<Block> TERRACOTTA_SLAB = createSlabBlock(Blocks.TERRACOTTA);
+    public static final RegistryObject<Block> WHITE_TERRACOTTA_SLAB = createSlabBlock(Blocks.WHITE_TERRACOTTA);
+    public static final RegistryObject<Block> YELLOW_TERRACOTTA_SLAB = createSlabBlock(Blocks.YELLOW_TERRACOTTA);
+    public static final RegistryObject<Block> BLACK_TERRACOTTA_SLAB = createSlabBlock(Blocks.BLACK_TERRACOTTA);
+    public static final RegistryObject<Block> RED_TERRACOTTA_SLAB = createSlabBlock(Blocks.RED_TERRACOTTA);
+    public static final RegistryObject<Block> PURPLE_TERRACOTTA_SLAB = createSlabBlock(Blocks.PURPLE_TERRACOTTA);
+    public static final RegistryObject<Block> PINK_TERRACOTTA_SLAB = createSlabBlock(Blocks.PINK_TERRACOTTA);
+    public static final RegistryObject<Block> ORANGE_TERRACOTTA_SLAB = createSlabBlock(Blocks.ORANGE_TERRACOTTA);
+    public static final RegistryObject<Block> MAGENTA_TERRACOTTA_SLAB = createSlabBlock(Blocks.MAGENTA_TERRACOTTA);
+    public static final RegistryObject<Block> LIME_TERRACOTTA_SLAB = createSlabBlock(Blocks.LIME_TERRACOTTA);
+    public static final RegistryObject<Block> LIGHT_GRAY_TERRACOTTA_SLAB = createSlabBlock(Blocks.LIGHT_GRAY_TERRACOTTA);
+    public static final RegistryObject<Block> LIGHT_BLUE_TERRACOTTA_SLAB = createSlabBlock(Blocks.LIGHT_BLUE_TERRACOTTA);
+    public static final RegistryObject<Block> GREEN_TERRACOTTA_SLAB = createSlabBlock(Blocks.GREEN_TERRACOTTA);
+    public static final RegistryObject<Block> GRAY_TERRACOTTA_SLAB = createSlabBlock(Blocks.GRAY_TERRACOTTA);
+    public static final RegistryObject<Block> CYAN_TERRACOTTA_SLAB = createSlabBlock(Blocks.CYAN_TERRACOTTA);
+    public static final RegistryObject<Block> BROWN_TERRACOTTA_SLAB = createSlabBlock(Blocks.BROWN_TERRACOTTA);
+    public static final RegistryObject<Block> BLUE_TERRACOTTA_SLAB = createSlabBlock(Blocks.BLUE_TERRACOTTA);
+
+    public static final RegistryObject<Block> TERRACOTTA_STAIRS = createStairsBlock(Blocks.TERRACOTTA);
+    public static final RegistryObject<Block> WHITE_TERRACOTTA_STAIRS = createStairsBlock(Blocks.WHITE_TERRACOTTA);
+    public static final RegistryObject<Block> YELLOW_TERRACOTTA_STAIRS = createStairsBlock(Blocks.YELLOW_TERRACOTTA);
+    public static final RegistryObject<Block> BLACK_TERRACOTTA_STAIRS = createStairsBlock(Blocks.BLACK_TERRACOTTA);
+    public static final RegistryObject<Block> RED_TERRACOTTA_STAIRS = createStairsBlock(Blocks.RED_TERRACOTTA);
+    public static final RegistryObject<Block> PURPLE_TERRACOTTA_STAIRS = createStairsBlock(Blocks.PURPLE_TERRACOTTA);
+    public static final RegistryObject<Block> PINK_TERRACOTTA_STAIRS = createStairsBlock(Blocks.PINK_TERRACOTTA);
+    public static final RegistryObject<Block> ORANGE_TERRACOTTA_STAIRS = createStairsBlock(Blocks.ORANGE_TERRACOTTA);
+    public static final RegistryObject<Block> MAGENTA_TERRACOTTA_STAIRS = createStairsBlock(Blocks.MAGENTA_TERRACOTTA);
+    public static final RegistryObject<Block> LIME_TERRACOTTA_STAIRS = createStairsBlock(Blocks.LIME_TERRACOTTA);
+    public static final RegistryObject<Block> LIGHT_GRAY_TERRACOTTA_STAIRS = createStairsBlock(Blocks.LIGHT_GRAY_TERRACOTTA);
+    public static final RegistryObject<Block> LIGHT_BLUE_TERRACOTTA_STAIRS = createStairsBlock(Blocks.LIGHT_BLUE_TERRACOTTA);
+    public static final RegistryObject<Block> GREEN_TERRACOTTA_STAIRS = createStairsBlock(Blocks.GREEN_TERRACOTTA);
+    public static final RegistryObject<Block> GRAY_TERRACOTTA_STAIRS = createStairsBlock(Blocks.GRAY_TERRACOTTA);
+    public static final RegistryObject<Block> CYAN_TERRACOTTA_STAIRS = createStairsBlock(Blocks.CYAN_TERRACOTTA);
+    public static final RegistryObject<Block> BROWN_TERRACOTTA_STAIRS = createStairsBlock(Blocks.BROWN_TERRACOTTA);
+    public static final RegistryObject<Block> BLUE_TERRACOTTA_STAIRS = createStairsBlock(Blocks.BLUE_TERRACOTTA);
+
+    public static final RegistryObject<Block> TERRACOTTA_WALL = createWallBlock(Blocks.TERRACOTTA);
+    public static final RegistryObject<Block> WHITE_TERRACOTTA_WALL = createWallBlock(Blocks.WHITE_TERRACOTTA);
+    public static final RegistryObject<Block> YELLOW_TERRACOTTA_WALL = createWallBlock(Blocks.YELLOW_TERRACOTTA);
+    public static final RegistryObject<Block> BLACK_TERRACOTTA_WALL = createWallBlock(Blocks.BLACK_TERRACOTTA);
+    public static final RegistryObject<Block> RED_TERRACOTTA_WALL = createWallBlock(Blocks.RED_TERRACOTTA);
+    public static final RegistryObject<Block> PURPLE_TERRACOTTA_WALL = createWallBlock(Blocks.PURPLE_TERRACOTTA);
+    public static final RegistryObject<Block> PINK_TERRACOTTA_WALL = createWallBlock(Blocks.PINK_TERRACOTTA);
+    public static final RegistryObject<Block> ORANGE_TERRACOTTA_WALL = createWallBlock(Blocks.ORANGE_TERRACOTTA);
+    public static final RegistryObject<Block> MAGENTA_TERRACOTTA_WALL = createWallBlock(Blocks.MAGENTA_TERRACOTTA);
+    public static final RegistryObject<Block> LIME_TERRACOTTA_WALL = createWallBlock(Blocks.LIME_TERRACOTTA);
+    public static final RegistryObject<Block> LIGHT_GRAY_TERRACOTTA_WALL = createWallBlock(Blocks.LIGHT_GRAY_TERRACOTTA);
+    public static final RegistryObject<Block> LIGHT_BLUE_TERRACOTTA_WALL = createWallBlock(Blocks.LIGHT_BLUE_TERRACOTTA);
+    public static final RegistryObject<Block> GREEN_TERRACOTTA_WALL = createWallBlock(Blocks.GREEN_TERRACOTTA);
+    public static final RegistryObject<Block> GRAY_TERRACOTTA_WALL = createWallBlock(Blocks.GRAY_TERRACOTTA);
+    public static final RegistryObject<Block> CYAN_TERRACOTTA_WALL = createWallBlock(Blocks.CYAN_TERRACOTTA);
+    public static final RegistryObject<Block> BROWN_TERRACOTTA_WALL = createWallBlock(Blocks.BROWN_TERRACOTTA);
+    public static final RegistryObject<Block> BLUE_TERRACOTTA_WALL = createWallBlock(Blocks.BLUE_TERRACOTTA);
+
+    public static final RegistryObject<Block> WHITE_WOOL_SLAB = createSlabBlock(Blocks.WHITE_WOOL);
+    public static final RegistryObject<Block> YELLOW_WOOL_SLAB = createSlabBlock(Blocks.YELLOW_WOOL);
+    public static final RegistryObject<Block> BLACK_WOOL_SLAB = createSlabBlock(Blocks.BLACK_WOOL);
+    public static final RegistryObject<Block> RED_WOOL_SLAB = createSlabBlock(Blocks.RED_WOOL);
+    public static final RegistryObject<Block> PURPLE_WOOL_SLAB = createSlabBlock(Blocks.PURPLE_WOOL);
+    public static final RegistryObject<Block> PINK_WOOL_SLAB = createSlabBlock(Blocks.PINK_WOOL);
+    public static final RegistryObject<Block> ORANGE_WOOL_SLAB = createSlabBlock(Blocks.ORANGE_WOOL);
+    public static final RegistryObject<Block> MAGENTA_WOOL_SLAB = createSlabBlock(Blocks.MAGENTA_WOOL);
+    public static final RegistryObject<Block> LIME_WOOL_SLAB = createSlabBlock(Blocks.LIME_WOOL);
+    public static final RegistryObject<Block> LIGHT_GRAY_WOOL_SLAB = createSlabBlock(Blocks.LIGHT_GRAY_WOOL);
+    public static final RegistryObject<Block> LIGHT_BLUE_WOOL_SLAB = createSlabBlock(Blocks.LIGHT_BLUE_WOOL);
+    public static final RegistryObject<Block> GREEN_WOOL_SLAB = createSlabBlock(Blocks.GREEN_WOOL);
+    public static final RegistryObject<Block> GRAY_WOOL_SLAB = createSlabBlock(Blocks.GRAY_WOOL);
+    public static final RegistryObject<Block> CYAN_WOOL_SLAB = createSlabBlock(Blocks.CYAN_WOOL);
+    public static final RegistryObject<Block> BROWN_WOOL_SLAB = createSlabBlock(Blocks.BROWN_WOOL);
+    public static final RegistryObject<Block> BLUE_WOOL_SLAB = createSlabBlock(Blocks.BLUE_WOOL);
+
+    public static final RegistryObject<Block> WHITE_WOOL_STAIRS = createStairsBlock(Blocks.WHITE_WOOL);
+    public static final RegistryObject<Block> YELLOW_WOOL_STAIRS = createStairsBlock(Blocks.YELLOW_WOOL);
+    public static final RegistryObject<Block> BLACK_WOOL_STAIRS = createStairsBlock(Blocks.BLACK_WOOL);
+    public static final RegistryObject<Block> RED_WOOL_STAIRS = createStairsBlock(Blocks.RED_WOOL);
+    public static final RegistryObject<Block> PURPLE_WOOL_STAIRS = createStairsBlock(Blocks.PURPLE_WOOL);
+    public static final RegistryObject<Block> PINK_WOOL_STAIRS = createStairsBlock(Blocks.PINK_WOOL);
+    public static final RegistryObject<Block> ORANGE_WOOL_STAIRS = createStairsBlock(Blocks.ORANGE_WOOL);
+    public static final RegistryObject<Block> MAGENTA_WOOL_STAIRS = createStairsBlock(Blocks.MAGENTA_WOOL);
+    public static final RegistryObject<Block> LIME_WOOL_STAIRS = createStairsBlock(Blocks.LIME_WOOL);
+    public static final RegistryObject<Block> LIGHT_GRAY_WOOL_STAIRS = createStairsBlock(Blocks.LIGHT_GRAY_WOOL);
+    public static final RegistryObject<Block> LIGHT_BLUE_WOOL_STAIRS = createStairsBlock(Blocks.LIGHT_BLUE_WOOL);
+    public static final RegistryObject<Block> GREEN_WOOL_STAIRS = createStairsBlock(Blocks.GREEN_WOOL);
+    public static final RegistryObject<Block> GRAY_WOOL_STAIRS = createStairsBlock(Blocks.GRAY_WOOL);
+    public static final RegistryObject<Block> CYAN_WOOL_STAIRS = createStairsBlock(Blocks.CYAN_WOOL);
+    public static final RegistryObject<Block> BROWN_WOOL_STAIRS = createStairsBlock(Blocks.BROWN_WOOL);
+    public static final RegistryObject<Block> BLUE_WOOL_STAIRS = createStairsBlock(Blocks.BLUE_WOOL);
+
+    public static final RegistryObject<Block> WHITE_WOOL_WALL = createWallBlock(Blocks.WHITE_WOOL);
+    public static final RegistryObject<Block> YELLOW_WOOL_WALL = createWallBlock(Blocks.YELLOW_WOOL);
+    public static final RegistryObject<Block> BLACK_WOOL_WALL = createWallBlock(Blocks.BLACK_WOOL);
+    public static final RegistryObject<Block> RED_WOOL_WALL = createWallBlock(Blocks.RED_WOOL);
+    public static final RegistryObject<Block> PURPLE_WOOL_WALL = createWallBlock(Blocks.PURPLE_WOOL);
+    public static final RegistryObject<Block> PINK_WOOL_WALL = createWallBlock(Blocks.PINK_WOOL);
+    public static final RegistryObject<Block> ORANGE_WOOL_WALL = createWallBlock(Blocks.ORANGE_WOOL);
+    public static final RegistryObject<Block> MAGENTA_WOOL_WALL = createWallBlock(Blocks.MAGENTA_WOOL);
+    public static final RegistryObject<Block> LIME_WOOL_WALL = createWallBlock(Blocks.LIME_WOOL);
+    public static final RegistryObject<Block> LIGHT_GRAY_WOOL_WALL = createWallBlock(Blocks.LIGHT_GRAY_WOOL);
+    public static final RegistryObject<Block> LIGHT_BLUE_WOOL_WALL = createWallBlock(Blocks.LIGHT_BLUE_WOOL);
+    public static final RegistryObject<Block> GREEN_WOOL_WALL = createWallBlock(Blocks.GREEN_WOOL);
+    public static final RegistryObject<Block> GRAY_WOOL_WALL = createWallBlock(Blocks.GRAY_WOOL);
+    public static final RegistryObject<Block> CYAN_WOOL_WALL = createWallBlock(Blocks.CYAN_WOOL);
+    public static final RegistryObject<Block> BROWN_WOOL_WALL = createWallBlock(Blocks.BROWN_WOOL);
+    public static final RegistryObject<Block> BLUE_WOOL_WALL = createWallBlock(Blocks.BLUE_WOOL);
+
+    public static final RegistryObject<Block> GLASS_SLAB = createCulledSlabBlock(Blocks.GLASS);
+    public static final RegistryObject<Block> WHITE_STAINED_GLASS_SLAB = createCulledSlabBlock(Blocks.WHITE_STAINED_GLASS);
+    public static final RegistryObject<Block> YELLOW_STAINED_GLASS_SLAB = createCulledSlabBlock(Blocks.YELLOW_STAINED_GLASS);
+    public static final RegistryObject<Block> BLACK_STAINED_GLASS_SLAB = createCulledSlabBlock(Blocks.BLACK_STAINED_GLASS);
+    public static final RegistryObject<Block> RED_STAINED_GLASS_SLAB = createCulledSlabBlock(Blocks.RED_STAINED_GLASS);
+    public static final RegistryObject<Block> PURPLE_STAINED_GLASS_SLAB = createCulledSlabBlock(Blocks.PURPLE_STAINED_GLASS);
+    public static final RegistryObject<Block> PINK_STAINED_GLASS_SLAB = createCulledSlabBlock(Blocks.PINK_STAINED_GLASS);
+    public static final RegistryObject<Block> ORANGE_STAINED_GLASS_SLAB = createCulledSlabBlock(Blocks.ORANGE_STAINED_GLASS);
+    public static final RegistryObject<Block> MAGENTA_STAINED_GLASS_SLAB = createCulledSlabBlock(Blocks.MAGENTA_STAINED_GLASS);
+    public static final RegistryObject<Block> LIME_STAINED_GLASS_SLAB = createCulledSlabBlock(Blocks.LIME_STAINED_GLASS);
+    public static final RegistryObject<Block> LIGHT_GRAY_STAINED_GLASS_SLAB = createCulledSlabBlock(Blocks.LIGHT_GRAY_STAINED_GLASS);
+    public static final RegistryObject<Block> LIGHT_BLUE_STAINED_GLASS_SLAB = createCulledSlabBlock(Blocks.LIGHT_BLUE_STAINED_GLASS);
+    public static final RegistryObject<Block> GREEN_STAINED_GLASS_SLAB = createCulledSlabBlock(Blocks.GREEN_STAINED_GLASS);
+    public static final RegistryObject<Block> GRAY_STAINED_GLASS_SLAB = createCulledSlabBlock(Blocks.GRAY_STAINED_GLASS);
+    public static final RegistryObject<Block> CYAN_STAINED_GLASS_SLAB = createCulledSlabBlock(Blocks.CYAN_STAINED_GLASS);
+    public static final RegistryObject<Block> BROWN_STAINED_GLASS_SLAB = createCulledSlabBlock(Blocks.BROWN_STAINED_GLASS);
+    public static final RegistryObject<Block> BLUE_STAINED_GLASS_SLAB = createCulledSlabBlock(Blocks.BLUE_STAINED_GLASS);
+
+    public static final RegistryObject<Block> GLASS_STAIRS = createCulledStairsBlock(Blocks.GLASS);
+    public static final RegistryObject<Block> WHITE_STAINED_GLASS_STAIRS = createCulledStairsBlock(Blocks.WHITE_STAINED_GLASS);
+    public static final RegistryObject<Block> YELLOW_STAINED_GLASS_STAIRS = createCulledStairsBlock(Blocks.YELLOW_STAINED_GLASS);
+    public static final RegistryObject<Block> BLACK_STAINED_GLASS_STAIRS = createCulledStairsBlock(Blocks.BLACK_STAINED_GLASS);
+    public static final RegistryObject<Block> RED_STAINED_GLASS_STAIRS = createCulledStairsBlock(Blocks.RED_STAINED_GLASS);
+    public static final RegistryObject<Block> PURPLE_STAINED_GLASS_STAIRS = createCulledStairsBlock(Blocks.PURPLE_STAINED_GLASS);
+    public static final RegistryObject<Block> PINK_STAINED_GLASS_STAIRS = createCulledStairsBlock(Blocks.PINK_STAINED_GLASS);
+    public static final RegistryObject<Block> ORANGE_STAINED_GLASS_STAIRS = createCulledStairsBlock(Blocks.ORANGE_STAINED_GLASS);
+    public static final RegistryObject<Block> MAGENTA_STAINED_GLASS_STAIRS = createCulledStairsBlock(Blocks.MAGENTA_STAINED_GLASS);
+    public static final RegistryObject<Block> LIME_STAINED_GLASS_STAIRS = createCulledStairsBlock(Blocks.LIME_STAINED_GLASS);
+    public static final RegistryObject<Block> LIGHT_GRAY_STAINED_GLASS_STAIRS = createCulledStairsBlock(Blocks.LIGHT_GRAY_STAINED_GLASS);
+    public static final RegistryObject<Block> LIGHT_BLUE_STAINED_GLASS_STAIRS = createCulledStairsBlock(Blocks.LIGHT_BLUE_STAINED_GLASS);
+    public static final RegistryObject<Block> GREEN_STAINED_GLASS_STAIRS = createCulledStairsBlock(Blocks.GREEN_STAINED_GLASS);
+    public static final RegistryObject<Block> GRAY_STAINED_GLASS_STAIRS = createCulledStairsBlock(Blocks.GRAY_STAINED_GLASS);
+    public static final RegistryObject<Block> CYAN_STAINED_GLASS_STAIRS = createCulledStairsBlock(Blocks.CYAN_STAINED_GLASS);
+    public static final RegistryObject<Block> BROWN_STAINED_GLASS_STAIRS = createCulledStairsBlock(Blocks.BROWN_STAINED_GLASS);
+    public static final RegistryObject<Block> BLUE_STAINED_GLASS_STAIRS = createCulledStairsBlock(Blocks.BLUE_STAINED_GLASS);
+
+    public static final RegistryObject<Block> GLASS_WALL = createWallBlock(Blocks.GLASS);
+    public static final RegistryObject<Block> WHITE_STAINED_GLASS_WALL = createWallBlock(Blocks.WHITE_STAINED_GLASS);
+    public static final RegistryObject<Block> YELLOW_STAINED_GLASS_WALL = createWallBlock(Blocks.YELLOW_STAINED_GLASS);
+    public static final RegistryObject<Block> BLACK_STAINED_GLASS_WALL = createWallBlock(Blocks.BLACK_STAINED_GLASS);
+    public static final RegistryObject<Block> RED_STAINED_GLASS_WALL = createWallBlock(Blocks.RED_STAINED_GLASS);
+    public static final RegistryObject<Block> PURPLE_STAINED_GLASS_WALL = createWallBlock(Blocks.PURPLE_STAINED_GLASS);
+    public static final RegistryObject<Block> PINK_STAINED_GLASS_WALL = createWallBlock(Blocks.PINK_STAINED_GLASS);
+    public static final RegistryObject<Block> ORANGE_STAINED_GLASS_WALL = createWallBlock(Blocks.ORANGE_STAINED_GLASS);
+    public static final RegistryObject<Block> MAGENTA_STAINED_GLASS_WALL = createWallBlock(Blocks.MAGENTA_STAINED_GLASS);
+    public static final RegistryObject<Block> LIME_STAINED_GLASS_WALL = createWallBlock(Blocks.LIME_STAINED_GLASS);
+    public static final RegistryObject<Block> LIGHT_GRAY_STAINED_GLASS_WALL = createWallBlock(Blocks.LIGHT_GRAY_STAINED_GLASS);
+    public static final RegistryObject<Block> LIGHT_BLUE_STAINED_GLASS_WALL = createWallBlock(Blocks.LIGHT_BLUE_STAINED_GLASS);
+    public static final RegistryObject<Block> GREEN_STAINED_GLASS_WALL = createWallBlock(Blocks.GREEN_STAINED_GLASS);
+    public static final RegistryObject<Block> GRAY_STAINED_GLASS_WALL = createWallBlock(Blocks.GRAY_STAINED_GLASS);
+    public static final RegistryObject<Block> CYAN_STAINED_GLASS_WALL = createWallBlock(Blocks.CYAN_STAINED_GLASS);
+    public static final RegistryObject<Block> BROWN_STAINED_GLASS_WALL = createWallBlock(Blocks.BROWN_STAINED_GLASS);
+    public static final RegistryObject<Block> BLUE_STAINED_GLASS_WALL = createWallBlock(Blocks.BLUE_STAINED_GLASS);
+
+    public static final RegistryObject<Block> QUARTZ_BRICKS_SLAB = createSlabBlock(Blocks.QUARTZ_BRICKS);
+    public static final RegistryObject<Block> QUARTZ_BRICKS_STAIRS = createStairsBlock(Blocks.QUARTZ_BRICKS);
+    public static final RegistryObject<Block> QUARTZ_BRICKS_WALL = createWallBlock(Blocks.QUARTZ_BRICKS);
+
+    public static final RegistryObject<Block> NETHERRACK_SLAB = createSlabBlock(Blocks.NETHERRACK);
+    public static final RegistryObject<Block> NETHERRACK_STAIRS = createStairsBlock(Blocks.NETHERRACK);
+    public static final RegistryObject<Block> NETHERRACK_WALL = createWallBlock(Blocks.NETHERRACK);
+
+    public static final RegistryObject<Block> DIRT_SLAB = createSlabBlock(Blocks.DIRT);
+    public static final RegistryObject<Block> DIRT_STAIRS = createStairsBlock(Blocks.DIRT);
+    public static final RegistryObject<Block> DIRT_WALL = createWallBlock(Blocks.DIRT);
+
+    public static final RegistryObject<Block> COARSE_DIRT_SLAB = createSlabBlock(Blocks.COARSE_DIRT);
+    public static final RegistryObject<Block> COARSE_DIRT_STAIRS = createStairsBlock(Blocks.COARSE_DIRT);
+    public static final RegistryObject<Block> COARSE_DIRT_WALL = createWallBlock(Blocks.COARSE_DIRT);
+
+    public static final RegistryObject<Block> HONEYCOMB_BLOCK_SLAB = createSlabBlock(Blocks.HONEYCOMB_BLOCK);
+    public static final RegistryObject<Block> HONEYCOMB_BLOCK_STAIRS = createStairsBlock(Blocks.HONEYCOMB_BLOCK);
+    public static final RegistryObject<Block> HONEYCOMB_BLOCK_WALL = createWallBlock(Blocks.HONEYCOMB_BLOCK);
+
+    public static final RegistryObject<Block> ROOTED_DIRT_SLAB = createSlabBlock(Blocks.ROOTED_DIRT);
+    public static final RegistryObject<Block> ROOTED_DIRT_STAIRS = createStairsBlock(Blocks.ROOTED_DIRT);
+    public static final RegistryObject<Block> ROOTED_DIRT_WALL = createWallBlock(Blocks.ROOTED_DIRT);
+
+    public static final RegistryObject<Block> SNOW_BLOCK_SLAB = createSlabBlock(Blocks.SNOW_BLOCK);
+    public static final RegistryObject<Block> SNOW_BLOCK_STAIRS = createStairsBlock(Blocks.SNOW_BLOCK);
+    public static final RegistryObject<Block> SNOW_BLOCK_WALL = createWallBlock(Blocks.SNOW_BLOCK);
+
+    public static final RegistryObject<Block> MUSHROOM_STEM_SLAB = createSlabBlock(Blocks.MUSHROOM_STEM);
+    public static final RegistryObject<Block> MUSHROOM_STEM_STAIRS = createStairsBlock(Blocks.MUSHROOM_STEM);
+    public static final RegistryObject<Block> MUSHROOM_STEM_WALL = createWallBlock(Blocks.MUSHROOM_STEM);
+
+    public static final RegistryObject<Block> BROWN_MUSHROOM_BLOCK_SLAB = createSlabBlock(Blocks.BROWN_MUSHROOM_BLOCK);
+    public static final RegistryObject<Block> BROWN_MUSHROOM_BLOCK_STAIRS = createStairsBlock(Blocks.BROWN_MUSHROOM_BLOCK);
+    public static final RegistryObject<Block> BROWN_MUSHROOM_BLOCK_WALL = createWallBlock(Blocks.BROWN_MUSHROOM_BLOCK);
+
+    public static final RegistryObject<Block> RED_MUSHROOM_BLOCK_SLAB = createSlabBlock(Blocks.RED_MUSHROOM_BLOCK);
+    public static final RegistryObject<Block> RED_MUSHROOM_BLOCK_STAIRS = createStairsBlock(Blocks.RED_MUSHROOM_BLOCK);
+    public static final RegistryObject<Block> RED_MUSHROOM_BLOCK_WALL = createWallBlock(Blocks.RED_MUSHROOM_BLOCK);
+
+    public static final RegistryObject<Block> PURPUR_WALL = createWallBlock("purpur", Blocks.PURPUR_BLOCK);
+
+    public static final RegistryObject<Block> MOSS_BLOCK_SLAB = createSlabBlock(Blocks.MOSS_BLOCK);
+    public static final RegistryObject<Block> MOSS_BLOCK_STAIRS = createStairsBlock(Blocks.MOSS_BLOCK);
+    public static final RegistryObject<Block> MOSS_BLOCK_WALL = createWallBlock(Blocks.MOSS_BLOCK);
+
+    public static final RegistryObject<Block> CALCITE_SLAB = createSlabBlock(Blocks.CALCITE);
+    public static final RegistryObject<Block> CALCITE_STAIRS = createStairsBlock(Blocks.CALCITE);
+    public static final RegistryObject<Block> CALCITE_WALL = createWallBlock(Blocks.CALCITE);
+
+    public static final RegistryObject<Block> GLOWSTONE_SLAB = createSlabBlock(Blocks.GLOWSTONE);
+    public static final RegistryObject<Block> GLOWSTONE_STAIRS = createStairsBlock(Blocks.GLOWSTONE);
+    public static final RegistryObject<Block> GLOWSTONE_WALL = createWallBlock(Blocks.GLOWSTONE);
+
+    public static final RegistryObject<Block> CRACKED_STONE_BRICKS_SLAB = createSlabBlock(Blocks.CRACKED_STONE_BRICKS);
+    public static final RegistryObject<Block> CRACKED_STONE_BRICKS_STAIRS = createStairsBlock(Blocks.CRACKED_STONE_BRICKS);
+    public static final RegistryObject<Block> CRACKED_STONE_BRICKS_WALL = createWallBlock(Blocks.CRACKED_STONE_BRICKS);
+
+    public static final RegistryObject<Block> TUFF_SLAB = createSlabBlock(Blocks.TUFF);
+    public static final RegistryObject<Block> TUFF_STAIRS = createStairsBlock(Blocks.TUFF);
+    public static final RegistryObject<Block> TUFF_WALL = createWallBlock(Blocks.TUFF);
+
+    public static final RegistryObject<Block> DRIPSTONE_BLOCK_SLAB = createSlabBlock(Blocks.DRIPSTONE_BLOCK);
+    public static final RegistryObject<Block> DRIPSTONE_BLOCK_STAIRS = createStairsBlock(Blocks.DRIPSTONE_BLOCK);
+    public static final RegistryObject<Block> DRIPSTONE_BLOCK_WALL = createWallBlock(Blocks.DRIPSTONE_BLOCK);
+
+    public static final RegistryObject<Block> SEA_LANTERN_SLAB = createSlabBlock(Blocks.SEA_LANTERN);
+    public static final RegistryObject<Block> SEA_LANTERN_STAIRS = createStairsBlock(Blocks.SEA_LANTERN);
+    public static final RegistryObject<Block> SEA_LANTERN_WALL = createWallBlock(Blocks.SEA_LANTERN);
+
+    public static final RegistryObject<Block> SHROOMLIGHT_SLAB = createSlabBlock(Blocks.SHROOMLIGHT);
+    public static final RegistryObject<Block> SHROOMLIGHT_STAIRS = createStairsBlock(Blocks.SHROOMLIGHT);
+    public static final RegistryObject<Block> SHROOMLIGHT_WALL = createWallBlock(Blocks.SHROOMLIGHT);
+
+    public static final RegistryObject<Block> END_STONE_SLAB = createSlabBlock(Blocks.END_STONE);
+    public static final RegistryObject<Block> END_STONE_STAIRS = createStairsBlock(Blocks.END_STONE);
+    public static final RegistryObject<Block> END_STONE_WALL = createWallBlock(Blocks.END_STONE);
+
+    public static final RegistryObject<Block> OAK_WOOD_SLAB = createSlabBlock(Blocks.OAK_WOOD);
+    public static final RegistryObject<Block> OAK_WOOD_STAIRS = createStairsBlock(Blocks.OAK_WOOD);
+    //public static final RegistryObject<Block> OAK_WOOD_WALL = createWallBlock(Blocks.OAK_WOOD);
+
+    public static final RegistryObject<Block> BIRCH_WOOD_SLAB = createSlabBlock(Blocks.BIRCH_WOOD);
+    public static final RegistryObject<Block> BIRCH_WOOD_STAIRS = createStairsBlock(Blocks.BIRCH_WOOD);
+    //public static final RegistryObject<Block> BIRCH_WOOD_WALL = createWallBlock(Blocks.BIRCH_WOOD);
+
+    public static final RegistryObject<Block> SPRUCE_WOOD_SLAB = createSlabBlock(Blocks.SPRUCE_WOOD);
+    public static final RegistryObject<Block> SPRUCE_WOOD_STAIRS = createStairsBlock(Blocks.SPRUCE_WOOD);
+   // public static final RegistryObject<Block> SPRUCE_WOOD_WALL = createWallBlock(Blocks.SPRUCE_WOOD);
+
+    public static final RegistryObject<Block> JUNGLE_WOOD_SLAB = createSlabBlock(Blocks.JUNGLE_WOOD);
+    public static final RegistryObject<Block> JUNGLE_WOOD_STAIRS = createStairsBlock(Blocks.JUNGLE_WOOD);
+    //public static final RegistryObject<Block> JUNGLE_WOOD_WALL = createWallBlock(Blocks.JUNGLE_WOOD);
+
+    public static final RegistryObject<Block> DARK_OAK_WOOD_SLAB = createSlabBlock(Blocks.DARK_OAK_WOOD);
+    public static final RegistryObject<Block> DARK_OAK_WOOD_STAIRS = createStairsBlock(Blocks.DARK_OAK_WOOD);
+    //public static final RegistryObject<Block> DARK_OAK_WOOD_WALL = createWallBlock(Blocks.DARK_OAK_WOOD);
+
+    public static final RegistryObject<Block> ACACIA_WOOD_SLAB = createSlabBlock(Blocks.ACACIA_WOOD);
+    public static final RegistryObject<Block> ACACIA_WOOD_STAIRS = createStairsBlock(Blocks.ACACIA_WOOD);
+    //public static final RegistryObject<Block> ACACIA_WOOD_WALL = createWallBlock(Blocks.ACACIA_WOOD);
+
+    public static final RegistryObject<Block> CRIMSON_HYPHAE_SLAB = createSlabBlock(Blocks.CRIMSON_HYPHAE);
+    public static final RegistryObject<Block> CRIMSON_HYPHAE_STAIRS = createStairsBlock(Blocks.CRIMSON_HYPHAE);
+    //public static final RegistryObject<Block> CRIMSON_HYPHAE_WALL = createWallBlock(Blocks.CRIMSON_HYPHAE);
+
+    public static final RegistryObject<Block> WARPED_HYPHAE_SLAB = createSlabBlock(Blocks.WARPED_HYPHAE);
+    public static final RegistryObject<Block> WARPED_HYPHAE_STAIRS = createStairsBlock(Blocks.WARPED_HYPHAE);
+    //public static final RegistryObject<Block> WARPED_HYPHAE_WALL = createWallBlock(Blocks.WARPED_HYPHAE);
+
+    public static final RegistryObject<Block> STRIPPED_OAK_WOOD_SLAB = createSlabBlock(Blocks.STRIPPED_OAK_WOOD);
+    public static final RegistryObject<Block> STRIPPED_OAK_WOOD_STAIRS = createStairsBlock(Blocks.STRIPPED_OAK_WOOD);
+    public static final RegistryObject<Block> STRIPPED_OAK_WOOD_WALL = createWallBlock(Blocks.STRIPPED_OAK_WOOD);
+
+    public static final RegistryObject<Block> STRIPPED_BIRCH_WOOD_SLAB = createSlabBlock(Blocks.STRIPPED_BIRCH_WOOD);
+    public static final RegistryObject<Block> STRIPPED_BIRCH_WOOD_STAIRS = createStairsBlock(Blocks.STRIPPED_BIRCH_WOOD);
+    public static final RegistryObject<Block> STRIPPED_BIRCH_WOOD_WALL = createWallBlock(Blocks.STRIPPED_BIRCH_WOOD);
+
+    public static final RegistryObject<Block> STRIPPED_SPRUCE_WOOD_SLAB = createSlabBlock(Blocks.STRIPPED_SPRUCE_WOOD);
+    public static final RegistryObject<Block> STRIPPED_SPRUCE_WOOD_STAIRS = createStairsBlock(Blocks.STRIPPED_SPRUCE_WOOD);
+    public static final RegistryObject<Block> STRIPPED_SPRUCE_WOOD_WALL = createWallBlock(Blocks.STRIPPED_SPRUCE_WOOD);
+
+    public static final RegistryObject<Block> STRIPPED_JUNGLE_WOOD_SLAB = createSlabBlock(Blocks.STRIPPED_JUNGLE_WOOD);
+    public static final RegistryObject<Block> STRIPPED_JUNGLE_WOOD_STAIRS = createStairsBlock(Blocks.STRIPPED_JUNGLE_WOOD);
+    public static final RegistryObject<Block> STRIPPED_JUNGLE_WOOD_WALL = createWallBlock(Blocks.STRIPPED_JUNGLE_WOOD);
+
+    public static final RegistryObject<Block> STRIPPED_DARK_OAK_WOOD_SLAB = createSlabBlock(Blocks.STRIPPED_DARK_OAK_WOOD);
+    public static final RegistryObject<Block> STRIPPED_DARK_OAK_WOOD_STAIRS = createStairsBlock(Blocks.STRIPPED_DARK_OAK_WOOD);
+    public static final RegistryObject<Block> STRIPPED_DARK_OAK_WOOD_WALL = createWallBlock(Blocks.STRIPPED_DARK_OAK_WOOD);
+
+    public static final RegistryObject<Block> STRIPPED_ACACIA_WOOD_SLAB = createSlabBlock(Blocks.STRIPPED_ACACIA_WOOD);
+    public static final RegistryObject<Block> STRIPPED_ACACIA_WOOD_STAIRS = createStairsBlock(Blocks.STRIPPED_ACACIA_WOOD);
+    public static final RegistryObject<Block> STRIPPED_ACACIA_WOOD_WALL = createWallBlock(Blocks.STRIPPED_ACACIA_WOOD);
+
+    public static final RegistryObject<Block> STRIPPED_CRIMSON_HYPHAE_SLAB = createSlabBlock(Blocks.STRIPPED_CRIMSON_HYPHAE);
+    public static final RegistryObject<Block> STRIPPED_CRIMSON_HYPHAE_STAIRS = createStairsBlock(Blocks.STRIPPED_CRIMSON_HYPHAE);
+    public static final RegistryObject<Block> STRIPPED_CRIMSON_HYPHAE_WALL = createWallBlock(Blocks.STRIPPED_CRIMSON_HYPHAE);
+
+    public static final RegistryObject<Block> STRIPPED_WARPED_HYPHAE_SLAB = createSlabBlock(Blocks.STRIPPED_WARPED_HYPHAE);
+    public static final RegistryObject<Block> STRIPPED_WARPED_HYPHAE_STAIRS = createStairsBlock(Blocks.STRIPPED_WARPED_HYPHAE);
+    public static final RegistryObject<Block> STRIPPED_WARPED_HYPHAE_WALL = createWallBlock(Blocks.STRIPPED_WARPED_HYPHAE);
+    
+    public static final RegistryObject<Block> OAK_LOG_SLAB = createSlabBlock(Blocks.OAK_LOG);
+    public static final RegistryObject<Block> OAK_LOG_STAIRS = createStairsBlock(Blocks.OAK_LOG);
+    public static final RegistryObject<Block> OAK_LOG_WALL = createWallBlock(Blocks.OAK_LOG);
+
+    public static final RegistryObject<Block> BIRCH_LOG_SLAB = createSlabBlock(Blocks.BIRCH_LOG);
+    public static final RegistryObject<Block> BIRCH_LOG_STAIRS = createStairsBlock(Blocks.BIRCH_LOG);
+    public static final RegistryObject<Block> BIRCH_LOG_WALL = createWallBlock(Blocks.BIRCH_LOG);
+
+    public static final RegistryObject<Block> SPRUCE_LOG_SLAB = createSlabBlock(Blocks.SPRUCE_LOG);
+    public static final RegistryObject<Block> SPRUCE_LOG_STAIRS = createStairsBlock(Blocks.SPRUCE_LOG);
+    public static final RegistryObject<Block> SPRUCE_LOG_WALL = createWallBlock(Blocks.SPRUCE_LOG);
+
+    public static final RegistryObject<Block> JUNGLE_LOG_SLAB = createSlabBlock(Blocks.JUNGLE_LOG);
+    public static final RegistryObject<Block> JUNGLE_LOG_STAIRS = createStairsBlock(Blocks.JUNGLE_LOG);
+    public static final RegistryObject<Block> JUNGLE_LOG_WALL = createWallBlock(Blocks.JUNGLE_LOG);
+
+    public static final RegistryObject<Block> DARK_OAK_LOG_SLAB = createSlabBlock(Blocks.DARK_OAK_LOG);
+    public static final RegistryObject<Block> DARK_OAK_LOG_STAIRS = createStairsBlock(Blocks.DARK_OAK_LOG);
+    public static final RegistryObject<Block> DARK_OAK_LOG_WALL = createWallBlock(Blocks.DARK_OAK_LOG);
+
+    public static final RegistryObject<Block> ACACIA_LOG_SLAB = createSlabBlock(Blocks.ACACIA_LOG);
+    public static final RegistryObject<Block> ACACIA_LOG_STAIRS = createStairsBlock(Blocks.ACACIA_LOG);
+    public static final RegistryObject<Block> ACACIA_LOG_WALL = createWallBlock(Blocks.ACACIA_LOG);
+
+    public static final RegistryObject<Block> CRIMSON_STEM_SLAB = createSlabBlock(Blocks.CRIMSON_STEM);
+    public static final RegistryObject<Block> CRIMSON_STEM_STAIRS = createStairsBlock(Blocks.CRIMSON_STEM);
+    //public static final RegistryObject<Block> CRIMSON_STEM_WALL = createWallBlock(Blocks.CRIMSON_STEM);
+
+    public static final RegistryObject<Block> WARPED_STEM_SLAB = createSlabBlock(Blocks.WARPED_STEM);
+    public static final RegistryObject<Block> WARPED_STEM_STAIRS = createStairsBlock(Blocks.WARPED_STEM);
+    //public static final RegistryObject<Block> WARPED_STEM_WALL = createWallBlock(Blocks.WARPED_STEM);
+
+    public static final RegistryObject<Block> BASALT_SLAB = createSlabBlock(Blocks.BASALT);
+    public static final RegistryObject<Block> BASALT_WALL = createWallBlock(Blocks.BASALT);
+
+    public static final RegistryObject<Block> SMOOTH_BASALT_SLAB = createSlabBlock(Blocks.SMOOTH_BASALT);
+    public static final RegistryObject<Block> SMOOTH_BASALT_STAIRS = createStairsBlock(Blocks.SMOOTH_BASALT);
+    public static final RegistryObject<Block> SMOOTH_BASALT_WALL = createWallBlock(Blocks.SMOOTH_BASALT);
+    
+    public static final RegistryObject<Block> CUT_COPPER_WALL = createWallBlock(Blocks.CUT_COPPER);
+    public static final RegistryObject<Block> EXPOSED_CUT_COPPER_WALL = createWallBlock(Blocks.EXPOSED_CUT_COPPER);
+    public static final RegistryObject<Block> WEATHERED_CUT_COPPER_WALL = createWallBlock(Blocks.WEATHERED_CUT_COPPER);
+    public static final RegistryObject<Block> OXIDIZED_CUT_COPPER_WALL = createWallBlock(Blocks.OXIDIZED_CUT_COPPER);
+
+    public static final RegistryObject<Block> WAXED_CUT_COPPER_WALL = createWallBlock(Blocks.WAXED_CUT_COPPER);
+    public static final RegistryObject<Block> WAXED_EXPOSED_CUT_COPPER_WALL = createWallBlock(Blocks.WAXED_EXPOSED_CUT_COPPER);
+    public static final RegistryObject<Block> WAXED_WEATHERED_CUT_COPPER_WALL = createWallBlock(Blocks.WAXED_WEATHERED_CUT_COPPER);
+    public static final RegistryObject<Block> WAXED_OXIDIZED_CUT_COPPER_WALL = createWallBlock(Blocks.WAXED_OXIDIZED_CUT_COPPER);
+
+    public static final RegistryObject<Block> SMOOTH_QUARTZ_WALL = createWallBlock(Blocks.SMOOTH_QUARTZ);
+    public static final RegistryObject<Block> QUARTZ_WALL = createWallBlock("quartz", Blocks.QUARTZ_BLOCK);
+    public static final RegistryObject<Block> POLISHED_ANDESITE_WALL = createWallBlock(Blocks.POLISHED_ANDESITE);
+    public static final RegistryObject<Block> POLISHED_DIORITE_WALL = createWallBlock(Blocks.POLISHED_DIORITE);
+    public static final RegistryObject<Block> POLISHED_GRANITE_WALL = createWallBlock(Blocks.POLISHED_GRANITE);
+
+    public static final RegistryObject<Block> SMOOTH_SANDSTONE_WALL = createWallBlock(Blocks.SMOOTH_SANDSTONE);
+    public static final RegistryObject<Block> SMOOTH_RED_SANDSTONE_WALL = createWallBlock(Blocks.SMOOTH_RED_SANDSTONE);
+    public static final RegistryObject<Block> DARK_PRISMARINE_WALL = createWallBlock(Blocks.DARK_PRISMARINE);
+    public static final RegistryObject<Block> PRISMARINE_BRICKS_WALL = createWallBlock(Blocks.PRISMARINE_BRICKS);
+    
+    public static final RegistryObject<Block> STONE_WALL = createWallBlock(Blocks.STONE);
+
+    public static final RegistryObject<Block> SMOOTH_STONE_STAIRS = createStairsBlock(Blocks.SMOOTH_STONE);
+    public static final RegistryObject<Block> SMOOTH_STONE_WALL = createWallBlock(Blocks.SMOOTH_STONE);
 
 
-    SMOOTH_SANDSTONE(Blocks.SMOOTH_SANDSTONE, ToolType.PICKAXE, false, false, true, "sandstone_top"),
-    SMOOTH_RED_SANDSTONE(Blocks.SMOOTH_RED_SANDSTONE, ToolType.PICKAXE, false, false, true, "red_sandstone_top"),
-    DARK_PRISMARINE(Blocks.DARK_PRISMARINE, ToolType.PICKAXE, false, false, true),
-    PRISMARINE_BRICKS(Blocks.PRISMARINE_BRICKS, ToolType.PICKAXE, false, false, true),
-    STONE(Blocks.STONE, ToolType.PICKAXE, false, false, true),
+    public static final RegistryObject<Block> OBSIDIAN_SLAB = createSlabBlock(Blocks.OBSIDIAN);
+    public static final RegistryObject<Block> OBSIDIAN_STAIRS = createStairsBlock(Blocks.OBSIDIAN);
+    public static final RegistryObject<Block> OBSIDIAN_WALL = createWallBlock(Blocks.OBSIDIAN);
 
-    SMOOTH_STONE(Blocks.SMOOTH_STONE, ToolType.PICKAXE, false, true, true),
+    public static final RegistryObject<Block> OAK_LEAVES_SLAB = createSlabBlock("oak_leaves", Blocks.OAK_LEAVES);
+    public static final RegistryObject<Block> OAK_LEAVES_STAIRS = createStairsBlock("oak_leaves", Blocks.OAK_LEAVES);
+    public static final RegistryObject<Block> OAK_LEAVES_WALL = createWallBlock("oak_leaves", Blocks.OAK_LEAVES);
 
-    OBSIDIAN(Blocks.OBSIDIAN, ToolType.PICKAXE),
+    public static final RegistryObject<Block> SPRUCE_LEAVES_SLAB = createSlabBlock("spruce_leaves", Blocks.SPRUCE_LEAVES);
+    public static final RegistryObject<Block> SPRUCE_LEAVES_STAIRS = createStairsBlock("spruce_leaves", Blocks.SPRUCE_LEAVES);
+    public static final RegistryObject<Block> SPRUCE_LEAVES_WALL = createWallBlock("spruce_leaves", Blocks.SPRUCE_LEAVES);
+
+    public static final RegistryObject<Block> BIRCH_LEAVES_SLAB = createSlabBlock("birch_leaves", Blocks.BIRCH_LEAVES);
+    public static final RegistryObject<Block> BIRCH_LEAVES_STAIRS = createStairsBlock("birch_leaves", Blocks.BIRCH_LEAVES);
+    public static final RegistryObject<Block> BIRCH_LEAVES_WALL = createWallBlock("birch_leaves", Blocks.BIRCH_LEAVES);
+
+    public static final RegistryObject<Block> JUNGLE_LEAVES_SLAB = createSlabBlock("jungle_leaves", Blocks.JUNGLE_LEAVES);
+    public static final RegistryObject<Block> JUNGLE_LEAVES_STAIRS = createStairsBlock("jungle_leaves", Blocks.JUNGLE_LEAVES);
+    public static final RegistryObject<Block> JUNGLE_LEAVES_WALL = createWallBlock("jungle_leaves", Blocks.JUNGLE_LEAVES);
+
+    public static final RegistryObject<Block> DARK_OAK_LEAVES_SLAB = createSlabBlock("dark_oak_leaves", Blocks.DARK_OAK_LEAVES);
+    public static final RegistryObject<Block> DARK_OAK_LEAVES_STAIRS = createStairsBlock("dark_oak_leaves", Blocks.DARK_OAK_LEAVES);
+    public static final RegistryObject<Block> DARK_OAK_LEAVES_WALL = createWallBlock("dark_oak_leaves", Blocks.DARK_OAK_LEAVES);
+
+    public static final RegistryObject<Block> ACACIA_LEAVES_SLAB = createSlabBlock("acacia_leaves", Blocks.ACACIA_LEAVES);
+    public static final RegistryObject<Block> ACACIA_LEAVES_STAIRS = createStairsBlock("acacia_leaves", Blocks.ACACIA_LEAVES);
+    public static final RegistryObject<Block> ACACIA_LEAVES_WALL = createWallBlock("acacia_leaves", Blocks.ACACIA_LEAVES);
+
+    public static final RegistryObject<Block> AZALEA_LEAVES_SLAB = createSlabBlock("azalea_leaves", Blocks.AZALEA_LEAVES);
+    public static final RegistryObject<Block> AZALEA_LEAVES_STAIRS = createStairsBlock("azalea_leaves", Blocks.AZALEA_LEAVES);
+    public static final RegistryObject<Block> AZALEA_LEAVES_WALL = createWallBlock("azalea_leaves", Blocks.AZALEA_LEAVES);
+
+    public static final RegistryObject<Block> FLOWERING_AZALEA_LEAVES_SLAB = createSlabBlock("flowering_azalea_leaves", Blocks.FLOWERING_AZALEA_LEAVES);
+    public static final RegistryObject<Block> FLOWERING_AZALEA_LEAVES_STAIRS = createStairsBlock("flowering_azalea_leaves", Blocks.FLOWERING_AZALEA_LEAVES);
+    public static final RegistryObject<Block> FLOWERING_AZALEA_LEAVES_WALL = createWallBlock("flowering_azalea_leaves", Blocks.FLOWERING_AZALEA_LEAVES);
+
+    public static final RegistryObject<Block> WARPED_WART_BLOCK_SLAB = createSlabBlock(Blocks.WARPED_WART_BLOCK);
+    public static final RegistryObject<Block> WARPED_WART_BLOCK_STAIRS = createStairsBlock(Blocks.WARPED_WART_BLOCK);
+    public static final RegistryObject<Block> WARPED_WART_BLOCK_WALL = createWallBlock(Blocks.WARPED_WART_BLOCK);
+
+    public static final RegistryObject<Block> NETHER_WART_BLOCK_SLAB = createSlabBlock(Blocks.NETHER_WART_BLOCK);
+    public static final RegistryObject<Block> NETHER_WART_BLOCK_STAIRS = createStairsBlock(Blocks.NETHER_WART_BLOCK);
+    public static final RegistryObject<Block> NETHER_WART_BLOCK_WALL = createWallBlock(Blocks.NETHER_WART_BLOCK);
+
+    public static final RegistryObject<Block> AMETHYST_BLOCK_SLAB = createSlabBlock(Blocks.AMETHYST_BLOCK);
+    public static final RegistryObject<Block> AMETHYST_BLOCK_STAIRS = createStairsBlock(Blocks.AMETHYST_BLOCK);
+    public static final RegistryObject<Block> AMETHYST_BLOCK_WALL = createWallBlock(Blocks.AMETHYST_BLOCK);
+
+    public static final RegistryObject<Block> RAW_COPPER_BLOCK_SLAB = createSlabBlock(Blocks.RAW_COPPER_BLOCK);
+    public static final RegistryObject<Block> RAW_COPPER_BLOCK_STAIRS = createStairsBlock(Blocks.RAW_COPPER_BLOCK);
+    public static final RegistryObject<Block> RAW_COPPER_BLOCK_WALL = createWallBlock(Blocks.RAW_COPPER_BLOCK);
+
+    public static final RegistryObject<Block> RAW_IRON_BLOCK_SLAB = createSlabBlock(Blocks.RAW_IRON_BLOCK);
+    public static final RegistryObject<Block> RAW_IRON_BLOCK_STAIRS = createStairsBlock(Blocks.RAW_IRON_BLOCK);
+    public static final RegistryObject<Block> RAW_IRON_BLOCK_WALL = createWallBlock(Blocks.RAW_IRON_BLOCK);
+
+    public static final RegistryObject<Block> RAW_GOLD_BLOCK_SLAB = createSlabBlock(Blocks.RAW_GOLD_BLOCK);
+    public static final RegistryObject<Block> RAW_GOLD_BLOCK_STAIRS = createStairsBlock(Blocks.RAW_GOLD_BLOCK);
+    public static final RegistryObject<Block> RAW_GOLD_BLOCK_WALL = createWallBlock(Blocks.RAW_GOLD_BLOCK);
+
+    public static final RegistryObject<Block> MAGMA_BLOCK_SLAB = createSlabBlock(Blocks.MAGMA_BLOCK);
+    public static final RegistryObject<Block> MAGMA_BLOCK_STAIRS = createStairsBlock(Blocks.MAGMA_BLOCK);
+    public static final RegistryObject<Block> MAGMA_BLOCK_WALL = createWallBlock(Blocks.MAGMA_BLOCK);
+
+    public static final RegistryObject<Block> SOUL_SAND_SLAB = createSlabBlock(Blocks.SOUL_SAND);
+    public static final RegistryObject<Block> SOUL_SAND_STAIRS = createStairsBlock(Blocks.SOUL_SAND);
+    public static final RegistryObject<Block> SOUL_SAND_WALL = createWallBlock(Blocks.SOUL_SAND);
+
+    public static final RegistryObject<Block> SOUL_SOIL_SLAB = createSlabBlock(Blocks.SOUL_SOIL);
+    public static final RegistryObject<Block> SOUL_SOIL_STAIRS = createStairsBlock(Blocks.SOUL_SOIL);
+    public static final RegistryObject<Block> SOUL_SOIL_WALL = createWallBlock(Blocks.SOUL_SOIL);
+
+    public static final RegistryObject<Block> CLAY_SLAB = createSlabBlock(Blocks.CLAY);
+    public static final RegistryObject<Block> CLAY_STAIRS = createStairsBlock(Blocks.CLAY);
+    public static final RegistryObject<Block> CLAY_WALL = createWallBlock(Blocks.CLAY);
+
+    public static final RegistryObject<Block> OCHRE_FROGLIGHT_SLAB = createSlabBlock(Blocks.OCHRE_FROGLIGHT);
+    public static final RegistryObject<Block> OCHRE_FROGLIGHT_STAIRS = createStairsBlock(Blocks.OCHRE_FROGLIGHT);
+    public static final RegistryObject<Block> OCHRE_FROGLIGHT_WALL = createWallBlock(Blocks.OCHRE_FROGLIGHT);
+
+    public static final RegistryObject<Block> VERDANT_FROGLIGHT_SLAB = createSlabBlock(Blocks.VERDANT_FROGLIGHT);
+    public static final RegistryObject<Block> VERDANT_FROGLIGHT_STAIRS = createStairsBlock(Blocks.VERDANT_FROGLIGHT);
+    public static final RegistryObject<Block> VERDANT_FROGLIGHT_WALL = createWallBlock(Blocks.VERDANT_FROGLIGHT);
+
+    public static final RegistryObject<Block> PEARLESCENT_FROGLIGHT_SLAB = createSlabBlock(Blocks.PEARLESCENT_FROGLIGHT);
+    public static final RegistryObject<Block> PEARLESCENT_FROGLIGHT_STAIRS = createStairsBlock(Blocks.PEARLESCENT_FROGLIGHT);
+    public static final RegistryObject<Block> PEARLESCENT_FROGLIGHT_WALL = createWallBlock(Blocks.PEARLESCENT_FROGLIGHT);
+
+    public static final RegistryObject<Block> CRYING_OBSIDIAN_SLAB = createSlabBlock(Blocks.CRYING_OBSIDIAN);
+    public static final RegistryObject<Block> CRYING_OBSIDIAN_STAIRS = createStairsBlock(Blocks.CRYING_OBSIDIAN);
+    public static final RegistryObject<Block> CRYING_OBSIDIAN_WALL = createWallBlock(Blocks.CRYING_OBSIDIAN);
+
+    public static final RegistryObject<Block> CRACKED_NETHER_BRICKS_SLAB = createSlabBlock(Blocks.CRACKED_NETHER_BRICKS);
+    public static final RegistryObject<Block> CRACKED_NETHER_BRICKS_STAIRS = createStairsBlock(Blocks.CRACKED_NETHER_BRICKS);
+    public static final RegistryObject<Block> CRACKED_NETHER_BRICKS_WALL = createWallBlock(Blocks.CRACKED_NETHER_BRICKS);
+
+    public static final RegistryObject<Block> CRACKED_DEEPSLATE_BRICKS_SLAB = createSlabBlock(Blocks.CRACKED_DEEPSLATE_BRICKS);
+    public static final RegistryObject<Block> CRACKED_DEEPSLATE_BRICKS_STAIRS = createStairsBlock(Blocks.CRACKED_DEEPSLATE_BRICKS);
+    public static final RegistryObject<Block> CRACKED_DEEPSLATE_BRICKS_WALL = createWallBlock(Blocks.CRACKED_DEEPSLATE_BRICKS);
+
+    public static final RegistryObject<Block> CRACKED_POLISHED_BLACKSTONE_BRICKS_SLAB = createSlabBlock(Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS);
+    public static final RegistryObject<Block> CRACKED_POLISHED_BLACKSTONE_BRICKS_STAIRS = createStairsBlock(Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS);
+    public static final RegistryObject<Block> CRACKED_POLISHED_BLACKSTONE_BRICKS_WALL = createWallBlock(Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS);
+
+    public static final RegistryObject<Block> CRACKED_DEEPSLATE_TILES_SLAB = createSlabBlock(Blocks.CRACKED_DEEPSLATE_TILES);
+    public static final RegistryObject<Block> CRACKED_DEEPSLATE_TILES_STAIRS = createStairsBlock(Blocks.CRACKED_DEEPSLATE_TILES);
+    public static final RegistryObject<Block> CRACKED_DEEPSLATE_TILES_WALL = createWallBlock(Blocks.CRACKED_DEEPSLATE_TILES);
+
+    public static final RegistryObject<Block> DEAD_TUBE_CORAL_BLOCK_SLAB = createSlabBlock(Blocks.DEAD_TUBE_CORAL_BLOCK);
+    public static final RegistryObject<Block> DEAD_TUBE_CORAL_BLOCK_STAIRS = createStairsBlock(Blocks.DEAD_TUBE_CORAL_BLOCK);
+    public static final RegistryObject<Block> DEAD_TUBE_CORAL_BLOCK_WALL = createWallBlock(Blocks.DEAD_TUBE_CORAL_BLOCK);
+
+    public static final RegistryObject<Block> TUBE_CORAL_BLOCK_SLAB = createCoralSlabBlock(DEAD_TUBE_CORAL_BLOCK_SLAB, Blocks.TUBE_CORAL_BLOCK);
+    public static final RegistryObject<Block> TUBE_CORAL_BLOCK_STAIRS = createCoralStairsBlock(DEAD_TUBE_CORAL_BLOCK_STAIRS, Blocks.TUBE_CORAL_BLOCK);
+    public static final RegistryObject<Block> TUBE_CORAL_BLOCK_WALL = createCoralWallBlock(DEAD_TUBE_CORAL_BLOCK_WALL, Blocks.TUBE_CORAL_BLOCK);
+
+    public static final RegistryObject<Block> DEAD_BUBBLE_CORAL_BLOCK_SLAB = createSlabBlock(Blocks.DEAD_BUBBLE_CORAL_BLOCK);
+    public static final RegistryObject<Block> DEAD_BUBBLE_CORAL_BLOCK_STAIRS = createStairsBlock(Blocks.DEAD_BUBBLE_CORAL_BLOCK);
+    public static final RegistryObject<Block> DEAD_BUBBLE_CORAL_BLOCK_WALL = createWallBlock(Blocks.DEAD_BUBBLE_CORAL_BLOCK);
+
+    public static final RegistryObject<Block> BUBBLE_CORAL_BLOCK_SLAB = createCoralSlabBlock(DEAD_BUBBLE_CORAL_BLOCK_SLAB, Blocks.BUBBLE_CORAL_BLOCK);
+    public static final RegistryObject<Block> BUBBLE_CORAL_BLOCK_STAIRS = createCoralStairsBlock(DEAD_BUBBLE_CORAL_BLOCK_STAIRS, Blocks.BUBBLE_CORAL_BLOCK);
+    public static final RegistryObject<Block> BUBBLE_CORAL_BLOCK_WALL = createCoralWallBlock(DEAD_BUBBLE_CORAL_BLOCK_WALL, Blocks.BUBBLE_CORAL_BLOCK);
+
+    public static final RegistryObject<Block> DEAD_BRAIN_CORAL_BLOCK_SLAB = createSlabBlock(Blocks.DEAD_BRAIN_CORAL_BLOCK);
+    public static final RegistryObject<Block> DEAD_BRAIN_CORAL_BLOCK_STAIRS = createStairsBlock(Blocks.DEAD_BRAIN_CORAL_BLOCK);
+    public static final RegistryObject<Block> DEAD_BRAIN_CORAL_BLOCK_WALL = createWallBlock(Blocks.DEAD_BRAIN_CORAL_BLOCK);
+
+    public static final RegistryObject<Block> BRAIN_CORAL_BLOCK_SLAB = createCoralSlabBlock(DEAD_BRAIN_CORAL_BLOCK_SLAB, Blocks.BRAIN_CORAL_BLOCK);
+    public static final RegistryObject<Block> BRAIN_CORAL_BLOCK_STAIRS = createCoralStairsBlock(DEAD_BRAIN_CORAL_BLOCK_STAIRS, Blocks.BRAIN_CORAL_BLOCK);
+    public static final RegistryObject<Block> BRAIN_CORAL_BLOCK_WALL = createCoralWallBlock(DEAD_BRAIN_CORAL_BLOCK_WALL, Blocks.BRAIN_CORAL_BLOCK);
+
+    public static final RegistryObject<Block> DEAD_FIRE_CORAL_BLOCK_SLAB = createSlabBlock(Blocks.DEAD_FIRE_CORAL_BLOCK);
+    public static final RegistryObject<Block> DEAD_FIRE_CORAL_BLOCK_STAIRS = createStairsBlock(Blocks.DEAD_FIRE_CORAL_BLOCK);
+    public static final RegistryObject<Block> DEAD_FIRE_CORAL_BLOCK_WALL = createWallBlock(Blocks.DEAD_FIRE_CORAL_BLOCK);
+
+    public static final RegistryObject<Block> FIRE_CORAL_BLOCK_SLAB = createCoralSlabBlock(DEAD_FIRE_CORAL_BLOCK_SLAB, Blocks.FIRE_CORAL_BLOCK);
+    public static final RegistryObject<Block> FIRE_CORAL_BLOCK_STAIRS = createCoralStairsBlock(DEAD_FIRE_CORAL_BLOCK_STAIRS, Blocks.FIRE_CORAL_BLOCK);
+    public static final RegistryObject<Block> FIRE_CORAL_BLOCK_WALL = createCoralWallBlock(DEAD_FIRE_CORAL_BLOCK_WALL, Blocks.FIRE_CORAL_BLOCK);
+
+    public static final RegistryObject<Block> DEAD_HORN_CORAL_BLOCK_SLAB = createSlabBlock(Blocks.DEAD_HORN_CORAL_BLOCK);
+    public static final RegistryObject<Block> DEAD_HORN_CORAL_BLOCK_STAIRS = createStairsBlock(Blocks.DEAD_HORN_CORAL_BLOCK);
+    public static final RegistryObject<Block> DEAD_HORN_CORAL_BLOCK_WALL = createWallBlock(Blocks.DEAD_HORN_CORAL_BLOCK);
+
+    public static final RegistryObject<Block> HORN_CORAL_BLOCK_SLAB = createCoralSlabBlock(DEAD_HORN_CORAL_BLOCK_SLAB, Blocks.HORN_CORAL_BLOCK);
+    public static final RegistryObject<Block> HORN_CORAL_BLOCK_STAIRS = createCoralStairsBlock(DEAD_HORN_CORAL_BLOCK_STAIRS, Blocks.HORN_CORAL_BLOCK);
+    public static final RegistryObject<Block> HORN_CORAL_BLOCK_WALL = createCoralWallBlock(DEAD_HORN_CORAL_BLOCK_WALL, Blocks.HORN_CORAL_BLOCK);
+
+    public static final RegistryObject<Block> ICE_SLAB = createSlabBlock(Blocks.ICE);
+    public static final RegistryObject<Block> ICE_STAIRS = createStairsBlock(Blocks.ICE);
+    public static final RegistryObject<Block> ICE_WALL = createWallBlock(Blocks.ICE);
+
+    public static final RegistryObject<Block> PACKED_ICE_SLAB = createSlabBlock(Blocks.PACKED_ICE);
+    public static final RegistryObject<Block> PACKED_ICE_STAIRS = createStairsBlock(Blocks.PACKED_ICE);
+    public static final RegistryObject<Block> PACKED_ICE_WALL = createWallBlock(Blocks.PACKED_ICE);
+
+    public static final RegistryObject<Block> BLUE_ICE_SLAB = createSlabBlock(Blocks.BLUE_ICE);
+    public static final RegistryObject<Block> BLUE_ICE_STAIRS = createStairsBlock(Blocks.BLUE_ICE);
+    public static final RegistryObject<Block> BLUE_ICE_WALL = createWallBlock(Blocks.BLUE_ICE);
+
+    public static final RegistryObject<Block> SLIME_BLOCK_SLAB = BLOCKS.register("slime_block" + "_slab", () -> new SlimeBlockSlab(getSettingsFromBlock(Blocks.SLIME_BLOCK)));
+    public static final RegistryObject<Block> SLIME_BLOCK_STAIRS = BLOCKS.register("slime_block" + "_stairs", () -> new SlimeBlockStairs(getSettingsFromBlock(Blocks.SLIME_BLOCK)));
+    public static final RegistryObject<Block> SLIME_BLOCK_WALL = BLOCKS.register("slime_block" + "_wall", () -> new SlimeBlockWall(getSettingsFromBlock(Blocks.SLIME_BLOCK)));
+
+    public static final RegistryObject<Block> HONEY_BLOCK_SLAB = BLOCKS.register("honey_block" + "_slab", () -> new HoneyBlockSlab(getSettingsFromBlock(Blocks.HONEY_BLOCK)));
+    public static final RegistryObject<Block> HONEY_BLOCK_STAIRS = BLOCKS.register("honey_block" + "_stairs", () -> new HoneyBlockStairs(getSettingsFromBlock(Blocks.HONEY_BLOCK)));
+    public static final RegistryObject<Block> HONEY_BLOCK_WALL = BLOCKS.register("honey_block" + "_wall", () -> new HoneyBlockWall(getSettingsFromBlock(Blocks.HONEY_BLOCK)));
+
+    public static final RegistryObject<Block> CRIMSON_NYLIUM_SLAB = createSpreadableSlabBlock(Blocks.CRIMSON_NYLIUM);
+    public static final RegistryObject<Block> CRIMSON_NYLIUM_STAIRS = createSpreadableStairsBlock(Blocks.CRIMSON_NYLIUM);
+    public static final RegistryObject<Block> CRIMSON_NYLIUM_WALL = createSpreadableWallBlock(Blocks.CRIMSON_NYLIUM);
+
+    public static final RegistryObject<Block> WARPED_NYLIUM_SLAB = createSpreadableSlabBlock(Blocks.WARPED_NYLIUM);
+    public static final RegistryObject<Block> WARPED_NYLIUM_STAIRS = createSpreadableStairsBlock(Blocks.WARPED_NYLIUM);
+    public static final RegistryObject<Block> WARPED_NYLIUM_WALL = createSpreadableWallBlock(Blocks.WARPED_NYLIUM);
+
+    public static final RegistryObject<Block> DRIED_KELP_BLOCK_SLAB = createSlabBlock(Blocks.DRIED_KELP_BLOCK);
+    public static final RegistryObject<Block> DRIED_KELP_BLOCK_STAIRS = createStairsBlock(Blocks.DRIED_KELP_BLOCK);
+    public static final RegistryObject<Block> DRIED_KELP_BLOCK_WALL = createWallBlock(Blocks.DRIED_KELP_BLOCK);
+
+    public static final RegistryObject<Block> GRASS_BLOCK_SLAB = createSpreadableSlabBlock((Blocks.GRASS_BLOCK));
+    public static final RegistryObject<Block> GRASS_BLOCK_STAIRS = createSpreadableStairsBlock(Blocks.GRASS_BLOCK);
+    public static final RegistryObject<Block> GRASS_BLOCK_WALL = createSpreadableWallBlock(Blocks.GRASS_BLOCK);
+
+    public static final RegistryObject<Block> MYCELIUM_SLAB = createSpreadableSlabBlock((Blocks.MYCELIUM));
+    public static final RegistryObject<Block> MYCELIUM_STAIRS = createSpreadableStairsBlock(Blocks.MYCELIUM);
+    public static final RegistryObject<Block> MYCELIUM_WALL = createSpreadableWallBlock(Blocks.MYCELIUM);
+
+    public static final RegistryObject<Block> PODZOL_SLAB = createSlabBlock((Blocks.PODZOL));
+    public static final RegistryObject<Block> PODZOL_STAIRS = createStairsBlock(Blocks.PODZOL);
+    public static final RegistryObject<Block> PODZOL_WALL = createWallBlock(Blocks.PODZOL);
+
+    public static final RegistryObject<Block> COAL_BLOCK_SLAB = createSlabBlock((Blocks.COAL_BLOCK));
+    public static final RegistryObject<Block> COAL_BLOCK_STAIRS = createStairsBlock(Blocks.COAL_BLOCK);
+    public static final RegistryObject<Block> COAL_BLOCK_WALL = createWallBlock(Blocks.COAL_BLOCK);
+
+    public static final RegistryObject<Block> IRON_BLOCK_SLAB = createSlabBlock((Blocks.IRON_BLOCK));
+    public static final RegistryObject<Block> IRON_BLOCK_STAIRS = createStairsBlock(Blocks.IRON_BLOCK);
+    public static final RegistryObject<Block> IRON_BLOCK_WALL = createWallBlock(Blocks.IRON_BLOCK);
+
+    public static final RegistryObject<Block> GOLD_BLOCK_SLAB = createSlabBlock((Blocks.GOLD_BLOCK));
+    public static final RegistryObject<Block> GOLD_BLOCK_STAIRS = createStairsBlock(Blocks.GOLD_BLOCK);
+    public static final RegistryObject<Block> GOLD_BLOCK_WALL = createWallBlock(Blocks.GOLD_BLOCK);
+
+    public static final RegistryObject<Block> DIAMOND_BLOCK_SLAB = createSlabBlock((Blocks.DIAMOND_BLOCK));
+    public static final RegistryObject<Block> DIAMOND_BLOCK_STAIRS = createStairsBlock(Blocks.DIAMOND_BLOCK);
+    public static final RegistryObject<Block> DIAMOND_BLOCK_WALL = createWallBlock(Blocks.DIAMOND_BLOCK);
+
+    public static final RegistryObject<Block> NETHERITE_BLOCK_SLAB = createSlabBlock((Blocks.NETHERITE_BLOCK));
+    public static final RegistryObject<Block> NETHERITE_BLOCK_STAIRS = createStairsBlock(Blocks.NETHERITE_BLOCK);
+    public static final RegistryObject<Block> NETHERITE_BLOCK_WALL = createWallBlock(Blocks.NETHERITE_BLOCK);
+
+    public static final RegistryObject<Block> LAPIS_BLOCK_SLAB = createSlabBlock((Blocks.LAPIS_BLOCK));
+    public static final RegistryObject<Block> LAPIS_BLOCK_STAIRS = createStairsBlock(Blocks.LAPIS_BLOCK);
+    public static final RegistryObject<Block> LAPIS_BLOCK_WALL = createWallBlock(Blocks.LAPIS_BLOCK);
+
+    public static final RegistryObject<Block> EMERALD_BLOCK_SLAB = createSlabBlock((Blocks.EMERALD_BLOCK));
+    public static final RegistryObject<Block> EMERALD_BLOCK_STAIRS = createStairsBlock(Blocks.EMERALD_BLOCK);
+    public static final RegistryObject<Block> EMERALD_BLOCK_WALL = createWallBlock(Blocks.EMERALD_BLOCK);
+
+    public static final RegistryObject<Block> GILDED_BLACKSTONE_SLAB = createSlabBlock((Blocks.GILDED_BLACKSTONE));
+    public static final RegistryObject<Block> GILDED_BLACKSTONE_STAIRS = createStairsBlock(Blocks.GILDED_BLACKSTONE);
+    public static final RegistryObject<Block> GILDED_BLACKSTONE_WALL = createWallBlock(Blocks.GILDED_BLACKSTONE);
+
+    public static final RegistryObject<Block> PUMPKIN_SLAB = createSlabBlock((Blocks.PUMPKIN));
+    public static final RegistryObject<Block> PUMPKIN_STAIRS = createStairsBlock(Blocks.PUMPKIN);
+    public static final RegistryObject<Block> PUMPKIN_WALL = createWallBlock(Blocks.PUMPKIN);
+
+    public static final RegistryObject<Block> MELON_SLAB = createSlabBlock((Blocks.MELON));
+    public static final RegistryObject<Block> MELON_STAIRS = createStairsBlock(Blocks.MELON);
+    public static final RegistryObject<Block> MELON_WALL = createWallBlock(Blocks.MELON);
+
+    public static final RegistryObject<Block> BONE_BLOCK_SLAB = createSlabBlock((Blocks.BONE_BLOCK));
+    public static final RegistryObject<Block> BONE_BLOCK_STAIRS = createStairsBlock(Blocks.BONE_BLOCK);
+    public static final RegistryObject<Block> BONE_BLOCK_WALL = createWallBlock(Blocks.BONE_BLOCK);
 
 
-    //2.0.0
-    OAK_LEAVES(Blocks.OAK_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED),
-    SPRUCE_LEAVES(Blocks.SPRUCE_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED),
-    BIRCH_LEAVES(Blocks.BIRCH_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED),
-    JUNGLE_LEAVES(Blocks.JUNGLE_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED),
-    DARK_OAK_LEAVES(Blocks.DARK_OAK_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED),
-    ACACIA_LEAVES(Blocks.ACACIA_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED),
-    AZALEA_LEAVES(Blocks.AZALEA_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED),
-    FLOWERING_AZALEA_LEAVES(Blocks.FLOWERING_AZALEA_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED, "flowering_azalea_leaves"),
+    public static final RegistryObject<Block> HAY_BLOCK_SLAB = createSlabBlock((Blocks.HAY_BLOCK));
+    public static final RegistryObject<Block> HAY_BLOCK_STAIRS = createStairsBlock(Blocks.HAY_BLOCK);
+    public static final RegistryObject<Block> HAY_BLOCK_WALL = createWallBlock(Blocks.HAY_BLOCK);
 
-    WARPED_WART_BLOCK(Blocks.WARPED_WART_BLOCK, ToolType.HOE),
-    NETHER_WART_BLOCK(Blocks.NETHER_WART_BLOCK, ToolType.HOE),
-
-    AMETHYST_BLOCK(Blocks.AMETHYST_BLOCK, ToolType.PICKAXE),
-
-    RAW_COPPER_BLOCK(Blocks.RAW_COPPER_BLOCK, ToolType.PICKAXE),
-    RAW_GOLD_BLOCK(Blocks.RAW_GOLD_BLOCK, ToolType.PICKAXE),
-    RAW_IRON_BLOCK(Blocks.RAW_IRON_BLOCK, ToolType.PICKAXE),
-
-    MAGMA_BLOCK(Blocks.MAGMA_BLOCK, ToolType.PICKAXE, "magma"),
-
-    SOUL_SAND(Blocks.SOUL_SAND, ToolType.SHOVEL),
-    SOUL_SOIL(Blocks.SOUL_SOIL, ToolType.SHOVEL),
-
-    CLAY(Blocks.CLAY, ToolType.SHOVEL),
-
-    OCHRE_FROGLIGHT(Blocks.OCHRE_FROGLIGHT, ToolType.HOE, "ochre_froglight_side"),
-    VERDANT_FROGLIGHT(Blocks.VERDANT_FROGLIGHT, ToolType.HOE, "verdant_froglight_side"),
-    PEARLESCENT_FROGLIGHT(Blocks.PEARLESCENT_FROGLIGHT, ToolType.HOE,"pearlescent_froglight_side"),
-
-    CRYING_OBSIDIAN(Blocks.CRYING_OBSIDIAN, ToolType.PICKAXE),
-
-    CRACKED_NETHER_BRICKS(Blocks.CRACKED_NETHER_BRICKS, ToolType.PICKAXE),
-    CRACKED_DEEPSLATE_BRICKS(Blocks.CRACKED_DEEPSLATE_BRICKS, ToolType.PICKAXE),
-    CRACKED_POLISHED_BLACKSTONE_BRICKS(Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS, ToolType.PICKAXE),
-    CRACKED_DEEPSLATE_TILES(Blocks.CRACKED_DEEPSLATE_TILES, ToolType.PICKAXE),
-
-    DEAD_TUBE_CORAL_BLOCK(Blocks.DEAD_TUBE_CORAL_BLOCK, ToolType.PICKAXE),
-    DEAD_BUBBLE_CORAL_BLOCK(Blocks.DEAD_BUBBLE_CORAL_BLOCK, ToolType.PICKAXE),
-    DEAD_BRAIN_CORAL_BLOCK(Blocks.DEAD_BRAIN_CORAL_BLOCK, ToolType.PICKAXE),
-    DEAD_FIRE_CORAL_BLOCK(Blocks.DEAD_FIRE_CORAL_BLOCK, ToolType.PICKAXE),
-    DEAD_HORN_CORAL_BLOCK(Blocks.DEAD_HORN_CORAL_BLOCK, ToolType.PICKAXE),
-
-    TUBE_CORAL_BLOCK(Blocks.TUBE_CORAL_BLOCK, ToolType.PICKAXE, DEAD_TUBE_CORAL_BLOCK),
-    BUBBLE_CORAL_BLOCK(Blocks.BUBBLE_CORAL_BLOCK, ToolType.PICKAXE, DEAD_BUBBLE_CORAL_BLOCK),
-    BRAIN_CORAL_BLOCK(Blocks.BRAIN_CORAL_BLOCK, ToolType.PICKAXE, DEAD_BRAIN_CORAL_BLOCK),
-    FIRE_CORAL_BLOCK(Blocks.FIRE_CORAL_BLOCK, ToolType.PICKAXE, DEAD_FIRE_CORAL_BLOCK),
-    HORN_CORAL_BLOCK(Blocks.HORN_CORAL_BLOCK, ToolType.PICKAXE, DEAD_HORN_CORAL_BLOCK),
-
-    ICE(Blocks.ICE, ToolType.PICKAXE, Layer.TRANSLUCENT),
-    PACKED_ICE(Blocks.PACKED_ICE, ToolType.PICKAXE),
-    BLUE_ICE(Blocks.BLUE_ICE, ToolType.PICKAXE),
-
-    SLIME_BLOCK(Blocks.SLIME_BLOCK, ToolType.NONE, Layer.TRANSLUCENT),
-    HONEY_BLOCK(Blocks.HONEY_BLOCK, ToolType.NONE, Layer.TRANSLUCENT, "honey_block_side", "honey_block_top", "honey_block_bottom"),
-
-    CRIMSON_NYLIUM(Blocks.CRIMSON_NYLIUM, ToolType.PICKAXE, Layer.SOLID, "crimson_nylium_side", "crimson_nylium", "netherrack"),
-    WARPED_NYLIUM(Blocks.WARPED_NYLIUM, ToolType.PICKAXE, Layer.SOLID, "warped_nylium_side", "warped_nylium", "netherrack"),
-    DRIED_KELP_BLOCK(Blocks.DRIED_KELP_BLOCK, ToolType.HOE, Layer.SOLID, "dried_kelp_side", "dried_kelp_top", "dried_kelp_bottom"),
-
-    GRASS_BLOCK(Blocks.GRASS_BLOCK, ToolType.SHOVEL, Layer.CUTOUT, "grass_block_side", "grass_block_top", "dirt"),
-    MYCELIUM(Blocks.MYCELIUM, ToolType.SHOVEL, Layer.CUTOUT, "mycelium_side", "mycelium_top", "dirt"),
-    PODZOL(Blocks.PODZOL, ToolType.SHOVEL, Layer.CUTOUT, "podzol_side", "podzol_top", "dirt"),
-
-    COAL_BLOCK(Blocks.COAL_BLOCK, ToolType.PICKAXE),
-    IRON_BLOCK(Blocks.IRON_BLOCK, ToolType.PICKAXE),
-    GOLD_BLOCK(Blocks.GOLD_BLOCK, ToolType.PICKAXE),
-    DIAMOND_BLOCK(Blocks.DIAMOND_BLOCK, ToolType.PICKAXE),
-    NETHERITE_BLOCK(Blocks.NETHERITE_BLOCK, ToolType.PICKAXE),
-    LAPIS_BLOCK(Blocks.LAPIS_BLOCK, ToolType.PICKAXE),
-    EMERALD_BLOCK(Blocks.EMERALD_BLOCK, ToolType.PICKAXE),
+    public static final RegistryObject<Block> BOOKSHELF_SLAB = createSlabBlock((Blocks.BOOKSHELF));
+    public static final RegistryObject<Block> BOOKSHELF_STAIRS = createStairsBlock(Blocks.BOOKSHELF);
+    //public static final RegistryObject<Block> BOOKSHELF_WALL = createWallBlock(Blocks.BOOKSHELF);
+    
+    public static final RegistryObject<Block> OAK_PLANKS_WALL = createWallBlock(Blocks.OAK_PLANKS);
+    public static final RegistryObject<Block> BIRCH_PLANKS_WALL = createWallBlock(Blocks.BIRCH_PLANKS);
+    public static final RegistryObject<Block> SPRUCE_PLANKS_WALL = createWallBlock(Blocks.SPRUCE_PLANKS);
+    public static final RegistryObject<Block> JUNGLE_PLANKS_WALL = createWallBlock(Blocks.JUNGLE_PLANKS);
+    public static final RegistryObject<Block> ACACIA_PLANKS_WALL = createWallBlock(Blocks.ACACIA_PLANKS);
+    public static final RegistryObject<Block> DARK_OAK_PLANKS_WALL = createWallBlock(Blocks.DARK_OAK_PLANKS);
+    public static final RegistryObject<Block> WARPED_PLANKS_WALL = createWallBlock(Blocks.WARPED_PLANKS);
+    public static final RegistryObject<Block> CRIMSON_PLANKS_WALL = createWallBlock(Blocks.CRIMSON_PLANKS);
 
 
-    GILDED_BLACKSTONE(Blocks.GILDED_BLACKSTONE, ToolType.PICKAXE),
+    public static final RegistryObject<Block> SCULK_SLAB = createSlabBlock((Blocks.SCULK));
+    public static final RegistryObject<Block> SCULK_STAIRS = createStairsBlock(Blocks.SCULK);
+    public static final RegistryObject<Block> SCULK_WALL = createWallBlock(Blocks.SCULK);
 
+    public static final RegistryObject<Block> PACKED_MUD_SLAB = createSlabBlock((Blocks.PACKED_MUD));
+    public static final RegistryObject<Block> PACKED_MUD_STAIRS = createStairsBlock(Blocks.PACKED_MUD);
+    public static final RegistryObject<Block> PACKED_MUD_WALL = createWallBlock(Blocks.PACKED_MUD);
 
+    public static final RegistryObject<Block> MANGROVE_LOG_SLAB = createSlabBlock((Blocks.MANGROVE_LOG));
+    public static final RegistryObject<Block> MANGROVE_LOG_STAIRS = createStairsBlock(Blocks.MANGROVE_LOG);
+    public static final RegistryObject<Block> MANGROVE_LOG_WALL = createWallBlock(Blocks.MANGROVE_LOG);
 
-    PUMPKIN(Blocks.PUMPKIN, ToolType.AXE, Layer.SOLID, "pumpkin_side", "pumpkin_top", "pumpkin_top"),
-    MELON(Blocks.MELON, ToolType.AXE, Layer.SOLID, "melon_side", "melon_top", "melon_top"),
+    public static final RegistryObject<Block> MANGROVE_WOOD_SLAB = createSlabBlock((Blocks.MANGROVE_WOOD));
+    public static final RegistryObject<Block> MANGROVE_WOOD_STAIRS = createStairsBlock(Blocks.MANGROVE_WOOD);
+    //public static final RegistryObject<Block> MANGROVE_WOOD_WALL = createWallBlock(Blocks.MANGROVE_WOOD);
 
-    BONE_BLOCK(Blocks.BONE_BLOCK, ToolType.PICKAXE, Layer.SOLID, "bone_block_side", "bone_block_top", "bone_block_top"),
+    public static final RegistryObject<Block> STRIPPED_MANGROVE_WOOD_SLAB = createSlabBlock((Blocks.STRIPPED_MANGROVE_WOOD));
+    public static final RegistryObject<Block> STRIPPED_MANGROVE_WOOD_STAIRS = createStairsBlock(Blocks.STRIPPED_MANGROVE_WOOD);
+    public static final RegistryObject<Block> STRIPPED_MANGROVE_WOOD_WALL = createWallBlock(Blocks.STRIPPED_MANGROVE_WOOD);
 
-    HAY_BLOCK(Blocks.HAY_BLOCK, ToolType.HOE, Layer.SOLID, "hay_block_side", "hay_block_top", "hay_block_top"),
+    public static final RegistryObject<Block> MANGROVE_LEAVES_SLAB = createSlabBlock("mangrove_leaves", (Blocks.MANGROVE_LEAVES));
+    public static final RegistryObject<Block> MANGROVE_LEAVES_STAIRS = createStairsBlock("mangrove_leaves", Blocks.MANGROVE_LEAVES);
+    public static final RegistryObject<Block> MANGROVE_LEAVES_WALL = createWallBlock("mangrove_leaves", Blocks.MANGROVE_LEAVES);
 
-    BOOKSHELF(Blocks.BOOKSHELF, ToolType.AXE, true, true, false, "bookshelf", "oak_planks", "oak_planks"),
+    public static final RegistryObject<Block> MANGROVE_PLANKS_WALL = createWallBlock(Blocks.MANGROVE_PLANKS);
 
-    OAK_LOG(Blocks.OAK_LOG, ToolType.AXE, Layer.SOLID, "oak_log", "oak_log_top", "oak_log_top"),
-    DARK_OAK_LOG(Blocks.DARK_OAK_LOG, ToolType.AXE, Layer.SOLID, "dark_oak_log", "dark_oak_log_top", "dark_oak_log_top"),
-    ACACIA_LOG(Blocks.ACACIA_LOG, ToolType.AXE, Layer.SOLID, "acacia_log", "acacia_log_top", "acacia_log_top"),
-    BIRCH_LOG(Blocks.BIRCH_LOG, ToolType.AXE, Layer.SOLID, "birch_log", "birch_log_top", "birch_log_top"),
-    JUNGLE_LOG(Blocks.JUNGLE_LOG, ToolType.AXE, Layer.SOLID, "jungle_log", "jungle_log_top", "jungle_log_top"),
-    SPRUCE_LOG(Blocks.SPRUCE_LOG, ToolType.AXE, Layer.SOLID, "spruce_log", "spruce_log_top", "spruce_log_top"),
+    public static final RegistryObject<Block> MUD_SLAB = createSlabBlock((Blocks.MUD));
+    public static final RegistryObject<Block> MUD_STAIRS = createStairsBlock(Blocks.MUD);
+    public static final RegistryObject<Block> MUD_WALL = createWallBlock(Blocks.MUD);
 
-    CRIMSON_STEM(Blocks.CRIMSON_STEM, ToolType.AXE, true, true, false, "crimson_stem", "crimson_stem_top", "crimson_stem_top"),
-    WARPED_STEM(Blocks.WARPED_STEM, ToolType.AXE, true, true, false, "warped_stem", "warped_stem_top", "warped_stem_top"),
+    public static final RegistryObject<Block> REDSTONE_BLOCK_SLAB = BLOCKS.register("redstone_block" + "_slab", () -> new RedstoneSlabBlock(getSettingsFromBlock(Blocks.REDSTONE_BLOCK)));
+    public static final RegistryObject<Block> REDSTONE_BLOCK_STAIRS = BLOCKS.register("redstone_block" + "_stairs", () -> new RedstoneStairsBlock(getSettingsFromBlock(Blocks.REDSTONE_BLOCK)));
+    //public static final RegistryObject<Block> REDSTONE_BLOCK_WALL = createWallBlock(Blocks.REDSTONE_BLOCK);
 
-    OAK_PLANKS(Blocks.OAK_PLANKS, ToolType.AXE, false, false, true),
-    BIRCH_PLANKS(Blocks.BIRCH_PLANKS, ToolType.AXE, false, false, true),
-    SPRUCE_PLANKS(Blocks.SPRUCE_PLANKS, ToolType.AXE, false, false, true),
-    JUNGLE_PLANKS(Blocks.JUNGLE_PLANKS, ToolType.AXE, false, false, true),
-    ACACIA_PLANKS(Blocks.ACACIA_PLANKS, ToolType.AXE, false, false, true),
-    DARK_OAK_PLANKS(Blocks.DARK_OAK_PLANKS, ToolType.AXE, false, false, true),
-    WARPED_PLANKS(Blocks.WARPED_PLANKS, ToolType.AXE, false, false, true),
-    CRIMSON_PLANKS(Blocks.CRIMSON_PLANKS, ToolType.AXE, false, false, true),
+    public static final RegistryObject<Block> COPPER_BLOCK_SLAB = createSlabBlock((Blocks.COPPER_BLOCK));
+    public static final RegistryObject<Block> COPPER_BLOCK_STAIRS = createStairsBlock(Blocks.COPPER_BLOCK);
+    public static final RegistryObject<Block> COPPER_BLOCK_WALL = createWallBlock(Blocks.COPPER_BLOCK);
 
-    //1.19
-    SCULK(Blocks.SCULK, ToolType.HOE),
-    PACKED_MUD(Blocks.PACKED_MUD, ToolType.SHOVEL),
+    public static final RegistryObject<Block> EXPOSED_COPPER_SLAB = createSlabBlock((Blocks.EXPOSED_COPPER));
+    public static final RegistryObject<Block> EXPOSED_COPPER_STAIRS = createStairsBlock(Blocks.EXPOSED_COPPER);
+    public static final RegistryObject<Block> EXPOSED_COPPER_WALL = createWallBlock(Blocks.EXPOSED_COPPER);
 
-    MANGROVE_LOG(Blocks.MANGROVE_LOG, ToolType.AXE,Layer.SOLID,  "mangrove_log", "mangrove_log_top", "mangrove_log_top"),
-    MANGROVE_WOOD(Blocks.MANGROVE_WOOD, ToolType.AXE, true, true, false, "mangrove_log"),
-    STRIPPED_MANGROVE_WOOD(Blocks.MANGROVE_WOOD, ToolType.AXE, "stripped_mangrove_log"),
-    MANGROVE_LEAVES(Blocks.MANGROVE_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED, "mangrove_leaves"),
-    MANGROVE_PLANKS(Blocks.MANGROVE_PLANKS, ToolType.AXE, false, false, true),
-    MUD(Blocks.MUD, ToolType.SHOVEL),
+    public static final RegistryObject<Block> WEATHERED_COPPER_SLAB = createSlabBlock((Blocks.WEATHERED_COPPER));
+    public static final RegistryObject<Block> WEATHERED_COPPER_STAIRS = createStairsBlock(Blocks.WEATHERED_COPPER);
+    public static final RegistryObject<Block> WEATHERED_COPPER_WALL = createWallBlock(Blocks.WEATHERED_COPPER);
 
+    public static final RegistryObject<Block> OXIDIZED_COPPER_SLAB = createSlabBlock((Blocks.OXIDIZED_COPPER));
+    public static final RegistryObject<Block> OXIDIZED_COPPER_STAIRS = createStairsBlock(Blocks.OXIDIZED_COPPER);
+    public static final RegistryObject<Block> OXIDIZED_COPPER_WALL = createWallBlock(Blocks.OXIDIZED_COPPER);
 
-    //2.1.0
-    REDSTONE_BLOCK(Blocks.REDSTONE_BLOCK, ToolType.PICKAXE, true, true, false),
+    public static final RegistryObject<Block> WAXED_COPPER_BLOCK_SLAB = createSlabBlock("waxed_copper", Blocks.WAXED_COPPER_BLOCK);
+    public static final RegistryObject<Block> WAXED_COPPER_BLOCK_STAIRS = createStairsBlock("waxed_copper", Blocks.WAXED_COPPER_BLOCK);
+    public static final RegistryObject<Block> WAXED_COPPER_BLOCK_WALL = createWallBlock("waxed_copper", Blocks.WAXED_COPPER_BLOCK);
 
-    //2.2.0
-    //SAND(Blocks.SAND, ToolType.SHOVEL, true, false, false)
+    public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_SLAB = createSlabBlock((Blocks.WAXED_EXPOSED_COPPER));
+    public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_STAIRS = createStairsBlock(Blocks.WAXED_EXPOSED_COPPER);
+    public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_WALL = createWallBlock(Blocks.WAXED_EXPOSED_COPPER);
 
-    COPPER_BLOCK(Blocks.COPPER_BLOCK, ToolType.PICKAXE),
-    EXPOSED_COPPER(Blocks.EXPOSED_COPPER, ToolType.PICKAXE),
-    WEATHERED_COPPER(Blocks.WEATHERED_COPPER, ToolType.PICKAXE),
-    OXIDIZED_COPPER(Blocks.OXIDIZED_COPPER, ToolType.PICKAXE),
+    public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_SLAB = createSlabBlock((Blocks.WAXED_WEATHERED_COPPER));
+    public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_STAIRS = createStairsBlock(Blocks.WAXED_WEATHERED_COPPER);
+    public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_WALL = createWallBlock(Blocks.WAXED_WEATHERED_COPPER);
 
-    WAXED_COPPER(Blocks.WAXED_COPPER_BLOCK, ToolType.PICKAXE, "copper_block"),
-    WAXED_EXPOSED_COPPER(Blocks.WAXED_EXPOSED_COPPER, ToolType.PICKAXE, "exposed_copper"),
-    WAXED_WEATHERED_COPPER(Blocks.WAXED_WEATHERED_COPPER, ToolType.PICKAXE, "weathered_copper"),
-    WAXED_OXIDIZED_COPPER(Blocks.WAXED_OXIDIZED_COPPER, ToolType.PICKAXE, "oxidized_copper"),
-    ;
+    public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_SLAB = createSlabBlock((Blocks.WAXED_OXIDIZED_COPPER));
+    public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_STAIRS = createStairsBlock(Blocks.WAXED_OXIDIZED_COPPER);
+    public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_WALL = createWallBlock(Blocks.WAXED_OXIDIZED_COPPER);
+    
 
-
-
-
-    public final boolean hasSlab, hasStairs, hasWall;
-    private final Block copyBlock;
-    public ModBlocks deadCoralBlock = null;
-    private Layer renderLayer;
-    private boolean customTexture;
-    public final ToolType toolType;
-    private String sideTexture, topTexture, bottomTexture;
-    private DyeColor color = null;
-
-    ModBlocks(Block copyBlock, ToolType toolType){
-        this.toolType = toolType;
-        hasSlab = true;
-        hasStairs = true;
-        hasWall = true;
-        this.copyBlock = copyBlock;
-        this.renderLayer = Layer.SOLID;
-        customTexture = false;
+    public static String getNameFromBlock(Block block){
+        String[] nameParts = block.getTranslationKey().toLowerCase().split("\\.");
+        return nameParts[nameParts.length-1];
     }
 
-    ModBlocks(Block copyBlock, ToolType toolType, ModBlocks deadCoralBlock){
-        this(copyBlock, toolType);
-        this.deadCoralBlock = deadCoralBlock;
-    }
+    public static AbstractBlock.Settings getSettingsFromBlock(Block block){
 
-    ModBlocks(Block copyBlock, ToolType toolType, String textureAll){
-        this(copyBlock, toolType);
-        this.sideTexture = textureAll;
-        this.topTexture  = textureAll;
-        this.bottomTexture = textureAll;
-        customTexture = true;
-    }
+        AbstractBlock.Settings settings = AbstractBlock.Settings.of(block.getDefaultState().getMaterial())
+                .sounds(block.getDefaultState().getSoundGroup())
+                .luminance((view) -> block.getDefaultState().getLuminance())
+                .mapColor(block.getDefaultMapColor())
+                .hardness(block.getHardness())
+                .resistance(block.getBlastResistance());
 
-    ModBlocks(Block copyBlock, ToolType toolType, DyeColor color){
-        this(copyBlock, toolType);
-        this.color = color;
-    }
-
-    ModBlocks(Block copyBlock, ToolType toolType, Layer renderLayer){
-        this(copyBlock, toolType);
-        this.renderLayer = renderLayer;
-    }
-
-    ModBlocks(Block copyBlock, ToolType toolType, Layer renderLayer, String textureAll){
-        this(copyBlock, toolType, renderLayer);
-        this.sideTexture = textureAll;
-        this.topTexture  = textureAll;
-        this.bottomTexture = textureAll;
-        customTexture = true;
-    }
-
-    ModBlocks(Block copyBlock, ToolType toolType, Layer renderLayer, String side, String top, String bottom){
-        this(copyBlock, toolType, renderLayer);
-        this.sideTexture = side;
-        this.topTexture  = top;
-        this.bottomTexture = bottom;
-        customTexture = true;
-    }
-
-    ModBlocks(Block copyBlock, ToolType toolType, Layer renderLayer, DyeColor color){
-        this(copyBlock, toolType, renderLayer);
-        this.color = color;
-    }
-
-    ModBlocks(Block copyBlock, ToolType toolType, boolean slab, boolean stairs, boolean wall){
-        this.toolType = toolType;
-        hasSlab = slab;
-        hasStairs = stairs;
-        hasWall = wall;
-        this.copyBlock = copyBlock;
-        this.renderLayer = Layer.SOLID;
-    }
-
-    ModBlocks(Block copyBlock, ToolType toolType, boolean slab, boolean stairs, boolean wall, String textureAll){
-        this(copyBlock, toolType, slab, stairs, wall);
-        this.sideTexture = textureAll;
-        this.topTexture  = textureAll;
-        this.bottomTexture = textureAll;
-        customTexture = true;
-    }
-
-    ModBlocks(Block copyBlock, ToolType toolType, boolean slab, boolean stairs, boolean wall, String sideTexture, String topTexture, String bottomTexture){
-        this(copyBlock, toolType, slab, stairs, wall);
-        this.sideTexture = sideTexture;
-        this.topTexture  = topTexture;
-        this.bottomTexture = bottomTexture;
-        customTexture = true;
-    }
-
-    public Block getSlabBlock(){
-        if(this.hasSlab){
-            return BlockRegistry.SLABS.get(this);
+        if (!block.getDefaultState().isOpaque()){
+            return settings.nonOpaque();
+        } else if (block.getDefaultState().isToolRequired()){
+            return settings.requiresTool();
+        } else {
+            return settings;
         }
-        return null;
+
+
     }
 
-    public Block getStairsBlock(){
-        if(this.hasStairs){
-            return BlockRegistry.STAIRS.get(this);
-        }
-        return null;
-    }
-    public Block getWallBlock(){
-        if(this.hasWall){
-            return BlockRegistry.WALLS.get(this);
-        }
-        return null;
+    public static RegistryObject<Block> createSlabBlock(Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_slab", () -> new SlabBlock(getSettingsFromBlock(copyBlock)));
     }
 
-    public Block getCopyBlock(){
-        return copyBlock;
+    public static RegistryObject<Block> createStairsBlock(Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_stairs", () -> new StairsBlock(copyBlock::getDefaultState, getSettingsFromBlock(copyBlock)));
     }
 
-    public String toString(){
-        return this.name().toLowerCase();
+    public static RegistryObject<Block> createWallBlock(Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_wall", () -> new WallBlock(getSettingsFromBlock(copyBlock)));
     }
 
-    public Identifier getIdentifier(BlockType blockType){
-        return new Identifier(MoreSlabsStairsAndWalls.mod_id, this + "_" + blockType);
+    public static RegistryObject<Block> createSlabBlock(String name, Block copyBlock){
+        return BLOCKS.register(name + "_slab", () -> new SlabBlock(getSettingsFromBlock(copyBlock)));
     }
 
-    public Layer getRenderLayer(){
-        return renderLayer;
+    public static RegistryObject<Block> createStairsBlock(String name,Block copyBlock){
+        return BLOCKS.register(name + "_stairs", () -> new StairsBlock(name.contains("leaves") ? Blocks.STONE::getDefaultState : copyBlock::getDefaultState, getSettingsFromBlock(copyBlock)));
     }
 
-    public boolean hasSlab(){
-        return hasSlab && getSlabBlock() != null;
+    public static RegistryObject<Block> createWallBlock(String name,Block copyBlock){
+        return BLOCKS.register(name + "_wall", () -> new WallBlock(getSettingsFromBlock(copyBlock)));
     }
 
-    public boolean hasStairs(){
-        return hasStairs && getStairsBlock() != null;
+
+    public static RegistryObject<Block> createCulledSlabBlock(Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_slab", () -> new CulledSlabBlock(getSettingsFromBlock(copyBlock)));
     }
 
-    public boolean hasWall(){
-        return hasWall && getWallBlock() != null;
+    public static RegistryObject<Block> createCulledStairsBlock(Block copyBlock) {
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_stairs", () -> new CulledStairsBlock(copyBlock.getDefaultState(), getSettingsFromBlock(copyBlock)));
     }
 
-    public DyeColor getDyeColor(){
-        return this.color;
+    public static RegistryObject<Block> createCoralSlabBlock(RegistryObject<Block> deadCoralBlock, Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_slab", () -> new CoralSlabBlock(deadCoralBlock, getSettingsFromBlock(copyBlock)));
     }
 
-    public int getLuminance() {
-        return this.getCopyBlock().getDefaultState().getLuminance();
+    public static RegistryObject<Block> createCoralStairsBlock(RegistryObject<Block> deadCoralBlock,Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_stairs", () -> new CoralStairsBlock(deadCoralBlock, getSettingsFromBlock(copyBlock)));
     }
 
-    public String getSideTexture(){
-        return sideTexture;
+    public static RegistryObject<Block> createCoralWallBlock(RegistryObject<Block> deadCoralBlock, Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_wall", () -> new CoralWallBlock(deadCoralBlock, getSettingsFromBlock(copyBlock)));
+    }
+    
+    public static RegistryObject<Block> createSpreadableSlabBlock(Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_slab", () -> new SpreadableSlabBlock(getSettingsFromBlock(copyBlock).ticksRandomly()));
     }
 
-    public String getTopTexture(){
-        return topTexture;
+    public static RegistryObject<Block> createSpreadableStairsBlock(Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_stairs", () -> new SpreadableStairsBlock(copyBlock.getDefaultState(), getSettingsFromBlock(copyBlock).ticksRandomly()));
     }
 
-    public String getBottomTexture(){
-        return bottomTexture;
+    public static RegistryObject<Block> createSpreadableWallBlock(Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_wall", () -> new SpreadableWallBlock(getSettingsFromBlock(copyBlock).ticksRandomly()));
     }
-
-    public boolean hasCustomTexture(){
-        return customTexture;
-    }
-
-    public enum ToolType{
-        PICKAXE,
-        AXE,
-        SHOVEL,
-        HOE,
-        NONE
-    }
-
-    public enum BlockType{
-        SLAB,
-        STAIRS,
-        WALL;
-
-        public String toString(){
-            return this.name().toLowerCase();
-        }
-    }
-
-    public enum Layer{
-        CUTOUT,
-        TRANSLUCENT,
-        CUTOUT_MIPPED,
-        SOLID,
-        NONE
-    }
+    
+    
 }
-
-

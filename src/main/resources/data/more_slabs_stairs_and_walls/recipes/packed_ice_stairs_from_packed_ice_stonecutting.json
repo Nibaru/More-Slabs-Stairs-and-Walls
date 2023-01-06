@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "minecraft:packed_ice"
+  },
+  "result": "more_slabs_stairs_and_walls:packed_ice_stairs"
+}

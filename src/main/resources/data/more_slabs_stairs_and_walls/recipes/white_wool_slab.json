@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": {
+            "modid": "comforts",
+            "type": "forge:mod_loaded"
+          },
+          "type": "forge:not"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:white_wool"
+          }
+        },
+        "result": {
+          "count": 6,
+          "item": "more_slabs_stairs_and_walls:white_wool_slab"
+        }
+      }
+    }
+  ]
+}

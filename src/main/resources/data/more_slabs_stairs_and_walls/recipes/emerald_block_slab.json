@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "emerald_block_slab",
+  "key": {
+    "#": {
+      "item": "minecraft:emerald_block"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "more_slabs_stairs_and_walls:emerald_block_slab"
+  }
+}

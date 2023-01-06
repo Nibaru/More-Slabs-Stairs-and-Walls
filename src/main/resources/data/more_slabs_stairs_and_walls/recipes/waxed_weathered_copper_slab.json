@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "waxed_weathered_copper_slab",
+  "key": {
+    "#": {
+      "item": "minecraft:waxed_weathered_copper"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "more_slabs_stairs_and_walls:waxed_weathered_copper_slab"
+  }
+}

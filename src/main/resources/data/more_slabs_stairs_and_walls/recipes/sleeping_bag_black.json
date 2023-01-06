@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+          {
+            "modid": "comforts",
+            "type": "forge:mod_loaded"
+          }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "XXX"
+        ],
+        "key": {
+          "X": {
+            "item": "more_slabs_stairs_and_walls:black_wool_slab"
+          }
+        },
+        "result": {
+          "count": 1,
+          "item": "comforts:sleeping_bag_black"
+        }
+      }
+    }
+  ]
+}

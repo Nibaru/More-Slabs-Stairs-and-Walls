@@ -1,8 +1,6 @@
 package games.twinhead.moreslabsstairsandwalls.block.culled;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SlabBlock;
@@ -18,7 +16,6 @@ public class CulledSlabBlock extends SlabBlock{
 
     @SuppressWarnings("deprecation")
     @Override
-    @Environment(EnvType.CLIENT)
     public boolean isSideInvisible(BlockState blockState_1, BlockState blockState_2, Direction direction_1) {
         if(blockState_2.getBlock() == Blocks.GLASS)
             return true;
@@ -28,7 +25,7 @@ public class CulledSlabBlock extends SlabBlock{
                 return true;
 
 
-        if(blockState_2.getBlock() == ModBlocks.GLASS.getStairsBlock())
+        if(blockState_2.getBlock() == ModBlocks.GLASS_STAIRS.get())
             if(isInvisibleToGlassStairs(blockState_1, blockState_2,
                     direction_1))
                 return true;

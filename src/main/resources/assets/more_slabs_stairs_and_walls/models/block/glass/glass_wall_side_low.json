@@ -1,4 +1,5 @@
 {
+	"render_type": "translucent",
 	"texture_size": [40, 16],
 	"textures": {
 		"wall": "more_slabs_stairs_and_walls:block/glass_wall"

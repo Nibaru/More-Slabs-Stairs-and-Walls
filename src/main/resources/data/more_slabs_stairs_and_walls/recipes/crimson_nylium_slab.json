@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "crimson_nylium_slab",
+  "key": {
+    "#": {
+      "item": "minecraft:crimson_nylium"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "more_slabs_stairs_and_walls:crimson_nylium_slab"
+  }
+}

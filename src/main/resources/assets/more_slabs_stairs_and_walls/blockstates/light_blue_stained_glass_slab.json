@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "more_slabs_stairs_and_walls:block/light_blue_stained_glass_slab"
+    },
+    "type=double": {
+      "model": "more_slabs_stairs_and_walls:block/light_blue_stained_glass_slab_double"
+    },
+    "type=top": {
+      "model": "more_slabs_stairs_and_walls:block/light_blue_stained_glass_slab_top"
+    }
+  }
+}

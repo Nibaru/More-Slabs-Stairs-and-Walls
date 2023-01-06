@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "basalt_wall",
+  "key": {
+    "#": {
+      "item": "minecraft:basalt"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "more_slabs_stairs_and_walls:basalt_wall"
+  }
+}

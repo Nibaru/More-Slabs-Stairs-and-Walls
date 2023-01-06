@@ -12,13 +12,14 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
+import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
 public class CoralSlabBlock extends SlabBlock {
 
-    private final Block deadCoralBlock;
+    private final RegistryObject<Block> deadCoralBlock;
 
-    public CoralSlabBlock(Block deadCoralBlock, Settings settings) {
+    public CoralSlabBlock(RegistryObject<Block> deadCoralBlock, Settings settings) {
         super(settings);
         this.deadCoralBlock = deadCoralBlock;
     }
@@ -26,7 +27,7 @@ public class CoralSlabBlock extends SlabBlock {
     @SuppressWarnings("deprecation")
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (!this.isInWater(world, pos) && !state.get(WATERLOGGED)) {
-            world.setBlockState(pos, this.deadCoralBlock.getDefaultState().with(TYPE, state.get(TYPE)), Block.NOTIFY_LISTENERS);
+            world.setBlockState(pos, this.deadCoralBlock.get().getDefaultState().with(TYPE, state.get(TYPE)), Block.NOTIFY_LISTENERS);
         }
     }
 

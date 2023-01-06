@@ -27,22 +27,22 @@ public abstract class PointedDripstoneBlockMixin extends Block implements Landin
     }
 
     private static boolean isDripstone(BlockState blockState){
-        return blockState.isOf(Blocks.DRIPSTONE_BLOCK) || blockState.isOf(ModBlocks.DRIPSTONE_BLOCK.getSlabBlock()) || blockState.isOf(ModBlocks.DRIPSTONE_BLOCK.getStairsBlock()) || blockState.isOf(ModBlocks.DRIPSTONE_BLOCK.getWallBlock());
+        return blockState.isOf(Blocks.DRIPSTONE_BLOCK) || blockState.isOf(ModBlocks.DRIPSTONE_BLOCK_SLAB.get()) || blockState.isOf(ModBlocks.DRIPSTONE_BLOCK_STAIRS.get()) || blockState.isOf(ModBlocks.DRIPSTONE_BLOCK_WALL.get());
     }
 
     private static boolean isWaterlogged(BlockState blockState){
-        if(blockState.isOf(ModBlocks.DRIPSTONE_BLOCK.getSlabBlock())){
+        if(blockState.isOf(ModBlocks.DRIPSTONE_BLOCK_SLAB.get())){
             return blockState.getFluidState().isIn(FluidTags.WATER);
-        } else if (blockState.isOf(ModBlocks.DRIPSTONE_BLOCK.getStairsBlock())) {
+        } else if (blockState.isOf(ModBlocks.DRIPSTONE_BLOCK_STAIRS.get())) {
             return blockState.getFluidState().isIn(FluidTags.WATER);
-        } else if (blockState.isOf(ModBlocks.DRIPSTONE_BLOCK.getWallBlock())) {
+        } else if (blockState.isOf(ModBlocks.DRIPSTONE_BLOCK_WALL.get())) {
             return blockState.getFluidState().isIn(FluidTags.WATER);
         }
         return false;
     }
 
     private static boolean isDripstoneWaterloggable(BlockState blockState){
-        return blockState.isOf(ModBlocks.DRIPSTONE_BLOCK.getSlabBlock()) || blockState.isOf(ModBlocks.DRIPSTONE_BLOCK.getStairsBlock()) || blockState.isOf(ModBlocks.DRIPSTONE_BLOCK.getWallBlock());
+        return blockState.isOf(ModBlocks.DRIPSTONE_BLOCK_SLAB.get()) || blockState.isOf(ModBlocks.DRIPSTONE_BLOCK_STAIRS.get()) || blockState.isOf(ModBlocks.DRIPSTONE_BLOCK_WALL.get());
     }
 
 }

@@ -21,6 +21,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class HoneyBlockSlab extends SlabBlock {
+
     public HoneyBlockSlab(Settings settings) {
         super(settings);
     }
@@ -35,6 +36,44 @@ public class HoneyBlockSlab extends SlabBlock {
     @SuppressWarnings("deprecation")
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return state.get(TYPE).equals(SlabType.BOTTOM) ? SHAPE : SHAPE_TOP;
+    }
+
+    public boolean isStickyBlock(BlockState state)
+    {
+        return isStateHoney(state) || isStateSlime(state);
+    }
+
+    public boolean canStickTo(BlockState state, BlockState other)
+    {
+        if(isStateHoney(state) && isStateSlime(other)){
+            return false;
+        }
+
+        if(isStateHoney(other) && isStateSlime(state)){
+            return false;
+        }
+
+        return state.isStickyBlock() || other.isStickyBlock();
+    }
+
+    private static boolean isStateHoney(BlockState state){
+        if(state.isOf(ModBlocks.HONEY_BLOCK_SLAB.get())){
+            return true;
+        } else if(state.isOf(ModBlocks.HONEY_BLOCK_STAIRS.get())){
+            return true;
+        } else if(state.isOf(ModBlocks.HONEY_BLOCK_WALL.get())){
+            return true;
+        } else return state.isOf(Blocks.HONEY_BLOCK);
+    }
+
+    private static boolean isStateSlime(BlockState state){
+        if(state.isOf(ModBlocks.SLIME_BLOCK_SLAB.get())){
+            return true;
+        } else if(state.isOf(ModBlocks.SLIME_BLOCK_STAIRS.get())){
+            return true;
+        } else if(state.isOf(ModBlocks.SLIME_BLOCK_WALL.get())){
+            return true;
+        } else return state.isOf(Blocks.SLIME_BLOCK);
     }
 
     public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {

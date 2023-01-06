@@ -1,7 +1,5 @@
 package games.twinhead.moreslabsstairsandwalls.block;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SlabBlock;
@@ -34,9 +32,47 @@ public class SlimeBlockSlab extends SlabBlock {
 
     }
 
+    public boolean isStickyBlock(BlockState state)
+    {
+        return isStateHoney(state) || isStateSlime(state);
+    }
+
+    public boolean canStickTo(BlockState state, BlockState other)
+    {
+        if(isStateHoney(state) && isStateSlime(other)){
+            return false;
+        }
+
+        if(isStateHoney(other) && isStateSlime(state)){
+           return false;
+        }
+
+        return state.isStickyBlock() || other.isStickyBlock();
+    }
+
+    private static boolean isStateHoney(BlockState state){
+        if(state.isOf(ModBlocks.HONEY_BLOCK_SLAB.get())){
+            return true;
+        } else if(state.isOf(ModBlocks.HONEY_BLOCK_STAIRS.get())){
+            return true;
+        } else if(state.isOf(ModBlocks.HONEY_BLOCK_WALL.get())){
+            return true;
+        } else return state.isOf(Blocks.HONEY_BLOCK);
+    }
+
+    private static boolean isStateSlime(BlockState state){
+        if(state.isOf(ModBlocks.SLIME_BLOCK_SLAB.get())){
+            return true;
+        } else if(state.isOf(ModBlocks.SLIME_BLOCK_STAIRS.get())){
+            return true;
+        } else if(state.isOf(ModBlocks.SLIME_BLOCK_WALL.get())){
+            return true;
+        } else return state.isOf(Blocks.SLIME_BLOCK);
+    }
+
+
     @SuppressWarnings("deprecation")
     @Override
-    @Environment(EnvType.CLIENT)
     public boolean isSideInvisible(BlockState blockState_1, BlockState blockState_2, Direction direction_1) {
         if(blockState_2.getBlock() == Blocks.SLIME_BLOCK)
             return true;
@@ -46,7 +82,7 @@ public class SlimeBlockSlab extends SlabBlock {
                 return true;
 
 
-        if(blockState_2.getBlock() == ModBlocks.SLIME_BLOCK.getStairsBlock())
+        if(blockState_2.getBlock() == ModBlocks.SLIME_BLOCK_STAIRS.get())
             if(isInvisibleToSlimeStairs(blockState_1, blockState_2,
                     direction_1))
                 return true;

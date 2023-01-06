@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "netherrack_slab",
+  "key": {
+    "#": {
+      "item": "minecraft:netherrack"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "more_slabs_stairs_and_walls:netherrack_slab"
+  }
+}

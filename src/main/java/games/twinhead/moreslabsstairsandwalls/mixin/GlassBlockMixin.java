@@ -17,8 +17,8 @@ public class GlassBlockMixin extends AbstractGlassBlock {
 
     @Override
     public boolean isSideInvisible(BlockState state, BlockState stateFrom, Direction direction) {
-        if(stateFrom.getBlock() == ModBlocks.GLASS.getSlabBlock() && isInvisibleToGlassSlab(stateFrom, direction))return true;
-        if(stateFrom.getBlock() == ModBlocks.GLASS.getStairsBlock() && isInvisibleToGlassStairs(stateFrom, direction))return true;
+        if(stateFrom.getBlock() == ModBlocks.GLASS_SLAB.get() && isInvisibleToGlassSlab(stateFrom, direction))return true;
+        if(stateFrom.getBlock() == ModBlocks.GLASS_STAIRS.get() && isInvisibleToGlassStairs(stateFrom, direction))return true;
         return super.isSideInvisible(state, stateFrom, direction);
     }
 

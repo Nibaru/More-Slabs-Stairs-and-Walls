@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "minecraft:light_blue_stained_glass"
+  },
+  "result": "more_slabs_stairs_and_walls:light_blue_stained_glass_wall"
+}

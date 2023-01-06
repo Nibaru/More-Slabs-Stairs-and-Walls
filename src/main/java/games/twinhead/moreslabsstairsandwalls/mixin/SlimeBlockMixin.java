@@ -17,9 +17,9 @@ public class SlimeBlockMixin extends TransparentBlock {
 
     @Override
     public boolean isSideInvisible(BlockState state, BlockState stateFrom, Direction direction) {
-        if(stateFrom.getBlock() == ModBlocks.SLIME_BLOCK.getSlabBlock())
+        if(stateFrom.getBlock() == ModBlocks.SLIME_BLOCK_SLAB.get())
             if(isInvisibleToGlassSlab(stateFrom, direction)) return true;
-        if(stateFrom.getBlock() == ModBlocks.SLIME_BLOCK.getStairsBlock())
+        if(stateFrom.getBlock() == ModBlocks.SLIME_BLOCK_STAIRS.get())
             if(isInvisibleToGlassStairs(stateFrom, direction)) return true;
         return super.isSideInvisible(state, stateFrom, direction);
     }

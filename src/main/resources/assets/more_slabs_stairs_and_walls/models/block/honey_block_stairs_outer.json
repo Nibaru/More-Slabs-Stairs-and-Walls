@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+	"render_type": "translucent",
 	"parent": "block/block",
 	"textures": {
 		"1": "block/honey_block_side",

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "sculk_stair",
+  "key": {
+    "#": {
+      "item": "minecraft:sculk"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "more_slabs_stairs_and_walls:sculk_stairs"
+  }
+}

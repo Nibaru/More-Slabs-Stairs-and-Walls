@@ -2,94 +2,72 @@ package games.twinhead.moreslabsstairsandwalls.client;
 
 import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.client.color.block.BlockColorProvider;
-import net.minecraft.client.color.item.ItemColorProvider;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.color.world.GrassColors;
-import net.minecraft.client.render.RenderLayer;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class Client implements ClientModInitializer {
-    @Override
-    public void onInitializeClient() {
+public class Client {
 
-        initBlockColors();
-        initRenderLayers();
+    public static void onInitializeClient(final FMLClientSetupEvent event) {
         copyGlassCompatibilityPackIfMissing();
     }
 
-    private void initRenderLayers(){
-        for (ModBlocks block: ModBlocks.values()) {
-
-            RenderLayer layer = switch (block.getRenderLayer()){
-                case CUTOUT -> RenderLayer.getCutout();
-                case TRANSLUCENT -> RenderLayer.getTranslucent();
-                case CUTOUT_MIPPED -> RenderLayer.getCutoutMipped();
-                case SOLID, NONE -> RenderLayer.getSolid();
-            };
-
-            if(block.hasSlab())
-                BlockRenderLayerMap.INSTANCE.putBlock(block.getSlabBlock(), layer);
-            if(block.hasStairs())
-                BlockRenderLayerMap.INSTANCE.putBlock(block.getStairsBlock(), layer);
-            if(block.hasWall())
-                BlockRenderLayerMap.INSTANCE.putBlock(block.getWallBlock(), layer);
-        }
+    @SubscribeEvent
+    public static void registerBlockColors(RegisterColorHandlersEvent.Block event){
+        event.register((state, world, pos, tint) -> world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.getColor(0.5, 1.0), ModBlocks.GRASS_BLOCK_SLAB.get(), ModBlocks.GRASS_BLOCK_STAIRS.get(), ModBlocks.GRASS_BLOCK_WALL.get());
+        event.register(((state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.getDefaultColor()),
+                ModBlocks.OAK_LEAVES_SLAB.get(),
+                ModBlocks.OAK_LEAVES_STAIRS.get(),
+                ModBlocks.OAK_LEAVES_WALL.get(),
+                ModBlocks.JUNGLE_LEAVES_SLAB.get(),
+                ModBlocks.JUNGLE_LEAVES_STAIRS.get(),
+                ModBlocks.JUNGLE_LEAVES_WALL.get(),
+                ModBlocks.ACACIA_LEAVES_SLAB.get(),
+                ModBlocks.ACACIA_LEAVES_STAIRS.get(),
+                ModBlocks.ACACIA_LEAVES_WALL.get(),
+                ModBlocks.DARK_OAK_LEAVES_SLAB.get(),
+                ModBlocks.DARK_OAK_LEAVES_STAIRS.get(),
+                ModBlocks.DARK_OAK_LEAVES_WALL.get(),
+                ModBlocks.MANGROVE_LEAVES_SLAB.get(),
+                ModBlocks.MANGROVE_LEAVES_STAIRS.get(),
+                ModBlocks.MANGROVE_LEAVES_WALL.get()
+                );
+        event.register((state, world, pos, tint) -> FoliageColors.getSpruceColor(), ModBlocks.SPRUCE_LEAVES_SLAB.get(), ModBlocks.SPRUCE_LEAVES_STAIRS.get(), ModBlocks.SPRUCE_LEAVES_WALL.get());
+        event.register((state, world, pos, tint) -> FoliageColors.getBirchColor(), ModBlocks.BIRCH_LEAVES_SLAB.get(), ModBlocks.BIRCH_LEAVES_STAIRS.get(), ModBlocks.BIRCH_LEAVES_WALL.get());
     }
 
-    private void initBlockColors(){
-        for (ModBlocks block: ModBlocks.values()) {
-            BlockColorProvider blockColor = switch (block){
-                case
-                        OAK_LEAVES,
-                                JUNGLE_LEAVES,
-                                ACACIA_LEAVES,
-                                DARK_OAK_LEAVES,
-                                MANGROVE_LEAVES
-                        -> ((state, world, pos, tintIndex) ->
-                        world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.getDefaultColor());
+    @SubscribeEvent
+    public static void registerItemColors(RegisterColorHandlersEvent.Item event){
+        event.register((stack, tint) -> GrassColors.getColor(0.5, 1.0), ModBlocks.GRASS_BLOCK_SLAB.get(), ModBlocks.GRASS_BLOCK_STAIRS.get(), ModBlocks.GRASS_BLOCK_WALL.get());
 
-                case SPRUCE_LEAVES -> (state, world, pos, tintIndex) -> FoliageColors.getSpruceColor();
-                case BIRCH_LEAVES -> (state, world, pos, tintIndex) -> FoliageColors.getBirchColor();
-                case GRASS_BLOCK -> (state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.getColor(0.5, 1.0);
-                default -> null;
-            };
+        event.register(((stack, tint) -> FoliageColors.getDefaultColor()),
+                ModBlocks.OAK_LEAVES_SLAB.get(),
+                ModBlocks.OAK_LEAVES_STAIRS.get(),
+                ModBlocks.OAK_LEAVES_WALL.get(),
+                ModBlocks.JUNGLE_LEAVES_SLAB.get(),
+                ModBlocks.JUNGLE_LEAVES_STAIRS.get(),
+                ModBlocks.JUNGLE_LEAVES_WALL.get(),
+                ModBlocks.ACACIA_LEAVES_SLAB.get(),
+                ModBlocks.ACACIA_LEAVES_STAIRS.get(),
+                ModBlocks.ACACIA_LEAVES_WALL.get(),
+                ModBlocks.DARK_OAK_LEAVES_SLAB.get(),
+                ModBlocks.DARK_OAK_LEAVES_STAIRS.get(),
+                ModBlocks.DARK_OAK_LEAVES_WALL.get(),
+                ModBlocks.MANGROVE_LEAVES_SLAB.get(),
+                ModBlocks.MANGROVE_LEAVES_STAIRS.get(),
+                ModBlocks.MANGROVE_LEAVES_WALL.get()
+        );
 
-            ItemColorProvider itemColor = switch (block){
-                case
-                        OAK_LEAVES,
-                                JUNGLE_LEAVES,
-                                ACACIA_LEAVES,
-                                DARK_OAK_LEAVES
-                        -> ((stack, tintIndex) -> FoliageColors.getDefaultColor());
-
-                case SPRUCE_LEAVES -> (stack, tintIndex) -> FoliageColors.getSpruceColor();
-                case BIRCH_LEAVES -> (stack, tintIndex) -> FoliageColors.getBirchColor();
-                case MANGROVE_LEAVES -> (stack, tintIndex) -> FoliageColors.getMangroveColor();
-                case GRASS_BLOCK -> (stack, tintIndex) -> GrassColors.getColor(0.5, 1.0);
-                default -> null;
-            };
-
-            if(blockColor != null){
-                if(block.hasSlab()) registerBlockColor(blockColor, itemColor, block.getSlabBlock());
-                if(block.hasStairs()) registerBlockColor(blockColor, itemColor, block.getStairsBlock());
-                if(block.hasWall()) registerBlockColor(blockColor, itemColor, block.getWallBlock());
-            }
-        }
-    }
-
-    public void registerBlockColor(BlockColorProvider blockColor, ItemColorProvider itemColor, Block block){
-        ColorProviderRegistry.BLOCK.register(blockColor, block);
-        ColorProviderRegistry.ITEM.register(itemColor, block.asItem());
+        event.register((stack, tint) -> FoliageColors.getSpruceColor(), ModBlocks.SPRUCE_LEAVES_SLAB.get(), ModBlocks.SPRUCE_LEAVES_STAIRS.get(), ModBlocks.SPRUCE_LEAVES_WALL.get());
+        event.register((stack, tint) -> FoliageColors.getBirchColor(), ModBlocks.BIRCH_LEAVES_SLAB.get(), ModBlocks.BIRCH_LEAVES_STAIRS.get(), ModBlocks.BIRCH_LEAVES_WALL.get());
     }
 
     private static void copyGlassCompatibilityPackIfMissing() {

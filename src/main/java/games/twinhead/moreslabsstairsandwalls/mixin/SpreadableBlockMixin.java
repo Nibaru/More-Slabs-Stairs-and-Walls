@@ -32,25 +32,25 @@ public class SpreadableBlockMixin extends SnowyBlock {
                     world.setBlockState(spreadPos, Blocks.MYCELIUM.getDefaultState().with(SNOWY, world.getBlockState(spreadPos.up()).isOf(Blocks.SNOW)));
                 }
 
-            if(world.getBlockState(spreadPos).isOf(ModBlocks.DIRT.getSlabBlock()))
+            if(world.getBlockState(spreadPos).isOf(ModBlocks.DIRT_SLAB.get()))
                 if(state.isOf(Blocks.GRASS_BLOCK)){
-                    world.setBlockState(spreadPos, ModBlocks.GRASS_BLOCK.getSlabBlock().getDefaultState().with(SNOWY, world.getBlockState(spreadPos.up()).isOf(Blocks.SNOW)).with(SlabBlock.WATERLOGGED, world.getBlockState(spreadPos).get(SlabBlock.WATERLOGGED)).with(SlabBlock.TYPE, world.getBlockState(spreadPos).get(SlabBlock.TYPE)));
+                    world.setBlockState(spreadPos, ModBlocks.GRASS_BLOCK_SLAB.get().getDefaultState().with(SNOWY, world.getBlockState(spreadPos.up()).isOf(Blocks.SNOW)).with(SlabBlock.WATERLOGGED, world.getBlockState(spreadPos).get(SlabBlock.WATERLOGGED)).with(SlabBlock.TYPE, world.getBlockState(spreadPos).get(SlabBlock.TYPE)));
                 } else if(state.isOf(Blocks.MYCELIUM)){
-                    world.setBlockState(spreadPos, ModBlocks.MYCELIUM.getSlabBlock().getDefaultState().with(SNOWY, world.getBlockState(spreadPos.up()).isOf(Blocks.SNOW)).with(SlabBlock.WATERLOGGED, world.getBlockState(spreadPos).get(SlabBlock.WATERLOGGED)).with(SlabBlock.TYPE, world.getBlockState(spreadPos).get(SlabBlock.TYPE)));
+                    world.setBlockState(spreadPos, ModBlocks.MYCELIUM_SLAB.get().getDefaultState().with(SNOWY, world.getBlockState(spreadPos.up()).isOf(Blocks.SNOW)).with(SlabBlock.WATERLOGGED, world.getBlockState(spreadPos).get(SlabBlock.WATERLOGGED)).with(SlabBlock.TYPE, world.getBlockState(spreadPos).get(SlabBlock.TYPE)));
                 }
 
-            if(world.getBlockState(spreadPos).isOf(ModBlocks.DIRT.getStairsBlock()))
+            if(world.getBlockState(spreadPos).isOf(ModBlocks.DIRT_STAIRS.get()))
                 if(state.isOf(Blocks.GRASS_BLOCK)){
-                    world.setBlockState(spreadPos, ModBlocks.GRASS_BLOCK.getStairsBlock().getStateWithProperties(world.getBlockState(spreadPos)));
+                    world.setBlockState(spreadPos, ModBlocks.GRASS_BLOCK_STAIRS.get().getStateWithProperties(world.getBlockState(spreadPos)));
                 } else if(state.isOf(Blocks.MYCELIUM)) {
-                    world.setBlockState(spreadPos, ModBlocks.MYCELIUM.getStairsBlock().getStateWithProperties(world.getBlockState(spreadPos)));
+                    world.setBlockState(spreadPos, ModBlocks.MYCELIUM_STAIRS.get().getStateWithProperties(world.getBlockState(spreadPos)));
                 }
 
-            if(world.getBlockState(spreadPos).isOf(ModBlocks.DIRT.getWallBlock()) && !world.getBlockState(spreadPos.up()).isIn(ModBlockTags.WALLS))
+            if(world.getBlockState(spreadPos).isOf(ModBlocks.DIRT_WALL.get()) && !world.getBlockState(spreadPos.up()).isIn(ModBlockTags.WALLS))
                 if(state.isOf(Blocks.GRASS_BLOCK)){
-                    world.setBlockState(spreadPos, ModBlocks.GRASS_BLOCK.getWallBlock().getStateWithProperties(world.getBlockState(spreadPos)));
+                    world.setBlockState(spreadPos, ModBlocks.GRASS_BLOCK_WALL.get().getStateWithProperties(world.getBlockState(spreadPos)));
                 } else if(state.isOf(Blocks.MYCELIUM)) {
-                    world.setBlockState(spreadPos, ModBlocks.MYCELIUM.getWallBlock().getStateWithProperties(world.getBlockState(spreadPos)));
+                    world.setBlockState(spreadPos, ModBlocks.MYCELIUM_WALL.get().getStateWithProperties(world.getBlockState(spreadPos)));
                 }
         }
     }

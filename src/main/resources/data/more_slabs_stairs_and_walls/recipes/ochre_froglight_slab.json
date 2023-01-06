@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "froglight_slabs",
+  "key": {
+    "#": {
+      "item": "minecraft:ochre_froglight"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "more_slabs_stairs_and_walls:ochre_froglight_slab"
+  }
+}

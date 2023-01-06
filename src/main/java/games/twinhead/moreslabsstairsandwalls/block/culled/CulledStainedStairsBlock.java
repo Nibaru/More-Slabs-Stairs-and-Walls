@@ -1,7 +1,5 @@
 package games.twinhead.moreslabsstairsandwalls.block.culled;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.SlabType;
@@ -20,7 +18,6 @@ public final class CulledStainedStairsBlock extends StairsBlock implements Stain
 
     @SuppressWarnings("deprecation")
     @Override
-    @Environment(EnvType.CLIENT)
     public boolean isSideInvisible(BlockState state1, BlockState state2, Direction direction) {
         Block block = state2.getBlock();
 
