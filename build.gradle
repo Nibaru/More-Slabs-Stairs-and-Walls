@@ -92,8 +92,8 @@ dependencies {
     // your forge dependency, this is **required** when using Forge Loom in forge mode!
     forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
-    modApi "me.shedaniel:RoughlyEnoughItems-forge:10.0.581"
-    modApi "me.shedaniel.cloth:cloth-config-forge:9.0.94"
+    modApi "me.shedaniel:RoughlyEnoughItems-forge:9.1.580"
+    modApi "me.shedaniel.cloth:cloth-config-forge:8.2.88"
 
     // additional dependencies can be specified using loom's regular format
     // specifying a "mod" dependency (like modImplementation or modApi)
@@ -191,7 +191,7 @@ modrinth {
     projectId = project.modrinth_id // The ID of your Modrinth project. Slugs will not work.
     versionNumber = project.mod_version // The (preferably SemVer) version of the mod. If not specified, it'll use the `version` declaration
     versionType = "release" // This is the default -- can also be `beta` or `alpha`
-    versionName =  "More Chests " + project.mod_version + " Forge"// This is the default -- can also be `beta` or `alpha`
+    versionName =  "MSSW " + project.mod_version + " Forge"// This is the default -- can also be `beta` or `alpha`
     uploadFile = remapJar // Tells Minotaur to use the remapped jar
     gameVersions = [project.minecraft_version] // An array of game versions the version supports
     loaders = ['forge'] // Self-explanatory.

@@ -4,10 +4,9 @@ import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.client.Client;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,6 +27,13 @@ public class MoreSlabsStairsAndWalls {
 //            .icon(()-> new ItemStack(ModBlocks.GRASS_BLOCK.getStairsBlock()))
 //            .build();
 
+    public static final ItemGroup ITEM_GROUP = new ItemGroup("creative_tab") {
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(ModBlocks.GRASS_BLOCK_STAIRS.get());
+        }
+    };
+
     public MoreSlabsStairsAndWalls() {
         IEventBus MOD_BUS = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -37,23 +43,6 @@ public class MoreSlabsStairsAndWalls {
         MOD_BUS.addListener(Client::onInitializeClient);
         MOD_BUS.addListener(Client::registerBlockColors);
         MOD_BUS.addListener(Client::registerItemColors);
-        MOD_BUS.addListener(this::registerTab);
-    }
-
-    @SubscribeEvent
-    public void registerTab(CreativeModeTabEvent.Register event) {
-        event.registerCreativeModeTab(new Identifier(MOD_ID, "creative_tab"), builder ->
-                // Set name of tab to display
-                builder.displayName(Text.translatable("itemGroup." + MOD_ID + ".creative_tab"))
-                        // Set icon of creative tab
-                        .icon(() -> new ItemStack(ModBlocks.GRASS_BLOCK_STAIRS.get()))
-                        // Add default items to tab
-                        .entries((enabledFlags, populator, hasPermissions) -> {
-                            ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
-                                    .forEach(block -> {
-                                        populator.add(block.asItem());
-                                    });
-                        }));
     }
 
     @SubscribeEvent
@@ -63,7 +52,7 @@ public class MoreSlabsStairsAndWalls {
                 helper -> {
                     ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)
                             .forEach(block -> {
-                                Item.Settings properties = new Item.Settings();
+                                Item.Settings properties = new Item.Settings().group(ITEM_GROUP);
                                 BlockItem blockItem = new BlockItem(block, properties);
                                 String[] nameParts = block.getTranslationKey().toLowerCase().split("\\.");
                                 helper.register(new Identifier(MOD_ID, nameParts[nameParts.length-1]),blockItem);
