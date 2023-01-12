@@ -189,9 +189,9 @@ curseforge {
 modrinth {
     token = "${System.getenv("MODRINTH_KEY")}" // Please use an environment variable for this! The default is `$MODRINTH_TOKEN`.
     projectId = project.modrinth_id // The ID of your Modrinth project. Slugs will not work.
-    versionNumber = project.mod_version // The (preferably SemVer) version of the mod. If not specified, it'll use the `version` declaration
+    versionNumber = project.mod_version + "+" + project.minecraft_version // The (preferably SemVer) version of the mod. If not specified, it'll use the `version` declaration
     versionType = "release" // This is the default -- can also be `beta` or `alpha`
-    versionName =  "More Chests " + project.mod_version + " Forge"// This is the default -- can also be `beta` or `alpha`
+    versionName =  "MSSW " + project.mod_version +"+"+ project.minecraft_version + " Forge"// This is the default -- can also be `beta` or `alpha`
     uploadFile = remapJar // Tells Minotaur to use the remapped jar
     gameVersions = [project.minecraft_version] // An array of game versions the version supports
     loaders = ['forge'] // Self-explanatory.
