@@ -5,8 +5,10 @@ import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.color.world.GrassColors;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import java.io.File;
@@ -14,7 +16,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class Client {
+
 
     public static void onInitializeClient(final FMLClientSetupEvent event) {
         copyGlassCompatibilityPackIfMissing();
@@ -22,6 +26,7 @@ public class Client {
 
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event){
+
         event.register((state, world, pos, tint) -> world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.getColor(0.5, 1.0), ModBlocks.GRASS_BLOCK_SLAB.get(), ModBlocks.GRASS_BLOCK_STAIRS.get(), ModBlocks.GRASS_BLOCK_WALL.get());
         event.register(((state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.getDefaultColor()),
                 ModBlocks.OAK_LEAVES_SLAB.get(),

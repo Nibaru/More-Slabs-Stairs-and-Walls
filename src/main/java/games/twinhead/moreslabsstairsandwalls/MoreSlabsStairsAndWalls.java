@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -21,12 +22,6 @@ public class MoreSlabsStairsAndWalls {
 
     public static final String MOD_ID ="more_slabs_stairs_and_walls";
 
-
-//    public static ItemGroup modGroup  = FabricItemGroup.builder(
-//            new Identifier(MOD_ID, "creative_tab"))
-//            .icon(()-> new ItemStack(ModBlocks.GRASS_BLOCK.getStairsBlock()))
-//            .build();
-
     public static final ItemGroup ITEM_GROUP = new ItemGroup("creative_tab") {
         @Override
         public ItemStack createIcon() {
@@ -40,9 +35,6 @@ public class MoreSlabsStairsAndWalls {
         ModBlocks.BLOCKS.register(MOD_BUS);
 
         MOD_BUS.addListener(this::register);
-        MOD_BUS.addListener(Client::onInitializeClient);
-        MOD_BUS.addListener(Client::registerBlockColors);
-        MOD_BUS.addListener(Client::registerItemColors);
     }
 
     @SubscribeEvent
