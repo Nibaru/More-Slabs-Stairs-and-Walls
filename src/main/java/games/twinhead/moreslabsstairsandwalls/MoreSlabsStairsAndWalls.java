@@ -34,9 +34,6 @@ public class MoreSlabsStairsAndWalls {
         ModBlocks.BLOCKS.register(MOD_BUS);
 
         MOD_BUS.addListener(this::register);
-        MOD_BUS.addListener(Client::onInitializeClient);
-        MOD_BUS.addListener(Client::registerBlockColors);
-        MOD_BUS.addListener(Client::registerItemColors);
         MOD_BUS.addListener(this::registerTab);
     }
 
