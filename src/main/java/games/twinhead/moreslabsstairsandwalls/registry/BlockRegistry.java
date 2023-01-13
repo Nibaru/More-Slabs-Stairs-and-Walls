@@ -15,7 +15,6 @@ import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -93,7 +92,10 @@ public class BlockRegistry {
                 .luminance((view) -> block.getDefaultState().getLuminance())
                 .mapColor(block.getDefaultMapColor())
                 .hardness(block.getHardness())
-                .resistance(block.getBlastResistance());
+                .resistance(block.getBlastResistance())
+                .slipperiness(block.getSlipperiness())
+                ;
+
         if (!block.getDefaultState().isOpaque()){
             settings = settings.nonOpaque();
         }
@@ -224,6 +226,7 @@ public class BlockRegistry {
                     OAK_LOG,
                     WARPED_STEM,
                     CRIMSON_STEM, BONE_BLOCK ->  new WallBlock(getSettingsFromBlock(copyBlock));
+            case SLIME_BLOCK -> new SlimeBlockWall(getSettingsFromBlock(copyBlock));
             case CUT_COPPER,
                     COPPER_BLOCK -> new OxidizableWallBlock(Oxidizable.OxidationLevel.UNAFFECTED, getSettingsFromBlock(copyBlock));
             case EXPOSED_CUT_COPPER,
