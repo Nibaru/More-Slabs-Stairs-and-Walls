@@ -30,12 +30,6 @@
     "more_slabs_stairs_and_walls:mycelium_wall",
     "more_slabs_stairs_and_walls:podzol_slab",
     "more_slabs_stairs_and_walls:podzol_stairs",
-    "more_slabs_stairs_and_walls:podzol_wall",
-    "more_slabs_stairs_and_walls:packed_mud_slab",
-    "more_slabs_stairs_and_walls:packed_mud_stairs",
-    "more_slabs_stairs_and_walls:packed_mud_wall",
-    "more_slabs_stairs_and_walls:mud_slab",
-    "more_slabs_stairs_and_walls:mud_stairs",
-    "more_slabs_stairs_and_walls:mud_wall"
-  ]
+    "more_slabs_stairs_and_walls:podzol_wall"
+    ]
 }

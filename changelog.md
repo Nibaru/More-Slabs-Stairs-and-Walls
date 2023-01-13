@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.2.1 - Forge 1.18.2]
+
+## Fixed
+- Minable/Shovel not loading correctly
+
 ## [2.2.0 - Forge 1.18.2] 2023/12/1
 
 ## Changed
