@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "minecraft:block/dirt",
-    "side": "minecraft:block/podzol_side",
-    "top": "minecraft:block/podzol_top"
-  }
-}

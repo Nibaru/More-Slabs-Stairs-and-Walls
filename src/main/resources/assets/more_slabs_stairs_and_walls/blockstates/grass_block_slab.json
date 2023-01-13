@@ -4,10 +4,10 @@
       "model": "more_slabs_stairs_and_walls:block/grass_block_slab"
     },
     "type=double,snowy=false": {
-      "model": "minecraft:block/grass_block"
+      "model": "more_slabs_stairs_and_walls:block/grass_block_double"
     },
     "type=double,snowy=true": {
-      "model": "minecraft:block/grass_block_snow"
+      "model": "more_slabs_stairs_and_walls:block/grass_block_snow_double"
     },
     "type=top,snowy=false": {
       "model": "more_slabs_stairs_and_walls:block/grass_block_slab_top"

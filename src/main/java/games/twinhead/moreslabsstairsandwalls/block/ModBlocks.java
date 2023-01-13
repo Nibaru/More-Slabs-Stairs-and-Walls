@@ -178,10 +178,6 @@ public enum ModBlocks {
 
     CLAY(Blocks.CLAY, ToolType.SHOVEL),
 
-    OCHRE_FROGLIGHT(Blocks.OCHRE_FROGLIGHT, ToolType.HOE, "ochre_froglight_side"),
-    VERDANT_FROGLIGHT(Blocks.VERDANT_FROGLIGHT, ToolType.HOE, "verdant_froglight_side"),
-    PEARLESCENT_FROGLIGHT(Blocks.PEARLESCENT_FROGLIGHT, ToolType.HOE,"pearlescent_froglight_side"),
-
     CRYING_OBSIDIAN(Blocks.CRYING_OBSIDIAN, ToolType.PICKAXE),
 
     CRACKED_NETHER_BRICKS(Blocks.CRACKED_NETHER_BRICKS, ToolType.PICKAXE),
@@ -256,18 +252,6 @@ public enum ModBlocks {
     DARK_OAK_PLANKS(Blocks.DARK_OAK_PLANKS, ToolType.AXE, false, false, true),
     WARPED_PLANKS(Blocks.WARPED_PLANKS, ToolType.AXE, false, false, true),
     CRIMSON_PLANKS(Blocks.CRIMSON_PLANKS, ToolType.AXE, false, false, true),
-
-    //1.19
-    SCULK(Blocks.SCULK, ToolType.HOE),
-    PACKED_MUD(Blocks.PACKED_MUD, ToolType.SHOVEL),
-
-    MANGROVE_LOG(Blocks.MANGROVE_LOG, ToolType.AXE,Layer.SOLID,  "mangrove_log", "mangrove_log_top", "mangrove_log_top"),
-    MANGROVE_WOOD(Blocks.MANGROVE_WOOD, ToolType.AXE, true, true, false, "mangrove_log"),
-    STRIPPED_MANGROVE_WOOD(Blocks.MANGROVE_WOOD, ToolType.AXE, "stripped_mangrove_log"),
-    MANGROVE_LEAVES(Blocks.MANGROVE_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED, "mangrove_leaves"),
-    MANGROVE_PLANKS(Blocks.MANGROVE_PLANKS, ToolType.AXE, false, false, true),
-    MUD(Blocks.MUD, ToolType.SHOVEL),
-
 
     //2.1.0
     REDSTONE_BLOCK(Blocks.REDSTONE_BLOCK, ToolType.PICKAXE, true, true, false),

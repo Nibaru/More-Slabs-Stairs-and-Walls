@@ -1,6 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
+	"render_type": "translucent",
 	"textures": {
 		"particle": "block/slime_block",
 		"texture": "block/slime_block"

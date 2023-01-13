@@ -87,9 +87,30 @@ public class BlockRegistry {
         Registry.register(Registry.ITEM, block.getIdentifier(type), new BlockItem(blockItem, new Item.Settings().group(MoreSlabsStairsAndWalls.modGroup)));
     }
 
+    public static AbstractBlock.Settings getSettingsFromBlock(Block block){
+        AbstractBlock.Settings settings = AbstractBlock.Settings.of(block.getDefaultState().getMaterial())
+                .sounds(block.getDefaultState().getSoundGroup())
+                .luminance((view) -> block.getDefaultState().getLuminance())
+                .mapColor(block.getDefaultMapColor())
+                .hardness(block.getHardness())
+                .resistance(block.getBlastResistance());
+        if (!block.getDefaultState().isOpaque()){
+            settings = settings.nonOpaque();
+        }
+        if (block.getDefaultState().isToolRequired()){
+            settings = settings.requiresTool();
+        }
+
+        if (block.getDefaultState().hasRandomTicks()){
+            settings = settings.ticksRandomly();
+        }
+
+        return settings;
+    }
+
     public static void registerSlab(ModBlocks block, Block copyBlock){
         Block slab = switch (block){
-            case GLASS -> new CulledSlabBlock(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+            case GLASS -> new CulledSlabBlock(getSettingsFromBlock(copyBlock));
             case WHITE_STAINED_GLASS,
                     YELLOW_STAINED_GLASS,
                     BLACK_STAINED_GLASS,
@@ -105,38 +126,28 @@ public class BlockRegistry {
                     GRAY_STAINED_GLASS,
                     CYAN_STAINED_GLASS,
                     BROWN_STAINED_GLASS,
-                    BLUE_STAINED_GLASS -> new CulledStainedSlabBlock(block.getDyeColor(), AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+                    BLUE_STAINED_GLASS -> new CulledStainedSlabBlock(block.getDyeColor(), getSettingsFromBlock(copyBlock));
             case BUBBLE_CORAL_BLOCK,
                     HORN_CORAL_BLOCK,
                     BRAIN_CORAL_BLOCK,
                     FIRE_CORAL_BLOCK,
-                    TUBE_CORAL_BLOCK -> new CoralSlabBlock(block.deadCoralBlock.getSlabBlock(), AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
-            case SLIME_BLOCK -> new SlimeBlockSlab(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
-            case HONEY_BLOCK -> new HoneyBlockSlab(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+                    TUBE_CORAL_BLOCK -> new CoralSlabBlock(block.deadCoralBlock.getSlabBlock(), getSettingsFromBlock(copyBlock));
+            case SLIME_BLOCK -> new SlimeBlockSlab(getSettingsFromBlock(copyBlock));
+            case HONEY_BLOCK -> new HoneyBlockSlab(getSettingsFromBlock(copyBlock));
 
             case GRASS_BLOCK,
                     MYCELIUM,
                     CRIMSON_NYLIUM,
-                    WARPED_NYLIUM -> new SpreadableSlabBlock(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
-            case SPRUCE_LOG,
-                    ACACIA_LOG,
-                    BIRCH_LOG,
-                    DARK_OAK_LOG,
-                    JUNGLE_LOG,
-                    MANGROVE_LOG,
-                    OAK_LOG,
-                    WARPED_STEM,
-                    CRIMSON_STEM ->  new SlabBlock(AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).luminance((i) -> block.getLuminance()));
-            case BONE_BLOCK -> new SlabBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.PALE_YELLOW).sounds(BlockSoundGroup.BONE).luminance((i) -> block.getLuminance()));
-            case REDSTONE_BLOCK -> new RedstoneSlabBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.BRIGHT_RED).sounds(BlockSoundGroup.STONE).luminance((i) -> block.getLuminance()));
+                    WARPED_NYLIUM -> new SpreadableSlabBlock(getSettingsFromBlock(copyBlock));
+            case REDSTONE_BLOCK -> new RedstoneSlabBlock(getSettingsFromBlock(copyBlock));
 
-            case COPPER_BLOCK -> new OxidizableSlabBlock(Oxidizable.OxidationLevel.UNAFFECTED, AbstractBlock.Settings.copy(copyBlock));
-            case EXPOSED_COPPER -> new OxidizableSlabBlock(Oxidizable.OxidationLevel.EXPOSED, AbstractBlock.Settings.copy(copyBlock));
-            case WEATHERED_COPPER -> new OxidizableSlabBlock(Oxidizable.OxidationLevel.WEATHERED, AbstractBlock.Settings.copy(copyBlock));
-            case OXIDIZED_COPPER -> new OxidizableSlabBlock(Oxidizable.OxidationLevel.OXIDIZED, AbstractBlock.Settings.copy(copyBlock));
+            case COPPER_BLOCK -> new OxidizableSlabBlock(Oxidizable.OxidationLevel.UNAFFECTED, getSettingsFromBlock(copyBlock));
+            case EXPOSED_COPPER -> new OxidizableSlabBlock(Oxidizable.OxidationLevel.EXPOSED, getSettingsFromBlock(copyBlock));
+            case WEATHERED_COPPER -> new OxidizableSlabBlock(Oxidizable.OxidationLevel.WEATHERED, getSettingsFromBlock(copyBlock));
+            case OXIDIZED_COPPER -> new OxidizableSlabBlock(Oxidizable.OxidationLevel.OXIDIZED, getSettingsFromBlock(copyBlock));
 
 
-            default -> new SlabBlock(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+            default -> new SlabBlock(getSettingsFromBlock(copyBlock));
         };
 
         registerItem(block, slab, ModBlocks.BlockType.SLAB);
@@ -146,7 +157,7 @@ public class BlockRegistry {
 
     public static void registerStairs(ModBlocks block, Block copyBlock){
         StairsBlock stairs = switch (block){
-            case GLASS -> new CulledStairsBlock(copyBlock.getDefaultState(), AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+            case GLASS -> new CulledStairsBlock(copyBlock.getDefaultState(), getSettingsFromBlock(copyBlock));
             case    WHITE_STAINED_GLASS,
                     YELLOW_STAINED_GLASS,
                     BLACK_STAINED_GLASS,
@@ -162,44 +173,31 @@ public class BlockRegistry {
                     GRAY_STAINED_GLASS,
                     CYAN_STAINED_GLASS,
                     BROWN_STAINED_GLASS,
-                    BLUE_STAINED_GLASS -> new CulledStainedStairsBlock(copyBlock.getDefaultState(), block.getDyeColor(), AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+                    BLUE_STAINED_GLASS -> new CulledStainedStairsBlock(copyBlock.getDefaultState(), block.getDyeColor(), getSettingsFromBlock(copyBlock));
             case OAK_LEAVES,
                     ACACIA_LEAVES,
                     BIRCH_LEAVES,
                     DARK_OAK_LEAVES,
                     JUNGLE_LEAVES,
-                    MANGROVE_LEAVES,
                     SPRUCE_LEAVES,
                     AZALEA_LEAVES,
-                    FLOWERING_AZALEA_LEAVES -> new StairsBlock(Blocks.GRASS_BLOCK.getDefaultState(),AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+                    FLOWERING_AZALEA_LEAVES -> new StairsBlock(Blocks.GRASS_BLOCK.getDefaultState(),getSettingsFromBlock(copyBlock));
             case BUBBLE_CORAL_BLOCK,
                     HORN_CORAL_BLOCK,
                     BRAIN_CORAL_BLOCK,
                     FIRE_CORAL_BLOCK,
-                    TUBE_CORAL_BLOCK -> new CoralStairsBlock(Objects.requireNonNull(block.deadCoralBlock.getStairsBlock()), AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
-            case SLIME_BLOCK -> new SlimeBlockStairs(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+                    TUBE_CORAL_BLOCK -> new CoralStairsBlock(Objects.requireNonNull(block.deadCoralBlock.getStairsBlock()), getSettingsFromBlock(copyBlock));
+            case SLIME_BLOCK -> new SlimeBlockStairs(getSettingsFromBlock(copyBlock));
             case GRASS_BLOCK,
                     MYCELIUM,
                     CRIMSON_NYLIUM,
-                    WARPED_NYLIUM -> new SpreadableStairsBlock(copyBlock.getDefaultState(),AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()).ticksRandomly());
-            case SPRUCE_LOG,
-                    ACACIA_LOG,
-                    BIRCH_LOG,
-                    DARK_OAK_LOG,
-                    JUNGLE_LOG,
-                    MANGROVE_LOG,
-                    OAK_LOG,
-                    WARPED_STEM,
-                    CRIMSON_STEM ->  new StairsBlock(copyBlock.getDefaultState(), AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).luminance((i) -> block.getLuminance()));
-            case COPPER_BLOCK -> new OxidizableStairsBlock(Oxidizable.OxidationLevel.UNAFFECTED, copyBlock.getDefaultState(), AbstractBlock.Settings.copy(copyBlock));
-            case EXPOSED_COPPER -> new OxidizableStairsBlock(Oxidizable.OxidationLevel.EXPOSED, copyBlock.getDefaultState(), AbstractBlock.Settings.copy(copyBlock));
-            case WEATHERED_COPPER -> new OxidizableStairsBlock(Oxidizable.OxidationLevel.WEATHERED, copyBlock.getDefaultState(), AbstractBlock.Settings.copy(copyBlock));
-            case OXIDIZED_COPPER -> new OxidizableStairsBlock(Oxidizable.OxidationLevel.OXIDIZED, copyBlock.getDefaultState(), AbstractBlock.Settings.copy(copyBlock));
-
-
-            case BONE_BLOCK -> new StairsBlock(copyBlock.getDefaultState(), AbstractBlock.Settings.of(Material.STONE, MapColor.PALE_YELLOW).sounds(BlockSoundGroup.BONE).luminance((i) -> block.getLuminance()));
-            case REDSTONE_BLOCK -> new RedstoneStairsBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.BRIGHT_RED).sounds(BlockSoundGroup.STONE).luminance((i) -> block.getLuminance()));
-            default -> new StairsBlock(copyBlock.getDefaultState(),AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+                    WARPED_NYLIUM -> new SpreadableStairsBlock(copyBlock.getDefaultState(),getSettingsFromBlock(copyBlock));
+            case COPPER_BLOCK -> new OxidizableStairsBlock(Oxidizable.OxidationLevel.UNAFFECTED, copyBlock.getDefaultState(), getSettingsFromBlock(copyBlock));
+            case EXPOSED_COPPER -> new OxidizableStairsBlock(Oxidizable.OxidationLevel.EXPOSED, copyBlock.getDefaultState(), getSettingsFromBlock(copyBlock));
+            case WEATHERED_COPPER -> new OxidizableStairsBlock(Oxidizable.OxidationLevel.WEATHERED, copyBlock.getDefaultState(), getSettingsFromBlock(copyBlock));
+            case OXIDIZED_COPPER -> new OxidizableStairsBlock(Oxidizable.OxidationLevel.OXIDIZED, copyBlock.getDefaultState(), getSettingsFromBlock(copyBlock));
+            case REDSTONE_BLOCK -> new RedstoneStairsBlock(getSettingsFromBlock(copyBlock));
+            default -> new StairsBlock(copyBlock.getDefaultState(),getSettingsFromBlock(copyBlock));
         };
 
         registerItem(block, stairs, ModBlocks.BlockType.STAIRS);
@@ -213,31 +211,29 @@ public class BlockRegistry {
                     HORN_CORAL_BLOCK,
                     BRAIN_CORAL_BLOCK,
                     FIRE_CORAL_BLOCK,
-                    TUBE_CORAL_BLOCK -> new CoralWallBlock(block.deadCoralBlock.getWallBlock(), AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+                    TUBE_CORAL_BLOCK -> new CoralWallBlock(block.deadCoralBlock.getWallBlock(), getSettingsFromBlock(copyBlock));
             case GRASS_BLOCK,
                     MYCELIUM,
                     CRIMSON_NYLIUM,
-                    WARPED_NYLIUM -> new SpreadableWallBlock(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()).ticksRandomly());
+                    WARPED_NYLIUM -> new SpreadableWallBlock(getSettingsFromBlock(copyBlock));
             case SPRUCE_LOG,
                     ACACIA_LOG,
                     BIRCH_LOG,
                     DARK_OAK_LOG,
                     JUNGLE_LOG,
-                    MANGROVE_LOG,
                     OAK_LOG,
                     WARPED_STEM,
-                    CRIMSON_STEM ->  new WallBlock(AbstractBlock.Settings.of(Material.WOOD).sounds(BlockSoundGroup.WOOD).luminance((i) -> block.getLuminance()));
+                    CRIMSON_STEM, BONE_BLOCK ->  new WallBlock(getSettingsFromBlock(copyBlock));
             case CUT_COPPER,
-                    COPPER_BLOCK -> new OxidizableWallBlock(Oxidizable.OxidationLevel.UNAFFECTED, AbstractBlock.Settings.copy(copyBlock));
+                    COPPER_BLOCK -> new OxidizableWallBlock(Oxidizable.OxidationLevel.UNAFFECTED, getSettingsFromBlock(copyBlock));
             case EXPOSED_CUT_COPPER,
-                    EXPOSED_COPPER -> new OxidizableWallBlock(Oxidizable.OxidationLevel.EXPOSED, AbstractBlock.Settings.copy(copyBlock));
+                    EXPOSED_COPPER -> new OxidizableWallBlock(Oxidizable.OxidationLevel.EXPOSED, getSettingsFromBlock(copyBlock));
             case WEATHERED_CUT_COPPER,
-                    WEATHERED_COPPER -> new OxidizableWallBlock(Oxidizable.OxidationLevel.WEATHERED, AbstractBlock.Settings.copy(copyBlock));
+                    WEATHERED_COPPER -> new OxidizableWallBlock(Oxidizable.OxidationLevel.WEATHERED, getSettingsFromBlock(copyBlock));
             case OXIDIZED_CUT_COPPER,
-                    OXIDIZED_COPPER -> new OxidizableWallBlock(Oxidizable.OxidationLevel.OXIDIZED, AbstractBlock.Settings.copy(copyBlock));
-            case BONE_BLOCK -> new WallBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.PALE_YELLOW).sounds(BlockSoundGroup.BONE).luminance((i) -> block.getLuminance()));
+                    OXIDIZED_COPPER -> new OxidizableWallBlock(Oxidizable.OxidationLevel.OXIDIZED, getSettingsFromBlock(copyBlock));
             //case REDSTONE -> new RedstoneWallBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.BRIGHT_RED).sounds(BlockSoundGroup.STONE).luminance((i) -> block.getLuminance()));
-            default -> new WallBlock(AbstractBlock.Settings.copy(copyBlock).luminance((i) -> block.getLuminance()));
+            default -> new WallBlock(getSettingsFromBlock(copyBlock));
         };
 
 

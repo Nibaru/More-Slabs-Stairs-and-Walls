@@ -1,4 +1,5 @@
 {   "parent": "block/block",
+    "render_type": "translucent",
     "textures": {
         "particle": "block/honey_block_bottom",
         "side": "block/honey_block_side",

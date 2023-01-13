@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "crimson_planks_wall",
+  "ingredients": [
+    {
+      "item": "minecraft:crimson_fence"
+    }
+  ],
+  "result": {
+    "item": "more_slabs_stairs_and_walls:crimson_planks_wall"
+  }
+}

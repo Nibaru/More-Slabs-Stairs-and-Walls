@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "mushroom_slabs",
+  "key": {
+    "#": {
+      "item": "minecraft:mushroom_stem"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "more_slabs_stairs_and_walls:mushroom_stem_slab"
+  }
+}

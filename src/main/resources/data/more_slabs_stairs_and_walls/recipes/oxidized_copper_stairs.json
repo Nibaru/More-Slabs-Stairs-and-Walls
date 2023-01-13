@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "oxidized_copper_stair",
+  "key": {
+    "#": {
+      "item": "minecraft:oxidized_copper"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "more_slabs_stairs_and_walls:oxidized_copper_stairs"
+  }
+}

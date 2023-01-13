@@ -2,8 +2,8 @@
 
 ## [2.2.0 - Fabric 1.19.2]
 
-### Fixed
-- Double grass/mycelium slabs drop only one slab.
+### Changed
+- Updated 1.18.2 to 2.2.0
 
-### Added
-- Copper block slabs, stairs and walls (Oxidizable and waxable)
+### Fixed
+- Fixed issue causing some blocks to break at incorrect speeds.
