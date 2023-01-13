@@ -8,7 +8,7 @@ plugins {
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
-archivesBaseName = project.archives_base_name +"-"+ project.minecraft_version
+archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
@@ -103,7 +103,7 @@ curseforge {
     project {
         id = "${project.curseforge_id}"
         mainArtifact (remapJar){
-            displayName = "v" + project.mod_version + " Fabric " + project.minecraft_version
+            displayName = "MSSW " + project.mod_version + " Fabric"
         }
         changelogType = 'markdown'
         changelog = file('changelog.md')
@@ -118,7 +118,7 @@ modrinth {
     projectId = project.modrinth_id // The ID of your Modrinth project. Slugs will not work.
     versionNumber = project.mod_version // The (preferably SemVer) version of the mod. If not specified, it'll use the `version` declaration
     versionType = "release" // This is the default -- can also be `beta` or `alpha`
-    versionName =  "v" + project.mod_version + " for Fabric " + project.minecraft_version// This is the default -- can also be `beta` or `alpha`
+    versionName =  "MSSW " + project.mod_version  + " Fabric"
     uploadFile = remapJar // Tells Minotaur to use the remapped jar
     gameVersions = [project.minecraft_version] // An array of game versions the version supports
     loaders = ['fabric'] // Self-explanatory.
