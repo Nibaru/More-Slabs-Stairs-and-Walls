@@ -5,7 +5,8 @@ import net.minecraft.block.Oxidizable;
 import net.minecraft.block.WallBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
+
+import java.util.Random;
 
 public class OxidizableWallBlock extends WallBlock implements Oxidizable {
     private final OxidationLevel oxidationLevel;

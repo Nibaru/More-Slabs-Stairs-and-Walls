@@ -11,7 +11,6 @@ import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -25,7 +24,7 @@ import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Random;
 
 public class SpreadableWallBlock extends WallBlock implements Waterloggable, Fertilizable {
 

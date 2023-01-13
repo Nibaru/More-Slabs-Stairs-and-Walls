@@ -92,8 +92,8 @@ dependencies {
     // your forge dependency, this is **required** when using Forge Loom in forge mode!
     forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
-    modApi "me.shedaniel:RoughlyEnoughItems-forge:9.1.580"
-    modApi "me.shedaniel.cloth:cloth-config-forge:8.2.88"
+    modApi "me.shedaniel:RoughlyEnoughItems-forge:8.3.583"
+    modApi "me.shedaniel.cloth:cloth-config-forge:6.4.90"
 
     // additional dependencies can be specified using loom's regular format
     // specifying a "mod" dependency (like modImplementation or modApi)

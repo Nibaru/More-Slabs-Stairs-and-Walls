@@ -87,15 +87,6 @@
     "more_slabs_stairs_and_walls:acacia_planks_wall",
     "more_slabs_stairs_and_walls:dark_oak_planks_wall",
     "more_slabs_stairs_and_walls:warped_planks_wall",
-    "more_slabs_stairs_and_walls:crimson_planks_wall",
-    "more_slabs_stairs_and_walls:mangrove_log_slab",
-    "more_slabs_stairs_and_walls:mangrove_log_stairs",
-    "more_slabs_stairs_and_walls:mangrove_log_wall",
-    "more_slabs_stairs_and_walls:mangrove_wood_slab",
-    "more_slabs_stairs_and_walls:mangrove_wood_stairs",
-    "more_slabs_stairs_and_walls:stripped_mangrove_wood_slab",
-    "more_slabs_stairs_and_walls:stripped_mangrove_wood_stairs",
-    "more_slabs_stairs_and_walls:stripped_mangrove_wood_wall",
-    "more_slabs_stairs_and_walls:mangrove_planks_wall"
+    "more_slabs_stairs_and_walls:crimson_planks_wall"
   ]
 }

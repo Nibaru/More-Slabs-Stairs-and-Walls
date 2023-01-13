@@ -511,18 +511,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> CLAY_STAIRS = createStairsBlock(Blocks.CLAY);
     public static final RegistryObject<Block> CLAY_WALL = createWallBlock(Blocks.CLAY);
 
-    public static final RegistryObject<Block> OCHRE_FROGLIGHT_SLAB = createSlabBlock(Blocks.OCHRE_FROGLIGHT);
-    public static final RegistryObject<Block> OCHRE_FROGLIGHT_STAIRS = createStairsBlock(Blocks.OCHRE_FROGLIGHT);
-    public static final RegistryObject<Block> OCHRE_FROGLIGHT_WALL = createWallBlock(Blocks.OCHRE_FROGLIGHT);
-
-    public static final RegistryObject<Block> VERDANT_FROGLIGHT_SLAB = createSlabBlock(Blocks.VERDANT_FROGLIGHT);
-    public static final RegistryObject<Block> VERDANT_FROGLIGHT_STAIRS = createStairsBlock(Blocks.VERDANT_FROGLIGHT);
-    public static final RegistryObject<Block> VERDANT_FROGLIGHT_WALL = createWallBlock(Blocks.VERDANT_FROGLIGHT);
-
-    public static final RegistryObject<Block> PEARLESCENT_FROGLIGHT_SLAB = createSlabBlock(Blocks.PEARLESCENT_FROGLIGHT);
-    public static final RegistryObject<Block> PEARLESCENT_FROGLIGHT_STAIRS = createStairsBlock(Blocks.PEARLESCENT_FROGLIGHT);
-    public static final RegistryObject<Block> PEARLESCENT_FROGLIGHT_WALL = createWallBlock(Blocks.PEARLESCENT_FROGLIGHT);
-
     public static final RegistryObject<Block> CRYING_OBSIDIAN_SLAB = createSlabBlock(Blocks.CRYING_OBSIDIAN);
     public static final RegistryObject<Block> CRYING_OBSIDIAN_STAIRS = createStairsBlock(Blocks.CRYING_OBSIDIAN);
     public static final RegistryObject<Block> CRYING_OBSIDIAN_WALL = createWallBlock(Blocks.CRYING_OBSIDIAN);
@@ -688,37 +676,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> DARK_OAK_PLANKS_WALL = createWallBlock(Blocks.DARK_OAK_PLANKS);
     public static final RegistryObject<Block> WARPED_PLANKS_WALL = createWallBlock(Blocks.WARPED_PLANKS);
     public static final RegistryObject<Block> CRIMSON_PLANKS_WALL = createWallBlock(Blocks.CRIMSON_PLANKS);
-
-
-    public static final RegistryObject<Block> SCULK_SLAB = createSlabBlock((Blocks.SCULK));
-    public static final RegistryObject<Block> SCULK_STAIRS = createStairsBlock(Blocks.SCULK);
-    public static final RegistryObject<Block> SCULK_WALL = createWallBlock(Blocks.SCULK);
-
-    public static final RegistryObject<Block> PACKED_MUD_SLAB = createSlabBlock((Blocks.PACKED_MUD));
-    public static final RegistryObject<Block> PACKED_MUD_STAIRS = createStairsBlock(Blocks.PACKED_MUD);
-    public static final RegistryObject<Block> PACKED_MUD_WALL = createWallBlock(Blocks.PACKED_MUD);
-
-    public static final RegistryObject<Block> MANGROVE_LOG_SLAB = createSlabBlock((Blocks.MANGROVE_LOG));
-    public static final RegistryObject<Block> MANGROVE_LOG_STAIRS = createStairsBlock(Blocks.MANGROVE_LOG);
-    public static final RegistryObject<Block> MANGROVE_LOG_WALL = createWallBlock(Blocks.MANGROVE_LOG);
-
-    public static final RegistryObject<Block> MANGROVE_WOOD_SLAB = createSlabBlock((Blocks.MANGROVE_WOOD));
-    public static final RegistryObject<Block> MANGROVE_WOOD_STAIRS = createStairsBlock(Blocks.MANGROVE_WOOD);
-    //public static final RegistryObject<Block> MANGROVE_WOOD_WALL = createWallBlock(Blocks.MANGROVE_WOOD);
-
-    public static final RegistryObject<Block> STRIPPED_MANGROVE_WOOD_SLAB = createSlabBlock((Blocks.STRIPPED_MANGROVE_WOOD));
-    public static final RegistryObject<Block> STRIPPED_MANGROVE_WOOD_STAIRS = createStairsBlock(Blocks.STRIPPED_MANGROVE_WOOD);
-    public static final RegistryObject<Block> STRIPPED_MANGROVE_WOOD_WALL = createWallBlock(Blocks.STRIPPED_MANGROVE_WOOD);
-
-    public static final RegistryObject<Block> MANGROVE_LEAVES_SLAB = createSlabBlock("mangrove_leaves", (Blocks.MANGROVE_LEAVES));
-    public static final RegistryObject<Block> MANGROVE_LEAVES_STAIRS = createStairsBlock("mangrove_leaves", Blocks.MANGROVE_LEAVES);
-    public static final RegistryObject<Block> MANGROVE_LEAVES_WALL = createWallBlock("mangrove_leaves", Blocks.MANGROVE_LEAVES);
-
-    public static final RegistryObject<Block> MANGROVE_PLANKS_WALL = createWallBlock(Blocks.MANGROVE_PLANKS);
-
-    public static final RegistryObject<Block> MUD_SLAB = createSlabBlock((Blocks.MUD));
-    public static final RegistryObject<Block> MUD_STAIRS = createStairsBlock(Blocks.MUD);
-    public static final RegistryObject<Block> MUD_WALL = createWallBlock(Blocks.MUD);
 
     public static final RegistryObject<Block> REDSTONE_BLOCK_SLAB = BLOCKS.register("redstone_block" + "_slab", () -> new RedstoneSlabBlock(getSettingsFromBlock(Blocks.REDSTONE_BLOCK)));
     public static final RegistryObject<Block> REDSTONE_BLOCK_STAIRS = BLOCKS.register("redstone_block" + "_stairs", () -> new RedstoneStairsBlock(getSettingsFromBlock(Blocks.REDSTONE_BLOCK)));

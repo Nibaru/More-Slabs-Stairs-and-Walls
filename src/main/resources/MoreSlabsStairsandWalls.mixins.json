@@ -9,8 +9,7 @@
     "PointedDripstoneBlockMixin",
     "SlimeBlockMixin",
     "SpreadableBlockMixin",
-    "StainedGlassBlockMixin",
-    "TreeDecoratorGeneratorMixin"
+    "StainedGlassBlockMixin"
   ],
   "client": [
   ],
