@@ -1,21 +1,24 @@
-// 1.19.3	2022-12-07T16:57:34.3874621	More Slabs, Stairs, and Walls/Tags for minecraft:block
+// 1.19.3	2023-01-14T18:15:01.4096317	More Slabs, Stairs, and Walls/Tags for minecraft:block
 0275c6a086dacf744c194a3b2aa4d48b5f29f0c8 data\minecraft\tags\blocks\mushroom_grow_block.json
-2c513d75d377eafcba25cecce37ad60c9f18841c data\minecraft\tags\blocks\slabs.json
+563913ff9784f548a4ac3b83afa383048d51be8d data\more_slabs_stairs_and_walls\tags\blocks\becomes_path_slab.json
+a36010476af97ac0e5399eedaa60172eefe04081 data\minecraft\tags\blocks\slabs.json
 1f7fc217d903a5d42ff60797d8202fd2a6ba85bf data\minecraft\tags\blocks\dirt.json
-504ee1a610de6872155658d64b9bd53765185d0f data\more_slabs_stairs_and_walls\tags\blocks\walls.json
+ca711a9a9c3a66d0894b95ea5d281b9ecf59b536 data\more_slabs_stairs_and_walls\tags\blocks\walls.json
 c4ef7439045e0e5abb707c2200a8425eccc48348 data\minecraft\tags\blocks\wither_summon_base_blocks.json
-8cd8974911e60716b0a9a1eb96589d14c953613c data\more_slabs_stairs_and_walls\tags\blocks\stairs.json
-8cd8974911e60716b0a9a1eb96589d14c953613c data\minecraft\tags\blocks\stairs.json
+c25e1c7ae0c7edc653a88b66250eaaea1466bfe6 data\more_slabs_stairs_and_walls\tags\blocks\stairs.json
+c25e1c7ae0c7edc653a88b66250eaaea1466bfe6 data\minecraft\tags\blocks\stairs.json
 c4ef7439045e0e5abb707c2200a8425eccc48348 data\minecraft\tags\blocks\soul_speed_blocks.json
 03659fe5a8ec0ce8bb0c2bad1ae678685b8364e6 data\minecraft\tags\blocks\dragon_immune.json
 60e59d715a4afb13fa0743a595927822bb5b77a0 data\minecraft\tags\blocks\mineable\pickaxe.json
-504ee1a610de6872155658d64b9bd53765185d0f data\minecraft\tags\blocks\walls.json
+ca711a9a9c3a66d0894b95ea5d281b9ecf59b536 data\minecraft\tags\blocks\walls.json
+0b9f9ea2f8df07b29922428058cd2fb16395d321 data\more_slabs_stairs_and_walls\tags\blocks\becomes_path_wall.json
 8df65e719628d741f69823bcded5934796111952 data\minecraft\tags\blocks\beacon_base_blocks.json
+d2db50a53a16e24cff543bf6e201edb1a337cb0c data\more_slabs_stairs_and_walls\tags\blocks\becomes_path_stairs.json
 15847c77df257e904a31f5a3f6af8cf0b92b6af3 data\minecraft\tags\blocks\nylium.json
-2c513d75d377eafcba25cecce37ad60c9f18841c data\more_slabs_stairs_and_walls\tags\blocks\slabs.json
+a36010476af97ac0e5399eedaa60172eefe04081 data\more_slabs_stairs_and_walls\tags\blocks\slabs.json
+f241662c3d752e5465dd10c7817f2a41ec1819ac data\minecraft\tags\blocks\mineable\hoe.json
+ee681c94c8807ba4ee26ab516d1209024ba56b40 data\minecraft\tags\blocks\mineable\axe.json
 e45d497a03434ac83d398208ac9bbd69cc0cbc90 data\minecraft\tags\blocks\wool.json
-ee86e5246a4a21f37b5234c22ba5ef205b76e3d0 data\minecraft\tags\blocks\mineable\axe.json
-497007df0679b508797361283e085f121857efab data\minecraft\tags\blocks\mineable\hoe.json
 c4ef7439045e0e5abb707c2200a8425eccc48348 data\minecraft\tags\blocks\soul_fire_based_blocks.json
-860882f6588b094284152c9bc0cf06ccb5925176 data\minecraft\tags\blocks\mineable\shovel.json
+2f6e040a444ceebc3cf0753eaf1aa37897a7baa3 data\minecraft\tags\blocks\mineable\shovel.json
 1f7fc217d903a5d42ff60797d8202fd2a6ba85bf data\more_slabs_stairs_and_walls\tags\blocks\dirt.json

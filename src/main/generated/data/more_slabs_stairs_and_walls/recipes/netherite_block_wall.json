@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "netherite_block_wall",
+  "group": "metal_walls",
   "key": {
     "#": {
       "item": "minecraft:netherite_block"

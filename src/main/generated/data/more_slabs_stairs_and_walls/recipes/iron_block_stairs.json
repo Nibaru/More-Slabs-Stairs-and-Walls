@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "iron_block_stair",
+  "group": "metal_stairs",
   "key": {
     "#": {
       "item": "minecraft:iron_block"

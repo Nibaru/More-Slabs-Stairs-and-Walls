@@ -1,5 +1,6 @@
-package games.twinhead.moreslabsstairsandwalls.block;
+package games.twinhead.moreslabsstairsandwalls.block.slime;
 
+import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.*;

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "wart_slabs",
+  "group": "leaves_slabs",
   "key": {
     "#": {
       "item": "minecraft:nether_wart_block"

@@ -3,7 +3,6 @@ package games.twinhead.moreslabsstairsandwalls.datagen;
 
 import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
@@ -182,6 +181,29 @@ public class ModelGenerator extends FabricModelProvider {
 
             blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createWallBlockState(block.getWallBlock(), post, low, tall));
             blockStateModelGenerator.registerParentedItemModel(block.getWallBlock().asItem(), inventory);
+        } else if(block.toString().contains("log") || block.equals(ModBlocks.BASALT) || block.equals(ModBlocks.HAY_BLOCK) || block.equals(ModBlocks.PUMPKIN) || block.equals(ModBlocks.MELON) || (block.toString().contains("stem") && !block.toString().contains("mushroom"))){
+
+            textureMap.put(TextureKey.SIDE, new Identifier("minecraft", "block/" + block.getSideTexture()));
+            textureMap.put(TextureKey.LAYER0, new Identifier("minecraft", "block/" + block.getSideTexture()));
+            textureMap.put(TextureKey.BOTTOM, new Identifier("minecraft", "block/" + block.getBottomTexture()));
+            textureMap.put(TextureKey.TOP, new Identifier("minecraft", "block/" + block.getTopTexture()));
+
+            post = new Model(Optional.of(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/log_wall_post")), Optional.empty(), TextureKey.SIDE, TextureKey.BOTTOM, TextureKey.TOP)
+                    .upload(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/" + block.toString().toLowerCase() + "_wall_post"), textureMap, blockStateModelGenerator.modelCollector);
+
+            tall = new Model(Optional.of(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/log_wall_side_tall")), Optional.empty(), TextureKey.SIDE, TextureKey.BOTTOM, TextureKey.TOP)
+                    .upload(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/" + block.toString().toLowerCase() + "_wall_side_tall"), textureMap, blockStateModelGenerator.modelCollector);
+
+            low = new Model(Optional.of(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/log_wall_side")), Optional.empty(), TextureKey.SIDE, TextureKey.BOTTOM, TextureKey.TOP)
+                    .upload(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/" + block.toString().toLowerCase() + "_wall_side"), textureMap, blockStateModelGenerator.modelCollector);
+
+            Identifier inventory = new Model(Optional.of(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/log_wall_inventory")), Optional.empty(), TextureKey.SIDE, TextureKey.BOTTOM, TextureKey.TOP)
+                    .upload(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/" + block.toString().toLowerCase() + "_wall_inventory"), textureMap, blockStateModelGenerator.modelCollector);
+
+
+            blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createWallBlockState(block.getWallBlock(), post, low, tall));
+            blockStateModelGenerator.registerParentedItemModel(block.getWallBlock().asItem(), inventory);
+
         }  else if(!block.toString().contains("glass")){
             post = Models.TEMPLATE_WALL_POST.upload(block.getWallBlock(), textureMap, blockStateModelGenerator.modelCollector);
             low = Models.TEMPLATE_WALL_SIDE.upload(block.getWallBlock(), textureMap, blockStateModelGenerator.modelCollector);

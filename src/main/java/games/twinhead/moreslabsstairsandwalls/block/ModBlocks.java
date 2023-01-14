@@ -100,24 +100,9 @@ public enum ModBlocks {
     SEA_LANTERN(Blocks.SEA_LANTERN, ToolType.NONE),
     SHROOMLIGHT(Blocks.SHROOMLIGHT, ToolType.HOE),
     END_STONE(Blocks.END_STONE, ToolType.PICKAXE),
-
-    OAK_WOOD(Blocks.OAK_WOOD, ToolType.AXE,true, true, false, "oak_log"),
-    BIRCH_WOOD(Blocks.BIRCH_WOOD, ToolType.AXE,true, true, false, "birch_log"),
-    SPRUCE_WOOD(Blocks.SPRUCE_WOOD, ToolType.AXE,true, true, false, "spruce_log"),
-    JUNGLE_WOOD(Blocks.JUNGLE_WOOD, ToolType.AXE,true, true, false, "jungle_log"),
-    DARK_OAK_WOOD(Blocks.DARK_OAK_WOOD, ToolType.AXE,true, true, false, "dark_oak_log"),
-    ACACIA_WOOD(Blocks.ACACIA_WOOD, ToolType.AXE,true, true, false, "acacia_log"),
-    CRIMSON_HYPHAE(Blocks.CRIMSON_HYPHAE, ToolType.AXE,true, true, false, "crimson_stem"),
-    WARPED_HYPHAE(Blocks.WARPED_HYPHAE, ToolType.AXE,true, true, false, "warped_stem"),
-
-    STRIPPED_OAK_WOOD(Blocks.STRIPPED_OAK_WOOD, ToolType.AXE,"stripped_oak_log"),
-    STRIPPED_BIRCH_WOOD(Blocks.STRIPPED_BIRCH_WOOD, ToolType.AXE,"stripped_birch_log"),
-    STRIPPED_SPRUCE_WOOD(Blocks.STRIPPED_SPRUCE_WOOD, ToolType.AXE,"stripped_spruce_log"),
-    STRIPPED_JUNGLE_WOOD(Blocks.STRIPPED_JUNGLE_WOOD, ToolType.AXE,"stripped_jungle_log"),
-    STRIPPED_DARK_OAK_WOOD(Blocks.STRIPPED_DARK_OAK_WOOD, ToolType.AXE,"stripped_dark_oak_log"),
-    STRIPPED_ACACIA_WOOD(Blocks.STRIPPED_ACACIA_WOOD, ToolType.AXE,"stripped_acacia_log"),
-    STRIPPED_CRIMSON_HYPHAE(Blocks.STRIPPED_CRIMSON_HYPHAE, ToolType.AXE, "stripped_crimson_stem"),
-    STRIPPED_WARPED_HYPHAE(Blocks.STRIPPED_WARPED_HYPHAE, ToolType.AXE, "stripped_warped_stem"),
+    
+    
+    
 
     BASALT(Blocks.BASALT, ToolType.PICKAXE, true, false, true, "basalt_side", "basalt_top", "basalt_top"),
     SMOOTH_BASALT(Blocks.SMOOTH_BASALT, ToolType.PICKAXE),
@@ -153,17 +138,8 @@ public enum ModBlocks {
 
 
     //2.0.0
-    OAK_LEAVES(Blocks.OAK_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED),
-    SPRUCE_LEAVES(Blocks.SPRUCE_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED),
-    BIRCH_LEAVES(Blocks.BIRCH_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED),
-    JUNGLE_LEAVES(Blocks.JUNGLE_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED),
-    DARK_OAK_LEAVES(Blocks.DARK_OAK_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED),
-    ACACIA_LEAVES(Blocks.ACACIA_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED),
-    AZALEA_LEAVES(Blocks.AZALEA_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED),
-    FLOWERING_AZALEA_LEAVES(Blocks.FLOWERING_AZALEA_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED, "flowering_azalea_leaves"),
 
-    WARPED_WART_BLOCK(Blocks.WARPED_WART_BLOCK, ToolType.HOE),
-    NETHER_WART_BLOCK(Blocks.NETHER_WART_BLOCK, ToolType.HOE),
+    
 
     AMETHYST_BLOCK(Blocks.AMETHYST_BLOCK, ToolType.PICKAXE),
 
@@ -237,35 +213,78 @@ public enum ModBlocks {
     HAY_BLOCK(Blocks.HAY_BLOCK, ToolType.HOE, Layer.SOLID, "hay_block_side", "hay_block_top", "hay_block_top"),
 
     BOOKSHELF(Blocks.BOOKSHELF, ToolType.AXE, true, true, false, "bookshelf", "oak_planks", "oak_planks"),
-
-    OAK_LOG(Blocks.OAK_LOG, ToolType.AXE, Layer.SOLID, "oak_log", "oak_log_top", "oak_log_top"),
-    DARK_OAK_LOG(Blocks.DARK_OAK_LOG, ToolType.AXE, Layer.SOLID, "dark_oak_log", "dark_oak_log_top", "dark_oak_log_top"),
-    ACACIA_LOG(Blocks.ACACIA_LOG, ToolType.AXE, Layer.SOLID, "acacia_log", "acacia_log_top", "acacia_log_top"),
-    BIRCH_LOG(Blocks.BIRCH_LOG, ToolType.AXE, Layer.SOLID, "birch_log", "birch_log_top", "birch_log_top"),
-    JUNGLE_LOG(Blocks.JUNGLE_LOG, ToolType.AXE, Layer.SOLID, "jungle_log", "jungle_log_top", "jungle_log_top"),
-    SPRUCE_LOG(Blocks.SPRUCE_LOG, ToolType.AXE, Layer.SOLID, "spruce_log", "spruce_log_top", "spruce_log_top"),
-
-    CRIMSON_STEM(Blocks.CRIMSON_STEM, ToolType.AXE, true, true, false, "crimson_stem", "crimson_stem_top", "crimson_stem_top"),
-    WARPED_STEM(Blocks.WARPED_STEM, ToolType.AXE, true, true, false, "warped_stem", "warped_stem_top", "warped_stem_top"),
-
-    OAK_PLANKS(Blocks.OAK_PLANKS, ToolType.AXE, false, false, true),
-    BIRCH_PLANKS(Blocks.BIRCH_PLANKS, ToolType.AXE, false, false, true),
-    SPRUCE_PLANKS(Blocks.SPRUCE_PLANKS, ToolType.AXE, false, false, true),
-    JUNGLE_PLANKS(Blocks.JUNGLE_PLANKS, ToolType.AXE, false, false, true),
-    ACACIA_PLANKS(Blocks.ACACIA_PLANKS, ToolType.AXE, false, false, true),
-    DARK_OAK_PLANKS(Blocks.DARK_OAK_PLANKS, ToolType.AXE, false, false, true),
-    WARPED_PLANKS(Blocks.WARPED_PLANKS, ToolType.AXE, false, false, true),
-    CRIMSON_PLANKS(Blocks.CRIMSON_PLANKS, ToolType.AXE, false, false, true),
-
+    
     //1.19
     SCULK(Blocks.SCULK, ToolType.HOE),
     PACKED_MUD(Blocks.PACKED_MUD, ToolType.SHOVEL),
+    
+    OAK_LOG(Blocks.OAK_LOG, ToolType.AXE,Layer.SOLID,  "oak_log", "oak_log_top", "oak_log_top"),
+    STRIPPED_OAK_LOG(Blocks.STRIPPED_OAK_LOG, ToolType.AXE, Layer.SOLID, "stripped_oak_log", "stripped_oak_log_top", "stripped_oak_log_top"),
+    OAK_WOOD(Blocks.OAK_WOOD, ToolType.AXE, "oak_log"),
+    STRIPPED_OAK_WOOD(Blocks.STRIPPED_OAK_WOOD, ToolType.AXE, "stripped_oak_log"),
+    OAK_LEAVES(Blocks.OAK_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED, "oak_leaves"),
+    OAK_PLANKS(Blocks.OAK_PLANKS, ToolType.AXE, false, false, true),
+
+    BIRCH_LOG(Blocks.BIRCH_LOG, ToolType.AXE,Layer.SOLID,  "birch_log", "birch_log_top", "birch_log_top"),
+    STRIPPED_BIRCH_LOG(Blocks.STRIPPED_BIRCH_LOG, ToolType.AXE, Layer.SOLID, "stripped_birch_log", "stripped_birch_log_top", "stripped_birch_log_top"),
+    BIRCH_WOOD(Blocks.BIRCH_WOOD, ToolType.AXE, "birch_log"),
+    STRIPPED_BIRCH_WOOD(Blocks.STRIPPED_BIRCH_WOOD, ToolType.AXE, "stripped_birch_log"),
+    BIRCH_LEAVES(Blocks.BIRCH_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED, "birch_leaves"),
+    BIRCH_PLANKS(Blocks.BIRCH_PLANKS, ToolType.AXE, false, false, true),
+
+    SPRUCE_LOG(Blocks.SPRUCE_LOG, ToolType.AXE,Layer.SOLID,  "spruce_log", "spruce_log_top", "spruce_log_top"),
+    STRIPPED_SPRUCE_LOG(Blocks.STRIPPED_SPRUCE_LOG, ToolType.AXE, Layer.SOLID, "stripped_spruce_log", "stripped_spruce_log_top", "stripped_spruce_log_top"),
+    SPRUCE_WOOD(Blocks.SPRUCE_WOOD, ToolType.AXE, "spruce_log"),
+    STRIPPED_SPRUCE_WOOD(Blocks.STRIPPED_SPRUCE_WOOD, ToolType.AXE, "stripped_spruce_log"),
+    SPRUCE_LEAVES(Blocks.SPRUCE_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED, "spruce_leaves"),
+    SPRUCE_PLANKS(Blocks.SPRUCE_PLANKS, ToolType.AXE, false, false, true),
+
+    JUNGLE_LOG(Blocks.JUNGLE_LOG, ToolType.AXE,Layer.SOLID,  "jungle_log", "jungle_log_top", "jungle_log_top"),
+    STRIPPED_JUNGLE_LOG(Blocks.STRIPPED_JUNGLE_LOG, ToolType.AXE, Layer.SOLID, "stripped_jungle_log", "stripped_jungle_log_top", "stripped_jungle_log_top"),
+    JUNGLE_WOOD(Blocks.JUNGLE_WOOD, ToolType.AXE, "jungle_log"),
+    STRIPPED_JUNGLE_WOOD(Blocks.STRIPPED_JUNGLE_WOOD, ToolType.AXE, "stripped_jungle_log"),
+    JUNGLE_LEAVES(Blocks.JUNGLE_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED, "jungle_leaves"),
+    JUNGLE_PLANKS(Blocks.JUNGLE_PLANKS, ToolType.AXE, false, false, true),
+    
+    ACACIA_LOG(Blocks.ACACIA_LOG, ToolType.AXE,Layer.SOLID,  "acacia_log", "acacia_log_top", "acacia_log_top"),
+    STRIPPED_ACACIA_LOG(Blocks.STRIPPED_ACACIA_LOG, ToolType.AXE, Layer.SOLID, "stripped_acacia_log", "stripped_acacia_log_top", "stripped_acacia_log_top"),
+    ACACIA_WOOD(Blocks.ACACIA_WOOD, ToolType.AXE, "acacia_log"),
+    STRIPPED_ACACIA_WOOD(Blocks.STRIPPED_ACACIA_WOOD, ToolType.AXE, "stripped_acacia_log"),
+    ACACIA_LEAVES(Blocks.ACACIA_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED, "acacia_leaves"),
+    ACACIA_PLANKS(Blocks.ACACIA_PLANKS, ToolType.AXE, false, false, true),
+
+    DARK_OAK_LOG(Blocks.DARK_OAK_LOG, ToolType.AXE,Layer.SOLID,  "dark_oak_log", "dark_oak_log_top", "dark_oak_log_top"),
+    STRIPPED_DARK_OAK_LOG(Blocks.STRIPPED_DARK_OAK_LOG, ToolType.AXE, Layer.SOLID, "stripped_dark_oak_log", "stripped_dark_oak_log_top", "stripped_dark_oak_log_top"),
+    DARK_OAK_WOOD(Blocks.DARK_OAK_WOOD, ToolType.AXE, "dark_oak_log"),
+    STRIPPED_DARK_OAK_WOOD(Blocks.STRIPPED_DARK_OAK_WOOD, ToolType.AXE, "stripped_dark_oak_log"),
+    DARK_OAK_LEAVES(Blocks.DARK_OAK_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED, "dark_oak_leaves"),
+    DARK_OAK_PLANKS(Blocks.DARK_OAK_PLANKS, ToolType.AXE, false, false, true),
 
     MANGROVE_LOG(Blocks.MANGROVE_LOG, ToolType.AXE,Layer.SOLID,  "mangrove_log", "mangrove_log_top", "mangrove_log_top"),
-    MANGROVE_WOOD(Blocks.MANGROVE_WOOD, ToolType.AXE, true, true, false, "mangrove_log"),
-    STRIPPED_MANGROVE_WOOD(Blocks.MANGROVE_WOOD, ToolType.AXE, "stripped_mangrove_log"),
+    STRIPPED_MANGROVE_LOG(Blocks.STRIPPED_MANGROVE_LOG, ToolType.AXE, Layer.SOLID, "stripped_mangrove_log", "stripped_mangrove_log_top", "stripped_mangrove_log_top"),
+    MANGROVE_WOOD(Blocks.MANGROVE_WOOD, ToolType.AXE, "mangrove_log"),
+    STRIPPED_MANGROVE_WOOD(Blocks.STRIPPED_MANGROVE_WOOD, ToolType.AXE, "stripped_mangrove_log"),
     MANGROVE_LEAVES(Blocks.MANGROVE_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED, "mangrove_leaves"),
     MANGROVE_PLANKS(Blocks.MANGROVE_PLANKS, ToolType.AXE, false, false, true),
+    
+    CRIMSON_STEM(Blocks.CRIMSON_STEM, ToolType.AXE,Layer.SOLID,  "crimson_stem", "crimson_stem_top", "crimson_stem_top"),
+    STRIPPED_CRIMSON_STEM(Blocks.STRIPPED_CRIMSON_STEM, ToolType.AXE, Layer.SOLID, "stripped_crimson_stem", "stripped_crimson_stem_top", "stripped_crimson_stem_top"),
+    CRIMSON_HYPHAE(Blocks.CRIMSON_HYPHAE, ToolType.AXE, "crimson_stem"),
+    STRIPPED_CRIMSON_HYPHAE(Blocks.STRIPPED_CRIMSON_HYPHAE, ToolType.AXE, "stripped_crimson_stem"),
+    NETHER_WART_BLOCK(Blocks.NETHER_WART_BLOCK, ToolType.HOE, Layer.CUTOUT_MIPPED, "nether_wart_block"),
+    CRIMSON_PLANKS(Blocks.CRIMSON_PLANKS, ToolType.AXE, false, false, true),
+
+    WARPED_STEM(Blocks.WARPED_STEM, ToolType.AXE,Layer.SOLID,  "warped_stem", "warped_stem_top", "warped_stem_top"),
+    STRIPPED_WARPED_STEM(Blocks.STRIPPED_WARPED_STEM, ToolType.AXE, Layer.SOLID, "stripped_warped_stem", "stripped_warped_stem_top", "stripped_warped_stem_top"),
+    WARPED_HYPHAE(Blocks.WARPED_HYPHAE, ToolType.AXE, "warped_stem"),
+    STRIPPED_WARPED_HYPHAE(Blocks.STRIPPED_WARPED_HYPHAE, ToolType.AXE, "stripped_warped_stem"),
+    WARPED_WART_BLOCK(Blocks.WARPED_WART_BLOCK, ToolType.HOE, Layer.CUTOUT_MIPPED, "warped_wart_block"),
+    WARPED_PLANKS(Blocks.WARPED_PLANKS, ToolType.AXE, false, false, true),
+
+    AZALEA_LEAVES(Blocks.AZALEA_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED),
+    FLOWERING_AZALEA_LEAVES(Blocks.FLOWERING_AZALEA_LEAVES, ToolType.HOE, Layer.CUTOUT_MIPPED, "flowering_azalea_leaves"),
+
+
     MUD(Blocks.MUD, ToolType.SHOVEL),
 
 
@@ -284,6 +303,14 @@ public enum ModBlocks {
     WAXED_EXPOSED_COPPER(Blocks.WAXED_EXPOSED_COPPER, ToolType.PICKAXE, "exposed_copper"),
     WAXED_WEATHERED_COPPER(Blocks.WAXED_WEATHERED_COPPER, ToolType.PICKAXE, "weathered_copper"),
     WAXED_OXIDIZED_COPPER(Blocks.WAXED_OXIDIZED_COPPER, ToolType.PICKAXE, "oxidized_copper"),
+
+
+
+
+    //2.3.0
+
+    DIRT_PATH(Blocks.DIRT_PATH, ToolType.SHOVEL),
+
     ;
 
 

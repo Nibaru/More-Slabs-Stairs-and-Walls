@@ -1,0 +1,22 @@
+{
+	"parent": "block/block",
+	"textures": {
+		"particle": "block/dirt",
+		"bottom": "block/dirt",
+		"top": "block/grass_block_top",
+		"side": "block/grass_block_side"
+	},
+	"elements": [
+		{   "from": [ 5, 0, 0 ],
+			"to": [ 11, 16, 8 ],
+			"faces": {
+				"down":  { "texture": "#bottom", "cullface": "down" },
+				"up":    { "texture": "#top" },
+				"north": { "texture": "#side", "cullface": "north" },
+				"west":  { "texture": "#side" },
+				"east":  { "texture": "#side" }
+			},
+			"__comment": "wall"
+		}
+	]
+}

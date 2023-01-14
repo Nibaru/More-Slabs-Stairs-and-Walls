@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "lapis_block_slab",
+  "group": "metal_slabs",
   "key": {
     "#": {
       "item": "minecraft:lapis_block"

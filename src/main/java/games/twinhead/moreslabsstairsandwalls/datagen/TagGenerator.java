@@ -34,6 +34,12 @@ public class TagGenerator extends FabricTagProvider<Block> {
         if(block.hasWall()) getOrCreateTagBuilder(tagKey).add(block.getWallBlock());
     }
 
+    public void addPathTags(ModBlocks block){
+        if(block.hasSlab()) getOrCreateTagBuilder(ModBlockTags.canBecomePathSlab).add(block.getSlabBlock());
+        if(block.hasStairs()) getOrCreateTagBuilder(ModBlockTags.canBecomePathStairs).add(block.getStairsBlock());
+        if(block.hasWall()) getOrCreateTagBuilder(ModBlockTags.canBecomePathWall).add(block.getWallBlock());
+    }
+
     @Override
     protected void configure(RegistryWrapper.WrapperLookup arg) {
         TagKey<Block> mineablePickaxe = TagKey.of(Registries.BLOCK.getKey(), new Identifier("minecraft", "mineable/pickaxe"));
@@ -88,6 +94,7 @@ public class TagGenerator extends FabricTagProvider<Block> {
                         PODZOL, ROOTED_DIRT -> {
                     addTag(block, ModBlockTags.DIRT);
                     addTag(block, dirt);
+                    addPathTags(block);
                 }
                 case CRIMSON_NYLIUM, WARPED_NYLIUM -> {
                     addTag(block, nylium);

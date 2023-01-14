@@ -167,7 +167,9 @@ public class RecipeGenerator extends FabricRecipeProvider {
                     JUNGLE_LEAVES,
                     MANGROVE_LEAVES,
                     OAK_LEAVES,
-                    SPRUCE_LEAVES-> "leaves_"+ blockType+ "s";
+                    SPRUCE_LEAVES,
+                    WARPED_WART_BLOCK,
+                    NETHER_WART_BLOCK -> "leaves_"+ blockType+ "s";
             case
                     WARPED_HYPHAE,
                     CRIMSON_HYPHAE,
@@ -189,6 +191,16 @@ public class RecipeGenerator extends FabricRecipeProvider {
                     STRIPPED_OAK_WOOD,
                     STRIPPED_SPRUCE_WOOD -> "stripped_wood_"+ blockType+ "s";
             case
+                    STRIPPED_WARPED_STEM,
+                            STRIPPED_CRIMSON_STEM,
+                            STRIPPED_ACACIA_LOG,
+                            STRIPPED_BIRCH_LOG,
+                            STRIPPED_DARK_OAK_LOG,
+                            STRIPPED_JUNGLE_LOG,
+                            STRIPPED_MANGROVE_LOG,
+                            STRIPPED_OAK_LOG,
+                            STRIPPED_SPRUCE_LOG -> "stripped_logs_"+ blockType+ "s";
+            case
                     WARPED_STEM,
                     CRIMSON_STEM,
                     ACACIA_LOG,
@@ -199,7 +211,6 @@ public class RecipeGenerator extends FabricRecipeProvider {
                     OAK_LOG,
                     SPRUCE_LOG -> "log_"+ blockType+ "s";
 
-            case WARPED_WART_BLOCK, NETHER_WART_BLOCK-> "wart_"+ blockType+ "s";
             case OCHRE_FROGLIGHT, PEARLESCENT_FROGLIGHT, VERDANT_FROGLIGHT -> "froglight_"+ blockType+ "s";
             case CUT_COPPER,
                     EXPOSED_CUT_COPPER,
@@ -230,6 +241,29 @@ public class RecipeGenerator extends FabricRecipeProvider {
                     DEAD_FIRE_CORAL_BLOCK,
                     DEAD_HORN_CORAL_BLOCK,
                     DEAD_TUBE_CORAL_BLOCK-> "coral_"+ blockType+ "s";
+
+            case GRASS_BLOCK,
+                    MYCELIUM,
+                    PODZOL,
+                    CRIMSON_NYLIUM,
+                    WARPED_NYLIUM -> "grass_"+ blockType+ "s";
+            case ACACIA_PLANKS,
+                    BIRCH_PLANKS,
+                    CRIMSON_PLANKS,
+                    DARK_OAK_PLANKS,
+                    JUNGLE_PLANKS,
+                    MANGROVE_PLANKS,
+                    OAK_PLANKS,
+                    SPRUCE_PLANKS,
+                    WARPED_PLANKS -> "plank_"+ blockType+ "s";
+            case COAL_BLOCK,
+                    IRON_BLOCK,
+                    GOLD_BLOCK,
+                    DIAMOND_BLOCK,
+                    EMERALD_BLOCK,
+                    LAPIS_BLOCK,
+                    NETHERITE_BLOCK -> "metal_"+ blockType+ "s";
+            case ICE, BLUE_ICE, PACKED_ICE -> "ice_"+ blockType+ "s";
 
 
             default -> block +"_"+ blockType;

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_mangrove_wood": {
+    "has_stripped_mangrove_wood": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:mangrove_wood"
+              "minecraft:stripped_mangrove_wood"
             ]
           }
         ]
@@ -34,7 +34,7 @@
   },
   "requirements": [
     [
-      "has_mangrove_wood",
+      "has_stripped_mangrove_wood",
       "has_stripped_mangrove_wood_stairs",
       "has_the_recipe"
     ]

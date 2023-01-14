@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "ice_wall",
+  "group": "ice_walls",
   "key": {
     "#": {
       "item": "minecraft:ice"

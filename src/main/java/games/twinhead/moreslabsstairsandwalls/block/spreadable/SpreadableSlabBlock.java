@@ -1,15 +1,16 @@
-package games.twinhead.moreslabsstairsandwalls.block;
+package games.twinhead.moreslabsstairsandwalls.block.spreadable;
 
+import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
+import games.twinhead.moreslabsstairsandwalls.block.dirt.DirtSlab;
 import games.twinhead.moreslabsstairsandwalls.registry.ModBlockTags;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.SlabType;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.world.ServerWorld;
@@ -21,16 +22,21 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.chunk.light.ChunkLightProvider;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.feature.NetherConfiguredFeatures;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.PlacedFeature;
+import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
+import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
 import org.jetbrains.annotations.Nullable;
 
-public class SpreadableSlabBlock extends GrassBlock implements Waterloggable {
+import java.util.List;
+import java.util.Optional;
+
+public class SpreadableSlabBlock extends DirtSlab implements Waterloggable, Fertilizable {
 
     public static final BooleanProperty SNOWY;
     public static final EnumProperty<SlabType> TYPE;
@@ -66,11 +72,16 @@ public class SpreadableSlabBlock extends GrassBlock implements Waterloggable {
         }
     }
 
-    //@Override
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+    @Override
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         if(state.get(SlabBlock.TYPE) == SlabType.BOTTOM) return false;
 
         return world.getBlockState(pos.up()).isAir();
+    }
+
+    @Override
+    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+        return state.get(SlabBlock.TYPE) == SlabType.BOTTOM;
     }
 
     @Override
@@ -89,7 +100,7 @@ public class SpreadableSlabBlock extends GrassBlock implements Waterloggable {
 //        } else
 //
         if (blockState.isOf(ModBlocks.GRASS_BLOCK.getSlabBlock())) {
-            super.grow(world,random,pos,state);
+            growBonemeal(world,random,pos,state);
         }
 
     }
@@ -153,28 +164,8 @@ public class SpreadableSlabBlock extends GrassBlock implements Waterloggable {
         }
     }
 
-    @SuppressWarnings("deprecation")
-    public boolean hasSidedTransparency(BlockState state) {
-        return state.get(TYPE) != SlabType.DOUBLE;
-    }
-
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(TYPE, WATERLOGGED, SNOWY);
-    }
-
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        SlabType slabType = state.get(TYPE);
-        switch (slabType) {
-            case DOUBLE:
-                return VoxelShapes.fullCube();
-            case TOP:
-                return TOP_SHAPE;
-            default:
-                return BOTTOM_SHAPE;
-        }
     }
 
     @Nullable
@@ -185,44 +176,10 @@ public class SpreadableSlabBlock extends GrassBlock implements Waterloggable {
             return blockState.with(TYPE, SlabType.DOUBLE).with(WATERLOGGED, false).with(SNOWY, ctx.getWorld().getBlockState(ctx.getBlockPos().up()).isIn(BlockTags.SNOW));
         } else {
             FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
-            BlockState blockState2 = this.getDefaultState().with(TYPE, SlabType.BOTTOM).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+            BlockState blockState2 = this.getDefaultState().with(TYPE, SlabType.BOTTOM).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER).with(SNOWY, ctx.getWorld().getBlockState(ctx.getBlockPos().up()).isIn(BlockTags.SNOW));
             Direction direction = ctx.getSide();
             return direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double)blockPos.getY() > 0.5)) ? blockState2 : blockState2.with(TYPE, SlabType.TOP);
         }
-    }
-
-    @SuppressWarnings("deprecation")
-    public boolean canReplace(BlockState state, ItemPlacementContext context) {
-        ItemStack itemStack = context.getStack();
-        SlabType slabType = state.get(TYPE);
-        if (slabType != SlabType.DOUBLE && itemStack.isOf(this.asItem())) {
-            if (context.canReplaceExisting()) {
-                boolean bl = context.getHitPos().y - (double)context.getBlockPos().getY() > 0.5;
-                Direction direction = context.getSide();
-                if (slabType == SlabType.BOTTOM) {
-                    return direction == Direction.UP || bl && direction.getAxis().isHorizontal();
-                } else {
-                    return direction == Direction.DOWN || !bl && direction.getAxis().isHorizontal();
-                }
-            } else {
-                return true;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    @SuppressWarnings("deprecation")
-    public FluidState getFluidState(BlockState state) {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
-    }
-
-    public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
-        return state.get(TYPE) != SlabType.DOUBLE && Waterloggable.super.tryFillWithFluid(world, pos, state, fluidState);
-    }
-
-    public boolean canFillWithFluid(BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
-        return state.get(TYPE) != SlabType.DOUBLE && Waterloggable.super.canFillWithFluid(world, pos, state, fluid);
     }
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
@@ -230,15 +187,37 @@ public class SpreadableSlabBlock extends GrassBlock implements Waterloggable {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
 
+        state = state.with(SNOWY, world.getBlockState(pos.up()).isIn(BlockTags.SNOW));
+
+
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    @SuppressWarnings("deprecation")
-    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
-        return switch (type) {
-            case WATER -> world.getFluidState(pos).isIn(FluidTags.WATER);
-            default -> false;
-        };
+    public void growBonemeal(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+        BlockPos blockPos = pos.up();
+        BlockState blockState = Blocks.GRASS.getDefaultState();
+        Optional<RegistryEntry.Reference<PlacedFeature>> optional = world.getRegistryManager().get(RegistryKeys.PLACED_FEATURE).getEntry(VegetationPlacedFeatures.GRASS_BONEMEAL);
+        block0: for (int i = 0; i < 128; ++i) {
+            RegistryEntry<PlacedFeature> registryEntry;
+            BlockPos blockPos2 = blockPos;
+            for (int j = 0; j < i / 16; ++j) {
+                if (!world.getBlockState((blockPos2 = blockPos2.add(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1)).down()).isOf(this) || world.getBlockState(blockPos2).isFullCube(world, blockPos2)) continue block0;
+            }
+            BlockState blockState2 = world.getBlockState(blockPos2);
+            if (blockState2.isOf(blockState.getBlock()) && random.nextInt(10) == 0) {
+                ((Fertilizable)((Object)blockState.getBlock())).grow(world, random, blockPos2, blockState2);
+            }
+            if (!blockState2.isAir()) continue;
+            if (random.nextInt(8) == 0) {
+                List<ConfiguredFeature<?, ?>> list = world.getBiome(blockPos2).value().getGenerationSettings().getFlowerFeatures();
+                if (list.isEmpty()) continue;
+                registryEntry = ((RandomPatchFeatureConfig)list.get(0).config()).feature();
+            } else {
+                if (!optional.isPresent()) continue;
+                registryEntry = (RegistryEntry<PlacedFeature>)optional.get();
+            }
+            ((PlacedFeature)registryEntry.value()).generateUnregistered(world, world.getChunkManager().getChunkGenerator(), random, blockPos2);
+        }
     }
 
     static {

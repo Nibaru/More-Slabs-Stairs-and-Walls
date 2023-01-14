@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "exposed_copper_slab",
+  "group": "copper_slabs",
   "key": {
     "#": {
       "item": "minecraft:exposed_copper"

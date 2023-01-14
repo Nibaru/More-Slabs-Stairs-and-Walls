@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "copper_block_slab",
+  "group": "copper_slabs",
   "key": {
     "#": {
       "item": "minecraft:copper_block"

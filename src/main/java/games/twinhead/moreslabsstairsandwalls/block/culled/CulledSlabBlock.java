@@ -20,18 +20,14 @@ public class CulledSlabBlock extends SlabBlock{
     @Override
     @Environment(EnvType.CLIENT)
     public boolean isSideInvisible(BlockState blockState_1, BlockState blockState_2, Direction direction_1) {
-        if(blockState_2.getBlock() == Blocks.GLASS)
-            return true;
+        if(blockState_2.getBlock() == Blocks.GLASS) return true;
 
         if(blockState_2.getBlock() == this)
-            if(isInvisibleToGlassSlab(blockState_1, blockState_2, direction_1))
-                return true;
+            if(isInvisibleToGlassSlab(blockState_1, blockState_2, direction_1)) return true;
 
 
         if(blockState_2.getBlock() == ModBlocks.GLASS.getStairsBlock())
-            if(isInvisibleToGlassStairs(blockState_1, blockState_2,
-                    direction_1))
-                return true;
+            if(isInvisibleToGlassStairs(blockState_1, blockState_2, direction_1)) return true;
 
 
         return super.isSideInvisible(blockState_1, blockState_2, direction_1);

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "building",
-  "group": "birch_planks_wall",
+  "group": "plank_walls",
   "ingredients": [
     {
       "item": "minecraft:birch_fence"

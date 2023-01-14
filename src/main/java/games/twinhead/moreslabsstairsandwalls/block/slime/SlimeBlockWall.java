@@ -1,4 +1,4 @@
-package games.twinhead.moreslabsstairsandwalls.block;
+package games.twinhead.moreslabsstairsandwalls.block.slime;
 
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "wart_walls",
+  "group": "leaves_walls",
   "key": {
     "#": {
       "item": "minecraft:warped_wart_block"
