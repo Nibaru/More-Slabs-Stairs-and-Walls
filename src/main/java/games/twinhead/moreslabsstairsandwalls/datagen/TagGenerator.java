@@ -65,6 +65,7 @@ public class TagGenerator extends FabricTagProvider<Block> {
         TagKey<Block> soulSpeed = TagKey.of(Registries.BLOCK.getKey(), new Identifier("minecraft", "soul_speed_blocks"));
 
         TagKey<Block> dragonImmune = TagKey.of(Registries.BLOCK.getKey(), new Identifier("minecraft", "dragon_immune"));
+        TagKey<Block> leaves = TagKey.of(Registries.BLOCK.getKey(), new Identifier("minecraft", "leaves"));
 
         for (ModBlocks block: ModBlocks.values()) {
             if(block.toString().contains("wool")){
@@ -84,6 +85,10 @@ public class TagGenerator extends FabricTagProvider<Block> {
             if(block.hasWall()){
                 getOrCreateTagBuilder(walls).add(block.getWallBlock());
                 getOrCreateTagBuilder(ModBlockTags.WALLS).add(block.getWallBlock());
+            }
+
+            if(block.toString().contains("leaves")){
+                addTag(block, leaves);
             }
 
             switch (block){

@@ -10,6 +10,8 @@ import games.twinhead.moreslabsstairsandwalls.block.culled.CulledStainedSlabBloc
 import games.twinhead.moreslabsstairsandwalls.block.culled.CulledStainedStairsBlock;
 import games.twinhead.moreslabsstairsandwalls.block.culled.CulledStairsBlock;
 import games.twinhead.moreslabsstairsandwalls.block.dirt.*;
+import games.twinhead.moreslabsstairsandwalls.block.leaves.LeavesSlabBlock;
+import games.twinhead.moreslabsstairsandwalls.block.leaves.LeavesStairsBlock;
 import games.twinhead.moreslabsstairsandwalls.block.log.StrippableSlabBlock;
 import games.twinhead.moreslabsstairsandwalls.block.log.StrippableStairsBlock;
 import games.twinhead.moreslabsstairsandwalls.block.log.StrippableWallBlock;
@@ -190,6 +192,16 @@ public class BlockRegistry {
             case SOUL_SAND -> new SoulSandSlab(getSettingsFromBlock(copyBlock));
             case MAGMA_BLOCK -> new MagmaSlab(getSettingsFromBlock(copyBlock));
 
+            case OAK_LEAVES,
+                    ACACIA_LEAVES,
+                    BIRCH_LEAVES,
+                    DARK_OAK_LEAVES,
+                    JUNGLE_LEAVES,
+                    MANGROVE_LEAVES,
+                    SPRUCE_LEAVES,
+                    AZALEA_LEAVES,
+                    FLOWERING_AZALEA_LEAVES -> new LeavesSlabBlock(getSettingsFromBlock(copyBlock));
+
 
             default -> new SlabBlock(getSettingsFromBlock(copyBlock));
         };
@@ -218,15 +230,7 @@ public class BlockRegistry {
                     CYAN_STAINED_GLASS,
                     BROWN_STAINED_GLASS,
                     BLUE_STAINED_GLASS -> new CulledStainedStairsBlock(copyBlock.getDefaultState(), block.getDyeColor(), getSettingsFromBlock(copyBlock));
-            case OAK_LEAVES,
-                    ACACIA_LEAVES,
-                    BIRCH_LEAVES,
-                    DARK_OAK_LEAVES,
-                    JUNGLE_LEAVES,
-                    MANGROVE_LEAVES,
-                    SPRUCE_LEAVES,
-                    AZALEA_LEAVES,
-                    FLOWERING_AZALEA_LEAVES -> new StairsBlock(Blocks.GRASS_BLOCK.getDefaultState(),getSettingsFromBlock(copyBlock));
+
             case BUBBLE_CORAL_BLOCK,
                     HORN_CORAL_BLOCK,
                     BRAIN_CORAL_BLOCK,
@@ -259,6 +263,16 @@ public class BlockRegistry {
             case SOUL_SAND -> new SoulSandStairs(getSettingsFromBlock(copyBlock));
 
             case MAGMA_BLOCK -> new MagmaStairs(getSettingsFromBlock(copyBlock));
+
+            case OAK_LEAVES,
+                    ACACIA_LEAVES,
+                    BIRCH_LEAVES,
+                    DARK_OAK_LEAVES,
+                    JUNGLE_LEAVES,
+                    MANGROVE_LEAVES,
+                    SPRUCE_LEAVES,
+                    AZALEA_LEAVES,
+                    FLOWERING_AZALEA_LEAVES -> new LeavesStairsBlock(copyBlock.getDefaultState(),getSettingsFromBlock(copyBlock));
 
             default -> new StairsBlock(copyBlock.getDefaultState(),getSettingsFromBlock(copyBlock));
         };

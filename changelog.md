@@ -14,6 +14,11 @@
 - Soul Speed now works with Soul Sand/Soil slabs stairs and walls
 - Magama slabs, stairs, and walls now damage entities above.
 - Basalt, Melon, Pumpkin, and Hay walls now show proper top/bottom texture
+- Leaves slabs, stairs, and walls can now be mined faster with shears
+- Leaves slabs and stairs can be set if they are persistent or not
+
+## Fixed 
+- issue where leaves stairs blocks would turn into a dirt/grass block.
 
 
 ## [2.2.1 - Fabric 1.19.3]
