@@ -1,6 +1,6 @@
 package games.twinhead.moreslabsstairsandwalls.mixin;
 
-import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
+import games.twinhead.moreslabsstairsandwalls.registry.ModBlocks;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.SlabType;

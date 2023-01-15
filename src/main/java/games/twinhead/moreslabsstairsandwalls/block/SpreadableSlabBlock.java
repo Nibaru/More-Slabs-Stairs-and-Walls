@@ -1,6 +1,7 @@
 package games.twinhead.moreslabsstairsandwalls.block;
 
 import games.twinhead.moreslabsstairsandwalls.registry.ModBlockTags;
+import games.twinhead.moreslabsstairsandwalls.registry.ModBlocks;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.SlabType;
@@ -27,7 +28,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.chunk.light.ChunkLightProvider;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import org.jetbrains.annotations.Nullable;
 
 public class SpreadableSlabBlock extends GrassBlock implements Waterloggable, Fertilizable {

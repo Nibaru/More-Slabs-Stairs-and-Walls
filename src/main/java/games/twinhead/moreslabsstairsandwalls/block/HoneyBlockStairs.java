@@ -1,8 +1,8 @@
 package games.twinhead.moreslabsstairsandwalls.block;
 
+import games.twinhead.moreslabsstairsandwalls.registry.ModBlocks;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
-import net.minecraft.block.enums.SlabType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.LivingEntity;
@@ -17,7 +17,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class HoneyBlockStairs extends StairsBlock {

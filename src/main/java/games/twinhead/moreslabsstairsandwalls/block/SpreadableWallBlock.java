@@ -1,8 +1,8 @@
 package games.twinhead.moreslabsstairsandwalls.block;
 
 import games.twinhead.moreslabsstairsandwalls.registry.ModBlockTags;
+import games.twinhead.moreslabsstairsandwalls.registry.ModBlocks;
 import net.minecraft.block.*;
-import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.registry.RegistryKeys;

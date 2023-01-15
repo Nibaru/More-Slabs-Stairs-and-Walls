@@ -1,7 +1,6 @@
 package games.twinhead.moreslabsstairsandwalls;
 
-import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
-import games.twinhead.moreslabsstairsandwalls.client.Client;
+import games.twinhead.moreslabsstairsandwalls.registry.ModBlocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -35,6 +34,7 @@ public class MoreSlabsStairsAndWalls {
 
         MOD_BUS.addListener(this::register);
         MOD_BUS.addListener(this::registerTab);
+
     }
 
     @SubscribeEvent
@@ -55,7 +55,6 @@ public class MoreSlabsStairsAndWalls {
 
     @SubscribeEvent
     public void register(RegisterEvent event) {
-
         event.register(ForgeRegistries.Keys.ITEMS,
                 helper -> {
                     ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)

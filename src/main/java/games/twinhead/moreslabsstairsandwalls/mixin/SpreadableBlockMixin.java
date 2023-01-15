@@ -1,6 +1,6 @@
 package games.twinhead.moreslabsstairsandwalls.mixin;
 
-import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
+import games.twinhead.moreslabsstairsandwalls.registry.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.SpreadableSlabBlock;
 import games.twinhead.moreslabsstairsandwalls.registry.ModBlockTags;
 import net.minecraft.block.*;

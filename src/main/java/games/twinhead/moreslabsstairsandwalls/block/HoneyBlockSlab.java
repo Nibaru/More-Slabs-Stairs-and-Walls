@@ -1,5 +1,6 @@
 package games.twinhead.moreslabsstairsandwalls.block;
 
+import games.twinhead.moreslabsstairsandwalls.registry.ModBlocks;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.SlabType;

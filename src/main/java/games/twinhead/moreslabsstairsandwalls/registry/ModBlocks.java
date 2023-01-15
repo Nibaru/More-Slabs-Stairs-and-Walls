@@ -1,6 +1,7 @@
-package games.twinhead.moreslabsstairsandwalls.block;
+package games.twinhead.moreslabsstairsandwalls.registry;
 
 import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
+import games.twinhead.moreslabsstairsandwalls.block.*;
 import games.twinhead.moreslabsstairsandwalls.block.coral.CoralSlabBlock;
 import games.twinhead.moreslabsstairsandwalls.block.coral.CoralStairsBlock;
 import games.twinhead.moreslabsstairsandwalls.block.coral.CoralWallBlock;
@@ -724,21 +725,21 @@ public class ModBlocks {
     public static final RegistryObject<Block> REDSTONE_BLOCK_STAIRS = BLOCKS.register("redstone_block" + "_stairs", () -> new RedstoneStairsBlock(getSettingsFromBlock(Blocks.REDSTONE_BLOCK)));
     //public static final RegistryObject<Block> REDSTONE_BLOCK_WALL = createWallBlock(Blocks.REDSTONE_BLOCK);
 
-    public static final RegistryObject<Block> COPPER_BLOCK_SLAB = createSlabBlock((Blocks.COPPER_BLOCK));
-    public static final RegistryObject<Block> COPPER_BLOCK_STAIRS = createStairsBlock(Blocks.COPPER_BLOCK);
-    public static final RegistryObject<Block> COPPER_BLOCK_WALL = createWallBlock(Blocks.COPPER_BLOCK);
+    public static final RegistryObject<Block> COPPER_BLOCK_SLAB = createOxidizedSlabBlock(Oxidizable.OxidationLevel.UNAFFECTED, Blocks.COPPER_BLOCK);
+    public static final RegistryObject<Block> COPPER_BLOCK_STAIRS = createOxidizedStairsBlock(Oxidizable.OxidationLevel.UNAFFECTED, Blocks.COPPER_BLOCK);
+    public static final RegistryObject<Block> COPPER_BLOCK_WALL = createOxidizedWallBlock(Oxidizable.OxidationLevel.UNAFFECTED, Blocks.COPPER_BLOCK);
 
-    public static final RegistryObject<Block> EXPOSED_COPPER_SLAB = createSlabBlock((Blocks.EXPOSED_COPPER));
-    public static final RegistryObject<Block> EXPOSED_COPPER_STAIRS = createStairsBlock(Blocks.EXPOSED_COPPER);
-    public static final RegistryObject<Block> EXPOSED_COPPER_WALL = createWallBlock(Blocks.EXPOSED_COPPER);
+    public static final RegistryObject<Block> EXPOSED_COPPER_SLAB = createOxidizedSlabBlock(Oxidizable.OxidationLevel.EXPOSED, Blocks.EXPOSED_COPPER);
+    public static final RegistryObject<Block> EXPOSED_COPPER_STAIRS = createOxidizedStairsBlock(Oxidizable.OxidationLevel.EXPOSED, Blocks.EXPOSED_COPPER);
+    public static final RegistryObject<Block> EXPOSED_COPPER_WALL = createOxidizedWallBlock(Oxidizable.OxidationLevel.EXPOSED, Blocks.EXPOSED_COPPER);
 
-    public static final RegistryObject<Block> WEATHERED_COPPER_SLAB = createSlabBlock((Blocks.WEATHERED_COPPER));
-    public static final RegistryObject<Block> WEATHERED_COPPER_STAIRS = createStairsBlock(Blocks.WEATHERED_COPPER);
-    public static final RegistryObject<Block> WEATHERED_COPPER_WALL = createWallBlock(Blocks.WEATHERED_COPPER);
+    public static final RegistryObject<Block> WEATHERED_COPPER_SLAB = createOxidizedSlabBlock(Oxidizable.OxidationLevel.WEATHERED, Blocks.WEATHERED_COPPER);
+    public static final RegistryObject<Block> WEATHERED_COPPER_STAIRS = createOxidizedStairsBlock(Oxidizable.OxidationLevel.WEATHERED, Blocks.WEATHERED_COPPER);
+    public static final RegistryObject<Block> WEATHERED_COPPER_WALL = createOxidizedWallBlock(Oxidizable.OxidationLevel.WEATHERED, Blocks.WEATHERED_COPPER);
 
-    public static final RegistryObject<Block> OXIDIZED_COPPER_SLAB = createSlabBlock((Blocks.OXIDIZED_COPPER));
-    public static final RegistryObject<Block> OXIDIZED_COPPER_STAIRS = createStairsBlock(Blocks.OXIDIZED_COPPER);
-    public static final RegistryObject<Block> OXIDIZED_COPPER_WALL = createWallBlock(Blocks.OXIDIZED_COPPER);
+    public static final RegistryObject<Block> OXIDIZED_COPPER_SLAB = createOxidizedSlabBlock(Oxidizable.OxidationLevel.OXIDIZED, Blocks.OXIDIZED_COPPER);
+    public static final RegistryObject<Block> OXIDIZED_COPPER_STAIRS = createOxidizedStairsBlock(Oxidizable.OxidationLevel.OXIDIZED, Blocks.OXIDIZED_COPPER);
+    public static final RegistryObject<Block> OXIDIZED_COPPER_WALL = createOxidizedWallBlock(Oxidizable.OxidationLevel.OXIDIZED, Blocks.OXIDIZED_COPPER);
 
     public static final RegistryObject<Block> WAXED_COPPER_BLOCK_SLAB = createSlabBlock("waxed_copper", Blocks.WAXED_COPPER_BLOCK);
     public static final RegistryObject<Block> WAXED_COPPER_BLOCK_STAIRS = createStairsBlock("waxed_copper", Blocks.WAXED_COPPER_BLOCK);
@@ -762,6 +763,8 @@ public class ModBlocks {
         return nameParts[nameParts.length-1];
     }
 
+
+
     public static AbstractBlock.Settings getSettingsFromBlock(Block block){
 
         AbstractBlock.Settings settings = AbstractBlock.Settings.of(block.getDefaultState().getMaterial())
@@ -780,6 +783,12 @@ public class ModBlocks {
         }
 
 
+    }
+
+    public static void registerOxidizable(){
+//        Oxidizable.OXIDATION_LEVEL_INCREASES.get().put(COPPER_BLOCK_SLAB.get(), EXPOSED_COPPER_SLAB.get());
+//        Oxidizable.OXIDATION_LEVEL_INCREASES.get().put(EXPOSED_COPPER_SLAB.get(), WEATHERED_COPPER_SLAB.get());
+//        Oxidizable.OXIDATION_LEVEL_INCREASES.get().put(WEATHERED_COPPER_SLAB.get(), OXIDIZED_COPPER_SLAB.get());
     }
 
     public static RegistryObject<Block> createSlabBlock(Block copyBlock){
@@ -837,6 +846,18 @@ public class ModBlocks {
 
     public static RegistryObject<Block> createSpreadableWallBlock(Block copyBlock){
         return BLOCKS.register(getNameFromBlock(copyBlock) + "_wall", () -> new SpreadableWallBlock(getSettingsFromBlock(copyBlock).ticksRandomly()));
+    }
+
+    public static RegistryObject<Block> createOxidizedSlabBlock(Oxidizable.OxidationLevel level, Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_slab", () -> new OxidizableSlabBlock(level, getSettingsFromBlock(copyBlock)));
+    }
+
+    public static RegistryObject<Block> createOxidizedStairsBlock(Oxidizable.OxidationLevel level, Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_stairs", () -> new OxidizableStairsBlock(level, copyBlock.getDefaultState(), getSettingsFromBlock(copyBlock)));
+    }
+
+    public static RegistryObject<Block> createOxidizedWallBlock(Oxidizable.OxidationLevel level, Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_wall", () -> new OxidizableWallBlock(level, getSettingsFromBlock(copyBlock)));
     }
     
     
