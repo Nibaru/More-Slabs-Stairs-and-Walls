@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "more_slabs_stairs_and_walls:block/dead_horn_coral_block_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/dead_horn_coral_block"
+    },
+    "type=top": {
+      "model": "more_slabs_stairs_and_walls:block/dead_horn_coral_block_slab_top"
+    }
+  }
+}
