@@ -1,9 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "render_type": "translucent",
-  "textures": {
-    "bottom": "minecraft:block/glass",
-    "side": "more_slabs_stairs_and_walls:block/glass_slab_side",
-    "top": "minecraft:block/glass"
-  }
-}

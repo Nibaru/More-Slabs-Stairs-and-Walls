@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "ice_slabs",
+  "key": {
+    "#": {
+      "item": "minecraft:blue_ice"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "more_slabs_stairs_and_walls:blue_ice_slab"
+  }
+}

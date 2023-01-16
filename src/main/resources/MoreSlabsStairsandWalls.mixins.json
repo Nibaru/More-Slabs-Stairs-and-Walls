@@ -4,7 +4,11 @@
   "package": "games.twinhead.moreslabsstairsandwalls.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "BoatEntityMixin",
+    "BubbleColumnBlockMixin",
     "GlassBlockMixin",
+    "ItemEntityMixin",
+    "LivingEntityMixin",
     "PistonHandlerMixin",
     "PlantBlockMixin",
     "PointedDripstoneBlockMixin",

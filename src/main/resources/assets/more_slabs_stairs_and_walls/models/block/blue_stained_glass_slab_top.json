@@ -1,8 +1,0 @@
-{
-  "parent": "more_slabs_stairs_and_walls:block/glass_slab_top",
-  "textures": {
-    "bottom": "minecraft:block/blue_stained_glass",
-    "side": "minecraft:block/blue_stained_glass",
-    "top": "minecraft:block/blue_stained_glass"
-  }
-}

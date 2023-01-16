@@ -1,5 +1,4 @@
 {
-  "render_type": "translucent",
   "textures": {
     "wall": "minecraft:block/glass"
   },

@@ -1,6 +1,6 @@
 {
 	"parent": "block/block",
-	"render_type": "translucent",
+
 	"textures": {
 		"wall": "more_slabs_stairs_and_walls:block/glass_wall"
 	},

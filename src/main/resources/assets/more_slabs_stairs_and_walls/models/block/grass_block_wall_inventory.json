@@ -1,6 +1,5 @@
 {
 	"parent": "more_slabs_stairs_and_walls:block/wall_inventory_side_bottom_top",
-	"render_type": "cutout",
 	"textures": {
 		"particle": "block/dirt",
 		"bottom": "block/dirt",

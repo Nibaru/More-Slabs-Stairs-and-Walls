@@ -1,6 +1,4 @@
-{
-    "render_type": "cutout_mipped",
-    "parent": "block/block",
+{   "parent": "block/block",
     "display": {
         "gui": {
             "rotation": [ 30, 135, 0 ],

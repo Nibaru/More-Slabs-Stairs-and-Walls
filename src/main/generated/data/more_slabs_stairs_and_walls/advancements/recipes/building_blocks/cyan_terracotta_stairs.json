@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cyan_terracotta": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:cyan_terracotta"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_cyan_terracotta_stairs": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "more_slabs_stairs_and_walls:cyan_terracotta_stairs"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "more_slabs_stairs_and_walls:cyan_terracotta_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_cyan_terracotta",
+      "has_cyan_terracotta_stairs",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "more_slabs_stairs_and_walls:cyan_terracotta_stairs"
+    ]
+  }
+}

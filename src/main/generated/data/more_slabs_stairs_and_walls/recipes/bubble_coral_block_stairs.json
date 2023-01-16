@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "coral_stairs",
+  "key": {
+    "#": {
+      "item": "minecraft:bubble_coral_block"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "more_slabs_stairs_and_walls:bubble_coral_block_stairs"
+  }
+}

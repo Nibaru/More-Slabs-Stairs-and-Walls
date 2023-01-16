@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_quartz_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:quartz_bricks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_quartz_bricks_wall": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "more_slabs_stairs_and_walls:quartz_bricks_wall"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "more_slabs_stairs_and_walls:quartz_bricks_wall"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_quartz_bricks",
+      "has_quartz_bricks_wall",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "more_slabs_stairs_and_walls:quartz_bricks_wall"
+    ]
+  }
+}

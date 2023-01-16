@@ -1,8 +1,0 @@
-{
-  "parent": "more_slabs_stairs_and_walls:block/leaves_slab_double",
-  "textures": {
-    "bottom": "minecraft:block/jungle_leaves",
-    "side": "minecraft:block/jungle_leaves",
-    "top": "minecraft:block/jungle_leaves"
-  }
-}

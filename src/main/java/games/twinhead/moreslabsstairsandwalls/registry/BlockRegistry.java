@@ -9,8 +9,26 @@ import games.twinhead.moreslabsstairsandwalls.block.culled.CulledSlabBlock;
 import games.twinhead.moreslabsstairsandwalls.block.culled.CulledStainedSlabBlock;
 import games.twinhead.moreslabsstairsandwalls.block.culled.CulledStainedStairsBlock;
 import games.twinhead.moreslabsstairsandwalls.block.culled.CulledStairsBlock;
+import games.twinhead.moreslabsstairsandwalls.block.dirt.*;
+import games.twinhead.moreslabsstairsandwalls.block.leaves.LeavesSlabBlock;
+import games.twinhead.moreslabsstairsandwalls.block.leaves.LeavesStairsBlock;
+import games.twinhead.moreslabsstairsandwalls.block.log.StrippableSlabBlock;
+import games.twinhead.moreslabsstairsandwalls.block.log.StrippableStairsBlock;
+import games.twinhead.moreslabsstairsandwalls.block.log.StrippableWallBlock;
+import games.twinhead.moreslabsstairsandwalls.block.magma.MagmaSlab;
+import games.twinhead.moreslabsstairsandwalls.block.magma.MagmaStairs;
+import games.twinhead.moreslabsstairsandwalls.block.magma.MagmaWall;
 import games.twinhead.moreslabsstairsandwalls.block.redstone.RedstoneSlabBlock;
 import games.twinhead.moreslabsstairsandwalls.block.redstone.RedstoneStairsBlock;
+import games.twinhead.moreslabsstairsandwalls.block.slime.SlimeBlockSlab;
+import games.twinhead.moreslabsstairsandwalls.block.slime.SlimeBlockStairs;
+import games.twinhead.moreslabsstairsandwalls.block.slime.SlimeBlockWall;
+import games.twinhead.moreslabsstairsandwalls.block.soulsand.SoulSandSlab;
+import games.twinhead.moreslabsstairsandwalls.block.soulsand.SoulSandStairs;
+import games.twinhead.moreslabsstairsandwalls.block.soulsand.SoulSandWall;
+import games.twinhead.moreslabsstairsandwalls.block.spreadable.SpreadableSlabBlock;
+import games.twinhead.moreslabsstairsandwalls.block.spreadable.SpreadableStairsBlock;
+import games.twinhead.moreslabsstairsandwalls.block.spreadable.SpreadableWallBlock;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
@@ -94,6 +112,7 @@ public class BlockRegistry {
                 .hardness(block.getHardness())
                 .resistance(block.getBlastResistance())
                 .slipperiness(block.getSlipperiness())
+                .velocityMultiplier(block.getVelocityMultiplier())
                 ;
 
         if (!block.getDefaultState().isOpaque()){
@@ -149,6 +168,33 @@ public class BlockRegistry {
             case OXIDIZED_COPPER -> new OxidizableSlabBlock(Oxidizable.OxidationLevel.OXIDIZED, getSettingsFromBlock(copyBlock));
 
 
+            case DIRT_PATH -> new PathBlockSlab(getSettingsFromBlock(copyBlock));
+            case DIRT, COARSE_DIRT, ROOTED_DIRT, PODZOL -> new DirtSlab(getSettingsFromBlock(copyBlock));
+
+            case
+                    OAK_LOG, OAK_WOOD,
+                            BIRCH_LOG, BIRCH_WOOD,
+                            SPRUCE_LOG, SPRUCE_WOOD,
+                            JUNGLE_LOG, JUNGLE_WOOD,
+                            ACACIA_LOG, ACACIA_WOOD,
+                            DARK_OAK_LOG, DARK_OAK_WOOD,
+                            CRIMSON_STEM, CRIMSON_HYPHAE,
+                            WARPED_STEM, WARPED_HYPHAE
+                    -> new StrippableSlabBlock(ModBlocks.valueOf("STRIPPED_" + block.name()), getSettingsFromBlock(copyBlock));
+
+            case SOUL_SAND -> new SoulSandSlab(getSettingsFromBlock(copyBlock));
+            case MAGMA_BLOCK -> new MagmaSlab(getSettingsFromBlock(copyBlock));
+
+            case OAK_LEAVES,
+                    ACACIA_LEAVES,
+                    BIRCH_LEAVES,
+                    DARK_OAK_LEAVES,
+                    JUNGLE_LEAVES,
+                    SPRUCE_LEAVES,
+                    AZALEA_LEAVES,
+                    FLOWERING_AZALEA_LEAVES -> new LeavesSlabBlock(getSettingsFromBlock(copyBlock));
+
+
             default -> new SlabBlock(getSettingsFromBlock(copyBlock));
         };
 
@@ -176,14 +222,7 @@ public class BlockRegistry {
                     CYAN_STAINED_GLASS,
                     BROWN_STAINED_GLASS,
                     BLUE_STAINED_GLASS -> new CulledStainedStairsBlock(copyBlock.getDefaultState(), block.getDyeColor(), getSettingsFromBlock(copyBlock));
-            case OAK_LEAVES,
-                    ACACIA_LEAVES,
-                    BIRCH_LEAVES,
-                    DARK_OAK_LEAVES,
-                    JUNGLE_LEAVES,
-                    SPRUCE_LEAVES,
-                    AZALEA_LEAVES,
-                    FLOWERING_AZALEA_LEAVES -> new StairsBlock(Blocks.GRASS_BLOCK.getDefaultState(),getSettingsFromBlock(copyBlock));
+
             case BUBBLE_CORAL_BLOCK,
                     HORN_CORAL_BLOCK,
                     BRAIN_CORAL_BLOCK,
@@ -193,12 +232,38 @@ public class BlockRegistry {
             case GRASS_BLOCK,
                     MYCELIUM,
                     CRIMSON_NYLIUM,
-                    WARPED_NYLIUM -> new SpreadableStairsBlock(copyBlock.getDefaultState(),getSettingsFromBlock(copyBlock));
+                    WARPED_NYLIUM -> new SpreadableStairsBlock(getSettingsFromBlock(copyBlock));
             case COPPER_BLOCK -> new OxidizableStairsBlock(Oxidizable.OxidationLevel.UNAFFECTED, copyBlock.getDefaultState(), getSettingsFromBlock(copyBlock));
             case EXPOSED_COPPER -> new OxidizableStairsBlock(Oxidizable.OxidationLevel.EXPOSED, copyBlock.getDefaultState(), getSettingsFromBlock(copyBlock));
             case WEATHERED_COPPER -> new OxidizableStairsBlock(Oxidizable.OxidationLevel.WEATHERED, copyBlock.getDefaultState(), getSettingsFromBlock(copyBlock));
             case OXIDIZED_COPPER -> new OxidizableStairsBlock(Oxidizable.OxidationLevel.OXIDIZED, copyBlock.getDefaultState(), getSettingsFromBlock(copyBlock));
             case REDSTONE_BLOCK -> new RedstoneStairsBlock(getSettingsFromBlock(copyBlock));
+            case
+                    OAK_LOG, OAK_WOOD,
+                            BIRCH_LOG, BIRCH_WOOD,
+                            SPRUCE_LOG, SPRUCE_WOOD,
+                            JUNGLE_LOG, JUNGLE_WOOD,
+                            ACACIA_LOG, ACACIA_WOOD,
+                            DARK_OAK_LOG, DARK_OAK_WOOD,
+                            CRIMSON_STEM, CRIMSON_HYPHAE,
+                            WARPED_STEM, WARPED_HYPHAE
+                    -> new StrippableStairsBlock(ModBlocks.valueOf("STRIPPED_" + block.name()), getSettingsFromBlock(copyBlock));
+            case DIRT_PATH -> new PathBlockStairs(getSettingsFromBlock(copyBlock));
+            case DIRT, COARSE_DIRT, ROOTED_DIRT, PODZOL -> new DirtStairs(getSettingsFromBlock(copyBlock));
+
+            case SOUL_SAND -> new SoulSandStairs(getSettingsFromBlock(copyBlock));
+
+            case MAGMA_BLOCK -> new MagmaStairs(getSettingsFromBlock(copyBlock));
+
+            case OAK_LEAVES,
+                    ACACIA_LEAVES,
+                    BIRCH_LEAVES,
+                    DARK_OAK_LEAVES,
+                    JUNGLE_LEAVES,
+                    SPRUCE_LEAVES,
+                    AZALEA_LEAVES,
+                    FLOWERING_AZALEA_LEAVES -> new LeavesStairsBlock(copyBlock.getDefaultState(),getSettingsFromBlock(copyBlock));
+
             default -> new StairsBlock(copyBlock.getDefaultState(),getSettingsFromBlock(copyBlock));
         };
 
@@ -218,14 +283,17 @@ public class BlockRegistry {
                     MYCELIUM,
                     CRIMSON_NYLIUM,
                     WARPED_NYLIUM -> new SpreadableWallBlock(getSettingsFromBlock(copyBlock));
-            case SPRUCE_LOG,
-                    ACACIA_LOG,
-                    BIRCH_LOG,
-                    DARK_OAK_LOG,
-                    JUNGLE_LOG,
-                    OAK_LOG,
-                    WARPED_STEM,
-                    CRIMSON_STEM, BONE_BLOCK ->  new WallBlock(getSettingsFromBlock(copyBlock));
+            case
+                    OAK_LOG, OAK_WOOD,
+                            BIRCH_LOG, BIRCH_WOOD,
+                            SPRUCE_LOG, SPRUCE_WOOD,
+                            JUNGLE_LOG, JUNGLE_WOOD,
+                            ACACIA_LOG, ACACIA_WOOD,
+                            DARK_OAK_LOG, DARK_OAK_WOOD,
+                            CRIMSON_STEM, CRIMSON_HYPHAE,
+                            WARPED_STEM, WARPED_HYPHAE
+                    -> new StrippableWallBlock(ModBlocks.valueOf("STRIPPED_" + block.name()), getSettingsFromBlock(copyBlock));
+
             case SLIME_BLOCK -> new SlimeBlockWall(getSettingsFromBlock(copyBlock));
             case CUT_COPPER,
                     COPPER_BLOCK -> new OxidizableWallBlock(Oxidizable.OxidationLevel.UNAFFECTED, getSettingsFromBlock(copyBlock));
@@ -236,6 +304,13 @@ public class BlockRegistry {
             case OXIDIZED_CUT_COPPER,
                     OXIDIZED_COPPER -> new OxidizableWallBlock(Oxidizable.OxidationLevel.OXIDIZED, getSettingsFromBlock(copyBlock));
             //case REDSTONE -> new RedstoneWallBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.BRIGHT_RED).sounds(BlockSoundGroup.STONE).luminance((i) -> block.getLuminance()));
+
+            case DIRT_PATH -> new PathBlockWall(getSettingsFromBlock(copyBlock));
+            case DIRT, COARSE_DIRT, ROOTED_DIRT, PODZOL -> new DirtWall(getSettingsFromBlock(copyBlock));
+
+            case SOUL_SAND -> new SoulSandWall(getSettingsFromBlock(copyBlock));
+            case MAGMA_BLOCK -> new MagmaWall(getSettingsFromBlock(copyBlock));
+
             default -> new WallBlock(getSettingsFromBlock(copyBlock));
         };
 

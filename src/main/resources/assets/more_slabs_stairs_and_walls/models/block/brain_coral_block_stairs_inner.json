@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "minecraft:block/brain_coral_block",
-    "side": "minecraft:block/brain_coral_block",
-    "top": "minecraft:block/brain_coral_block"
-  }
-}

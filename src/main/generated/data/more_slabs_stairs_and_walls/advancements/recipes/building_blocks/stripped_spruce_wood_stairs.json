@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stripped_spruce_wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:stripped_spruce_wood"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_stripped_spruce_wood_stairs": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "more_slabs_stairs_and_walls:stripped_spruce_wood_stairs"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "more_slabs_stairs_and_walls:stripped_spruce_wood_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_stripped_spruce_wood",
+      "has_stripped_spruce_wood_stairs",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "more_slabs_stairs_and_walls:stripped_spruce_wood_stairs"
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "minecraft:crimson_stem"
+  },
+  "result": "more_slabs_stairs_and_walls:crimson_stem_wall"
+}

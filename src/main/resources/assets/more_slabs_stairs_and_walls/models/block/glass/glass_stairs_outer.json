@@ -1,5 +1,4 @@
 {
-	"render_type": "translucent",
 	"textures": {
 		"side": "more_slabs_stairs_and_walls:block/glass_stair_side",
 		"bottom": "block/glass",

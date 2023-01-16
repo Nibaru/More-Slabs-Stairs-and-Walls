@@ -1,8 +1,0 @@
-{
-  "parent": "more_slabs_stairs_and_walls:block/leaves_inner_stairs",
-  "textures": {
-    "bottom": "minecraft:block/dark_oak_leaves",
-    "side": "minecraft:block/dark_oak_leaves",
-    "top": "minecraft:block/dark_oak_leaves"
-  }
-}

@@ -1,5 +1,4 @@
 {
-	"render_type": "translucent",
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"texture_size": [40, 16],

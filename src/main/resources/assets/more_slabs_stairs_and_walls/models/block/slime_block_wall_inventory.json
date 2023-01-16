@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/wall_inventory",
-  "render_type": "translucent",
-  "textures": {
-    "wall": "minecraft:block/slime_block"
-  }
-}
