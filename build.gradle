@@ -105,8 +105,6 @@ curseforge {
         mainArtifact (remapJar){
             displayName = "MSSW " + project.mod_version + " Fabric"
         }
-        changelogType = 'markdown'
-        changelog = file('changelog.md')
         releaseType = 'release'
         addGameVersion "Fabric"
         addGameVersion project.minecraft_version

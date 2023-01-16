@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.3.0- Fabric 1.18.2]
+## [2.3.0 - Fabric 1.18.2]
 
 ## Added
 - Dirt path slab, stairs and wall
