@@ -179,7 +179,6 @@ curseforge {
         mainArtifact (remapJar){
             displayName = "v" + project.mod_version + " Forge " + project.minecraft_version
         }
-        changelogType = 'markdown'
         releaseType = 'beta'
         addGameVersion "Forge"
         addGameVersion project.minecraft_version
