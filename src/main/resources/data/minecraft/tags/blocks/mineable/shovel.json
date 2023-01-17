@@ -30,6 +30,9 @@
     "more_slabs_stairs_and_walls:mycelium_wall",
     "more_slabs_stairs_and_walls:podzol_slab",
     "more_slabs_stairs_and_walls:podzol_stairs",
-    "more_slabs_stairs_and_walls:podzol_wall"
-    ]
+    "more_slabs_stairs_and_walls:podzol_wall",
+    "more_slabs_stairs_and_walls:dirt_path_slab",
+    "more_slabs_stairs_and_walls:dirt_path_stairs",
+    "more_slabs_stairs_and_walls:dirt_path_wall"
+  ]
 }

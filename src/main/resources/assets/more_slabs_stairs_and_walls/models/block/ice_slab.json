@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/slab",
+  "render_type": "translucent",
   "textures": {
     "bottom": "minecraft:block/ice",
     "side": "minecraft:block/ice",

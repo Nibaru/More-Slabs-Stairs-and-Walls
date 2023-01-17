@@ -1,6 +1,6 @@
 package games.twinhead.moreslabsstairsandwalls;
 
-import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
+import games.twinhead.moreslabsstairsandwalls.registry.ModBlocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
