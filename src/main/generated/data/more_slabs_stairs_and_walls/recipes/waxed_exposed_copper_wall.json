@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "waxed_exposed_copper_wall",
+  "group": "copper_walls",
   "key": {
     "#": {
       "item": "minecraft:waxed_exposed_copper"

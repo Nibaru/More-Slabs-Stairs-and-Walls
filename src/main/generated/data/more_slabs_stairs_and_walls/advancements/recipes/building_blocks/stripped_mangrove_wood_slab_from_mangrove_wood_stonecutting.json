@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:stripped_mangrove_wood_slab_from_mangrove_wood_stonecutting"
+        "recipe": "minecraft:mangrove_wood_wall_from_mangrove_wood_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:stripped_mangrove_wood_slab_from_mangrove_wood_stonecutting"
+      "minecraft:mangrove_wood_wall_from_mangrove_wood_stonecutting"
     ]
   }
 }

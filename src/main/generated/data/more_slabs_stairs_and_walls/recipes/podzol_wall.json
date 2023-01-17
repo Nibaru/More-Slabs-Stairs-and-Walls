@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "podzol_wall",
+  "group": "grass_walls",
   "key": {
     "#": {
       "item": "minecraft:podzol"

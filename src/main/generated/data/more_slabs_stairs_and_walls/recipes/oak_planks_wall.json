@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "building",
-  "group": "oak_planks_wall",
+  "group": "plank_walls",
   "ingredients": [
     {
       "item": "minecraft:oak_fence"

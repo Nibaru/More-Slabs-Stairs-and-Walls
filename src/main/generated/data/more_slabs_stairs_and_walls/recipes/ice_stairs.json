@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "ice_stair",
+  "group": "ice_stairs",
   "key": {
     "#": {
       "item": "minecraft:ice"

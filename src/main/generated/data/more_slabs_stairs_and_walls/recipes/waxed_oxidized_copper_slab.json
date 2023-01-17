@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "waxed_oxidized_copper_slab",
+  "group": "copper_slabs",
   "key": {
     "#": {
       "item": "minecraft:waxed_oxidized_copper"

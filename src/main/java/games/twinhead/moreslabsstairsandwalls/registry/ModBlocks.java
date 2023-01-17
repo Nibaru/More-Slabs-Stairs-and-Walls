@@ -7,8 +7,24 @@ import games.twinhead.moreslabsstairsandwalls.block.coral.CoralStairsBlock;
 import games.twinhead.moreslabsstairsandwalls.block.coral.CoralWallBlock;
 import games.twinhead.moreslabsstairsandwalls.block.culled.CulledSlabBlock;
 import games.twinhead.moreslabsstairsandwalls.block.culled.CulledStairsBlock;
+import games.twinhead.moreslabsstairsandwalls.block.dirt.*;
+import games.twinhead.moreslabsstairsandwalls.block.log.StrippableSlabBlock;
+import games.twinhead.moreslabsstairsandwalls.block.log.StrippableStairsBlock;
+import games.twinhead.moreslabsstairsandwalls.block.log.StrippableWallBlock;
+import games.twinhead.moreslabsstairsandwalls.block.magma.MagmaSlab;
+import games.twinhead.moreslabsstairsandwalls.block.magma.MagmaStairs;
+import games.twinhead.moreslabsstairsandwalls.block.magma.MagmaWall;
 import games.twinhead.moreslabsstairsandwalls.block.redstone.RedstoneSlabBlock;
 import games.twinhead.moreslabsstairsandwalls.block.redstone.RedstoneStairsBlock;
+import games.twinhead.moreslabsstairsandwalls.block.slime.SlimeBlockSlab;
+import games.twinhead.moreslabsstairsandwalls.block.slime.SlimeBlockStairs;
+import games.twinhead.moreslabsstairsandwalls.block.slime.SlimeBlockWall;
+import games.twinhead.moreslabsstairsandwalls.block.soulsand.SoulSandSlab;
+import games.twinhead.moreslabsstairsandwalls.block.soulsand.SoulSandStairs;
+import games.twinhead.moreslabsstairsandwalls.block.soulsand.SoulSandWall;
+import games.twinhead.moreslabsstairsandwalls.block.spreadable.SpreadableSlabBlock;
+import games.twinhead.moreslabsstairsandwalls.block.spreadable.SpreadableStairsBlock;
+import games.twinhead.moreslabsstairsandwalls.block.spreadable.SpreadableWallBlock;
 import net.minecraft.block.*;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -236,21 +252,21 @@ public class ModBlocks {
     public static final RegistryObject<Block> NETHERRACK_STAIRS = createStairsBlock(Blocks.NETHERRACK);
     public static final RegistryObject<Block> NETHERRACK_WALL = createWallBlock(Blocks.NETHERRACK);
 
-    public static final RegistryObject<Block> DIRT_SLAB = createSlabBlock(Blocks.DIRT);
-    public static final RegistryObject<Block> DIRT_STAIRS = createStairsBlock(Blocks.DIRT);
-    public static final RegistryObject<Block> DIRT_WALL = createWallBlock(Blocks.DIRT);
+    public static final RegistryObject<Block> DIRT_SLAB = createDirtSlabBlock(Blocks.DIRT);
+    public static final RegistryObject<Block> DIRT_STAIRS = createDirtStairsBlock(Blocks.DIRT);
+    public static final RegistryObject<Block> DIRT_WALL = createDirtWallBlock(Blocks.DIRT);
 
-    public static final RegistryObject<Block> COARSE_DIRT_SLAB = createSlabBlock(Blocks.COARSE_DIRT);
-    public static final RegistryObject<Block> COARSE_DIRT_STAIRS = createStairsBlock(Blocks.COARSE_DIRT);
-    public static final RegistryObject<Block> COARSE_DIRT_WALL = createWallBlock(Blocks.COARSE_DIRT);
+    public static final RegistryObject<Block> COARSE_DIRT_SLAB = createDirtSlabBlock(Blocks.COARSE_DIRT);
+    public static final RegistryObject<Block> COARSE_DIRT_STAIRS = createDirtStairsBlock(Blocks.COARSE_DIRT);
+    public static final RegistryObject<Block> COARSE_DIRT_WALL = createDirtWallBlock(Blocks.COARSE_DIRT);
 
     public static final RegistryObject<Block> HONEYCOMB_BLOCK_SLAB = createSlabBlock(Blocks.HONEYCOMB_BLOCK);
     public static final RegistryObject<Block> HONEYCOMB_BLOCK_STAIRS = createStairsBlock(Blocks.HONEYCOMB_BLOCK);
     public static final RegistryObject<Block> HONEYCOMB_BLOCK_WALL = createWallBlock(Blocks.HONEYCOMB_BLOCK);
 
-    public static final RegistryObject<Block> ROOTED_DIRT_SLAB = createSlabBlock(Blocks.ROOTED_DIRT);
-    public static final RegistryObject<Block> ROOTED_DIRT_STAIRS = createStairsBlock(Blocks.ROOTED_DIRT);
-    public static final RegistryObject<Block> ROOTED_DIRT_WALL = createWallBlock(Blocks.ROOTED_DIRT);
+    public static final RegistryObject<Block> ROOTED_DIRT_SLAB = createDirtSlabBlock(Blocks.ROOTED_DIRT);
+    public static final RegistryObject<Block> ROOTED_DIRT_STAIRS = createDirtStairsBlock(Blocks.ROOTED_DIRT);
+    public static final RegistryObject<Block> ROOTED_DIRT_WALL = createDirtWallBlock(Blocks.ROOTED_DIRT);
 
     public static final RegistryObject<Block> SNOW_BLOCK_SLAB = createSlabBlock(Blocks.SNOW_BLOCK);
     public static final RegistryObject<Block> SNOW_BLOCK_STAIRS = createStairsBlock(Blocks.SNOW_BLOCK);
@@ -308,35 +324,35 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> OAK_WOOD_SLAB = createSlabBlock(Blocks.OAK_WOOD);
     public static final RegistryObject<Block> OAK_WOOD_STAIRS = createStairsBlock(Blocks.OAK_WOOD);
-    //public static final RegistryObject<Block> OAK_WOOD_WALL = createWallBlock(Blocks.OAK_WOOD);
+    public static final RegistryObject<Block> OAK_WOOD_WALL = createWallBlock(Blocks.OAK_WOOD);
 
     public static final RegistryObject<Block> BIRCH_WOOD_SLAB = createSlabBlock(Blocks.BIRCH_WOOD);
     public static final RegistryObject<Block> BIRCH_WOOD_STAIRS = createStairsBlock(Blocks.BIRCH_WOOD);
-    //public static final RegistryObject<Block> BIRCH_WOOD_WALL = createWallBlock(Blocks.BIRCH_WOOD);
+    public static final RegistryObject<Block> BIRCH_WOOD_WALL = createWallBlock(Blocks.BIRCH_WOOD);
 
     public static final RegistryObject<Block> SPRUCE_WOOD_SLAB = createSlabBlock(Blocks.SPRUCE_WOOD);
     public static final RegistryObject<Block> SPRUCE_WOOD_STAIRS = createStairsBlock(Blocks.SPRUCE_WOOD);
-   // public static final RegistryObject<Block> SPRUCE_WOOD_WALL = createWallBlock(Blocks.SPRUCE_WOOD);
+    public static final RegistryObject<Block> SPRUCE_WOOD_WALL = createWallBlock(Blocks.SPRUCE_WOOD);
 
     public static final RegistryObject<Block> JUNGLE_WOOD_SLAB = createSlabBlock(Blocks.JUNGLE_WOOD);
     public static final RegistryObject<Block> JUNGLE_WOOD_STAIRS = createStairsBlock(Blocks.JUNGLE_WOOD);
-    //public static final RegistryObject<Block> JUNGLE_WOOD_WALL = createWallBlock(Blocks.JUNGLE_WOOD);
+    public static final RegistryObject<Block> JUNGLE_WOOD_WALL = createWallBlock(Blocks.JUNGLE_WOOD);
 
     public static final RegistryObject<Block> DARK_OAK_WOOD_SLAB = createSlabBlock(Blocks.DARK_OAK_WOOD);
     public static final RegistryObject<Block> DARK_OAK_WOOD_STAIRS = createStairsBlock(Blocks.DARK_OAK_WOOD);
-    //public static final RegistryObject<Block> DARK_OAK_WOOD_WALL = createWallBlock(Blocks.DARK_OAK_WOOD);
+    public static final RegistryObject<Block> DARK_OAK_WOOD_WALL = createWallBlock(Blocks.DARK_OAK_WOOD);
 
     public static final RegistryObject<Block> ACACIA_WOOD_SLAB = createSlabBlock(Blocks.ACACIA_WOOD);
     public static final RegistryObject<Block> ACACIA_WOOD_STAIRS = createStairsBlock(Blocks.ACACIA_WOOD);
-    //public static final RegistryObject<Block> ACACIA_WOOD_WALL = createWallBlock(Blocks.ACACIA_WOOD);
+    public static final RegistryObject<Block> ACACIA_WOOD_WALL = createWallBlock(Blocks.ACACIA_WOOD);
 
     public static final RegistryObject<Block> CRIMSON_HYPHAE_SLAB = createSlabBlock(Blocks.CRIMSON_HYPHAE);
     public static final RegistryObject<Block> CRIMSON_HYPHAE_STAIRS = createStairsBlock(Blocks.CRIMSON_HYPHAE);
-    //public static final RegistryObject<Block> CRIMSON_HYPHAE_WALL = createWallBlock(Blocks.CRIMSON_HYPHAE);
+    public static final RegistryObject<Block> CRIMSON_HYPHAE_WALL = createWallBlock(Blocks.CRIMSON_HYPHAE);
 
     public static final RegistryObject<Block> WARPED_HYPHAE_SLAB = createSlabBlock(Blocks.WARPED_HYPHAE);
     public static final RegistryObject<Block> WARPED_HYPHAE_STAIRS = createStairsBlock(Blocks.WARPED_HYPHAE);
-    //public static final RegistryObject<Block> WARPED_HYPHAE_WALL = createWallBlock(Blocks.WARPED_HYPHAE);
+    public static final RegistryObject<Block> WARPED_HYPHAE_WALL = createWallBlock(Blocks.WARPED_HYPHAE);
 
     public static final RegistryObject<Block> STRIPPED_OAK_WOOD_SLAB = createSlabBlock(Blocks.STRIPPED_OAK_WOOD);
     public static final RegistryObject<Block> STRIPPED_OAK_WOOD_STAIRS = createStairsBlock(Blocks.STRIPPED_OAK_WOOD);
@@ -370,37 +386,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> STRIPPED_WARPED_HYPHAE_STAIRS = createStairsBlock(Blocks.STRIPPED_WARPED_HYPHAE);
     public static final RegistryObject<Block> STRIPPED_WARPED_HYPHAE_WALL = createWallBlock(Blocks.STRIPPED_WARPED_HYPHAE);
     
-    public static final RegistryObject<Block> OAK_LOG_SLAB = createSlabBlock(Blocks.OAK_LOG);
-    public static final RegistryObject<Block> OAK_LOG_STAIRS = createStairsBlock(Blocks.OAK_LOG);
-    public static final RegistryObject<Block> OAK_LOG_WALL = createWallBlock(Blocks.OAK_LOG);
 
-    public static final RegistryObject<Block> BIRCH_LOG_SLAB = createSlabBlock(Blocks.BIRCH_LOG);
-    public static final RegistryObject<Block> BIRCH_LOG_STAIRS = createStairsBlock(Blocks.BIRCH_LOG);
-    public static final RegistryObject<Block> BIRCH_LOG_WALL = createWallBlock(Blocks.BIRCH_LOG);
-
-    public static final RegistryObject<Block> SPRUCE_LOG_SLAB = createSlabBlock(Blocks.SPRUCE_LOG);
-    public static final RegistryObject<Block> SPRUCE_LOG_STAIRS = createStairsBlock(Blocks.SPRUCE_LOG);
-    public static final RegistryObject<Block> SPRUCE_LOG_WALL = createWallBlock(Blocks.SPRUCE_LOG);
-
-    public static final RegistryObject<Block> JUNGLE_LOG_SLAB = createSlabBlock(Blocks.JUNGLE_LOG);
-    public static final RegistryObject<Block> JUNGLE_LOG_STAIRS = createStairsBlock(Blocks.JUNGLE_LOG);
-    public static final RegistryObject<Block> JUNGLE_LOG_WALL = createWallBlock(Blocks.JUNGLE_LOG);
-
-    public static final RegistryObject<Block> DARK_OAK_LOG_SLAB = createSlabBlock(Blocks.DARK_OAK_LOG);
-    public static final RegistryObject<Block> DARK_OAK_LOG_STAIRS = createStairsBlock(Blocks.DARK_OAK_LOG);
-    public static final RegistryObject<Block> DARK_OAK_LOG_WALL = createWallBlock(Blocks.DARK_OAK_LOG);
-
-    public static final RegistryObject<Block> ACACIA_LOG_SLAB = createSlabBlock(Blocks.ACACIA_LOG);
-    public static final RegistryObject<Block> ACACIA_LOG_STAIRS = createStairsBlock(Blocks.ACACIA_LOG);
-    public static final RegistryObject<Block> ACACIA_LOG_WALL = createWallBlock(Blocks.ACACIA_LOG);
-
-    public static final RegistryObject<Block> CRIMSON_STEM_SLAB = createSlabBlock(Blocks.CRIMSON_STEM);
-    public static final RegistryObject<Block> CRIMSON_STEM_STAIRS = createStairsBlock(Blocks.CRIMSON_STEM);
-    //public static final RegistryObject<Block> CRIMSON_STEM_WALL = createWallBlock(Blocks.CRIMSON_STEM);
-
-    public static final RegistryObject<Block> WARPED_STEM_SLAB = createSlabBlock(Blocks.WARPED_STEM);
-    public static final RegistryObject<Block> WARPED_STEM_STAIRS = createStairsBlock(Blocks.WARPED_STEM);
-    //public static final RegistryObject<Block> WARPED_STEM_WALL = createWallBlock(Blocks.WARPED_STEM);
 
     public static final RegistryObject<Block> BASALT_SLAB = createSlabBlock(Blocks.BASALT);
     public static final RegistryObject<Block> BASALT_WALL = createWallBlock(Blocks.BASALT);
@@ -496,13 +482,13 @@ public class ModBlocks {
     public static final RegistryObject<Block> RAW_GOLD_BLOCK_STAIRS = createStairsBlock(Blocks.RAW_GOLD_BLOCK);
     public static final RegistryObject<Block> RAW_GOLD_BLOCK_WALL = createWallBlock(Blocks.RAW_GOLD_BLOCK);
 
-    public static final RegistryObject<Block> MAGMA_BLOCK_SLAB = createSlabBlock(Blocks.MAGMA_BLOCK);
-    public static final RegistryObject<Block> MAGMA_BLOCK_STAIRS = createStairsBlock(Blocks.MAGMA_BLOCK);
-    public static final RegistryObject<Block> MAGMA_BLOCK_WALL = createWallBlock(Blocks.MAGMA_BLOCK);
+    public static final RegistryObject<Block> MAGMA_BLOCK_SLAB = BLOCKS.register("magma_block" + "_slab", () -> new MagmaSlab(getSettingsFromBlock(Blocks.MAGMA_BLOCK)));
+    public static final RegistryObject<Block> MAGMA_BLOCK_STAIRS = BLOCKS.register("magma_block" + "_stairs", () -> new MagmaStairs(getSettingsFromBlock(Blocks.MAGMA_BLOCK)));
+    public static final RegistryObject<Block> MAGMA_BLOCK_WALL = BLOCKS.register("magma_block" + "_wall", () -> new MagmaWall(getSettingsFromBlock(Blocks.MAGMA_BLOCK)));
 
-    public static final RegistryObject<Block> SOUL_SAND_SLAB = createSlabBlock(Blocks.SOUL_SAND);
-    public static final RegistryObject<Block> SOUL_SAND_STAIRS = createStairsBlock(Blocks.SOUL_SAND);
-    public static final RegistryObject<Block> SOUL_SAND_WALL = createWallBlock(Blocks.SOUL_SAND);
+    public static final RegistryObject<Block> SOUL_SAND_SLAB = BLOCKS.register("soul_sand" + "_slab", () -> new SoulSandSlab(getSettingsFromBlock(Blocks.SOUL_SAND)));
+    public static final RegistryObject<Block> SOUL_SAND_STAIRS = BLOCKS.register("soul_sand" + "_stairs", () -> new SoulSandStairs(getSettingsFromBlock(Blocks.SOUL_SAND)));
+    public static final RegistryObject<Block> SOUL_SAND_WALL = BLOCKS.register("soul_sand" + "_wall", () -> new SoulSandWall(getSettingsFromBlock(Blocks.SOUL_SAND)));
 
     public static final RegistryObject<Block> SOUL_SOIL_SLAB = createSlabBlock(Blocks.SOUL_SOIL);
     public static final RegistryObject<Block> SOUL_SOIL_STAIRS = createStairsBlock(Blocks.SOUL_SOIL);
@@ -699,19 +685,23 @@ public class ModBlocks {
     public static final RegistryObject<Block> PACKED_MUD_STAIRS = createStairsBlock(Blocks.PACKED_MUD);
     public static final RegistryObject<Block> PACKED_MUD_WALL = createWallBlock(Blocks.PACKED_MUD);
 
-    public static final RegistryObject<Block> MANGROVE_LOG_SLAB = createSlabBlock((Blocks.MANGROVE_LOG));
-    public static final RegistryObject<Block> MANGROVE_LOG_STAIRS = createStairsBlock(Blocks.MANGROVE_LOG);
-    public static final RegistryObject<Block> MANGROVE_LOG_WALL = createWallBlock(Blocks.MANGROVE_LOG);
+    public static final RegistryObject<Block> STRIPPED_MANGROVE_LOG_SLAB = createSlabBlock((Blocks.STRIPPED_MANGROVE_LOG));
+    public static final RegistryObject<Block> STRIPPED_MANGROVE_LOG_STAIRS = createStairsBlock(Blocks.STRIPPED_MANGROVE_LOG);
+    public static final RegistryObject<Block> STRIPPED_MANGROVE_LOG_WALL = createWallBlock(Blocks.STRIPPED_MANGROVE_LOG);
+
+    public static final RegistryObject<Block> MANGROVE_LOG_SLAB = createLogSlabBlock(STRIPPED_MANGROVE_LOG_SLAB, Blocks.MANGROVE_LOG);
+    public static final RegistryObject<Block> MANGROVE_LOG_STAIRS = createLogStairsBlock(STRIPPED_MANGROVE_LOG_STAIRS, Blocks.MANGROVE_LOG);
+    public static final RegistryObject<Block> MANGROVE_LOG_WALL = createLogWallBlock(STRIPPED_MANGROVE_LOG_WALL, Blocks.MANGROVE_LOG);
 
     public static final RegistryObject<Block> MANGROVE_WOOD_SLAB = createSlabBlock((Blocks.MANGROVE_WOOD));
     public static final RegistryObject<Block> MANGROVE_WOOD_STAIRS = createStairsBlock(Blocks.MANGROVE_WOOD);
-    //public static final RegistryObject<Block> MANGROVE_WOOD_WALL = createWallBlock(Blocks.MANGROVE_WOOD);
+    public static final RegistryObject<Block> MANGROVE_WOOD_WALL = createWallBlock(Blocks.MANGROVE_WOOD);
 
     public static final RegistryObject<Block> STRIPPED_MANGROVE_WOOD_SLAB = createSlabBlock((Blocks.STRIPPED_MANGROVE_WOOD));
     public static final RegistryObject<Block> STRIPPED_MANGROVE_WOOD_STAIRS = createStairsBlock(Blocks.STRIPPED_MANGROVE_WOOD);
     public static final RegistryObject<Block> STRIPPED_MANGROVE_WOOD_WALL = createWallBlock(Blocks.STRIPPED_MANGROVE_WOOD);
 
-    public static final RegistryObject<Block> MANGROVE_LEAVES_SLAB = createSlabBlock("mangrove_leaves", (Blocks.MANGROVE_LEAVES));
+    public static final RegistryObject<Block> MANGROVE_LEAVES_SLAB = createSlabBlock("mangrove_leaves", Blocks.MANGROVE_LEAVES);
     public static final RegistryObject<Block> MANGROVE_LEAVES_STAIRS = createStairsBlock("mangrove_leaves", Blocks.MANGROVE_LEAVES);
     public static final RegistryObject<Block> MANGROVE_LEAVES_WALL = createWallBlock("mangrove_leaves", Blocks.MANGROVE_LEAVES);
 
@@ -756,7 +746,77 @@ public class ModBlocks {
     public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_SLAB = createSlabBlock((Blocks.WAXED_OXIDIZED_COPPER));
     public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_STAIRS = createStairsBlock(Blocks.WAXED_OXIDIZED_COPPER);
     public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_WALL = createWallBlock(Blocks.WAXED_OXIDIZED_COPPER);
-    
+
+    public static final RegistryObject<Block> DIRT_PATH_SLAB = BLOCKS.register("dirt_path" + "_slab", () -> new PathBlockSlab(getSettingsFromBlock(Blocks.DIRT_PATH)));
+    public static final RegistryObject<Block> DIRT_PATH_STAIRS = BLOCKS.register("dirt_path" + "_stairs", () -> new PathBlockStairs(getSettingsFromBlock(Blocks.DIRT_PATH)));
+    public static final RegistryObject<Block> DIRT_PATH_WALL = BLOCKS.register("dirt_path" + "_wall", () -> new PathBlockWall(getSettingsFromBlock(Blocks.DIRT_PATH)));
+
+    public static final RegistryObject<Block> STRIPPED_OAK_LOG_SLAB = createSlabBlock(Blocks.STRIPPED_OAK_LOG);
+    public static final RegistryObject<Block> STRIPPED_OAK_LOG_STAIRS = createStairsBlock(Blocks.STRIPPED_OAK_LOG);
+    public static final RegistryObject<Block> STRIPPED_OAK_LOG_WALL = createWallBlock(Blocks.STRIPPED_OAK_LOG);
+
+    public static final RegistryObject<Block> OAK_LOG_SLAB = createLogSlabBlock(STRIPPED_OAK_LOG_SLAB, Blocks.OAK_LOG);
+    public static final RegistryObject<Block> OAK_LOG_STAIRS = createLogStairsBlock(STRIPPED_OAK_LOG_STAIRS, Blocks.OAK_LOG);
+    public static final RegistryObject<Block> OAK_LOG_WALL = createLogWallBlock(STRIPPED_OAK_LOG_WALL, Blocks.OAK_LOG);
+
+    public static final RegistryObject<Block> STRIPPED_BIRCH_LOG_SLAB = createSlabBlock(Blocks.STRIPPED_BIRCH_LOG);
+    public static final RegistryObject<Block> STRIPPED_BIRCH_LOG_STAIRS = createStairsBlock(Blocks.STRIPPED_BIRCH_LOG);
+    public static final RegistryObject<Block> STRIPPED_BIRCH_LOG_WALL = createWallBlock(Blocks.STRIPPED_BIRCH_LOG);
+
+    public static final RegistryObject<Block> BIRCH_LOG_SLAB = createLogSlabBlock(STRIPPED_BIRCH_LOG_SLAB, Blocks.BIRCH_LOG);
+    public static final RegistryObject<Block> BIRCH_LOG_STAIRS = createLogStairsBlock(STRIPPED_BIRCH_LOG_STAIRS, Blocks.BIRCH_LOG);
+    public static final RegistryObject<Block> BIRCH_LOG_WALL = createLogWallBlock(STRIPPED_BIRCH_LOG_WALL, Blocks.BIRCH_LOG);
+
+    public static final RegistryObject<Block> STRIPPED_SPRUCE_LOG_SLAB = createSlabBlock(Blocks.STRIPPED_SPRUCE_LOG);
+    public static final RegistryObject<Block> STRIPPED_SPRUCE_LOG_STAIRS = createStairsBlock(Blocks.STRIPPED_SPRUCE_LOG);
+    public static final RegistryObject<Block> STRIPPED_SPRUCE_LOG_WALL = createWallBlock(Blocks.STRIPPED_SPRUCE_LOG);
+
+    public static final RegistryObject<Block> SPRUCE_LOG_SLAB = createLogSlabBlock(STRIPPED_SPRUCE_LOG_SLAB, Blocks.SPRUCE_LOG);
+    public static final RegistryObject<Block> SPRUCE_LOG_STAIRS = createLogStairsBlock(STRIPPED_SPRUCE_LOG_STAIRS, Blocks.SPRUCE_LOG);
+    public static final RegistryObject<Block> SPRUCE_LOG_WALL = createLogWallBlock(STRIPPED_SPRUCE_LOG_WALL, Blocks.SPRUCE_LOG);
+
+    public static final RegistryObject<Block> STRIPPED_JUNGLE_LOG_SLAB = createSlabBlock(Blocks.STRIPPED_JUNGLE_LOG);
+    public static final RegistryObject<Block> STRIPPED_JUNGLE_LOG_STAIRS = createStairsBlock(Blocks.STRIPPED_JUNGLE_LOG);
+    public static final RegistryObject<Block> STRIPPED_JUNGLE_LOG_WALL = createWallBlock(Blocks.STRIPPED_JUNGLE_LOG);
+
+    public static final RegistryObject<Block> JUNGLE_LOG_SLAB = createLogSlabBlock(STRIPPED_JUNGLE_LOG_SLAB, Blocks.JUNGLE_LOG);
+    public static final RegistryObject<Block> JUNGLE_LOG_STAIRS = createLogStairsBlock(STRIPPED_JUNGLE_LOG_STAIRS, Blocks.JUNGLE_LOG);
+    public static final RegistryObject<Block> JUNGLE_LOG_WALL = createLogWallBlock(STRIPPED_JUNGLE_LOG_WALL, Blocks.JUNGLE_LOG);
+
+    public static final RegistryObject<Block> STRIPPED_DARK_OAK_LOG_SLAB = createSlabBlock(Blocks.STRIPPED_DARK_OAK_LOG);
+    public static final RegistryObject<Block> STRIPPED_DARK_OAK_LOG_STAIRS = createStairsBlock(Blocks.STRIPPED_DARK_OAK_LOG);
+    public static final RegistryObject<Block> STRIPPED_DARK_OAK_LOG_WALL = createWallBlock(Blocks.STRIPPED_DARK_OAK_LOG);
+
+    public static final RegistryObject<Block> DARK_OAK_LOG_SLAB = createLogSlabBlock(STRIPPED_DARK_OAK_LOG_SLAB, Blocks.DARK_OAK_LOG);
+    public static final RegistryObject<Block> DARK_OAK_LOG_STAIRS = createLogStairsBlock(STRIPPED_DARK_OAK_LOG_STAIRS, Blocks.DARK_OAK_LOG);
+    public static final RegistryObject<Block> DARK_OAK_LOG_WALL = createLogWallBlock(STRIPPED_DARK_OAK_LOG_WALL, Blocks.DARK_OAK_LOG);
+
+    public static final RegistryObject<Block> STRIPPED_ACACIA_LOG_SLAB = createSlabBlock(Blocks.STRIPPED_ACACIA_LOG);
+    public static final RegistryObject<Block> STRIPPED_ACACIA_LOG_STAIRS = createStairsBlock(Blocks.STRIPPED_ACACIA_LOG);
+    public static final RegistryObject<Block> STRIPPED_ACACIA_LOG_WALL = createWallBlock(Blocks.STRIPPED_ACACIA_LOG);
+
+    public static final RegistryObject<Block> ACACIA_LOG_SLAB = createLogSlabBlock(STRIPPED_ACACIA_LOG_SLAB, Blocks.ACACIA_LOG);
+    public static final RegistryObject<Block> ACACIA_LOG_STAIRS = createLogStairsBlock(STRIPPED_ACACIA_LOG_STAIRS, Blocks.ACACIA_LOG);
+    public static final RegistryObject<Block> ACACIA_LOG_WALL = createLogWallBlock(STRIPPED_ACACIA_LOG_WALL, Blocks.ACACIA_LOG);
+
+    public static final RegistryObject<Block> STRIPPED_CRIMSON_STEM_SLAB = createSlabBlock(Blocks.STRIPPED_CRIMSON_STEM);
+    public static final RegistryObject<Block> STRIPPED_CRIMSON_STEM_STAIRS = createStairsBlock(Blocks.STRIPPED_CRIMSON_STEM);
+    public static final RegistryObject<Block> STRIPPED_CRIMSON_STEM_WALL = createWallBlock(Blocks.STRIPPED_CRIMSON_STEM);
+
+    public static final RegistryObject<Block> CRIMSON_STEM_SLAB = createLogSlabBlock(STRIPPED_CRIMSON_STEM_SLAB, Blocks.CRIMSON_STEM);
+    public static final RegistryObject<Block> CRIMSON_STEM_STAIRS = createLogStairsBlock(STRIPPED_CRIMSON_STEM_STAIRS, Blocks.CRIMSON_STEM);
+    public static final RegistryObject<Block> CRIMSON_STEM_WALL = createLogWallBlock(STRIPPED_CRIMSON_STEM_WALL, Blocks.CRIMSON_STEM);
+
+    public static final RegistryObject<Block> STRIPPED_WARPED_STEM_SLAB = createSlabBlock(Blocks.STRIPPED_WARPED_STEM);
+    public static final RegistryObject<Block> STRIPPED_WARPED_STEM_STAIRS = createStairsBlock(Blocks.STRIPPED_WARPED_STEM);
+    public static final RegistryObject<Block> STRIPPED_WARPED_STEM_WALL = createWallBlock(Blocks.STRIPPED_WARPED_STEM);
+
+    public static final RegistryObject<Block> WARPED_STEM_SLAB = createLogSlabBlock(STRIPPED_WARPED_STEM_SLAB, Blocks.WARPED_STEM);
+    public static final RegistryObject<Block> WARPED_STEM_STAIRS = createLogStairsBlock(STRIPPED_WARPED_STEM_STAIRS, Blocks.WARPED_STEM);
+    public static final RegistryObject<Block> WARPED_STEM_WALL = createLogWallBlock(STRIPPED_WARPED_STEM_WALL, Blocks.WARPED_STEM);
+
+
+
 
     public static String getNameFromBlock(Block block){
         String[] nameParts = block.getTranslationKey().toLowerCase().split("\\.");
@@ -772,15 +832,25 @@ public class ModBlocks {
                 .luminance((view) -> block.getDefaultState().getLuminance())
                 .mapColor(block.getDefaultMapColor())
                 .hardness(block.getHardness())
-                .resistance(block.getBlastResistance());
+                .resistance(block.getBlastResistance())
+                .velocityMultiplier(block.getVelocityMultiplier())
+                .slipperiness(block.getSlipperiness())
+
+                ;
+
 
         if (!block.getDefaultState().isOpaque()){
-            return settings.nonOpaque();
-        } else if (block.getDefaultState().isToolRequired()){
-            return settings.requiresTool();
-        } else {
-            return settings;
+            settings = settings.nonOpaque();
         }
+        if (block.getDefaultState().isToolRequired()){
+            settings = settings.requiresTool();
+        }
+
+        if (block.getDefaultState().hasRandomTicks()){
+            settings = settings.ticksRandomly();
+        }
+
+        return settings;
 
 
     }
@@ -858,6 +928,30 @@ public class ModBlocks {
 
     public static RegistryObject<Block> createOxidizedWallBlock(Oxidizable.OxidationLevel level, Block copyBlock){
         return BLOCKS.register(getNameFromBlock(copyBlock) + "_wall", () -> new OxidizableWallBlock(level, getSettingsFromBlock(copyBlock)));
+    }
+
+    public static RegistryObject<Block> createDirtSlabBlock(Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_slab", () -> new DirtSlab(getSettingsFromBlock(copyBlock)));
+    }
+
+    public static RegistryObject<Block> createDirtStairsBlock(Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_stairs", () -> new DirtStairs(getSettingsFromBlock(copyBlock)));
+    }
+
+    public static RegistryObject<Block> createDirtWallBlock(Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_wall", () -> new DirtWall(getSettingsFromBlock(copyBlock)));
+    }
+
+    public static RegistryObject<Block> createLogSlabBlock(RegistryObject<Block> strippedBlock, Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_slab", () -> new StrippableSlabBlock(strippedBlock, getSettingsFromBlock(copyBlock)));
+    }
+
+    public static RegistryObject<Block> createLogStairsBlock(RegistryObject<Block> strippedBlock,Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_stairs", () -> new StrippableStairsBlock(strippedBlock, getSettingsFromBlock(copyBlock)));
+    }
+
+    public static RegistryObject<Block> createLogWallBlock(RegistryObject<Block> strippedBlock,Block copyBlock){
+        return BLOCKS.register(getNameFromBlock(copyBlock) + "_wall", () -> new StrippableWallBlock(strippedBlock, getSettingsFromBlock(copyBlock)));
     }
     
     

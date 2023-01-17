@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "more_slabs_stairs_and_walls:dirt_slab",
+    "more_slabs_stairs_and_walls:coarse_dirt_slab",
+    "more_slabs_stairs_and_walls:rooted_dirt_slab",
+    "more_slabs_stairs_and_walls:grass_block_slab",
+    "more_slabs_stairs_and_walls:mycelium_slab",
+    "more_slabs_stairs_and_walls:podzol_slab"
+  ]
+}

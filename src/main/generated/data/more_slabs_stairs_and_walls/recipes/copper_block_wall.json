@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "copper_block_wall",
+  "group": "copper_walls",
   "key": {
     "#": {
       "item": "minecraft:copper_block"

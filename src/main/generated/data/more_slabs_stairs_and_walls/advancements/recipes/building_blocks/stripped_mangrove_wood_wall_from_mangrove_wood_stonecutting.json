@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_mangrove_wood": {
+    "has_acacia_wood": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:mangrove_wood"
+              "minecraft:acacia_wood"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:stripped_mangrove_wood_wall_from_mangrove_wood_stonecutting"
+        "recipe": "minecraft:acacia_wood_wall_from_acacia_wood_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_mangrove_wood",
+      "has_acacia_wood",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:stripped_mangrove_wood_wall_from_mangrove_wood_stonecutting"
+      "minecraft:acacia_wood_wall_from_acacia_wood_stonecutting"
     ]
   }
 }

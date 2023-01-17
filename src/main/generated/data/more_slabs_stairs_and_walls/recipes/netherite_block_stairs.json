@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "netherite_block_stair",
+  "group": "metal_stairs",
   "key": {
     "#": {
       "item": "minecraft:netherite_block"

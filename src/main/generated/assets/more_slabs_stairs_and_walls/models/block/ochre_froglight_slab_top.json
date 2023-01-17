@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "minecraft:block/ochre_froglight_side",
-    "side": "minecraft:block/ochre_froglight_side",
-    "top": "minecraft:block/ochre_froglight_side"
-  }
-}

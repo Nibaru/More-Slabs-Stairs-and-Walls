@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "minecraft:block/green_stained_glass",
-    "side": "more_slabs_stairs_and_walls:block/green_stained_glass_slab_side",
-    "top": "minecraft:block/green_stained_glass"
-  }
-}

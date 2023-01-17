@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "minecraft:block/pearlescent_froglight_side",
-    "side": "minecraft:block/pearlescent_froglight_side",
-    "top": "minecraft:block/pearlescent_froglight_side"
-  }
-}
