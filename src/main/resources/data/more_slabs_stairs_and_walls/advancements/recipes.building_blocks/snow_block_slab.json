@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_snow_block": {
+    "has_oak_wood": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:snow"
+              "minecraft:oak_wood"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "more_slabs_stairs_and_walls:snow_block_slab"
+        "recipe": "minecraft:oak_wood_wall_from_oak_wood_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_snow_block",
+      "has_oak_wood",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "more_slabs_stairs_and_walls:snow_block_slab"
+      "minecraft:oak_wood_wall_from_oak_wood_stonecutting"
     ]
   }
 }

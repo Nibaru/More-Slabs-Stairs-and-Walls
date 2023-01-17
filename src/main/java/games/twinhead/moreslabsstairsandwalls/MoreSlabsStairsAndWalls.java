@@ -1,13 +1,11 @@
 package games.twinhead.moreslabsstairsandwalls;
 
-import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
-import games.twinhead.moreslabsstairsandwalls.client.Client;
+import games.twinhead.moreslabsstairsandwalls.registry.ModBlocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -22,7 +20,7 @@ public class MoreSlabsStairsAndWalls {
 
     public static final String MOD_ID ="more_slabs_stairs_and_walls";
 
-    public static final ItemGroup ITEM_GROUP = new ItemGroup("creative_tab") {
+    public static final ItemGroup ITEM_GROUP = new ItemGroup(MOD_ID + ".creative_tab") {
         @Override
         public ItemStack createIcon() {
             return new ItemStack(ModBlocks.GRASS_BLOCK_STAIRS.get());

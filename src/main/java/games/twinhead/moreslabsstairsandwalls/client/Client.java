@@ -1,7 +1,7 @@
 package games.twinhead.moreslabsstairsandwalls.client;
 
 import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
-import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
+import games.twinhead.moreslabsstairsandwalls.registry.ModBlocks;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.color.world.GrassColors;
