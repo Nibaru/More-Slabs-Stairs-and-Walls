@@ -29,6 +29,8 @@ import games.twinhead.moreslabsstairsandwalls.block.soulsand.SoulSandWall;
 import games.twinhead.moreslabsstairsandwalls.block.spreadable.SpreadableSlabBlock;
 import games.twinhead.moreslabsstairsandwalls.block.spreadable.SpreadableStairsBlock;
 import games.twinhead.moreslabsstairsandwalls.block.spreadable.SpreadableWallBlock;
+import games.twinhead.moreslabsstairsandwalls.block.terracotta.GlazedTerracottaSlabBlock;
+import games.twinhead.moreslabsstairsandwalls.block.terracotta.GlazedTerracottaStairsBlock;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.minecraft.block.*;
@@ -202,6 +204,22 @@ public class BlockRegistry {
                     AZALEA_LEAVES,
                     FLOWERING_AZALEA_LEAVES -> new LeavesSlabBlock(getSettingsFromBlock(copyBlock));
 
+            case WHITE_GLAZED_TERRACOTTA,
+                    YELLOW_GLAZED_TERRACOTTA,
+                    BLACK_GLAZED_TERRACOTTA,
+                    RED_GLAZED_TERRACOTTA,
+                    PURPLE_GLAZED_TERRACOTTA,
+                    PINK_GLAZED_TERRACOTTA,
+                    ORANGE_GLAZED_TERRACOTTA,
+                    MAGENTA_GLAZED_TERRACOTTA,
+                    LIME_GLAZED_TERRACOTTA,
+                    LIGHT_GRAY_GLAZED_TERRACOTTA,
+                    LIGHT_BLUE_GLAZED_TERRACOTTA,
+                    GREEN_GLAZED_TERRACOTTA,
+                    GRAY_GLAZED_TERRACOTTA,
+                    CYAN_GLAZED_TERRACOTTA,
+                    BROWN_GLAZED_TERRACOTTA,
+                    BLUE_GLAZED_TERRACOTTA -> new GlazedTerracottaSlabBlock(getSettingsFromBlock(copyBlock));
 
             default -> new SlabBlock(getSettingsFromBlock(copyBlock));
         };
@@ -273,6 +291,23 @@ public class BlockRegistry {
                     SPRUCE_LEAVES,
                     AZALEA_LEAVES,
                     FLOWERING_AZALEA_LEAVES -> new LeavesStairsBlock(copyBlock.getDefaultState(),getSettingsFromBlock(copyBlock));
+
+            case WHITE_GLAZED_TERRACOTTA,
+                YELLOW_GLAZED_TERRACOTTA,
+                BLACK_GLAZED_TERRACOTTA,
+                RED_GLAZED_TERRACOTTA,
+                PURPLE_GLAZED_TERRACOTTA,
+                PINK_GLAZED_TERRACOTTA,
+                ORANGE_GLAZED_TERRACOTTA,
+                MAGENTA_GLAZED_TERRACOTTA,
+                LIME_GLAZED_TERRACOTTA,
+                LIGHT_GRAY_GLAZED_TERRACOTTA,
+                LIGHT_BLUE_GLAZED_TERRACOTTA,
+                GREEN_GLAZED_TERRACOTTA,
+                GRAY_GLAZED_TERRACOTTA,
+                CYAN_GLAZED_TERRACOTTA,
+                BROWN_GLAZED_TERRACOTTA,
+                BLUE_GLAZED_TERRACOTTA -> new GlazedTerracottaStairsBlock(copyBlock.getDefaultState(), getSettingsFromBlock(copyBlock));
 
             default -> new StairsBlock(copyBlock.getDefaultState(),getSettingsFromBlock(copyBlock));
         };

@@ -43,6 +43,22 @@ public class ModelGenerator extends FabricModelProvider {
         return VariantsBlockStateSupplier.create(slabBlock).coordinate(BlockStateVariantMap.create(Properties.SLAB_TYPE).register(SlabType.BOTTOM, BlockStateVariant.create().put(VariantSettings.MODEL, bottomModelId)).register(SlabType.TOP, BlockStateVariant.create().put(VariantSettings.MODEL, topModelId)).register(SlabType.DOUBLE, BlockStateVariant.create().put(VariantSettings.MODEL, fullModelId)));
     }
 
+    public static BlockStateSupplier createRotatableSlabBlockState(Block slabBlock, Identifier bottomId, Identifier topId, Identifier doubleId, boolean uvlock) {
+        return VariantsBlockStateSupplier.create(slabBlock).coordinate(BlockStateVariantMap.create(Properties.SLAB_TYPE, Properties.HORIZONTAL_FACING)
+                .register(SlabType.BOTTOM, Direction.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, bottomId).put(VariantSettings.Y, VariantSettings.Rotation.R0).put(VariantSettings.UVLOCK, uvlock))
+                .register(SlabType.BOTTOM, Direction.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, bottomId).put(VariantSettings.Y, VariantSettings.Rotation.R180).put(VariantSettings.UVLOCK, uvlock))
+                .register(SlabType.BOTTOM, Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, bottomId).put(VariantSettings.Y, VariantSettings.Rotation.R90).put(VariantSettings.UVLOCK, uvlock))
+                .register(SlabType.BOTTOM, Direction.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, bottomId).put(VariantSettings.Y, VariantSettings.Rotation.R270).put(VariantSettings.UVLOCK, uvlock))
+                .register(SlabType.DOUBLE, Direction.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, doubleId).put(VariantSettings.Y, VariantSettings.Rotation.R0).put(VariantSettings.UVLOCK, uvlock))
+                .register(SlabType.DOUBLE, Direction.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, doubleId).put(VariantSettings.Y, VariantSettings.Rotation.R180).put(VariantSettings.UVLOCK, uvlock))
+                .register(SlabType.DOUBLE, Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, doubleId).put(VariantSettings.Y, VariantSettings.Rotation.R90).put(VariantSettings.UVLOCK, uvlock))
+                .register(SlabType.DOUBLE, Direction.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, doubleId).put(VariantSettings.Y, VariantSettings.Rotation.R270).put(VariantSettings.UVLOCK, uvlock))
+                .register(SlabType.TOP, Direction.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, topId).put(VariantSettings.Y, VariantSettings.Rotation.R0).put(VariantSettings.UVLOCK, uvlock))
+                .register(SlabType.TOP, Direction.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, topId).put(VariantSettings.Y, VariantSettings.Rotation.R180).put(VariantSettings.UVLOCK, uvlock))
+                .register(SlabType.TOP, Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, topId).put(VariantSettings.Y, VariantSettings.Rotation.R90).put(VariantSettings.UVLOCK, uvlock))
+                .register(SlabType.TOP, Direction.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, topId).put(VariantSettings.Y, VariantSettings.Rotation.R270).put(VariantSettings.UVLOCK, uvlock)));
+    }
+
     public void generateSlab(BlockStateModelGenerator blockStateModelGenerator, ModBlocks block){
         TextureMap textureMap = TextureMap.all(block.getCopyBlock());
 
@@ -69,6 +85,14 @@ public class ModelGenerator extends FabricModelProvider {
             return;
         }
 
+        if(block.toString().toLowerCase().contains("glazed")){
+            slab =  new Model(Optional.of(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/glazed_terracotta_slab")), Optional.empty(), TextureKey.BOTTOM, TextureKey.TOP, TextureKey.SIDE)
+                    .upload(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/" + block.toString().toLowerCase() + "_slab"), textureMap, blockStateModelGenerator.modelCollector);
+            slabTop =  new Model(Optional.of(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/glazed_terracotta_slab_top")), Optional.empty(), TextureKey.BOTTOM, TextureKey.TOP, TextureKey.SIDE)
+                    .upload(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/" + block.toString().toLowerCase() + "_slab_top"), textureMap, blockStateModelGenerator.modelCollector);
+            blockStateModelGenerator.blockStateCollector.accept(createRotatableSlabBlockState(block.getSlabBlock(), slab, slabTop, new Identifier("minecraft", "block/" + block.toString().toLowerCase()), false));
+            return;
+        }
 
 
 
@@ -77,13 +101,16 @@ public class ModelGenerator extends FabricModelProvider {
                     .upload(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/" + block.toString().toLowerCase() + "_slab"), textureMap, blockStateModelGenerator.modelCollector);
             slabTop =  new Model(Optional.of(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/leaves_slab_top")), Optional.empty(), TextureKey.BOTTOM, TextureKey.TOP, TextureKey.SIDE)
                     .upload(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/" + block.toString().toLowerCase() + "_slab_top"), textureMap, blockStateModelGenerator.modelCollector);
-        } else {
+        }else {
             slab = Models.SLAB.upload(block.getSlabBlock(),
                     (block.toString().contains("glass") ? textureMap.put(TextureKey.SIDE, new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/" + block.toString().toLowerCase() + "_slab_side")) : textureMap ), blockStateModelGenerator.modelCollector);
             slabTop = Models.SLAB_TOP.upload(block.getSlabBlock(), textureMap, blockStateModelGenerator.modelCollector);
         }
 
+
+
         Identifier fullId = new Identifier("minecraft" , "block/" + (block.toString().toLowerCase().contains("waxed") ? block.toString().toLowerCase().replace("waxed_", "") : block.toString().toLowerCase()));
+
         blockStateModelGenerator.blockStateCollector.accept(createSlabBlockState(block.getSlabBlock(), slab, slabTop, fullId));
     }
 
@@ -147,6 +174,14 @@ public class ModelGenerator extends FabricModelProvider {
                     .upload(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/" + block.toString().toLowerCase() + "_stairs"), textureMap, blockStateModelGenerator.modelCollector);
             outer = new Model(Optional.of(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/leaves_outer_stairs")), Optional.empty(), TextureKey.BOTTOM, TextureKey.TOP, TextureKey.SIDE)
                     .upload(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/" + block.toString().toLowerCase() + "_stairs_outer"), textureMap, blockStateModelGenerator.modelCollector);
+        } else if(block.toString().contains("glazed")){
+            inner =  new Model(Optional.of(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/glazed_terracotta_stairs_inner")), Optional.empty(), TextureKey.BOTTOM, TextureKey.TOP, TextureKey.SIDE)
+                    .upload(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/" + block.toString().toLowerCase() + "_stairs_inner"), textureMap, blockStateModelGenerator.modelCollector);
+            stairs = new Model(Optional.of(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/glazed_terracotta_stairs")), Optional.empty(), TextureKey.BOTTOM, TextureKey.TOP, TextureKey.SIDE)
+                    .upload(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/" + block.toString().toLowerCase() + "_stairs"), textureMap, blockStateModelGenerator.modelCollector);
+            outer = new Model(Optional.of(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/glazed_terracotta_stairs_outer")), Optional.empty(), TextureKey.BOTTOM, TextureKey.TOP, TextureKey.SIDE)
+                    .upload(new Identifier(MoreSlabsStairsAndWalls.mod_id, "block/" + block.toString().toLowerCase() + "_stairs_outer"), textureMap, blockStateModelGenerator.modelCollector);
+            uvLock = false;
         } else {
             stairs = Models.STAIRS.upload(block.getStairsBlock(), textureMap, blockStateModelGenerator.modelCollector);
             inner = Models.INNER_STAIRS.upload(block.getStairsBlock(), textureMap, blockStateModelGenerator.modelCollector);
@@ -181,7 +216,7 @@ public class ModelGenerator extends FabricModelProvider {
 
             blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createWallBlockState(block.getWallBlock(), post, low, tall));
             blockStateModelGenerator.registerParentedItemModel(block.getWallBlock().asItem(), inventory);
-        } else if(block.toString().contains("log") || block.equals(ModBlocks.BASALT) || block.equals(ModBlocks.HAY_BLOCK) || block.equals(ModBlocks.PUMPKIN) || block.equals(ModBlocks.MELON) || (block.toString().contains("stem") && !block.toString().contains("mushroom"))){
+        } else if(block.toString().contains("log") || block.equals(ModBlocks.BASALT) || block.equals(ModBlocks.POLISHED_BASALT) || block.equals(ModBlocks.HAY_BLOCK) || block.equals(ModBlocks.PUMPKIN) || block.equals(ModBlocks.MELON) || (block.toString().contains("stem") && !block.toString().contains("mushroom"))){
 
             textureMap.put(TextureKey.SIDE, new Identifier("minecraft", "block/" + block.getSideTexture()));
             textureMap.put(TextureKey.LAYER0, new Identifier("minecraft", "block/" + block.getSideTexture()));

@@ -43,6 +43,23 @@ public enum ModBlocks {
     BLUE_TERRACOTTA(Blocks.BLUE_TERRACOTTA, ToolType.PICKAXE, DyeColor.BLUE),
     TERRACOTTA(Blocks.TERRACOTTA, ToolType.PICKAXE),
 
+    WHITE_GLAZED_TERRACOTTA(Blocks.WHITE_GLAZED_TERRACOTTA, ToolType.PICKAXE, DyeColor.WHITE),
+    YELLOW_GLAZED_TERRACOTTA(Blocks.YELLOW_GLAZED_TERRACOTTA, ToolType.PICKAXE, DyeColor.YELLOW),
+    BLACK_GLAZED_TERRACOTTA(Blocks.BLACK_GLAZED_TERRACOTTA, ToolType.PICKAXE, DyeColor.BLACK),
+    RED_GLAZED_TERRACOTTA(Blocks.RED_GLAZED_TERRACOTTA, ToolType.PICKAXE, DyeColor.RED),
+    PURPLE_GLAZED_TERRACOTTA(Blocks.PURPLE_GLAZED_TERRACOTTA, ToolType.PICKAXE, DyeColor.PURPLE),
+    PINK_GLAZED_TERRACOTTA(Blocks.PINK_GLAZED_TERRACOTTA, ToolType.PICKAXE, DyeColor.PINK),
+    ORANGE_GLAZED_TERRACOTTA(Blocks.ORANGE_GLAZED_TERRACOTTA, ToolType.PICKAXE, DyeColor.ORANGE),
+    MAGENTA_GLAZED_TERRACOTTA(Blocks.MAGENTA_GLAZED_TERRACOTTA, ToolType.PICKAXE, DyeColor.MAGENTA),
+    LIME_GLAZED_TERRACOTTA(Blocks.LIME_GLAZED_TERRACOTTA, ToolType.PICKAXE, DyeColor.LIME),
+    LIGHT_GRAY_GLAZED_TERRACOTTA(Blocks.LIGHT_GRAY_GLAZED_TERRACOTTA, ToolType.PICKAXE, DyeColor.LIGHT_GRAY),
+    LIGHT_BLUE_GLAZED_TERRACOTTA(Blocks.LIGHT_BLUE_GLAZED_TERRACOTTA, ToolType.PICKAXE, DyeColor.LIGHT_BLUE),
+    GREEN_GLAZED_TERRACOTTA(Blocks.GREEN_GLAZED_TERRACOTTA, ToolType.PICKAXE, DyeColor.GREEN),
+    GRAY_GLAZED_TERRACOTTA(Blocks.GRAY_GLAZED_TERRACOTTA, ToolType.PICKAXE, DyeColor.GRAY),
+    CYAN_GLAZED_TERRACOTTA(Blocks.CYAN_GLAZED_TERRACOTTA, ToolType.PICKAXE, DyeColor.CYAN),
+    BROWN_GLAZED_TERRACOTTA(Blocks.BROWN_GLAZED_TERRACOTTA, ToolType.PICKAXE, DyeColor.BROWN),
+    BLUE_GLAZED_TERRACOTTA(Blocks.BLUE_GLAZED_TERRACOTTA, ToolType.PICKAXE, DyeColor.BLUE),
+
     WHITE_WOOL(Blocks.WHITE_WOOL, ToolType.NONE, DyeColor.WHITE),
     YELLOW_WOOL(Blocks.YELLOW_WOOL, ToolType.NONE, DyeColor.YELLOW),
     BLACK_WOOL(Blocks.BLACK_WOOL, ToolType.NONE, DyeColor.BLACK),
@@ -104,7 +121,7 @@ public enum ModBlocks {
     
     
 
-    BASALT(Blocks.BASALT, ToolType.PICKAXE, true, false, true, "basalt_side", "basalt_top", "basalt_top"),
+    BASALT(Blocks.BASALT, ToolType.PICKAXE, Layer.SOLID,"basalt_side", "basalt_top", "basalt_top"),
     SMOOTH_BASALT(Blocks.SMOOTH_BASALT, ToolType.PICKAXE),
 
     CUT_COPPER(Blocks.CUT_COPPER, ToolType.PICKAXE, false, false, true),
@@ -304,13 +321,19 @@ public enum ModBlocks {
     WAXED_WEATHERED_COPPER(Blocks.WAXED_WEATHERED_COPPER, ToolType.PICKAXE, "weathered_copper"),
     WAXED_OXIDIZED_COPPER(Blocks.WAXED_OXIDIZED_COPPER, ToolType.PICKAXE, "oxidized_copper"),
 
-
-
-
     //2.3.0
 
     DIRT_PATH(Blocks.DIRT_PATH, ToolType.SHOVEL),
 
+    //2.4.0
+    CHISELED_SANDSTONE(Blocks.CHISELED_SANDSTONE, ToolType.PICKAXE, Layer.SOLID, "chiseled_sandstone", "sandstone_top", "sandstone_top"),
+    CHISELED_RED_SANDSTONE(Blocks.CHISELED_RED_SANDSTONE, ToolType.PICKAXE, Layer.SOLID, "chiseled_red_sandstone", "red_sandstone_top", "red_sandstone_top"),
+
+    CUT_SANDSTONE(Blocks.CUT_SANDSTONE, ToolType.PICKAXE, Layer.SOLID, "cut_sandstone", "sandstone_top", "sandstone_top"),
+    CUT_RED_SANDSTONE(Blocks.CUT_RED_SANDSTONE, ToolType.PICKAXE, Layer.SOLID, "cut_red_sandstone", "red_sandstone_top", "red_sandstone_top"),
+
+    CHISELED_NETHER_BRICKS(Blocks.CHISELED_NETHER_BRICKS, ToolType.PICKAXE),
+    POLISHED_BASALT(Blocks.POLISHED_BASALT, ToolType.PICKAXE, Layer.SOLID, "polished_basalt_side", "polished_basalt_top", "polished_basalt_top"),
     ;
 
 

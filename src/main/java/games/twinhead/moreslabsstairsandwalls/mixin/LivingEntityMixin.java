@@ -40,13 +40,13 @@ public class LivingEntityMixin extends Entity {
 
     @Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/Block;getSlipperiness()F"))
     public float addIceSlipperiness(Block instance){
-        if(((LivingEntity)(Object)this).world.getBlockState(this.getVelocityAffectingPos().up()).getBlock() instanceof SlabBlock carpetBlock){
+        if(((LivingEntity)(Object)this).world.getBlockState(this.getVelocityAffectingPos().up()).getBlock() instanceof SlabBlock){
             if(world.getBlockState(this.getVelocityAffectingPos().up()).get(SlabBlock.TYPE) == SlabType.BOTTOM)
-                return carpetBlock.getSlipperiness();
+                return ((LivingEntity)(Object)this).world.getBlockState(this.getVelocityAffectingPos().up()).getBlock().getSlipperiness();
         }
-        if(((LivingEntity)(Object)this).world.getBlockState(this.getVelocityAffectingPos().up()).getBlock() instanceof StairsBlock carpetBlock){
+        if(((LivingEntity)(Object)this).world.getBlockState(this.getVelocityAffectingPos().up()).getBlock() instanceof StairsBlock){
             if(world.getBlockState(this.getVelocityAffectingPos().up()).get(StairsBlock.HALF) == BlockHalf.BOTTOM)
-                return carpetBlock.getSlipperiness();
+                return ((LivingEntity)(Object)this).world.getBlockState(this.getVelocityAffectingPos().up()).getBlock().getSlipperiness();
         }
         return instance.getSlipperiness();
     }

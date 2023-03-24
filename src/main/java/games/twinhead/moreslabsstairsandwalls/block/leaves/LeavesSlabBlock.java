@@ -1,7 +1,11 @@
 package games.twinhead.moreslabsstairsandwalls.block.leaves;
 
 import net.minecraft.block.*;
+import net.minecraft.block.enums.SlabType;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
@@ -16,6 +20,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import org.jetbrains.annotations.Nullable;
 
 public class LeavesSlabBlock extends SlabBlock {
     public static final int MAX_DISTANCE = 7;
@@ -34,6 +39,7 @@ public class LeavesSlabBlock extends SlabBlock {
         return (Integer)state.get(DISTANCE) == 7 && !(Boolean)state.get(PERSISTENT);
     }
 
+    @SuppressWarnings("deprecation")
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (this.shouldDecay(state)) {
             dropStacks(state, world, pos);
@@ -41,16 +47,51 @@ public class LeavesSlabBlock extends SlabBlock {
         }
     }
 
+    public FluidState getFluidState(BlockState state) {
+        return (Boolean)state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+    }
 
+    public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
+        if (!(Boolean)state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
+            if (!world.isClient()) {
+                world.setBlockState(pos, (BlockState)state.with(Properties.WATERLOGGED, true), 3);
+                world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean canFillWithFluid(BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
+        return fluid == Fluids.WATER;
+    }
+
+    @Nullable
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        BlockPos blockPos = ctx.getBlockPos();
+        BlockState blockState = ctx.getWorld().getBlockState(blockPos);
+        FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
+        if (blockState.isOf(this)) {
+            return (BlockState)((BlockState)blockState.with(TYPE, SlabType.DOUBLE)).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+        } else {
+            BlockState blockState2 = (BlockState)((BlockState)this.getDefaultState().with(TYPE, SlabType.BOTTOM)).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+            Direction direction = ctx.getSide();
+            return direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double)blockPos.getY() > 0.5)) ? blockState2 : (BlockState)blockState2.with(TYPE, SlabType.TOP);
+        }
+    }
 
     protected boolean shouldDecay(BlockState state) {
         return !(Boolean)state.get(PERSISTENT) && (Integer)state.get(DISTANCE) == 7;
     }
 
+    @SuppressWarnings("deprecation")
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         world.setBlockState(pos, updateDistanceFromLogs(state, world, pos), 3);
     }
 
+    @SuppressWarnings("deprecation")
     public int getOpacity(BlockState state, BlockView world, BlockPos pos) {
         return 1;
     }

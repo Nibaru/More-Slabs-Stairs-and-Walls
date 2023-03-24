@@ -13,9 +13,10 @@ import net.minecraft.world.WorldAccess;
 
 public class SoulSandSlab extends SlabBlock {
 
-    protected static final VoxelShape COLLISION_SHAPE_BOTTOM = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 6.0, 16.0);
-    protected static final VoxelShape COLLISION_SHAPE_TOP = Block.createCuboidShape(0.0, 8.0, 0.0, 16.0, 14.0, 16.0);
-    protected static final VoxelShape COLLISION_SHAPE_FULL = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 14.0, 16.0);
+    public static final VoxelShape COLLISION_SHAPE_BOTTOM = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 6.0, 16.0);
+    public static final VoxelShape COLLISION_SHAPE_TOP = Block.createCuboidShape(0.0, 8.0, 0.0, 16.0, 14.0, 16.0);
+    public static final VoxelShape COLLISION_SHAPE_FULL = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 14.0, 16.0);
+
 
     public SoulSandSlab(Settings settings) {
         super(settings);
