@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "polished_basalt_stair",
+  "key": {
+    "#": {
+      "item": "minecraft:polished_basalt"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "more_slabs_stairs_and_walls:polished_basalt_stairs"
+  }
+}

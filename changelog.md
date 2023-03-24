@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.4.0 - Fabric 1.18.2]
+
+## Added
+- Slabs, Stairs and Walls for:
+  - All Glazed Terracotta Blocks
+  - Polished Basalt
+  - Chiseled Sandstone
+  - Cut SandStone
+  - Chiseled Red Sandstone
+  - Cut Red SandStone
+  - Chiseled Nether Bricks
+- Stairs for:
+  - Basalt
+
+## Changed
+- Snow Block Slab recipe updated
+- Double Leaf slabs can now be waterlogged
+- Collision shape of Soul Sand Stairs has been lowered 2 pixels.
+
+## Fixed
+- Glass Resource Pack was missing causing a crash.
+
+
 ## [2.3.0 - Fabric 1.18.2]
 
 ## Added

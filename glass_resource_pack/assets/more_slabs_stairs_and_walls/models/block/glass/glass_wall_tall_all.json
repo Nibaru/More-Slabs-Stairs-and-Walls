@@ -1,0 +1,37 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"particle": "#wall",
+		"wall": "block/glass"
+	},
+	"elements": [
+		{
+			"name": "wall",
+			"from": [5, 0, 0],
+			"to": [11, 16, 16],
+			"faces": {
+				"east": {"uv": [16, 0, 0, 16], "rotation": 180, "texture": "#wall"},
+				"west": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#wall"},
+				"down": {"uv": [2.8, 0, 5.2, 16], "rotation": 180, "texture": "#wall", "cullface": "down"}
+			}
+		},
+		{
+			"from": [11, 0, 5],
+			"to": [16, 16, 11],
+			"faces": {
+				"north": {"uv": [0, 0, 5, 16], "texture": "#wall"},
+				"south": {"uv": [11, 0, 16, 16], "texture": "#wall"},
+				"down": {"uv": [2.8, 0, 5.2, 5], "rotation": 90, "texture": "#wall"}
+			}
+		},
+		{
+			"from": [0, 0, 5],
+			"to": [5, 16, 11],
+			"faces": {
+				"north": {"uv": [11, 0, 16, 16], "texture": "#wall"},
+				"south": {"uv": [0, 0, 5, 16], "texture": "#wall"},
+				"down": {"uv": [2.8, 11, 5.2, 16], "rotation": 90, "texture": "#wall"}
+			}
+		}
+	]
+}
