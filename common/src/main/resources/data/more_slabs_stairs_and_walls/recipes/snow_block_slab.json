@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:snow"
+    },
+    {
+      "item": "minecraft:snow"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "more_slabs_stairs_and_walls:snow_block_slab"
+  }
+}

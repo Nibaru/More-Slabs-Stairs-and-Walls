@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "games.twinhead.moreslabsstairsandwalls.mixin.fabric",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+  ],
+  "mixins": [
+    "ItemEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

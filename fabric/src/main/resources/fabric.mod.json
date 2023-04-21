@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "more_slabs_stairs_and_walls",
+  "version": "${version}",
+  "name": "More Slabs, Stairs & Walls",
+  "description": "Expand your building options with More Slabs, Stairs, & Walls.",
+  "authors": [
+    "Nibaru"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/more-slabs-stairs-and-walls",
+    "sources": "https://github.com/Nibaru/More-Slabs-Stairs-and-Walls",
+    "issues": "https://github.com/Nibaru/More-Slabs-Stairs-and-Walls/issues"
+  },
+  "license": "LGPL-3.0",
+  "icon": "assets/more_slabs_stairs_and_walls/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "games.twinhead.moreslabsstairsandwalls.fabric.MoreSlabsStairsAndWallsFabric"
+    ],
+    "fabric-datagen": [
+      "games.twinhead.moreslabsstairsandwalls.datagen.fabric.DataGenerators"
+    ],
+    "client": [
+      "games.twinhead.moreslabsstairsandwalls.client.fabric.ClientInitializer"
+    ]
+  },
+  "mixins": [
+    "more_slabs_stairs_and_walls.mixins.json",
+    "more_slabs_stairs_and_walls-common.mixins.json"
+  ],
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.19.2"
+  }
+}

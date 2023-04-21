@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "package": "games.twinhead.moreslabsstairsandwalls.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+  ],
+  "mixins": [
+    "BubbleColumnBlockMixin",
+    "EntityMixin",
+    "GlassBlockMixin",
+    "PistonHandlerMixin",
+    "PlantBlockMixin",
+    "PointedDripstoneBlockMixin",
+    "SlimeBlockMixin",
+    "SpreadableBlockMixin",
+    "TreeDecoratorGeneratorMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
