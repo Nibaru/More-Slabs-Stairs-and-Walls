@@ -21,8 +21,7 @@ import games.twinhead.moreslabsstairsandwalls.block.leaves.*;
 import games.twinhead.moreslabsstairsandwalls.block.magma.MagmaSlab;
 import games.twinhead.moreslabsstairsandwalls.block.magma.MagmaStairs;
 import games.twinhead.moreslabsstairsandwalls.block.magma.MagmaWall;
-import games.twinhead.moreslabsstairsandwalls.block.oxidizable.OxidizableWall;
-import games.twinhead.moreslabsstairsandwalls.block.oxidizable.WaxedWall;
+import games.twinhead.moreslabsstairsandwalls.block.oxidizable.*;
 import games.twinhead.moreslabsstairsandwalls.block.redstone.RedstoneSlab;
 import games.twinhead.moreslabsstairsandwalls.block.redstone.RedstoneStairs;
 import games.twinhead.moreslabsstairsandwalls.block.redstone.RedstoneWall;
@@ -260,19 +259,22 @@ public enum ModBlocks {
     CRACKED_POLISHED_BLACKSTONE_BRICKS(Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS, BlockTags.PICKAXE_MINEABLE),
     CRACKED_DEEPSLATE_TILES(Blocks.CRACKED_DEEPSLATE_TILES, BlockTags.PICKAXE_MINEABLE),
 
-
-
-
     //CRYING_OBSIDIAN(Blocks.CRYING_OBSIDIAN, ModelType.CUBE_ALL, BaseSlab.class, null, BaseWall.class, BlockTags.PICKAXE_MINEABLE, BlockTags.DRAGON_IMMUNE, BlockTags.NEEDS_DIAMOND_TOOL),
     //NETHERRACK(Blocks.NETHERRACK, ModelType.CUBE_ALL, BaseSlab.class, null, BaseWall.class, BlockTags.PICKAXE_MINEABLE),
-
-
 
 
     BASALT(Blocks.BASALT, ModelType.CUBE_BOTTOM_TOP, BlockTags.PICKAXE_MINEABLE),
     SMOOTH_BASALT(Blocks.SMOOTH_BASALT,   BlockTags.PICKAXE_MINEABLE),
 
+    OXIDIZED_COPPER(Blocks.OXIDIZED_COPPER, ModelType.CUBE_ALL, Oxidizable.OxidationLevel.OXIDIZED, null,  OxidizableSlab.class, OxidizableStairs.class, OxidizableWall.class, BlockTags.PICKAXE_MINEABLE),
+    WEATHERED_COPPER(Blocks.WEATHERED_COPPER, ModelType.CUBE_ALL, Oxidizable.OxidationLevel.WEATHERED, OXIDIZED_COPPER, OxidizableSlab.class, OxidizableStairs.class, OxidizableWall.class, BlockTags.PICKAXE_MINEABLE),
+    EXPOSED_COPPER(Blocks.EXPOSED_COPPER, ModelType.CUBE_ALL,Oxidizable.OxidationLevel.EXPOSED, WEATHERED_COPPER, OxidizableSlab.class, OxidizableStairs.class, OxidizableWall.class, BlockTags.PICKAXE_MINEABLE),
+    COPPER_BLOCK(Blocks.COPPER_BLOCK,  ModelType.CUBE_ALL ,Oxidizable.OxidationLevel.UNAFFECTED, EXPOSED_COPPER,  OxidizableSlab.class, OxidizableStairs.class, OxidizableWall.class, BlockTags.PICKAXE_MINEABLE),
 
+    WAXED_COPPER_BLOCK(Blocks.WAXED_COPPER_BLOCK,"copper_block", COPPER_BLOCK, WaxedSlab.class, WaxedStairs.class, WaxedWall.class, BlockTags.PICKAXE_MINEABLE),
+    WAXED_EXPOSED_COPPER(Blocks.WAXED_EXPOSED_COPPER,"exposed_copper", EXPOSED_COPPER, WaxedSlab.class, WaxedStairs.class, WaxedWall.class, BlockTags.PICKAXE_MINEABLE),
+    WAXED_WEATHERED_COPPER(Blocks.WAXED_WEATHERED_COPPER, "weathered_copper", WEATHERED_COPPER, WaxedSlab.class, WaxedStairs.class, WaxedWall.class, BlockTags.PICKAXE_MINEABLE),
+    WAXED_OXIDIZED_COPPER(Blocks.WAXED_OXIDIZED_COPPER, "oxidized_copper", OXIDIZED_COPPER, WaxedSlab.class, WaxedStairs.class, WaxedWall.class, BlockTags.PICKAXE_MINEABLE),
 
     OXIDIZED_CUT_COPPER(Blocks.OXIDIZED_CUT_COPPER, ModelType.CUBE_ALL, Oxidizable.OxidationLevel.OXIDIZED, null,  null, null, OxidizableWall.class, BlockTags.PICKAXE_MINEABLE),
     WEATHERED_CUT_COPPER(Blocks.WEATHERED_CUT_COPPER, ModelType.CUBE_ALL, Oxidizable.OxidationLevel.WEATHERED, OXIDIZED_CUT_COPPER, null, null, OxidizableWall.class, BlockTags.PICKAXE_MINEABLE),

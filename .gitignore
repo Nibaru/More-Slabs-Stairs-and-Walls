@@ -19,3 +19,5 @@ classes/
 *.launch
 /.idea/
 /gradle/
+/common/src/main/generated/
+/fabric/src/main/generated/

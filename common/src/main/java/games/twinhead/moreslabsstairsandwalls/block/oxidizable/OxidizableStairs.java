@@ -1,7 +1,7 @@
 package games.twinhead.moreslabsstairsandwalls.block.oxidizable;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
-import games.twinhead.moreslabsstairsandwalls.block.base.BaseWall;
+import games.twinhead.moreslabsstairsandwalls.block.base.BaseStairs;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,24 +15,22 @@ import net.minecraft.world.World;
 
 import java.util.Optional;
 
-public class OxidizableWall extends BaseWall implements CustomOxidizable {
+public class OxidizableStairs extends BaseStairs implements CustomOxidizable {
 
     private final Oxidizable.OxidationLevel oxidationLevel;
     private final ModBlocks nextBlock;
 
-    public OxidizableWall(Oxidizable.OxidationLevel oxidationLevel, ModBlocks nextBlock, Settings arg) {
-        super(arg);
+    public OxidizableStairs(BlockState defaultState, Oxidizable.OxidationLevel oxidationLevel, ModBlocks nextBlock, Settings arg) {
+        super(defaultState, arg);
         this.oxidationLevel = oxidationLevel;
         this.nextBlock = nextBlock;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-       return useItem(state, world, pos, player, hand);
+        return useItem(state, world, pos, player, hand);
     }
 
-    @SuppressWarnings("deprecation")
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         tickDegradation(state, world, pos, random);
     }
@@ -48,5 +46,6 @@ public class OxidizableWall extends BaseWall implements CustomOxidizable {
     public Optional<BlockState> getDegradationResult(BlockState state) {
         return Optional.ofNullable((this.nextBlock == null ? state : nextBlock.getBlock(getBlockType()).getStateWithProperties(state)));
     }
+
 
 }

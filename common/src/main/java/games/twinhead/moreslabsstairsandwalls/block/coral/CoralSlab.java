@@ -27,7 +27,7 @@ public class CoralSlab extends BaseSlab {
     @SuppressWarnings("deprecation")
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (!this.isInWater(world, pos) && !state.get(WATERLOGGED)) {
-            world.setBlockState(pos, this.deadCoralBlock.getBlock(ModBlocks.BlockType.SLAB).getStateWithProperties(state), Block.NOTIFY_LISTENERS);
+            world.setBlockState(pos, this.deadCoralBlock.getBlock(getBlockType()).getStateWithProperties(state), Block.NOTIFY_LISTENERS);
         }
     }
 

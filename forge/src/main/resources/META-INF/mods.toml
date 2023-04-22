@@ -1,6 +1,7 @@
 modLoader = "javafml"
 loaderVersion = "[43,)"
 issueTrackerURL = "https://github.com/Nibaru/More-Slabs-Stairs-and-Walls/issues"
+displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 license = "LGPL-3.0"
 
 [[mods]]
