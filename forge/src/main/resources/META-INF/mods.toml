@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[43,)"
+loaderVersion = "[44,)"
 issueTrackerURL = "https://github.com/Nibaru/More-Slabs-Stairs-and-Walls/issues"
 displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 license = "LGPL-3.0"
@@ -17,13 +17,13 @@ logoFile = "logo.png"
 [[dependencies.more_slabs_stairs_and_walls]]
 modId = "forge"
 mandatory = true
-versionRange = "[43,)"
+versionRange = "[44,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.more_slabs_stairs_and_walls]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.19.2,)"
+versionRange = "[1.19.4,)"
 ordering = "NONE"
 side = "BOTH"

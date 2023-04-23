@@ -1,0 +1,6 @@
+{
+	"parent": "more_slabs_stairs_and_walls:block/glass/glass_wall_tall_full",
+	"textures": {
+		"wall": "block/black_stained_glass"
+	}
+}

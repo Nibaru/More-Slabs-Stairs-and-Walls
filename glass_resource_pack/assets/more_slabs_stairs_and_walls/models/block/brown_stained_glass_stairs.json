@@ -1,0 +1,6 @@
+{
+	"parent": "more_slabs_stairs_and_walls:block/glass_stairs",
+	"textures": {
+		"glass": "minecraft:block/brown_stained_glass"
+	}
+}
