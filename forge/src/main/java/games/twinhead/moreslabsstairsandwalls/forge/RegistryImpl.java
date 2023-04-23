@@ -4,11 +4,12 @@ package games.twinhead.moreslabsstairsandwalls.forge;
 import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseWall;
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Oxidizable;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -30,14 +31,6 @@ public class RegistryImpl {
     public static Block getBlock(Identifier id) {
         return MOD_BLOCKS.get(id).get();
     }
-
-    public static final ItemGroup modGroup = new ItemGroup(MoreSlabsStairsAndWalls.MOD_ID + ".creative_tab") {
-        @Override
-        public ItemStack createIcon() {
-            return new ItemStack(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.STAIRS));
-        }
-    };
-
 
     public static void registerBlocks(){
         for (ModBlocks modBlock : ModBlocks.values()) {
@@ -118,8 +111,6 @@ public class RegistryImpl {
     }
 
     public static void registerItem(Identifier id, RegistryObject<Block> block){
-        MOD_ITEMS.put(id, ITEMS.register(id.getPath(), () -> new BlockItem(block.get(), new Item.Settings().group(modGroup))));
-        //Item item = net.minecraft.util.registry.Registry.register(Registry.ITEM, id, new BlockItem(block.get(), new Item.Settings().group(modGroup)));
-        //ItemGroupEvents.modifyEntriesEvent(MoreSlabsStairsAndWalls.modGroup).register(entries -> entries.add(item));
+        MOD_ITEMS.put(id, ITEMS.register(id.getPath(), () -> new BlockItem(block.get(), new Item.Settings())));
     }
 }

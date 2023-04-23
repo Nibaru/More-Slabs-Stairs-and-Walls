@@ -20,15 +20,15 @@ public class EntityMixin{
 
     @Inject(method = "getVelocityAffectingPos", at = @At(value = "HEAD"), cancellable = true)
     public void changeCheckedBlock(CallbackInfoReturnable<BlockPos> cir){
-        if(((Entity)(Object)this).world.getBlockState(new BlockPos(((Entity)(Object)this).getPos().x, ((Entity)(Object)this).getBoundingBox().minY - 0.25, ((Entity)(Object)this).getPos().z)).getBlock() instanceof BaseSlab){
-            if(((Entity)(Object)this).world.getBlockState(new BlockPos(((Entity)(Object)this).getPos().x, ((Entity)(Object)this).getBoundingBox().minY - 0.25, ((Entity)(Object)this).getPos().z)).get(SlabBlock.TYPE) == SlabType.BOTTOM){
-                cir.setReturnValue(new BlockPos(((Entity)(Object)this).getPos().x, ((Entity)(Object)this).getBoundingBox().minY - 0.25, ((Entity)(Object)this).getPos().z));
+        if(((Entity)(Object)this).world.getBlockState(((Entity)(Object)this).getBlockPos()).getBlock() instanceof BaseSlab){
+            if(((Entity)(Object)this).world.getBlockState(((Entity)(Object)this).getBlockPos()).get(SlabBlock.TYPE) == SlabType.BOTTOM){
+                cir.setReturnValue(((Entity)(Object)this).getBlockPos());
             }
         }
 
-        if(((Entity)(Object)this).world.getBlockState(new BlockPos(((Entity)(Object)this).getPos().x, ((Entity)(Object)this).getBoundingBox().minY - 0.25, ((Entity)(Object)this).getPos().z)).getBlock() instanceof BaseStairs){
-            if(((Entity)(Object)this).world.getBlockState(new BlockPos(((Entity)(Object)this).getPos().x, ((Entity)(Object)this).getBoundingBox().minY - 0.25, ((Entity)(Object)this).getPos().z)).get(StairsBlock.HALF) == BlockHalf.BOTTOM){
-                cir.setReturnValue(new BlockPos(((Entity)(Object)this).getPos().x, ((Entity)(Object)this).getBoundingBox().minY - 0.25, ((Entity)(Object)this).getPos().z));
+        if(((Entity)(Object)this).world.getBlockState(((Entity)(Object)this).getBlockPos()).getBlock() instanceof BaseStairs){
+            if(((Entity)(Object)this).world.getBlockState(((Entity)(Object)this).getBlockPos()).get(StairsBlock.HALF) == BlockHalf.BOTTOM){
+                cir.setReturnValue(((Entity)(Object)this).getBlockPos());
             }
         }
     }

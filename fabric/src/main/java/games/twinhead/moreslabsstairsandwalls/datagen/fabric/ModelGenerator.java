@@ -2,7 +2,7 @@ package games.twinhead.moreslabsstairsandwalls.datagen.fabric;
 
 import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -10,16 +10,16 @@ import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.block.enums.StairShape;
 import net.minecraft.data.client.*;
+import net.minecraft.registry.Registries;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.Registry;
 
 import java.util.Optional;
 
 public class ModelGenerator extends FabricModelProvider {
 
-    public ModelGenerator(FabricDataGenerator dataGenerator) {
+    public ModelGenerator(FabricDataOutput dataGenerator) {
         super(dataGenerator);
     }
 
@@ -42,23 +42,23 @@ public class ModelGenerator extends FabricModelProvider {
         TextureMap textureMap = getTextureMap(block);
         Identifier slab = null;
         Identifier slabTop = null;
-        Identifier slabDouble = getResourceId(Registry.BLOCK.getId(block.parentBlock));
+        Identifier slabDouble = getResourceId(Registries.BLOCK.getId(block.parentBlock));
 
         switch (block.modelType){
-            case LOG -> textureMap.put(TextureKey.SIDE, new Identifier("minecraft", "block/" + Registry.BLOCK.getId(block.parentBlock).toString().split(":")[1]));
+            case LOG -> textureMap.put(TextureKey.SIDE, new Identifier("minecraft", "block/" + Registries.BLOCK.getId(block.parentBlock).toString().split(":")[1]));
             case LOG_ALL -> {
                 Identifier id = null;
                 if(block.toString().toLowerCase().contains("hyphae")) {
-                    id =new Identifier("minecraft", "block/" + Registry.BLOCK.getId(block.parentBlock).toString().split(":")[1].replace("hyphae", "stem"));
+                    id =new Identifier("minecraft", "block/" + Registries.BLOCK.getId(block.parentBlock).toString().split(":")[1].replace("hyphae", "stem"));
                 } else {
-                    id = new Identifier("minecraft", "block/" + Registry.BLOCK.getId(block.parentBlock).toString().split(":")[1].replace("wood", "log"));
+                    id = new Identifier("minecraft", "block/" + Registries.BLOCK.getId(block.parentBlock).toString().split(":")[1].replace("wood", "log"));
                 }
                 textureMap.put(TextureKey.ALL, id);
             }
             case GRASS -> {
-                textureMap.put(TextureKey.LAYER0, getIdWithSuffix(getResourceId(Registry.BLOCK.getId(block.parentBlock)), block.equals(ModBlocks.GRASS_BLOCK) ? "_side_overlay" : "_side"));
-                textureMap.put(TextureKey.BOTTOM, getResourceId(Registry.BLOCK.getId((block.equals(ModBlocks.CRIMSON_NYLIUM) || block.equals(ModBlocks.WARPED_NYLIUM) ? Blocks.NETHERRACK : Blocks.DIRT))));
-                if(block.equals(ModBlocks.CRIMSON_NYLIUM) || block.equals(ModBlocks.WARPED_NYLIUM)) textureMap.put(TextureKey.TOP, getResourceId(Registry.BLOCK.getId(block.parentBlock)));
+                textureMap.put(TextureKey.LAYER0, getIdWithSuffix(getResourceId(Registries.BLOCK.getId(block.parentBlock)), block.equals(ModBlocks.GRASS_BLOCK) ? "_side_overlay" : "_side"));
+                textureMap.put(TextureKey.BOTTOM, getResourceId(Registries.BLOCK.getId((block.equals(ModBlocks.CRIMSON_NYLIUM) || block.equals(ModBlocks.WARPED_NYLIUM) ? Blocks.NETHERRACK : Blocks.DIRT))));
+                if(block.equals(ModBlocks.CRIMSON_NYLIUM) || block.equals(ModBlocks.WARPED_NYLIUM)) textureMap.put(TextureKey.TOP, getResourceId(Registries.BLOCK.getId(block.parentBlock)));
 
                 slab = getTemplateModel("template_grass_slab", TextureKey.SIDE, TextureKey.TOP, TextureKey.BOTTOM, TextureKey.LAYER0).upload(getResourceId(block.getId(ModBlocks.BlockType.SLAB)),  textureMap, blockStateModelGenerator.modelCollector);
                 slabTop = getTemplateModel("template_grass_slab_top", TextureKey.SIDE, TextureKey.TOP, TextureKey.BOTTOM, TextureKey.LAYER0).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.SLAB)), "_top"),  textureMap, blockStateModelGenerator.modelCollector);
@@ -71,7 +71,7 @@ public class ModelGenerator extends FabricModelProvider {
             }
             case GLASS -> {
                 textureMap.put(TextureKey.SIDE, getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.SLAB)),  "_side"));
-                textureMap.put(TextureKey.END, getResourceId(Registry.BLOCK.getId(block.parentBlock)));
+                textureMap.put(TextureKey.END, getResourceId(Registries.BLOCK.getId(block.parentBlock)));
                 slab = getTemplateModel("template_glass_slab",TextureKey.END, TextureKey.SIDE).upload(getResourceId(block.getId(ModBlocks.BlockType.SLAB)),  textureMap, blockStateModelGenerator.modelCollector);
                 slabTop = getTemplateModel("template_glass_slab_top",TextureKey.END, TextureKey.SIDE).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.SLAB)), "_top"),  textureMap, blockStateModelGenerator.modelCollector);
                 slabDouble = getTemplateModel("template_glass_slab_double", TextureKey.ALL).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.SLAB)), "_double"),  textureMap, blockStateModelGenerator.modelCollector);
@@ -82,11 +82,17 @@ public class ModelGenerator extends FabricModelProvider {
             }
 
             case GLAZED_TERRACOTTA -> {
-                textureMap.put(TextureKey.ALL, getResourceId(Registry.BLOCK.getId(block.parentBlock)));
+                textureMap.put(TextureKey.ALL, getResourceId(Registries.BLOCK.getId(block.parentBlock)));
                 slab = getTemplateModel("glazed_terracotta_slab", TextureKey.ALL).upload(getResourceId(block.getId(ModBlocks.BlockType.SLAB)),  textureMap, blockStateModelGenerator.modelCollector);
                 slabTop = getTemplateModel("glazed_terracotta_slab_top", TextureKey.ALL).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.SLAB)), "_top"),  textureMap, blockStateModelGenerator.modelCollector);
-                blockStateModelGenerator.blockStateCollector.accept(createRotatableSlabBlockState(block.getBlock(ModBlocks.BlockType.SLAB), slab, slabTop, getResourceId(Registry.BLOCK.getId(block.parentBlock)), false));
+                blockStateModelGenerator.blockStateCollector.accept(createRotatableSlabBlockState(block.getBlock(ModBlocks.BlockType.SLAB), slab, slabTop, getResourceId(Registries.BLOCK.getId(block.parentBlock)), false));
                 return;
+            }
+
+            case CUSTOM -> {
+                if(block.toString().contains("waxed")){
+                    slabDouble = new Identifier("minecraft", "block/" + block.textureid);
+                }
             }
 
         };
@@ -104,22 +110,22 @@ public class ModelGenerator extends FabricModelProvider {
         Identifier outer = null;
 
         switch (block.modelType){
-            case LOG ->textureMap.put(TextureKey.SIDE, new Identifier("minecraft", "block/" + Registry.BLOCK.getId(block.parentBlock).toString().split(":")[1]));
+            case LOG ->textureMap.put(TextureKey.SIDE, new Identifier("minecraft", "block/" + Registries.BLOCK.getId(block.parentBlock).toString().split(":")[1]));
             case LOG_ALL -> {
                 Identifier id = null;
                 if(block.toString().toLowerCase().contains("hyphae")) {
-                    id =new Identifier("minecraft", "block/" + Registry.BLOCK.getId(block.parentBlock).toString().split(":")[1].replace("hyphae", "stem"));
+                    id =new Identifier("minecraft", "block/" + Registries.BLOCK.getId(block.parentBlock).toString().split(":")[1].replace("hyphae", "stem"));
                 } else {
-                    id = new Identifier("minecraft", "block/" + Registry.BLOCK.getId(block.parentBlock).toString().split(":")[1].replace("wood", "log"));
+                    id = new Identifier("minecraft", "block/" + Registries.BLOCK.getId(block.parentBlock).toString().split(":")[1].replace("wood", "log"));
                 }
                 textureMap.put(TextureKey.ALL, id);
             }
             case GRASS -> {
                 TextureKey[] textureKeys = new TextureKey[]{TextureKey.SIDE, TextureKey.TOP, TextureKey.BOTTOM, TextureKey.LAYER0};
 
-                textureMap.put(TextureKey.LAYER0, getIdWithSuffix(getResourceId(Registry.BLOCK.getId(block.parentBlock)), block.equals(ModBlocks.GRASS_BLOCK) ? "_side_overlay" : "_side"));
-                textureMap.put(TextureKey.BOTTOM, getResourceId(Registry.BLOCK.getId((block.equals(ModBlocks.CRIMSON_NYLIUM) || block.equals(ModBlocks.WARPED_NYLIUM) ? Blocks.NETHERRACK : Blocks.DIRT))));
-                if(block.equals(ModBlocks.CRIMSON_NYLIUM) || block.equals(ModBlocks.WARPED_NYLIUM)) textureMap.put(TextureKey.TOP, getResourceId(Registry.BLOCK.getId(block.parentBlock)));
+                textureMap.put(TextureKey.LAYER0, getIdWithSuffix(getResourceId(Registries.BLOCK.getId(block.parentBlock)), block.equals(ModBlocks.GRASS_BLOCK) ? "_side_overlay" : "_side"));
+                textureMap.put(TextureKey.BOTTOM, getResourceId(Registries.BLOCK.getId((block.equals(ModBlocks.CRIMSON_NYLIUM) || block.equals(ModBlocks.WARPED_NYLIUM) ? Blocks.NETHERRACK : Blocks.DIRT))));
+                if(block.equals(ModBlocks.CRIMSON_NYLIUM) || block.equals(ModBlocks.WARPED_NYLIUM)) textureMap.put(TextureKey.TOP, getResourceId(Registries.BLOCK.getId(block.parentBlock)));
 
 
                 stair = getTemplateModel("template_grass_stairs", textureKeys).upload(getResourceId(block.getId(ModBlocks.BlockType.STAIRS)),  textureMap, blockStateModelGenerator.modelCollector);
@@ -145,7 +151,7 @@ public class ModelGenerator extends FabricModelProvider {
                 outer = getTemplateModel("glazed_terracotta_stairs_outer", TextureKey.ALL).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.STAIRS)), "_outer"),  textureMap, blockStateModelGenerator.modelCollector);
             }
             case GLASS -> {
-                textureMap.put(TextureKey.BOTTOM, getResourceId(Registry.BLOCK.getId(block.parentBlock)));
+                textureMap.put(TextureKey.BOTTOM, getResourceId(Registries.BLOCK.getId(block.parentBlock)));
                 textureMap.put(TextureKey.FRONT, getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.SLAB)), "_side"));
                 textureMap.put(TextureKey.TOP, getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.STAIRS)), "_small"));
                 textureMap.put(TextureKey.SIDE, getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.STAIRS)), "_side"));
@@ -177,10 +183,10 @@ public class ModelGenerator extends FabricModelProvider {
 
         switch (block.modelType){
             case GRASS -> {
-                textureMap.put(TextureKey.LAYER0, getIdWithSuffix(getResourceId(Registry.BLOCK.getId(block.parentBlock)), block.equals(ModBlocks.GRASS_BLOCK) ? "_side_overlay" : "_side"));
-                textureMap.put(TextureKey.BOTTOM, getResourceId(Registry.BLOCK.getId((block.equals(ModBlocks.CRIMSON_NYLIUM) || block.equals(ModBlocks.WARPED_NYLIUM) ? Blocks.NETHERRACK : Blocks.DIRT))));
-                if(block.equals(ModBlocks.CRIMSON_NYLIUM) || block.equals(ModBlocks.WARPED_NYLIUM)) textureMap.put(TextureKey.TOP, getResourceId(Registry.BLOCK.getId(block.parentBlock)));
-                textureMap.put(TextureKey.SIDE, getIdWithSuffix(getResourceId(Registry.BLOCK.getId(block.parentBlock)), "_side"));
+                textureMap.put(TextureKey.LAYER0, getIdWithSuffix(getResourceId(Registries.BLOCK.getId(block.parentBlock)), block.equals(ModBlocks.GRASS_BLOCK) ? "_side_overlay" : "_side"));
+                textureMap.put(TextureKey.BOTTOM, getResourceId(Registries.BLOCK.getId((block.equals(ModBlocks.CRIMSON_NYLIUM) || block.equals(ModBlocks.WARPED_NYLIUM) ? Blocks.NETHERRACK : Blocks.DIRT))));
+                if(block.equals(ModBlocks.CRIMSON_NYLIUM) || block.equals(ModBlocks.WARPED_NYLIUM)) textureMap.put(TextureKey.TOP, getResourceId(Registries.BLOCK.getId(block.parentBlock)));
+                textureMap.put(TextureKey.SIDE, getIdWithSuffix(getResourceId(Registries.BLOCK.getId(block.parentBlock)), "_side"));
 
                 post = getTemplateModel("template_grass_wall_post", TextureKey.BOTTOM, TextureKey.TOP, TextureKey.SIDE, TextureKey.LAYER0).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.WALL)), "_post"),  textureMap, blockStateModelGenerator.modelCollector);
                 low = getTemplateModel("template_grass_wall_side", TextureKey.BOTTOM, TextureKey.TOP, TextureKey.SIDE, TextureKey.LAYER0).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.WALL)), "_side"),  textureMap, blockStateModelGenerator.modelCollector);
@@ -189,8 +195,8 @@ public class ModelGenerator extends FabricModelProvider {
             }
 
             case LOG -> {
-                textureMap.put(TextureKey.SIDE, new Identifier("minecraft", "block/" + Registry.BLOCK.getId(block.parentBlock).toString().split(":")[1]));
-                textureMap.put(TextureKey.BOTTOM, new Identifier("minecraft", "block/" + Registry.BLOCK.getId(block.parentBlock).toString().split(":")[1] + "_top"));
+                textureMap.put(TextureKey.SIDE, new Identifier("minecraft", "block/" + Registries.BLOCK.getId(block.parentBlock).toString().split(":")[1]));
+                textureMap.put(TextureKey.BOTTOM, new Identifier("minecraft", "block/" + Registries.BLOCK.getId(block.parentBlock).toString().split(":")[1] + "_top"));
 
                 post = getTemplateModel("template_column_wall_post", TextureKey.BOTTOM, TextureKey.TOP, TextureKey.SIDE).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.WALL)), "_post"),  textureMap, blockStateModelGenerator.modelCollector);
                 low = getTemplateModel("template_column_wall_side", TextureKey.BOTTOM, TextureKey.TOP, TextureKey.SIDE).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.WALL)), "_side"),  textureMap, blockStateModelGenerator.modelCollector);
@@ -201,9 +207,9 @@ public class ModelGenerator extends FabricModelProvider {
             case LOG_ALL -> {
                 Identifier id = null;
                 if(block.toString().toLowerCase().contains("hyphae")) {
-                    id =new Identifier("minecraft", "block/" + Registry.BLOCK.getId(block.parentBlock).toString().split(":")[1].replace("hyphae", "stem"));
+                    id =new Identifier("minecraft", "block/" + Registries.BLOCK.getId(block.parentBlock).toString().split(":")[1].replace("hyphae", "stem"));
                 } else {
-                    id = new Identifier("minecraft", "block/" + Registry.BLOCK.getId(block.parentBlock).toString().split(":")[1].replace("wood", "log"));
+                    id = new Identifier("minecraft", "block/" + Registries.BLOCK.getId(block.parentBlock).toString().split(":")[1].replace("wood", "log"));
                 }
                 textureMap.put(TextureKey.WALL, id);
                 post = Models.TEMPLATE_WALL_POST.upload(block.getBlock(ModBlocks.BlockType.WALL), textureMap, blockStateModelGenerator.modelCollector);
@@ -219,7 +225,7 @@ public class ModelGenerator extends FabricModelProvider {
                 inventroy = getTemplateModel("template_leaves_wall_inventory", TextureKey.WALL).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.WALL)), "_inventory"),  textureMap, blockStateModelGenerator.modelCollector);
             }
             case CUBE_BOTTOM_TOP -> {
-                textureMap.put(TextureKey.BOTTOM, new Identifier("minecraft", "block/" + Registry.BLOCK.getId(block.parentBlock).toString().split(":")[1] + "_top"));
+                textureMap.put(TextureKey.BOTTOM, new Identifier("minecraft", "block/" + Registries.BLOCK.getId(block.parentBlock).toString().split(":")[1] + "_top"));
 
                 post = getTemplateModel("template_column_wall_post", TextureKey.BOTTOM, TextureKey.TOP, TextureKey.SIDE).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.WALL)), "_post"),  textureMap, blockStateModelGenerator.modelCollector);
                 low = getTemplateModel("template_column_wall_side", TextureKey.BOTTOM, TextureKey.TOP, TextureKey.SIDE).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.WALL)), "_side"),  textureMap, blockStateModelGenerator.modelCollector);

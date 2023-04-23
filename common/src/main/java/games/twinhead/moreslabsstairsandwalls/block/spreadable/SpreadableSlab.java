@@ -8,17 +8,18 @@ import net.minecraft.block.enums.SlabType;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.BlockTags;
-import net.minecraft.tag.FluidTags;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -31,6 +32,7 @@ import net.minecraft.world.gen.feature.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertilizable {
 
@@ -69,7 +71,7 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
     }
 
     @Override
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         if(state.get(SlabBlock.TYPE) == SlabType.BOTTOM) return false;
 
         return world.getBlockState(pos.up()).isAir();
@@ -85,15 +87,7 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
         BlockState blockState = world.getBlockState(pos);
         BlockPos blockPos = pos.up();
         ChunkGenerator chunkGenerator = world.getChunkManager().getChunkGenerator();
-        if (blockState.isOf(ModBlocks.CRIMSON_NYLIUM.getBlock(ModBlocks.BlockType.SLAB))) {
-            NetherConfiguredFeatures.CRIMSON_FOREST_VEGETATION_BONEMEAL.value().generate(world, chunkGenerator, random, blockPos);
-        } else if (blockState.isOf(ModBlocks.WARPED_NYLIUM.getBlock(ModBlocks.BlockType.SLAB))) {
-            NetherConfiguredFeatures.WARPED_FOREST_VEGETATION_BONEMEAL.value().generate(world, chunkGenerator, random, blockPos);
-            NetherConfiguredFeatures.NETHER_SPROUTS_BONEMEAL.value().generate(world, chunkGenerator, random, blockPos);
-            if (random.nextInt(8) == 0) {
-                NetherConfiguredFeatures.TWISTING_VINES_BONEMEAL.value().generate(world, chunkGenerator, random, blockPos);
-            }
-        } else if (blockState.isOf(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.SLAB))) {
+        if (blockState.isOf(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.SLAB))) {
             growBoneMeal(world,random,pos,state);
         }
 
@@ -102,15 +96,16 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
     public void growBoneMeal(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         BlockPos blockPos = pos.up();
         BlockState blockState = Blocks.GRASS.getDefaultState();
+        Optional<RegistryEntry.Reference<PlacedFeature>> optional = world.getRegistryManager().get(RegistryKeys.PLACED_FEATURE).getEntry(VegetationPlacedFeatures.GRASS_BONEMEAL);
 
-        label46:
+        label49:
         for(int i = 0; i < 128; ++i) {
             BlockPos blockPos2 = blockPos;
 
             for(int j = 0; j < i / 16; ++j) {
                 blockPos2 = blockPos2.add(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
                 if (!world.getBlockState(blockPos2.down()).isOf(this) || world.getBlockState(blockPos2).isFullCube(world, blockPos2)) {
-                    continue label46;
+                    continue label49;
                 }
             }
 
@@ -129,7 +124,11 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
 
                     registryEntry = ((RandomPatchFeatureConfig)((ConfiguredFeature)list.get(0)).config()).feature();
                 } else {
-                    registryEntry = VegetationPlacedFeatures.GRASS_BONEMEAL;
+                    if (!optional.isPresent()) {
+                        continue;
+                    }
+
+                    registryEntry = (RegistryEntry)optional.get();
                 }
 
                 ((PlacedFeature)registryEntry.value()).generateUnregistered(world, world.getChunkManager().getChunkGenerator(), random, blockPos2);
@@ -217,7 +216,7 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(WATERLOGGED)) {
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
 
         state = state.with(SNOWY, world.getBlockState(pos.up()).isIn(BlockTags.SNOW));

@@ -2,12 +2,12 @@ package games.twinhead.moreslabsstairsandwalls.datagen.fabric;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.fabric.RegistryImpl;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 
 public class LangDatagen extends FabricLanguageProvider {
 
-    protected LangDatagen(FabricDataGenerator dataGenerator) {
+    protected LangDatagen(FabricDataOutput dataGenerator) {
         super(dataGenerator);
     }
 

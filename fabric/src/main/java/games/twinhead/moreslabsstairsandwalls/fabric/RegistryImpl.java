@@ -4,14 +4,16 @@ package games.twinhead.moreslabsstairsandwalls.fabric;
 import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseWall;
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -19,9 +21,9 @@ import java.util.HashMap;
 
 public class RegistryImpl {
 
-    public static ItemGroup modGroup  = FabricItemGroupBuilder.build(
-            new Identifier(MoreSlabsStairsAndWalls.MOD_ID, "creative_tab"),
-            () -> new ItemStack(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.STAIRS)));
+    public static ItemGroup modGroup  = FabricItemGroup.builder(new Identifier(MoreSlabsStairsAndWalls.MOD_ID, "creative_tab"))
+            .icon(()-> new ItemStack(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.STAIRS)))
+            .build();
 
     public static final HashMap<Identifier, Block> MOD_BLOCKS = new HashMap<>();
 
@@ -95,11 +97,12 @@ public class RegistryImpl {
             throw new RuntimeException(e);
         }
 
-        MOD_BLOCKS.put(block.getId(type), Registry.register(Registry.BLOCK, block.getId(type), b));
+        MOD_BLOCKS.put(block.getId(type), Registry.register(Registries.BLOCK, block.getId(type), b));
         registerItem(block.getId(type), b);
     }
 
     public static void registerItem(Identifier id, Block block){
-        Registry.register(Registry.ITEM, id, new BlockItem(block, new Item.Settings().group(modGroup)));
+        Item item = Registry.register(Registries.ITEM, id, new BlockItem(block, new Item.Settings()));
+        ItemGroupEvents.modifyEntriesEvent(modGroup).register(entries -> entries.add(item));
     }
 }

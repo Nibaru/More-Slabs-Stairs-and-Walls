@@ -34,7 +34,7 @@ public class SoulSandStairs extends BaseStairs {
     protected static final VoxelShape[]TOP_SHAPES = composeShapes(TOP_SHAPE, COLLISION_BOTTOM_NORTH_WEST_CORNER_SHAPE, COLLISION_BOTTOM_NORTH_EAST_CORNER_SHAPE, COLLISION_BOTTOM_SOUTH_WEST_CORNER_SHAPE, COLLISION_BOTTOM_SOUTH_EAST_CORNER_SHAPE);
     protected static final VoxelShape[]BOTTOM_SHAPES = composeShapes(BOTTOM_SHAPE, COLLISION_TOP_NORTH_WEST_CORNER_SHAPE, COLLISION_TOP_NORTH_EAST_CORNER_SHAPE, COLLISION_TOP_SOUTH_WEST_CORNER_SHAPE, COLLISION_TOP_SOUTH_EAST_CORNER_SHAPE);
 
-    private static final int[] SHAPE_INDICES = new int[]{12, 5, 3, 10, 14, 13, 7, 11, 13, 7, 11, 14, 8, 4, 1, 2, 4, 1, 2, 8};;
+    private static final int[] SHAPE_INDICES = new int[]{12, 5, 3, 10, 14, 13, 7, 11, 13, 7, 11, 14, 8, 4, 1, 2, 4, 1, 2, 8};
 
     private static VoxelShape[] composeShapes(VoxelShape base, VoxelShape northWest, VoxelShape northEast, VoxelShape southWest, VoxelShape southEast) {
         return (VoxelShape[]) IntStream.range(0, 16).mapToObj((i) -> {
@@ -89,12 +89,12 @@ public class SoulSandStairs extends BaseStairs {
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (direction == Direction.UP && neighborState.isOf(Blocks.WATER) || this.getFluidState(state).isOf(Fluids.WATER)) {
-            world.createAndScheduleBlockTick(pos, this, 20);
+            world.scheduleBlockTick(pos, this, 20);
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        world.createAndScheduleBlockTick(pos, this, 20);
+        world.scheduleBlockTick(pos, this, 20);
     }
 }

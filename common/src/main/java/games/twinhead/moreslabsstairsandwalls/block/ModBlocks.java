@@ -41,8 +41,8 @@ import games.twinhead.moreslabsstairsandwalls.block.soulsand.SoulSandSlab;
 import games.twinhead.moreslabsstairsandwalls.block.soulsand.SoulSandStairs;
 import games.twinhead.moreslabsstairsandwalls.block.soulsand.SoulSandWall;
 import net.minecraft.block.*;
-import net.minecraft.tag.BlockTags;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 
@@ -260,7 +260,8 @@ public enum ModBlocks {
     CRACKED_DEEPSLATE_TILES(Blocks.CRACKED_DEEPSLATE_TILES, BlockTags.PICKAXE_MINEABLE),
 
     //CRYING_OBSIDIAN(Blocks.CRYING_OBSIDIAN, ModelType.CUBE_ALL, BaseSlab.class, null, BaseWall.class, BlockTags.PICKAXE_MINEABLE, BlockTags.DRAGON_IMMUNE, BlockTags.NEEDS_DIAMOND_TOOL),
-    //NETHERRACK(Blocks.NETHERRACK, ModelType.CUBE_ALL, BaseSlab.class, null, BaseWall.class, BlockTags.PICKAXE_MINEABLE),
+
+    NETHERRACK(Blocks.NETHERRACK, ModelType.CUBE_ALL, BaseSlab.class, BaseStairs.class, BaseWall.class, BlockTags.PICKAXE_MINEABLE, BlockTags.INFINIBURN_OVERWORLD, BlockTags.INFINIBURN_END, BlockTags.INFINIBURN_NETHER),
 
 
     BASALT(Blocks.BASALT, ModelType.CUBE_BOTTOM_TOP, BlockTags.PICKAXE_MINEABLE),
@@ -385,8 +386,6 @@ public enum ModBlocks {
     public boolean hasSlab = true;
     public boolean hasStairs = true;
     public boolean hasWall = true;
-
-    public final DyeColor dyeColor = DyeColor.WHITE;
 
     public final TagKey<Block>[] blockTags;
 
