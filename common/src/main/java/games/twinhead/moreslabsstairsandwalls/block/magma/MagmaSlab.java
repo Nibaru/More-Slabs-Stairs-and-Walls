@@ -7,6 +7,7 @@ import net.minecraft.block.BubbleColumnBlock;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -24,7 +25,7 @@ public class MagmaSlab extends BaseSlab {
     @Override
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
         if (!entity.bypassesSteppingEffects() && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entity)) {
-            entity.damage(world.getDamageSources().hotFloor(), 1.0f);
+            entity.damage(DamageSource.HOT_FLOOR, 1.0f);
         }
         super.onSteppedOn(world, pos, state, entity);
     }
