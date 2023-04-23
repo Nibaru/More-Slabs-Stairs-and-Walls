@@ -1,5 +1,6 @@
 package games.twinhead.moreslabsstairsandwalls.client.fabric;
 
+import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -17,6 +18,7 @@ public class ClientInitializer implements ClientModInitializer {
     public void onInitializeClient() {
         initBlockColorsLayers();
         initRenderLayers();
+        MoreSlabsStairsAndWalls.copyGlassCompatibilityPackIfMissing();
     }
 
     private void initRenderLayers(){

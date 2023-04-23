@@ -27,7 +27,7 @@ public class MoreSlabsStairsAndWallsForge {
                         // Set icon of creative tab
                         .icon(() -> new ItemStack(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.STAIRS)))
                         // Add default items to tab
-                        .entries((enabledFlags, populator) -> {
+                        .entries((enabledFlags, populator, p) -> {
                             RegistryImpl.BLOCKS.getEntries().stream().map(RegistryObject::get)
                                     .forEach(block -> {
                                         populator.add(block.asItem());
