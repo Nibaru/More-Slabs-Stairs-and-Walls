@@ -89,6 +89,12 @@ public class ModelGenerator extends FabricModelProvider {
                 return;
             }
 
+            case CUSTOM -> {
+                if(block.toString().contains("waxed")){
+                    slabDouble = new Identifier("minecraft", "block/" + block.textureid);
+                }
+            }
+
         };
 
         if(slab == null) slab = Models.SLAB.upload(block.getBlock(ModBlocks.BlockType.SLAB),  textureMap, blockStateModelGenerator.modelCollector);
