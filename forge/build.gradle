@@ -1,5 +1,7 @@
 plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
+    id "com.modrinth.minotaur" version "2.+"
 }
 
 architectury {
@@ -118,4 +120,29 @@ publishing {
     repositories {
         // Add repositories to publish to here.
     }
+}
+
+curseforge {
+    apiKey = "${System.getenv("CURSEFORGE_KEY")}"
+    project {
+        id = "${project.curseforge_id}"
+        mainArtifact (remapJar){
+            displayName = "v" + project.mod_version + "+" + project.minecraft_version + " Forge"
+        }
+        changelogType = 'markdown'
+        releaseType = 'release'
+        addGameVersion "Forge"
+        addGameVersion project.minecraft_version
+    }
+}
+
+modrinth {
+    token = "${System.getenv("MODRINTH_KEY")}" // Please use an environment variable for this! The default is `$MODRINTH_TOKEN`.
+    projectId = project.modrinth_id // The ID of your Modrinth project. Slugs will not work.
+    versionNumber = project.mod_version + "+" + project.minecraft_version // The (preferably SemVer) version of the mod. If not specified, it'll use the `version` declaration
+    versionType = "release" // This is the default -- can also be `beta` or `alpha`
+    versionName =  "v" + project.mod_version + "+" + project.minecraft_version  + " Forge"
+    uploadFile = remapJar // Tells Minotaur to use the remapped jar
+    gameVersions = [project.minecraft_version] // An array of game versions the version supports
+    loaders = ['forge'] // Self-explanatory.
 }
