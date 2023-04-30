@@ -130,7 +130,7 @@ curseforge {
             displayName = "v" + project.mod_version + "+" + project.minecraft_version + " Forge"
         }
         changelogType = 'markdown'
-        releaseType = 'release'
+        releaseType = 'beta'
         addGameVersion "Forge"
         addGameVersion project.minecraft_version
     }
