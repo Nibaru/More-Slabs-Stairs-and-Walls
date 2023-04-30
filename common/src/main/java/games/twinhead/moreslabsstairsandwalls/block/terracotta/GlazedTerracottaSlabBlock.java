@@ -22,7 +22,7 @@ public class GlazedTerracottaSlabBlock extends BaseSlab {
           return super.getPlacementState(ctx).with(FACING, ctx.getWorld().getBlockState(ctx.getBlockPos()).get(FACING));
         }
 
-        return super.getPlacementState(ctx).with(FACING, ctx.getPlayerLookDirection().getOpposite());
+        return super.getPlacementState(ctx).with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
