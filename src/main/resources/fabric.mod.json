@@ -2,14 +2,16 @@
   "schemaVersion": 1,
   "id": "more_slabs_stairs_and_walls",
   "version": "${version}",
-  "name": "more slabs stairs & walls",
-  "description": "",
-  "authors": [],
+  "name": "More Slabs Stairs & Walls",
+  "description": "Expand your building options with More Slabs, Stairs, & Walls.",
+  "authors": ["Nibaru"],
   "contact": {
-    "repo": "https://github.com/Nick/MSSW-Fabric"
+    "homepage": "https://modrinth.com/mod/more-slabs-stairs-and-walls",
+    "sources": "https://github.com/Nibaru/More-Slabs-Stairs-and-Walls",
+    "issues": "https://github.com/Nibaru/More-Slabs-Stairs-and-Walls/issues"
   },
   "license": "LGPL-3.0",
-  "icon": "assets/moreslabsstairsandwalls/icon.png",
+  "icon": "assets/more_slabs_stairs_and_walls/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
