@@ -1,0 +1,305 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_post"
+      },
+      "when": {
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_low_full",
+        "uvlock": false,
+        "y": 90
+      },
+      "when": {
+        "up": "false",
+        "east": "low",
+        "west": "low",
+        "north": "none",
+        "south": "none"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_low_full",
+        "uvlock": false,
+        "y": 180
+      },
+      "when": {
+        "up": "false",
+        "east": "none",
+        "west": "none",
+        "north": "low",
+        "south": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_low_all",
+        "uvlock": true
+      },
+      "when": {
+        "up": "false",
+        "east": "low",
+        "west": "low",
+        "north": "low",
+        "south": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_side_low",
+        "uvlock": false
+      },
+      "when": {
+        "up": "true",
+        "north": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_side_low",
+        "uvlock": false,
+        "y": 90
+      },
+      "when": {
+        "up": "true",
+        "east": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_side_low",
+        "uvlock": false,
+        "y": 180
+      },
+      "when": {
+        "up": "true",
+        "south": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_side_low",
+        "uvlock": false,
+        "y": 270
+      },
+      "when": {
+        "up": "true",
+        "west": "low"
+      }
+    },
+
+
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_tall_full",
+        "uvlock": false
+      },
+      "when": {
+        "up": "false",
+        "north": "tall",
+        "south": "tall",
+        "east": "none",
+        "west": "none"
+      }
+    },
+
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_tall_full",
+        "uvlock": false,
+        "y": 90
+      },
+      "when": {
+        "up": "false",
+        "east": "tall",
+        "west": "tall",
+        "north": "none",
+        "south": "none"
+      }
+    },
+
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_side_tall",
+        "uvlock": true
+      },
+      "when": {
+        "north": "tall",
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_side_tall",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "tall",
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_side_tall",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "tall",
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_side_tall",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "west": "tall",
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_side_low",
+        "uvlock": true
+      },
+      "when": {
+        "west": "tall",
+        "east": "tall",
+        "north": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_side_low",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "west": "tall",
+        "east": "tall",
+        "south": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_side_low",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "north": "tall",
+        "south": "tall",
+        "east": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_side_low",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "north": "tall",
+        "south": "tall",
+        "west": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_tall_all",
+        "uvlock": false
+      },
+      "when": {
+        "up": "false",
+        "north": "tall",
+        "south": "tall",
+        "east": "tall",
+        "west": "tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_post",
+        "uvlock": true
+      },
+      "when": {
+        "north": "low",
+        "south": "low",
+        "east": "tall",
+        "west": "tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_side_tall",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "north": "low",
+        "south": "low",
+        "east": "tall",
+        "west": "tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_side_tall",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "north": "low",
+        "south": "low",
+        "east": "tall",
+        "west": "tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_post",
+        "uvlock": true
+      },
+      "when": {
+        "north": "tall",
+        "south": "tall",
+        "east": "low",
+        "west": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_side_tall",
+        "uvlock": true
+      },
+      "when": {
+        "north": "tall",
+        "south": "tall",
+        "east": "low",
+        "west": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "more_slabs_stairs_and_walls:block/orange_stained_glass/orange_stained_glass_wall_side_tall",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "north": "tall",
+        "south": "tall",
+        "east": "low",
+        "west": "low"
+      }
+    }
+  ]
+}

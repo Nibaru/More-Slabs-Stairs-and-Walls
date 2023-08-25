@@ -1,0 +1,39 @@
+{
+	"render_type": "translucent",
+	"credit": "Made with Blockbench",
+	"texture_size": [40, 16],
+	"textures": {
+		"wall": "more_slabs_stairs_and_walls:block/glass_wall",
+		"particle": "minecraft:block/glass"
+	},
+	"elements": [
+		{
+			"name": "wall",
+			"from": [5, 0, 0],
+			"to": [11, 16, 16],
+			"faces": {
+				"east": {"uv": [11.2, 2, 4.8, 16], "rotation": 180, "texture": "#wall"},
+				"west": {"uv": [4.8, 2, 11.2, 16], "rotation": 180, "texture": "#wall"},
+				"down": {"uv": [2.8, 0, 5.2, 16], "rotation": 180, "texture": "#wall", "cullface": "down"}
+			}
+		},
+		{
+			"from": [11, 0, 5],
+			"to": [16, 16, 11],
+			"faces": {
+				"north": {"uv": [4.8, 2, 6.8, 16], "texture": "#wall"},
+				"south": {"uv": [9.16667, 2, 11.16667, 16], "texture": "#wall"},
+				"down": {"uv": [2.8, 0, 5.2, 5], "rotation": 90, "texture": "#wall"}
+			}
+		},
+		{
+			"from": [0, 0, 5],
+			"to": [5, 16, 11],
+			"faces": {
+				"north": {"uv": [9.56667, 2, 11.23333, 16], "texture": "#wall"},
+				"south": {"uv": [4.8, 2, 6.8, 16], "texture": "#wall"},
+				"down": {"uv": [2.8, 11, 5.2, 16], "rotation": 90, "texture": "#wall"}
+			}
+		}
+	]
+}

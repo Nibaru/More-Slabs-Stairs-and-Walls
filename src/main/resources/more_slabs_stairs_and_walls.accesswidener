@@ -1,0 +1,3 @@
+accessWidener   v2  named
+accessible method net/minecraft/entity/FallingBlockEntity <init> (Lnet/minecraft/world/World;DDDLnet/minecraft/block/BlockState;)V
+accessible field  net/minecraft/entity/FallingBlockEntity block Lnet/minecraft/block/BlockState;

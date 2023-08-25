@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "more_slabs_stairs_and_walls",
+  "version": "${version}",
+  "name": "more slabs stairs & walls",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/Nick/MSSW-Fabric"
+  },
+  "license": "LGPL-3.0",
+  "icon": "assets/moreslabsstairsandwalls/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "games.twinhead.moreslabsstairsandwalls.client.MoreSlabsStairsAndWallsClient"
+    ],
+    "main": [
+      "games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls"
+    ],
+    "fabric-datagen": [
+      "games.twinhead.moreslabsstairsandwalls.datagen.DataGenerators"
+    ]
+  },
+  "mixins": [
+    "moreslabsstairsandwalls.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  },
+  "accessWidener" : "more_slabs_stairs_and_walls.accesswidener"
+}
