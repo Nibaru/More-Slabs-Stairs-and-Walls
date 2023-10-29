@@ -63,11 +63,16 @@ public class HoneySlab extends TranslucentSlab {
         super.onEntityCollision(state, world, pos, entity);
     }
 
-    public static boolean isSliding(BlockPos pos, Entity entity) {
+    private boolean isSliding(BlockPos pos, Entity entity) {
         if (entity.isOnGround()) {
             return false;
         }
-        if (entity.getY() > (double)pos.getY() + 0.9375 - 1.0E-7) {
+        SlabType slabType = entity.getWorld().getBlockState(pos).get(TYPE);
+        double maxY = switch (slabType) {
+            case DOUBLE, TOP -> 0.9375;
+            default -> 0.4375;
+        };
+        if (entity.getY() > (double)pos.getY() + maxY - 1.0E-7) {
             return false;
         }
         if (entity.getVelocity().y >= -0.08) {

@@ -59,11 +59,29 @@ public class HoneyStairs extends TranslucentStairs {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (HoneySlab.isSliding(pos, entity)) {
+        if (isSliding(pos, entity)) {
             HoneySlab.triggerAdvancement(entity, pos);
             HoneySlab.updateSlidingVelocity(entity);
             HoneySlab.addCollisionEffects(world, entity);
         }
         super.onEntityCollision(state, world, pos, entity);
     }
+
+    private boolean isSliding(BlockPos pos, Entity entity) {
+        if (entity.isOnGround()) {
+            return false;
+        }
+        // would be more correct to use 0.4375 instead of 0.9375 depending on the side the entity is on
+        if (entity.getY() > (double)pos.getY() + 0.9375 - 1.0E-7) {
+            return false;
+        }
+        if (entity.getVelocity().y >= -0.08) {
+            return false;
+        }
+        double d = Math.abs((double)pos.getX() + 0.5 - entity.getX());
+        double e = Math.abs((double)pos.getZ() + 0.5 - entity.getZ());
+        double f = 0.4375 + (double)(entity.getWidth() / 2.0f);
+        return d + 1.0E-7 > f || e + 1.0E-7 > f;
+    }
+
 }
