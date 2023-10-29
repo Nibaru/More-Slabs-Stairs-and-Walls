@@ -17,6 +17,9 @@ import games.twinhead.moreslabsstairsandwalls.block.dirt.*;
 import games.twinhead.moreslabsstairsandwalls.block.falling.FallingSlab;
 import games.twinhead.moreslabsstairsandwalls.block.falling.FallingStairs;
 import games.twinhead.moreslabsstairsandwalls.block.falling.FallingWall;
+import games.twinhead.moreslabsstairsandwalls.block.honey.HoneySlab;
+import games.twinhead.moreslabsstairsandwalls.block.honey.HoneyStairs;
+import games.twinhead.moreslabsstairsandwalls.block.honey.HoneyWall;
 import games.twinhead.moreslabsstairsandwalls.block.ice.IceSlab;
 import games.twinhead.moreslabsstairsandwalls.block.ice.IceStairs;
 import games.twinhead.moreslabsstairsandwalls.block.leaves.LeavesSlab;
@@ -269,6 +272,10 @@ public class ModRegistry {
                         (block.hasSlab ? new SlimeSlab(block.getSettings()) : null),
                         (block.hasStairs ? new SlimeStairs(block.parentBlock.getDefaultState(), block.getSettings()) : null),
                         (block.hasWall ? new SlimeWall(block.getSettings()) : null));
+                case HONEY_BLOCK -> registerBlock(block,
+                        (block.hasSlab ? new HoneySlab(block.getSettings()) : null),
+                        (block.hasStairs ? new HoneyStairs(block.parentBlock.getDefaultState(), block.getSettings()) : null),
+                        (block.hasWall ? new HoneyWall(block.getSettings()) : null));
                 case REDSTONE_BLOCK -> registerBlock(block,
                         (block.hasSlab ? new RedstoneSlab(block.getSettings()) : null),
                         (block.hasStairs ? new RedstoneStairs(block.parentBlock.getDefaultState(), block.getSettings()) : null),

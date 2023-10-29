@@ -477,6 +477,8 @@ public enum ModBlocks {
                 .hardness(block.getHardness())
                 .resistance(block.getBlastResistance())
                 .slipperiness(block.getSlipperiness())
+                .jumpVelocityMultiplier(block.getJumpVelocityMultiplier())
+                .velocityMultiplier(block.getVelocityMultiplier())
                 ;
 
         if (!block.getDefaultState().isOpaque()){

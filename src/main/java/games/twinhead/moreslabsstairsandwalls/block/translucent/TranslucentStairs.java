@@ -11,11 +11,36 @@ import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.block.enums.StairShape;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.stream.IntStream;
 
 public class TranslucentStairs extends BaseStairs {
 
     final @NotNull ModBlocks modBlock;
+
+    protected static VoxelShape[] composeShapes(VoxelShape base, VoxelShape northWest, VoxelShape northEast, VoxelShape southWest, VoxelShape southEast) {
+        return (VoxelShape[]) IntStream.range(0, 16).mapToObj(i -> composeShape(i, base, northWest, northEast, southWest, southEast)).toArray(VoxelShape[]::new);
+    }
+
+    protected static VoxelShape composeShape(int i, VoxelShape base, VoxelShape northWest, VoxelShape northEast, VoxelShape southWest, VoxelShape southEast) {
+        VoxelShape voxelShape = base;
+        if ((i & 1) != 0) {
+            voxelShape = VoxelShapes.union(voxelShape, northWest);
+        }
+        if ((i & 2) != 0) {
+            voxelShape = VoxelShapes.union(voxelShape, northEast);
+        }
+        if ((i & 4) != 0) {
+            voxelShape = VoxelShapes.union(voxelShape, southWest);
+        }
+        if ((i & 8) != 0) {
+            voxelShape = VoxelShapes.union(voxelShape, southEast);
+        }
+        return voxelShape;
+    }
 
     public TranslucentStairs(BlockState blockState, @NotNull ModBlocks block, Settings settings) {
         super(blockState, settings);
