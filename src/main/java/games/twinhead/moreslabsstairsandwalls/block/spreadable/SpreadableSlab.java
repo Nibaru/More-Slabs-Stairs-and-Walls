@@ -1,5 +1,6 @@
 package games.twinhead.moreslabsstairsandwalls.block.spreadable;
 
+import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.dirt.DirtSlab;
 import net.minecraft.block.*;
@@ -43,33 +44,55 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
     public static final BooleanProperty WATERLOGGED;
     protected static final VoxelShape BOTTOM_SHAPE;
     protected static final VoxelShape TOP_SHAPE;
+    public final Block baseBlock;
 
-    public SpreadableSlab(Settings settings) {
+    public SpreadableSlab(Settings settings, Block baseBlock) {
         super(settings);
+        this.baseBlock = baseBlock;
     }
 
+    /**
+     * used by full blocks, slabs, stairs and walls
+     * TODO: maybe this function should be moved into a different class?
+     */
     public static boolean canSurvive(BlockState state, WorldView world, BlockPos pos) {
-        BlockPos blockPos = pos.up();
-        BlockState blockState = world.getBlockState(blockPos);
-
-        if(blockState.isOf(Blocks.SNOW) && blockState.get(SnowBlock.LAYERS) == 1){
-            return true;
-        }else if (!blockState.isOpaqueFullCube(world, pos) &&
-                (blockState.getBlock() instanceof SpreadableSlab && blockState.get(SlabBlock.TYPE) == SlabType.TOP)
-                || (blockState.getBlock() instanceof SpreadableStairs && blockState.get(StairsBlock.HALF) == BlockHalf.TOP))
-        {
-            return true;
-
-        } else if (state.getBlock() instanceof SpreadableSlab && state.get(SlabBlock.TYPE) == SlabType.BOTTOM){
-            return true;
-        } else if (state.getBlock() instanceof SpreadableSlab && state.get(SlabBlock.TYPE) == SlabType.TOP && !blockState.isSideSolid(world, pos, Direction.DOWN, SideShapeType.FULL)){
-            return true;
-        } else if (blockState.getFluidState().getLevel() == 8) {
-            return false;
-        } else {
-            int i = ChunkLightProvider.getRealisticOpacity(world, state, pos, blockState, blockPos, Direction.UP, blockState.getOpacity(world, blockPos));
-            return i < world.getMaxLightLevel();
+        Block stateBlock = state.getBlock();
+        // a bottom-slab shouldn't die to the block above because there's at least a 0.5 meter gap
+        if (stateBlock instanceof DirtSlab && state.get(SlabBlock.TYPE) == SlabType.BOTTOM) {
+            // water destroys Spreadables, see "blockStateAbove.getFluidState().getLevel() == 8" below
+            return !state.get(SlabBlock.WATERLOGGED);
         }
+        BlockPos above = pos.up();
+        BlockState blockStateAbove = world.getBlockState(above);
+        if (blockStateAbove.isOf(Blocks.SNOW) && blockStateAbove.get(SnowBlock.LAYERS) == 1) {
+            // see vanilla SpreadableBlock
+            return true;
+        }
+        if (blockStateAbove.getFluidState().getLevel() == 8) {
+            // see vanilla SpreadableBlock
+            return false;
+        }
+        if (state.isIn(BlockTags.WALLS) && blockStateAbove.isIn(BlockTags.WALLS) && blockStateAbove.isOpaque()) {
+            // SpreadableWall is entirely covered by another wall and thus can't survive
+            return false;
+        }
+        if (world instanceof World
+                && ((World) world).getGameRules().getBoolean(MoreSlabsStairsAndWalls.SPREAD_UNDER_SLABS)
+                && blockStateAbove.getBlock() instanceof SpreadableSlab
+                && blockStateAbove.get(SlabBlock.TYPE) == SlabType.BOTTOM) {
+            // make sure that the block is of the same type as the slab above it
+            Block baseBlock = ((SpreadableSlab) blockStateAbove.getBlock()).baseBlock;
+            if (baseBlock.equals(stateBlock)
+            || (stateBlock instanceof SpreadableSlab && baseBlock == ((SpreadableSlab) stateBlock).baseBlock)
+            || (stateBlock instanceof SpreadableStairs && baseBlock == ((SpreadableStairs) stateBlock).baseBlock)) {
+                return true;
+            }
+        }
+        // i don't really know what getRealisticOpacity does, tbh.
+        // top-slabs don't work correctly if "state" is used as second parameter instead of a full block's state
+        // there might be a better solution i'm not aware of
+        int i = ChunkLightProvider.getRealisticOpacity(world, Blocks.GRASS_BLOCK.getDefaultState(), pos, blockStateAbove, above, Direction.UP, blockStateAbove.getOpacity(world, above));
+        return i < world.getMaxLightLevel();
     }
 
     @Override
@@ -139,63 +162,61 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
 
     }
 
-    private static boolean canSpread(BlockState state, WorldView world, BlockPos pos) {
-        BlockPos blockPos = pos.up();
-        return canSurvive(state, world, pos) && !world.getFluidState(blockPos).isIn(FluidTags.WATER);
-    }
-
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (!canSurvive(state, world, pos)) {
-            if(state.isOf(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.SLAB))) {
-                world.setBlockState(pos, ModBlocks.DIRT.getBlock(ModBlocks.BlockType.SLAB).getStateWithProperties(world.getBlockState(pos)), Block.NOTIFY_LISTENERS);
-            }else if(state.isOf(ModBlocks.MYCELIUM.getBlock(ModBlocks.BlockType.SLAB))) {
-                world.setBlockState(pos, ModBlocks.DIRT.getBlock(ModBlocks.BlockType.SLAB).getStateWithProperties(world.getBlockState(pos)), Block.NOTIFY_LISTENERS);
-            }else if(state.isOf(ModBlocks.WARPED_NYLIUM.getBlock(ModBlocks.BlockType.SLAB))) {
-                //world.setBlockState(pos, ModBlocks.NETHERRACK.getBlock(ModBlocks.BlockType.SLAB).getStateWithProperties(world.getBlockState(pos)), Block.NOTIFY_LISTENERS);
-            }else if(state.isOf(ModBlocks.CRIMSON_NYLIUM.getBlock(ModBlocks.BlockType.SLAB))) {
-                //world.setBlockState(pos, ModBlocks.NETHERRACK.getBlock(ModBlocks.BlockType.SLAB).getStateWithProperties(world.getBlockState(pos)), Block.NOTIFY_LISTENERS);
-            }  else {
-                world.setBlockState(pos, Blocks.DIRT.getDefaultState());
+            ModBlocks deadBase = ModBlocks.DIRT;
+            if (state.isOf(ModBlocks.WARPED_NYLIUM.getBlock(ModBlocks.BlockType.SLAB))
+            || state.isOf(ModBlocks.CRIMSON_NYLIUM.getBlock(ModBlocks.BlockType.SLAB))) {
+                deadBase = ModBlocks.NETHERRACK;
             }
+            world.setBlockState(pos, deadBase.getBlock(ModBlocks.BlockType.SLAB).getStateWithProperties(world.getBlockState(pos)), Block.NOTIFY_LISTENERS);
         } else {
             if (world.getLightLevel(pos.up()) >= 9) {
-                BlockState blockState = this.getDefaultState();
-
                 for(int i = 0; i < 4; ++i) {
                     BlockPos blockPos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                    if (canSpread(blockState, world, blockPos)) {
-                        if(world.getBlockState(blockPos).isOf(Blocks.DIRT))
-                            if(state.isOf(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.SLAB))){
-                                world.setBlockState(blockPos, Blocks.GRASS_BLOCK.getDefaultState().with(SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW)));
-                            } else if(state.isOf(ModBlocks.MYCELIUM.getBlock(ModBlocks.BlockType.SLAB))){
-                                world.setBlockState(blockPos, Blocks.MYCELIUM.getDefaultState().with(SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW)));
-                            }
+                    trySpread(world, baseBlock, blockPos);
+                }
+            }
+        }
+    }
 
-                        if(world.getBlockState(blockPos).isOf(ModBlocks.DIRT.getBlock(ModBlocks.BlockType.SLAB)))
-                            if(state.isOf(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.SLAB))){
-                                world.setBlockState(blockPos, ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.SLAB).getDefaultState().with(SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW)).with(SlabBlock.WATERLOGGED, world.getBlockState(blockPos).get(SlabBlock.WATERLOGGED)).with(SlabBlock.TYPE, world.getBlockState(blockPos).get(SlabBlock.TYPE)));
-                            } else if(state.isOf(ModBlocks.MYCELIUM.getBlock(ModBlocks.BlockType.SLAB))){
-                                world.setBlockState(blockPos, ModBlocks.MYCELIUM.getBlock(ModBlocks.BlockType.SLAB).getDefaultState().with(SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW)).with(SlabBlock.WATERLOGGED, world.getBlockState(blockPos).get(SlabBlock.WATERLOGGED)).with(SlabBlock.TYPE, world.getBlockState(blockPos).get(SlabBlock.TYPE)));
-                            }
-
-                        if(world.getBlockState(blockPos).isOf(ModBlocks.DIRT.getBlock(ModBlocks.BlockType.STAIRS)))
-                            if(state.isOf(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.SLAB))){
-                                world.setBlockState(blockPos, ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.STAIRS).getStateWithProperties(world.getBlockState(blockPos)));
-                            } else if(state.isOf(ModBlocks.MYCELIUM.getBlock(ModBlocks.BlockType.SLAB))) {
-                                world.setBlockState(blockPos, ModBlocks.MYCELIUM.getBlock(ModBlocks.BlockType.STAIRS).getStateWithProperties(world.getBlockState(blockPos)));
-                            }
-
-                        if(world.getBlockState(blockPos).isOf(ModBlocks.DIRT.getBlock(ModBlocks.BlockType.WALL)) && !world.getBlockState(blockPos.up()).isIn(BlockTags.WALLS))
-                            if(state.isOf(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.SLAB))){
-                                world.setBlockState(blockPos, ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.WALL).getStateWithProperties(world.getBlockState(blockPos)));
-                            } else if(state.isOf(ModBlocks.MYCELIUM.getBlock(ModBlocks.BlockType.SLAB))) {
-                                world.setBlockState(blockPos, ModBlocks.MYCELIUM.getBlock(ModBlocks.BlockType.WALL).getStateWithProperties(world.getBlockState(blockPos)));
-                            }
+    /**
+     * used by full blocks, slabs, stairs and walls
+     * tries to spread to the block at spreadPos
+     * @param world
+     * @param baseBlock the full block version of what the target block should be turned into
+     * @param spreadPos position of the target block
+     */
+    public static void trySpread(ServerWorld world, Block baseBlock, BlockPos spreadPos) {
+        BlockState newState = null;
+        BlockState oldState = world.getBlockState(spreadPos);
+        ModBlocks[] fromDirt = {ModBlocks.GRASS_BLOCK, ModBlocks.MYCELIUM};
+        if (oldState.isOf(Blocks.DIRT)) {
+            // target is a full dirt block
+            for (ModBlocks modBlock : fromDirt) {
+                if (baseBlock.equals(modBlock.parentBlock)) {
+                    newState = modBlock.parentBlock.getDefaultState()
+                            .with(SNOWY, world.getBlockState(spreadPos.up()).isOf(Blocks.SNOW));
+                }
+            }
+        } else {
+            // luckily all properties except "SNOWY" can be copied using getStateWithProperties(...)
+            for (ModBlocks.BlockType blockType :ModBlocks.BlockType.values()) {
+                if (oldState.isOf(ModBlocks.DIRT.getBlock(blockType))) {
+                    // target is dirt slab/stairs/wall
+                    for (ModBlocks modBlock : fromDirt) {
+                        if (baseBlock.equals(modBlock.parentBlock)) {
+                            newState = modBlock.getBlock(blockType)
+                                .getStateWithProperties(world.getBlockState(spreadPos));
+                            if (newState.contains(Properties.SNOWY))
+                                newState = newState.with(Properties.SNOWY, world.getBlockState(spreadPos.up()).isOf(Blocks.SNOW));
+                        }
                     }
                 }
             }
-
         }
+        if (newState != null && canSurvive(newState, world, spreadPos) && !world.getFluidState(spreadPos.up()).isIn(FluidTags.WATER))
+            world.setBlockState(spreadPos, newState);
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {

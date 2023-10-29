@@ -48,6 +48,7 @@ import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentStair
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -116,12 +117,15 @@ public class ModRegistry {
 
     public static void addBlock(ModBlocks block) {
         switch (block) {
-                case GRASS_BLOCK, MYCELIUM -> registerBlock(block,
-                        (block.hasSlab ? new SpreadableSlab(block.getSettings()) : null),
-                        (block.hasStairs ? new SpreadableStairs(block.parentBlock.getDefaultState(), block.getSettings()) : null),
-                        (block.hasSlab ? new SpreadableWall(block.getSettings()) : null));
-                case DIRT,
-                    PODZOL-> registerBlock(block,
+                case GRASS_BLOCK -> registerBlock(block,
+                        (block.hasSlab ? new SpreadableSlab(block.getSettings(), Blocks.GRASS_BLOCK) : null),
+                        (block.hasStairs ? new SpreadableStairs(block.parentBlock.getDefaultState(), block.getSettings(), Blocks.GRASS_BLOCK) : null),
+                        (block.hasSlab ? new SpreadableWall(block.getSettings(), Blocks.GRASS_BLOCK) : null));
+                case MYCELIUM -> registerBlock(block,
+                    (block.hasSlab ? new SpreadableSlab(block.getSettings(), Blocks.MYCELIUM) : null),
+                    (block.hasStairs ? new SpreadableStairs(block.parentBlock.getDefaultState(), block.getSettings(), Blocks.MYCELIUM) : null),
+                    (block.hasSlab ? new SpreadableWall(block.getSettings(), Blocks.MYCELIUM) : null));
+                case DIRT, PODZOL-> registerBlock(block,
                         (block.hasSlab ? new DirtSlab(block.getSettings()) : null),
                         (block.hasStairs ? new DirtStairs(block.parentBlock.getDefaultState(), block.getSettings()) : null),
                         (block.hasWall ? new DirtWall(block.getSettings()) : null));

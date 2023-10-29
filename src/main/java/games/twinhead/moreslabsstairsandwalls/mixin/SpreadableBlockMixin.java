@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(SpreadableBlock.class)
@@ -23,32 +24,14 @@ public class SpreadableBlockMixin extends SnowyBlock {
         super(settings);
     }
 
-    @Inject(method = "randomTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z"), locals = LocalCapture.CAPTURE_FAILHARD)
-    public void onTick(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci, BlockState defaultState, int j, BlockPos spreadPos) {
-
-        if (canSpread(defaultState, world, spreadPos)) {
-            if(world.getBlockState(spreadPos).isOf(Blocks.DIRT))
-                if(state.isOf(Blocks.GRASS_BLOCK)){
-                    world.setBlockState(spreadPos, Blocks.GRASS_BLOCK.getDefaultState().with(SNOWY, world.getBlockState(spreadPos.up()).isOf(Blocks.SNOW)));
-                } else if(state.isOf(Blocks.MYCELIUM)){
-                    world.setBlockState(spreadPos, Blocks.MYCELIUM.getDefaultState().with(SNOWY, world.getBlockState(spreadPos.up()).isOf(Blocks.SNOW)));
-                }
-
-
-            for (ModBlocks.BlockType type: ModBlocks.BlockType.values()) {
-                if(world.getBlockState(spreadPos).isOf(ModBlocks.DIRT.getBlock(type)))
-                    if(state.isOf(Blocks.GRASS_BLOCK)){
-                        world.setBlockState(spreadPos, ModBlocks.GRASS_BLOCK.getBlock(type).getDefaultState().with(SNOWY, world.getBlockState(spreadPos.up()).isOf(Blocks.SNOW)));
-                    } else if(state.isOf(Blocks.MYCELIUM)){
-                        world.setBlockState(spreadPos, ModBlocks.MYCELIUM.getBlock(type).getDefaultState().with(SNOWY, world.getBlockState(spreadPos.up()).isOf(Blocks.SNOW)));
-                    }
-            }
-        }
+    @Inject(method = "canSurvive", at = @At("HEAD"), cancellable = true)
+    private static void surviveUnderOwnSlab(BlockState state, WorldView world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+        cir.setReturnValue(SpreadableSlab.canSurvive(state, world, pos));
     }
 
-
-    private static boolean canSpread(BlockState state, WorldView world, BlockPos pos) {
-        BlockPos blockPos = pos.up();
-        return SpreadableSlab.canSurvive(state, world, pos) && !world.getFluidState(blockPos).isIn(FluidTags.WATER);
+    @Inject(method = "randomTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
+    private void onTick(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci, BlockState defaultState, int j, BlockPos spreadPos) {
+        SpreadableSlab.trySpread(world, defaultState.getBlock(), spreadPos);
+        ci.cancel();
     }
 }
