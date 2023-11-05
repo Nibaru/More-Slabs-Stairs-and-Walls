@@ -9,17 +9,13 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-
-import java.util.stream.IntStream;
 
 public class PathStairs extends BaseStairs {
     protected static final VoxelShape TOP_SHAPE;
@@ -72,26 +68,7 @@ public class PathStairs extends BaseStairs {
         world.setBlockState(pos, pushEntitiesUpBeforeBlockChange(state, ModBlocks.DIRT.getBlock(ModBlocks.BlockType.STAIRS).getStateWithProperties(state), world, pos));
     }
 
-    private static VoxelShape[] composeShapes(VoxelShape base, VoxelShape northWest, VoxelShape northEast, VoxelShape southWest, VoxelShape southEast) {
-        return (VoxelShape[]) IntStream.range(0, 16).mapToObj(i -> composeShape(i, base, northWest, northEast, southWest, southEast)).toArray(VoxelShape[]::new);
-    }
 
-    private static VoxelShape composeShape(int i, VoxelShape base, VoxelShape northWest, VoxelShape northEast, VoxelShape southWest, VoxelShape southEast) {
-        VoxelShape voxelShape = base;
-        if ((i & 1) != 0) {
-            voxelShape = VoxelShapes.union(voxelShape, northWest);
-        }
-        if ((i & 2) != 0) {
-            voxelShape = VoxelShapes.union(voxelShape, northEast);
-        }
-        if ((i & 4) != 0) {
-            voxelShape = VoxelShapes.union(voxelShape, southWest);
-        }
-        if ((i & 8) != 0) {
-            voxelShape = VoxelShapes.union(voxelShape, southEast);
-        }
-        return voxelShape;
-    }
 
     private static StairShape getStairShape(BlockState state, BlockView world, BlockPos pos) {
         Direction direction3;

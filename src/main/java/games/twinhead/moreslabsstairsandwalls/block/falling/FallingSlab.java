@@ -4,6 +4,7 @@ import games.twinhead.moreslabsstairsandwalls.block.entity.FallingSlabBlockEntit
 import net.minecraft.block.*;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.entity.FallingBlockEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
@@ -39,24 +40,32 @@ public class FallingSlab extends FallingBlock implements LandingBlock, Waterlogg
         super(settings);
     }
 
+    public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
+        return state.get(TYPE) != SlabType.DOUBLE && Waterloggable.super.tryFillWithFluid(world, pos, state, fluidState);
+    }
+
+    public boolean canFillWithFluid(BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
+        return state.get(TYPE) != SlabType.DOUBLE && Waterloggable.super.canFillWithFluid(world, pos, state, fluid);
+    }
+
+
+    @SuppressWarnings("deprecation")
     public boolean hasSidedTransparency(BlockState state) {
         return state.get(TYPE) != SlabType.DOUBLE;
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{TYPE, WATERLOGGED});
+        builder.add(TYPE, WATERLOGGED);
     }
 
+    @SuppressWarnings("deprecation")
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        SlabType slabType = (SlabType)state.get(TYPE);
-        switch (slabType) {
-            case DOUBLE:
-                return VoxelShapes.fullCube();
-            case TOP:
-                return TOP_SHAPE;
-            default:
-                return BOTTOM_SHAPE;
-        }
+        SlabType slabType = (SlabType) state.get(TYPE);
+        return switch (slabType) {
+            case DOUBLE -> VoxelShapes.fullCube();
+            case TOP -> TOP_SHAPE;
+            default -> BOTTOM_SHAPE;
+        };
     }
 
 
@@ -81,6 +90,7 @@ public class FallingSlab extends FallingBlock implements LandingBlock, Waterlogg
         }
     }
 
+    @SuppressWarnings("deprecation")
     public boolean canReplace(BlockState state, ItemPlacementContext context) {
         ItemStack itemStack = context.getStack();
         SlabType slabType = (SlabType)state.get(TYPE);
@@ -157,6 +167,7 @@ public class FallingSlab extends FallingBlock implements LandingBlock, Waterlogg
         return 2;
     }
 
+    @SuppressWarnings("deprecation")
     public static boolean canFallThrough(BlockState state) {
         return state.isAir() || state.isIn(BlockTags.FIRE) || state.isLiquid() || state.isReplaceable();
     }
@@ -178,6 +189,7 @@ public class FallingSlab extends FallingBlock implements LandingBlock, Waterlogg
         return -16777216;
     }
 
+    @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state) {
         return (Boolean)state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }

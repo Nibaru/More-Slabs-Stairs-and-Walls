@@ -10,12 +10,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
-
-import java.util.stream.IntStream;
 
 public class SoulSandStairs extends BaseStairs {
 
@@ -35,37 +32,6 @@ public class SoulSandStairs extends BaseStairs {
     protected static final VoxelShape[]BOTTOM_SHAPES = composeShapes(BOTTOM_SHAPE, COLLISION_TOP_NORTH_WEST_CORNER_SHAPE, COLLISION_TOP_NORTH_EAST_CORNER_SHAPE, COLLISION_TOP_SOUTH_WEST_CORNER_SHAPE, COLLISION_TOP_SOUTH_EAST_CORNER_SHAPE);
 
     private static final int[] SHAPE_INDICES = new int[]{12, 5, 3, 10, 14, 13, 7, 11, 13, 7, 11, 14, 8, 4, 1, 2, 4, 1, 2, 8};
-
-    private static VoxelShape[] composeShapes(VoxelShape base, VoxelShape northWest, VoxelShape northEast, VoxelShape southWest, VoxelShape southEast) {
-        return (VoxelShape[]) IntStream.range(0, 16).mapToObj((i) -> {
-            return composeShape(i, base, northWest, northEast, southWest, southEast);
-        }).toArray((i) -> {
-            return new VoxelShape[i];
-        });
-    }
-
-
-
-    private static VoxelShape composeShape(int i, VoxelShape base, VoxelShape northWest, VoxelShape northEast, VoxelShape southWest, VoxelShape southEast) {
-        VoxelShape voxelShape = base;
-        if ((i & 1) != 0) {
-            voxelShape = VoxelShapes.union(base, northWest);
-        }
-
-        if ((i & 2) != 0) {
-            voxelShape = VoxelShapes.union(voxelShape, northEast);
-        }
-
-        if ((i & 4) != 0) {
-            voxelShape = VoxelShapes.union(voxelShape, southWest);
-        }
-
-        if ((i & 8) != 0) {
-            voxelShape = VoxelShapes.union(voxelShape, southEast);
-        }
-
-        return voxelShape;
-    }
 
     public SoulSandStairs(BlockState state, Settings settings) {
         super(state, settings);

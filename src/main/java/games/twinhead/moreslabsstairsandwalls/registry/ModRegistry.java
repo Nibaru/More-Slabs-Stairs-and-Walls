@@ -17,6 +17,9 @@ import games.twinhead.moreslabsstairsandwalls.block.dirt.*;
 import games.twinhead.moreslabsstairsandwalls.block.falling.FallingSlab;
 import games.twinhead.moreslabsstairsandwalls.block.falling.FallingStairs;
 import games.twinhead.moreslabsstairsandwalls.block.falling.FallingWall;
+import games.twinhead.moreslabsstairsandwalls.block.honey.HoneySlab;
+import games.twinhead.moreslabsstairsandwalls.block.honey.HoneyStairs;
+import games.twinhead.moreslabsstairsandwalls.block.honey.HoneyWall;
 import games.twinhead.moreslabsstairsandwalls.block.ice.IceSlab;
 import games.twinhead.moreslabsstairsandwalls.block.ice.IceStairs;
 import games.twinhead.moreslabsstairsandwalls.block.leaves.LeavesSlab;
@@ -46,13 +49,10 @@ import games.twinhead.moreslabsstairsandwalls.block.terracotta.GlazedTerracottaW
 import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentSlab;
 import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentStairs;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Block;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
@@ -117,9 +117,9 @@ public class ModRegistry {
     public static void addBlock(ModBlocks block) {
         switch (block) {
                 case GRASS_BLOCK, MYCELIUM -> registerBlock(block,
-                        (block.hasSlab ? new SpreadableSlab(block.getSettings()) : null),
-                        (block.hasStairs ? new SpreadableStairs(block.parentBlock.getDefaultState(), block.getSettings()) : null),
-                        (block.hasSlab ? new SpreadableWall(block.getSettings()) : null));
+                        (block.hasSlab ? new SpreadableSlab(block.getSettings(), block) : null),
+                        (block.hasStairs ? new SpreadableStairs(block.parentBlock.getDefaultState(), block.getSettings(), block) : null),
+                        (block.hasSlab ? new SpreadableWall(block.getSettings(), block) : null));
                 case DIRT,
                     PODZOL-> registerBlock(block,
                         (block.hasSlab ? new DirtSlab(block.getSettings()) : null),
@@ -269,6 +269,10 @@ public class ModRegistry {
                         (block.hasSlab ? new SlimeSlab(block.getSettings()) : null),
                         (block.hasStairs ? new SlimeStairs(block.parentBlock.getDefaultState(), block.getSettings()) : null),
                         (block.hasWall ? new SlimeWall(block.getSettings()) : null));
+                case HONEY_BLOCK -> registerBlock(block,
+                        (block.hasSlab ? new HoneySlab(block.getSettings()) : null),
+                        (block.hasStairs ? new HoneyStairs(block.parentBlock.getDefaultState(), block.getSettings()) : null),
+                        (block.hasWall ? new HoneyWall(block.getSettings()) : null));
                 case REDSTONE_BLOCK -> registerBlock(block,
                         (block.hasSlab ? new RedstoneSlab(block.getSettings()) : null),
                         (block.hasStairs ? new RedstoneStairs(block.parentBlock.getDefaultState(), block.getSettings()) : null),
@@ -295,7 +299,6 @@ public class ModRegistry {
 
     public static void registerBlock(ModBlocks block, @Nullable Block slab, @Nullable Block stair, @Nullable Block wall) {
         if (block.hasSlab) {
-            System.out.println(block.toString());
             MOD_BLOCKS.put(block.getId(ModBlocks.BlockType.SLAB), net.minecraft.registry.Registry.register(Registries.BLOCK, block.getId(ModBlocks.BlockType.SLAB), slab));
             registerItem(block.getId(ModBlocks.BlockType.SLAB), slab);
         }
@@ -315,6 +318,6 @@ public class ModRegistry {
 
 
     public static void registerItem(Identifier id, Block block){
-        Item item = net.minecraft.registry.Registry.register(Registries.ITEM, id, new BlockItem(block, new Item.Settings()));
+        net.minecraft.registry.Registry.register(Registries.ITEM, id, new BlockItem(block, new Item.Settings()));
     }
 }

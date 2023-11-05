@@ -44,32 +44,43 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
     protected static final VoxelShape BOTTOM_SHAPE;
     protected static final VoxelShape TOP_SHAPE;
 
-    public SpreadableSlab(Settings settings) {
+    public final ModBlocks modBlock;
+
+    public SpreadableSlab(Settings settings, ModBlocks parentBlock) {
         super(settings);
+        this.modBlock = parentBlock;
     }
 
     public static boolean canSurvive(BlockState state, WorldView world, BlockPos pos) {
         BlockPos blockPos = pos.up();
         BlockState blockState = world.getBlockState(blockPos);
 
-        if(blockState.isOf(Blocks.SNOW) && blockState.get(SnowBlock.LAYERS) == 1){
-            return true;
-        }else if (!blockState.isOpaqueFullCube(world, pos) &&
-                (blockState.getBlock() instanceof SpreadableSlab && blockState.get(SlabBlock.TYPE) == SlabType.TOP)
-                || (blockState.getBlock() instanceof SpreadableStairs && blockState.get(StairsBlock.HALF) == BlockHalf.TOP))
-        {
-            return true;
-
-        } else if (state.getBlock() instanceof SpreadableSlab && state.get(SlabBlock.TYPE) == SlabType.BOTTOM){
-            return true;
-        } else if (state.getBlock() instanceof SpreadableSlab && state.get(SlabBlock.TYPE) == SlabType.TOP && !blockState.isSideSolid(world, pos, Direction.DOWN, SideShapeType.FULL)){
-            return true;
-        } else if (blockState.getFluidState().getLevel() == 8) {
-            return false;
-        } else {
-            int i = ChunkLightProvider.getRealisticOpacity(world, state, pos, blockState, blockPos, Direction.UP, blockState.getOpacity(world, blockPos));
-            return i < world.getMaxLightLevel();
+        if (state.getBlock() instanceof DirtSlab && state.get(SlabBlock.TYPE) == SlabType.BOTTOM) {
+            return !state.get(SlabBlock.WATERLOGGED);
         }
+
+        if (blockState.isOf(Blocks.SNOW) && blockState.get(SnowBlock.LAYERS) == 1) {
+            return true;
+        }
+
+        if (blockState.getFluidState().getLevel() == 8) {
+            return false;
+        }
+
+        if (state.isIn(BlockTags.WALLS) && blockState.isIn(BlockTags.WALLS) && blockState.isOpaque()) {
+            return false;
+        }
+
+        if (blockState.getBlock() instanceof SlabBlock && blockState.get(SlabBlock.TYPE) == SlabType.TOP){
+            return true;
+        }
+
+        if (blockState.getBlock() instanceof StairsBlock && blockState.get(StairsBlock.HALF) == BlockHalf.TOP){
+            return true;
+        }
+
+        int i = ChunkLightProvider.getRealisticOpacity(world, ModBlocks.GRASS_BLOCK.parentBlock.getDefaultState(), pos, blockState, blockPos, Direction.UP, blockState.getOpacity(world, blockPos));
+        return i < world.getMaxLightLevel();
     }
 
     @Override
@@ -87,15 +98,13 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         BlockState blockState = world.getBlockState(pos);
-        BlockPos blockPos = pos.up();
-        ChunkGenerator chunkGenerator = world.getChunkManager().getChunkGenerator();
         if (blockState.isOf(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.SLAB))) {
-            growBoneMeal(world,random,pos,state);
+            growBoneMeal(world,random,pos);
         }
 
     }
 
-    public void growBoneMeal(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+    public void growBoneMeal(ServerWorld world, Random random, BlockPos pos) {
         BlockPos blockPos = pos.up();
         BlockState blockState = Blocks.GRASS.getDefaultState();
         Optional<RegistryEntry.Reference<PlacedFeature>> optional = world.getRegistryManager().get(RegistryKeys.PLACED_FEATURE).getEntry(VegetationPlacedFeatures.GRASS_BONEMEAL);
@@ -126,11 +135,11 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
 
                     registryEntry = ((RandomPatchFeatureConfig)((ConfiguredFeature)list.get(0)).config()).feature();
                 } else {
-                    if (!optional.isPresent()) {
+                    if (optional.isEmpty()) {
                         continue;
                     }
 
-                    registryEntry = (RegistryEntry)optional.get();
+                    registryEntry = optional.get();
                 }
 
                 ((PlacedFeature)registryEntry.value()).generateUnregistered(world, world.getChunkManager().getChunkGenerator(), random, blockPos2);
@@ -139,63 +148,54 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
 
     }
 
-    private static boolean canSpread(BlockState state, WorldView world, BlockPos pos) {
-        BlockPos blockPos = pos.up();
-        return canSurvive(state, world, pos) && !world.getFluidState(blockPos).isIn(FluidTags.WATER);
-    }
-
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (!canSurvive(state, world, pos)) {
-            if(state.isOf(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.SLAB))) {
-                world.setBlockState(pos, ModBlocks.DIRT.getBlock(ModBlocks.BlockType.SLAB).getStateWithProperties(world.getBlockState(pos)), Block.NOTIFY_LISTENERS);
-            }else if(state.isOf(ModBlocks.MYCELIUM.getBlock(ModBlocks.BlockType.SLAB))) {
-                world.setBlockState(pos, ModBlocks.DIRT.getBlock(ModBlocks.BlockType.SLAB).getStateWithProperties(world.getBlockState(pos)), Block.NOTIFY_LISTENERS);
-            }else if(state.isOf(ModBlocks.WARPED_NYLIUM.getBlock(ModBlocks.BlockType.SLAB))) {
-                //world.setBlockState(pos, ModBlocks.NETHERRACK.getBlock(ModBlocks.BlockType.SLAB).getStateWithProperties(world.getBlockState(pos)), Block.NOTIFY_LISTENERS);
-            }else if(state.isOf(ModBlocks.CRIMSON_NYLIUM.getBlock(ModBlocks.BlockType.SLAB))) {
-                //world.setBlockState(pos, ModBlocks.NETHERRACK.getBlock(ModBlocks.BlockType.SLAB).getStateWithProperties(world.getBlockState(pos)), Block.NOTIFY_LISTENERS);
-            }  else {
-                world.setBlockState(pos, Blocks.DIRT.getDefaultState());
+            ModBlocks deadBase = ModBlocks.DIRT;
+            if (state.isOf(ModBlocks.WARPED_NYLIUM.getBlock(ModBlocks.BlockType.SLAB))
+                    || state.isOf(ModBlocks.CRIMSON_NYLIUM.getBlock(ModBlocks.BlockType.SLAB))) {
+                deadBase = ModBlocks.NETHERRACK;
             }
+            world.setBlockState(pos, deadBase.getBlock(ModBlocks.BlockType.SLAB).getStateWithProperties(world.getBlockState(pos)), Block.NOTIFY_LISTENERS);
         } else {
             if (world.getLightLevel(pos.up()) >= 9) {
-                BlockState blockState = this.getDefaultState();
-
                 for(int i = 0; i < 4; ++i) {
                     BlockPos blockPos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                    if (canSpread(blockState, world, blockPos)) {
-                        if(world.getBlockState(blockPos).isOf(Blocks.DIRT))
-                            if(state.isOf(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.SLAB))){
-                                world.setBlockState(blockPos, Blocks.GRASS_BLOCK.getDefaultState().with(SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW)));
-                            } else if(state.isOf(ModBlocks.MYCELIUM.getBlock(ModBlocks.BlockType.SLAB))){
-                                world.setBlockState(blockPos, Blocks.MYCELIUM.getDefaultState().with(SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW)));
-                            }
+                    trySpread(world, modBlock.parentBlock, blockPos);
+                }
+            }
+        }
+    }
 
-                        if(world.getBlockState(blockPos).isOf(ModBlocks.DIRT.getBlock(ModBlocks.BlockType.SLAB)))
-                            if(state.isOf(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.SLAB))){
-                                world.setBlockState(blockPos, ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.SLAB).getDefaultState().with(SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW)).with(SlabBlock.WATERLOGGED, world.getBlockState(blockPos).get(SlabBlock.WATERLOGGED)).with(SlabBlock.TYPE, world.getBlockState(blockPos).get(SlabBlock.TYPE)));
-                            } else if(state.isOf(ModBlocks.MYCELIUM.getBlock(ModBlocks.BlockType.SLAB))){
-                                world.setBlockState(blockPos, ModBlocks.MYCELIUM.getBlock(ModBlocks.BlockType.SLAB).getDefaultState().with(SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW)).with(SlabBlock.WATERLOGGED, world.getBlockState(blockPos).get(SlabBlock.WATERLOGGED)).with(SlabBlock.TYPE, world.getBlockState(blockPos).get(SlabBlock.TYPE)));
-                            }
 
-                        if(world.getBlockState(blockPos).isOf(ModBlocks.DIRT.getBlock(ModBlocks.BlockType.STAIRS)))
-                            if(state.isOf(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.SLAB))){
-                                world.setBlockState(blockPos, ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.STAIRS).getStateWithProperties(world.getBlockState(blockPos)));
-                            } else if(state.isOf(ModBlocks.MYCELIUM.getBlock(ModBlocks.BlockType.SLAB))) {
-                                world.setBlockState(blockPos, ModBlocks.MYCELIUM.getBlock(ModBlocks.BlockType.STAIRS).getStateWithProperties(world.getBlockState(blockPos)));
-                            }
-
-                        if(world.getBlockState(blockPos).isOf(ModBlocks.DIRT.getBlock(ModBlocks.BlockType.WALL)) && !world.getBlockState(blockPos.up()).isIn(BlockTags.WALLS))
-                            if(state.isOf(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.SLAB))){
-                                world.setBlockState(blockPos, ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.WALL).getStateWithProperties(world.getBlockState(blockPos)));
-                            } else if(state.isOf(ModBlocks.MYCELIUM.getBlock(ModBlocks.BlockType.SLAB))) {
-                                world.setBlockState(blockPos, ModBlocks.MYCELIUM.getBlock(ModBlocks.BlockType.WALL).getStateWithProperties(world.getBlockState(blockPos)));
-                            }
+    public static void trySpread(ServerWorld world, Block parentBlock, BlockPos spreadPos) {
+        BlockState newState = null;
+        BlockState oldState = world.getBlockState(spreadPos);
+        ModBlocks[] fromDirt = {ModBlocks.GRASS_BLOCK, ModBlocks.MYCELIUM};
+        if (oldState.isOf(Blocks.DIRT)) {
+            // target is a full dirt block
+            for (ModBlocks modBlock : fromDirt) {
+                if (parentBlock.equals(modBlock.parentBlock)) {
+                    newState = modBlock.parentBlock.getDefaultState().with(SNOWY, world.getBlockState(spreadPos.up()).isOf(Blocks.SNOW));
+                }
+            }
+        } else {
+            // luckily all properties except "SNOWY" can be copied using getStateWithProperties(...)
+            for (ModBlocks.BlockType blockType :ModBlocks.BlockType.values()) {
+                if (oldState.isOf(ModBlocks.DIRT.getBlock(blockType))) {
+                    // target is dirt slab/stairs/wall
+                    for (ModBlocks modBlock : fromDirt) {
+                        if (parentBlock.equals(modBlock.parentBlock)) {
+                            newState = modBlock.getBlock(blockType)
+                                    .getStateWithProperties(world.getBlockState(spreadPos));
+                            if (newState.contains(Properties.SNOWY))
+                                newState = newState.with(Properties.SNOWY, world.getBlockState(spreadPos.up()).isOf(Blocks.SNOW));
+                        }
                     }
                 }
             }
-
         }
+        if (newState != null && canSurvive(newState, world, spreadPos) && !world.getFluidState(spreadPos.up()).isIn(FluidTags.WATER))
+            world.setBlockState(spreadPos, newState);
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
