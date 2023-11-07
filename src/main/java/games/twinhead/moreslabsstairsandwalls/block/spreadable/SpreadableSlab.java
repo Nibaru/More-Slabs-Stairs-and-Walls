@@ -26,7 +26,6 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.light.ChunkLightProvider;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.PlacedFeature;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
@@ -84,7 +83,7 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
     }
 
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
         if(state.get(SlabBlock.TYPE) == SlabType.BOTTOM) return false;
 
         return world.getBlockState(pos.up()).isAir();

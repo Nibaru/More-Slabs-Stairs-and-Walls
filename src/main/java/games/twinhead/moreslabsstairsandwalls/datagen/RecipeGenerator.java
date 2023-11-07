@@ -6,20 +6,18 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.server.recipe.RecipeJsonProvider;
-import net.minecraft.data.server.recipe.RecipeProvider;
-import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.*;
 import net.minecraft.recipe.book.RecipeCategory;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class RecipeGenerator extends FabricRecipeProvider {
 
     public RecipeGenerator(FabricDataOutput dataGenerator) {
         super(dataGenerator);
     }
+
+
 
     public final List<ModBlocks> planks = List.of(new ModBlocks[]{
             ModBlocks.ACACIA_PLANKS,
@@ -51,7 +49,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
             ModBlocks.BLUE_STAINED_GLASS);
 
     @Override
-    public void generate(Consumer<RecipeJsonProvider> exporter) {
+    public void generate(RecipeExporter exporter) {
         for (ModBlocks block: ModBlocks.values()) {
             if(block.hasBlock(ModBlocks.BlockType.SLAB)){
                 RecipeProvider.offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, block.getBlock(ModBlocks.BlockType.SLAB), block.parentBlock, 2);

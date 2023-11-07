@@ -147,10 +147,13 @@ public class ModRegistry {
                  WARPED_STEM,
                  WARPED_HYPHAE,
                  CRIMSON_STEM,
-                CRIMSON_HYPHAE-> registerBlock(block,
-                        (block.hasSlab ? new StrippableSlab(block.accociatedBlock, block.getSettings()) : null),
-                        (block.hasStairs ? new StrippableStairs(block.parentBlock.getDefaultState(),block.accociatedBlock, block.getSettings()) : null),
-                        (block.hasWall ? new StrippableWall(block.accociatedBlock, block.getSettings()) : null));
+                CRIMSON_HYPHAE,
+            CHERRY_LOG,
+                    CHERRY_WOOD,
+                        BAMBOO_BLOCK-> registerBlock(block,
+                        (block.hasSlab ? new StrippableSlab(block.associatedBlock, block.getSettings()) : null),
+                        (block.hasStairs ? new StrippableStairs(block.parentBlock.getDefaultState(),block.associatedBlock, block.getSettings()) : null),
+                        (block.hasWall ? new StrippableWall(block.associatedBlock, block.getSettings()) : null));
 
                 case OAK_LEAVES,
                     SPRUCE_LEAVES,
@@ -162,7 +165,8 @@ public class ModRegistry {
                     AZALEA_LEAVES,
                     FLOWERING_AZALEA_LEAVES,
                     CRIMSON_WART,
-                    WARPED_WART-> registerBlock(block,
+                    WARPED_WART,
+                        CHERRY_LEAVES-> registerBlock(block,
                         (block.hasSlab ? new LeavesSlab(block.getSettings()) : null),
                         (block.hasStairs ? new LeavesStairs(block.parentBlock.getDefaultState(), block.getSettings()) : null),
                         (block.hasWall ? new BaseWall(block.getSettings()) : null));
@@ -210,9 +214,9 @@ public class ModRegistry {
                         RED_CONCRETE_POWDER,
                         WHITE_CONCRETE_POWDER,
                         YELLOW_CONCRETE_POWDER -> registerBlock(block,
-                        (block.hasSlab ? new ConcretePowderSlab(block.accociatedBlock, block.getSettings()) : null),
-                        (block.hasStairs ? new ConcretePowderStairs(block.parentBlock.getDefaultState(), block.accociatedBlock, block.getSettings()) : null),
-                        (block.hasWall ? new ConcretePowderWall(block.accociatedBlock, block.getSettings()) : null));
+                        (block.hasSlab ? new ConcretePowderSlab(block.associatedBlock, block.getSettings()) : null),
+                        (block.hasStairs ? new ConcretePowderStairs(block.parentBlock.getDefaultState(), block.associatedBlock, block.getSettings()) : null),
+                        (block.hasWall ? new ConcretePowderWall(block.associatedBlock, block.getSettings()) : null));
 
                 case WHITE_GLAZED_TERRACOTTA,
                 YELLOW_GLAZED_TERRACOTTA,
@@ -242,9 +246,9 @@ public class ModRegistry {
                  WEATHERED_CUT_COPPER,
                     EXPOSED_CUT_COPPER,
                     CUT_COPPER -> registerBlock(block,
-                        (block.hasSlab ? new OxidizableSlab(block.oxidationLevel, block.accociatedBlock, block.getSettings()) : null),
-                        (block.hasStairs ? new OxidizableStairs(block.parentBlock.getDefaultState(),block.oxidationLevel, block.accociatedBlock, block.getSettings()) : null),
-                        (block.hasWall ? new OxidizableWall(block.oxidationLevel, block.accociatedBlock, block.getSettings()) : null));
+                        (block.hasSlab ? new OxidizableSlab(block.oxidationLevel, block.associatedBlock, block.getSettings()) : null),
+                        (block.hasStairs ? new OxidizableStairs(block.parentBlock.getDefaultState(),block.oxidationLevel, block.associatedBlock, block.getSettings()) : null),
+                        (block.hasWall ? new OxidizableWall(block.oxidationLevel, block.associatedBlock, block.getSettings()) : null));
                 case WAXED_COPPER_BLOCK,
                 WAXED_EXPOSED_COPPER,
                 WAXED_WEATHERED_COPPER,
@@ -253,9 +257,9 @@ public class ModRegistry {
                 WAXED_EXPOSED_CUT_COPPER,
                 WAXED_WEATHERED_CUT_COPPER,
                 WAXED_OXIDIZED_CUT_COPPER -> registerBlock(block,
-                        (block.hasSlab ? new WaxedSlab(block.accociatedBlock, block.getSettings()) : null),
-                        (block.hasStairs ? new WaxedStairs(block.parentBlock.getDefaultState(),block.accociatedBlock, block.getSettings()) : null),
-                        (block.hasWall ? new WaxedWall(block.accociatedBlock, block.getSettings()) : null));
+                        (block.hasSlab ? new WaxedSlab(block.associatedBlock, block.getSettings()) : null),
+                        (block.hasStairs ? new WaxedStairs(block.parentBlock.getDefaultState(),block.associatedBlock, block.getSettings()) : null),
+                        (block.hasWall ? new WaxedWall(block.associatedBlock, block.getSettings()) : null));
 
                 case MAGMA_BLOCK -> registerBlock(block,
                         (block.hasSlab ? new MagmaSlab(block.getSettings()) : null),
@@ -282,9 +286,9 @@ public class ModRegistry {
                 BRAIN_CORAL_BLOCK,
                 FIRE_CORAL_BLOCK,
                 HORN_CORAL_BLOCK -> registerBlock(block,
-                        (block.hasSlab ? new CoralSlab(block.accociatedBlock, block.getSettings()) : null),
-                        (block.hasStairs ? new CoralStairs(block.parentBlock.getDefaultState(),block.accociatedBlock,  block.getSettings()) : null),
-                        (block.hasWall ? new CoralWall(block.accociatedBlock, block.getSettings()) : null));
+                        (block.hasSlab ? new CoralSlab(block.associatedBlock, block.getSettings()) : null),
+                        (block.hasStairs ? new CoralStairs(block.parentBlock.getDefaultState(),block.associatedBlock,  block.getSettings()) : null),
+                        (block.hasWall ? new CoralWall(block.associatedBlock, block.getSettings()) : null));
 
                 case ICE -> registerBlock(block,
                         (block.hasSlab ? new IceSlab(block, block.getSettings()) : null),

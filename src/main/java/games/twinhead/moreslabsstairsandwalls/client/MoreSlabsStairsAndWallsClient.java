@@ -11,6 +11,7 @@ import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.client.render.RenderLayer;
 
+
 public class MoreSlabsStairsAndWallsClient implements ClientModInitializer {
 
     @Override

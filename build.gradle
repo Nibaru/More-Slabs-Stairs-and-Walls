@@ -24,9 +24,9 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    modApi "com.terraformersmc:modmenu:7.1.0"
-    modApi "me.shedaniel:RoughlyEnoughItems-fabric:12.0.645"
-    modApi "me.shedaniel.cloth:cloth-config-fabric:11.1.106"
+//    modApi "com.terraformersmc:modmenu:7.1.0"
+//    modApi "me.shedaniel:RoughlyEnoughItems-fabric:12.0.645"
+//    modApi "me.shedaniel.cloth:cloth-config-fabric:11.1.106"
 
         // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
@@ -74,7 +74,6 @@ java {
 
 loom {
     accessWidenerPath = file("src/main/resources/more_slabs_stairs_and_walls.accesswidener")
-
     runs {
         //
         // This adds a new gradle task that runs the datagen API: "gradlew runDatagenClient"

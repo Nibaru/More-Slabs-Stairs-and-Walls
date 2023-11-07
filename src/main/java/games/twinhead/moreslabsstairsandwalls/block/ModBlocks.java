@@ -13,9 +13,6 @@ import net.minecraft.util.Identifier;
 @SuppressWarnings("unchecked")
 public enum ModBlocks {
 
-
-
-
     GRASS_BLOCK(Blocks.GRASS_BLOCK, ModelType.GRASS , BlockTags.SHOVEL_MINEABLE, BlockTags.DIRT),
     PODZOL(Blocks.PODZOL, ModelType.GRASS , BlockTags.SHOVEL_MINEABLE, BlockTags.MUSHROOM_GROW_BLOCK, BlockTags.DIRT),
     MYCELIUM(Blocks.MYCELIUM, ModelType.GRASS , BlockTags.SHOVEL_MINEABLE, BlockTags.DIRT),
@@ -70,6 +67,18 @@ public enum ModBlocks {
     MANGROVE_WOOD(Blocks.MANGROVE_WOOD, ModelType.LOG_ALL, STRIPPED_MANGROVE_WOOD , BlockTags.AXE_MINEABLE),
     MANGROVE_LEAVES(Blocks.MANGROVE_LEAVES, ModelType.LEAVES  , BlockTags.LEAVES, BlockTags.HOE_MINEABLE),
     MANGROVE_PLANKS(Blocks.MANGROVE_PLANKS, true, BlockTags.AXE_MINEABLE),
+
+    STRIPPED_CHERRY_LOG(Blocks.STRIPPED_CHERRY_LOG, ModelType.LOG, BlockTags.AXE_MINEABLE),
+    STRIPPED_CHERRY_WOOD(Blocks.STRIPPED_CHERRY_WOOD, ModelType.LOG_ALL, BlockTags.AXE_MINEABLE),
+    CHERRY_LOG(Blocks.CHERRY_LOG, ModelType.LOG, ModBlocks.STRIPPED_CHERRY_LOG ,BlockTags.AXE_MINEABLE),
+    CHERRY_WOOD(Blocks.CHERRY_WOOD, ModelType.LOG_ALL, STRIPPED_CHERRY_WOOD , BlockTags.AXE_MINEABLE),
+    CHERRY_LEAVES(Blocks.CHERRY_LEAVES, ModelType.LEAVES  , BlockTags.LEAVES, BlockTags.HOE_MINEABLE),
+    CHERRY_PLANKS(Blocks.CHERRY_PLANKS, true, BlockTags.AXE_MINEABLE),
+
+    STRIPPED_BAMBOO_BLOCK(Blocks.STRIPPED_BAMBOO_BLOCK, ModelType.LOG, BlockTags.AXE_MINEABLE),
+    BAMBOO_BLOCK(Blocks.BAMBOO_BLOCK, ModelType.LOG, ModBlocks.STRIPPED_BAMBOO_BLOCK, BlockTags.AXE_MINEABLE),
+    BAMBOO_PLANKS(Blocks.BAMBOO_PLANKS, true, BlockTags.AXE_MINEABLE),
+    BAMBOO_MOSAIC(Blocks.BAMBOO_MOSAIC, true, BlockTags.AXE_MINEABLE),
 
     AZALEA_LEAVES(Blocks.AZALEA_LEAVES, ModelType.LEAVES  , BlockTags.LEAVES, BlockTags.HOE_MINEABLE),
     FLOWERING_AZALEA_LEAVES(Blocks.FLOWERING_AZALEA_LEAVES, ModelType.LEAVES  , BlockTags.LEAVES, BlockTags.HOE_MINEABLE),
@@ -224,7 +233,7 @@ public enum ModBlocks {
     CRACKED_POLISHED_BLACKSTONE_BRICKS(Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS, BlockTags.PICKAXE_MINEABLE),
     CRACKED_DEEPSLATE_TILES(Blocks.CRACKED_DEEPSLATE_TILES, BlockTags.PICKAXE_MINEABLE),
 
-    //CRYING_OBSIDIAN(Blocks.CRYING_OBSIDIAN, ModelType.CUBE_ALL, , null, , BlockTags.PICKAXE_MINEABLE, BlockTags.DRAGON_IMMUNE, BlockTags.NEEDS_DIAMOND_TOOL),
+    CRYING_OBSIDIAN(Blocks.CRYING_OBSIDIAN, ModelType.CUBE_ALL, BlockTags.PICKAXE_MINEABLE, BlockTags.DRAGON_IMMUNE, BlockTags.NEEDS_DIAMOND_TOOL),
 
     NETHERRACK(Blocks.NETHERRACK, ModelType.CUBE_ALL , BlockTags.PICKAXE_MINEABLE, BlockTags.INFINIBURN_OVERWORLD, BlockTags.INFINIBURN_END, BlockTags.INFINIBURN_NETHER),
 
@@ -354,11 +363,11 @@ public enum ModBlocks {
 
     public final TagKey<Block>[] blockTags;
 
-    public ModBlocks accociatedBlock = null;
+    public ModBlocks associatedBlock = null;
 
-    public String textureid = "";
-    public String bottomid = "";
-    public String topid = "";
+    public String textureId = "";
+    public String bottomId = "";
+    public String topId = "";
 
     public Oxidizable.OxidationLevel oxidationLevel = null;
 
@@ -368,10 +377,10 @@ public enum ModBlocks {
         this.blockTags = blockTags;
     }
 
-    ModBlocks(Block parentBlock, String textureid,  TagKey<Block>... blockTags){
+    ModBlocks(Block parentBlock, String textureId,  TagKey<Block>... blockTags){
         this(parentBlock, blockTags);
         this.modelType = ModelType.CUSTOM;
-        this.textureid = textureid;
+        this.textureId = textureId;
     }
 
     ModBlocks(Block parentBlock, boolean wallOnly, TagKey<Block>... blockTags){
@@ -385,18 +394,18 @@ public enum ModBlocks {
     ModBlocks(Block parentBlock, String id, boolean wallOnly, TagKey<Block>... blockTags){
         this.parentBlock = parentBlock;
         this.modelType = ModelType.CUSTOM;
-        this.textureid = id;
+        this.textureId = id;
         this.hasSlab = false;
         this.hasStairs = false;
         this.blockTags = blockTags;
     }
 
-    ModBlocks(Block parentBlock, String sideid, String topid, String bottomid,  TagKey<Block>... blockTags){
+    ModBlocks(Block parentBlock, String sideId, String topId, String bottomId,  TagKey<Block>... blockTags){
         this.parentBlock = parentBlock;
         this.modelType = ModelType.CUSTOM_SIDE_BOTTOM_TOP;
-        this.textureid = sideid;
-        this.topid = topid;
-        this.bottomid = bottomid;
+        this.textureId = sideId;
+        this.topId = topId;
+        this.bottomId = bottomId;
         this.blockTags = blockTags;
     }
 
@@ -406,45 +415,45 @@ public enum ModBlocks {
         this.blockTags = blockTags;
     }
 
-    ModBlocks(Block parentBlock, ModelType modelType, ModBlocks accociatedBlock, TagKey<Block>... blockTags){
+    ModBlocks(Block parentBlock, ModelType modelType, ModBlocks associatedBlock, TagKey<Block>... blockTags){
         this.parentBlock = parentBlock;
         this.modelType = modelType;
         this.blockTags = blockTags;
-        this.accociatedBlock = accociatedBlock;
+        this.associatedBlock = associatedBlock;
     }
 
-    ModBlocks(Block parentBlock, String modelId, ModBlocks accociatedBlock, TagKey<Block>... blockTags){
+    ModBlocks(Block parentBlock, String modelId, ModBlocks associatedBlock, TagKey<Block>... blockTags){
         this.parentBlock = parentBlock;
         this.blockTags = blockTags;
-        this.accociatedBlock = accociatedBlock;
+        this.associatedBlock = associatedBlock;
         this.modelType = ModelType.CUSTOM;
-        this.textureid = modelId;
+        this.textureId = modelId;
     }
 
-    ModBlocks(Block parentBlock, String modelId, ModBlocks accociatedBlock, boolean slab, boolean stairs, boolean wall, TagKey<Block>... blockTags){
+    ModBlocks(Block parentBlock, String modelId, ModBlocks associatedBlock, boolean slab, boolean stairs, boolean wall, TagKey<Block>... blockTags){
         this.parentBlock = parentBlock;
         this.blockTags = blockTags;
-        this.accociatedBlock = accociatedBlock;
+        this.associatedBlock = associatedBlock;
         this.modelType = ModelType.CUSTOM;
-        this.textureid = modelId;
+        this.textureId = modelId;
         this.hasSlab = slab;
         this.hasStairs = stairs;
         this.hasWall = wall;
     }
 
-    ModBlocks(Block parentBlock, ModelType modelType, Oxidizable.OxidationLevel oxidationLevel,  ModBlocks accociatedBlock, TagKey<Block>... blockTags){
+    ModBlocks(Block parentBlock, ModelType modelType, Oxidizable.OxidationLevel oxidationLevel,  ModBlocks associatedBlock, TagKey<Block>... blockTags){
         this.parentBlock = parentBlock;
         this.modelType = modelType;
         this.blockTags = blockTags;
-        this.accociatedBlock = accociatedBlock;
+        this.associatedBlock = associatedBlock;
         this.oxidationLevel = oxidationLevel;
     }
 
-    ModBlocks(Block parentBlock, ModelType modelType, Oxidizable.OxidationLevel oxidationLevel,  ModBlocks accociatedBlock, boolean slab, boolean stairs, boolean wall,  TagKey<Block>... blockTags){
+    ModBlocks(Block parentBlock, ModelType modelType, Oxidizable.OxidationLevel oxidationLevel,  ModBlocks associatedBlock, boolean slab, boolean stairs, boolean wall,  TagKey<Block>... blockTags){
         this.parentBlock = parentBlock;
         this.modelType = modelType;
         this.blockTags = blockTags;
-        this.accociatedBlock = accociatedBlock;
+        this.associatedBlock = associatedBlock;
         this.oxidationLevel = oxidationLevel;
         this.hasSlab = slab;
         this.hasStairs = stairs;
