@@ -482,7 +482,7 @@ public enum ModBlocks {
 
     public AbstractBlock.Settings getSettings(){
         Block block = this.parentBlock;
-        AbstractBlock.Settings settings = AbstractBlock.Settings.create()
+        AbstractBlock.Settings settings = AbstractBlock.Settings.of(block.getDefaultState().getMaterial())
                 .sounds(block.getDefaultState().getSoundGroup())
                 .luminance((view) -> block.getDefaultState().getLuminance())
                 .mapColor(block.getDefaultMapColor())

@@ -168,7 +168,7 @@ public class FallingSlab extends FallingBlock implements LandingBlock, Waterlogg
 
     @SuppressWarnings("deprecation")
     public static boolean canFallThrough(BlockState state) {
-        return state.isAir() || state.isIn(BlockTags.FIRE) || state.isLiquid() || state.isReplaceable();
+        return state.isAir() || state.isIn(BlockTags.FIRE) || state.getMaterial().isLiquid() || state.isReplaceable();
     }
 
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {

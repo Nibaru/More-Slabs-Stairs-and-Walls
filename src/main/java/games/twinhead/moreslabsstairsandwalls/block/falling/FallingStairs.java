@@ -51,7 +51,7 @@ public class FallingStairs extends StairsBlock implements Waterloggable, Landing
     }
 
     public static boolean canFallThrough(BlockState state) {
-        return state.isAir() || state.isIn(BlockTags.FIRE) || state.isLiquid() || state.isReplaceable();
+        return state.isAir() || state.isIn(BlockTags.FIRE) || state.getMaterial().isLiquid() || state.isReplaceable();
     }
 
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {

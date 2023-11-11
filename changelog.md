@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 3.1.0 - For Fabric 1.20.1
+## Version 3.1.0 - For Fabric 1.19.4
 
 ### Bug Fixes
 - Fixed various issues related to spreadable blocks. (Thanks to @stratecide)

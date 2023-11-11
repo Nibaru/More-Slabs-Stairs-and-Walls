@@ -98,19 +98,16 @@ public class ModRegistry {
                 addBlock(modBlock);
            }
 
-           modGroup = Registry.register(Registries.ITEM_GROUP, new Identifier(MoreSlabsStairsAndWalls.MOD_ID, "creative_tab"),
-                   FabricItemGroup.builder()
-                           .icon(() -> new ItemStack(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.STAIRS)))
-                           .displayName(Text.translatable("itemGroup.more_slabs_stairs_and_walls.creative_tab"))
-                           .entries((displayContext, entries) -> {
-                               for (ModBlocks block: ModBlocks.values())
-                                       for (ModBlocks.BlockType type : ModBlocks.BlockType.values())
-                                           if (block.hasBlock(type)) entries.add(block.getBlock(type));
+            modGroup  = FabricItemGroup.builder(new Identifier(MoreSlabsStairsAndWalls.MOD_ID, "creative_tab"))
+                .icon(()-> new ItemStack(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.STAIRS)))
+                .displayName(Text.translatable("itemGroup.more_slabs_stairs_and_walls.creative_tab"))
+                .entries((displayContext, entries) -> {
+                    for (ModBlocks block: ModBlocks.values())
+                        for (ModBlocks.BlockType type : ModBlocks.BlockType.values())
+                            if (block.hasBlock(type)) entries.add(block.getBlock(type));
+                })
+                .build();
 
-
-                           }
-                           )
-                           .build());
 
     }
 
