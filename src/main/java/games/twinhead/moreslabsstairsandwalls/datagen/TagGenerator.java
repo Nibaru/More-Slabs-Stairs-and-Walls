@@ -1,31 +1,21 @@
 package games.twinhead.moreslabsstairsandwalls.datagen;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Block;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.tag.BlockTags;
+import net.minecraft.tag.TagKey;
+import net.minecraft.util.registry.Registry;
 
-import java.util.concurrent.CompletableFuture;
+public class TagGenerator extends FabricTagProvider<Block> {
 
-public class TagGenerator extends FabricTagProvider.BlockTagProvider {
-
-    /**
-     * Construct a new {@link FabricTagProvider} with the default computed path.
-     *
-     * <p>Common implementations of this class are provided. For example @see BlockTagProvider
-     *
-     * @param dataGenerator The data generator instance
-     */
-    public TagGenerator(FabricDataOutput dataGenerator, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-        super(dataGenerator, registriesFuture);
+    public TagGenerator(FabricDataGenerator dataGenerator) {
+        super(dataGenerator, Registry.BLOCK);
     }
 
-
     @Override
-    protected void configure(RegistryWrapper.WrapperLookup arg) {
+    protected void generateTags() {
         for (ModBlocks block: ModBlocks.values()){
             for (ModBlocks.BlockType type: ModBlocks.BlockType.values()) {
                 if(!block.hasBlock(type)) continue;

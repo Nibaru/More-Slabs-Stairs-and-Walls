@@ -5,6 +5,7 @@ import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentStair
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
@@ -22,7 +23,7 @@ public class SlimeStairs extends TranslucentStairs {
             if (entity.bypassesLandingEffects()) {
                 super.onLandedUpon(world, state, pos, entity, fallDistance);
             } else {
-                entity.handleFallDamage(fallDistance, 0.0F, world.getDamageSources().fall());
+                entity.handleFallDamage(fallDistance, 0.0F, DamageSource.FALL);
             }
 
     }

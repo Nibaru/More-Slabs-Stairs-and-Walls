@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -36,7 +36,7 @@ public class CoralWall extends BaseWall {
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (!this.isInWater(world, pos)) {
-            world.scheduleBlockTick(pos, this, 60 + world.getRandom().nextInt(40));
+            world.createAndScheduleBlockTick(pos, this, 60 + world.getRandom().nextInt(40));
         }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
@@ -60,7 +60,7 @@ public class CoralWall extends BaseWall {
     @Nullable
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         if (!this.isInWater(ctx.getWorld(), ctx.getBlockPos())) {
-            ctx.getWorld().scheduleBlockTick(ctx.getBlockPos(), this, 60 + ctx.getWorld().getRandom().nextInt(40));
+            ctx.getWorld().createAndScheduleBlockTick(ctx.getBlockPos(), this, 60 + ctx.getWorld().getRandom().nextInt(40));
         }
 
         return super.getPlacementState(ctx);

@@ -11,7 +11,7 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -69,11 +69,11 @@ public class FallingSlab extends FallingBlock implements LandingBlock, Waterlogg
 
 
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        world.scheduleBlockTick(pos, this, this.getFallDelay());
+        world.createAndScheduleBlockTick(pos, this, this.getFallDelay());
     }
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        world.scheduleBlockTick(pos, this, this.getFallDelay());
+        world.createAndScheduleBlockTick(pos, this, this.getFallDelay());
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
@@ -168,7 +168,7 @@ public class FallingSlab extends FallingBlock implements LandingBlock, Waterlogg
 
     @SuppressWarnings("deprecation")
     public static boolean canFallThrough(BlockState state) {
-        return state.isAir() || state.isIn(BlockTags.FIRE) || state.getMaterial().isLiquid() || state.isReplaceable();
+        return state.isAir() || state.isIn(BlockTags.FIRE) || state.getMaterial().isLiquid() || state.getMaterial().isReplaceable();
     }
 
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {

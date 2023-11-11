@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.TntEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -49,7 +50,7 @@ public class HoneySlab extends TranslucentSlab {
         if (!world.isClient) {
             world.sendEntityStatus(entity, EntityStatuses.DRIP_RICH_HONEY);
         }
-        if (entity.handleFallDamage(fallDistance, 0.2f, world.getDamageSources().fall())) {
+        if (entity.handleFallDamage(fallDistance, 0.2f, DamageSource.FALL)) {
             entity.playSound(this.soundGroup.getFallSound(), this.soundGroup.getVolume() * 0.5f, this.soundGroup.getPitch() * 0.75f);
         }
     }

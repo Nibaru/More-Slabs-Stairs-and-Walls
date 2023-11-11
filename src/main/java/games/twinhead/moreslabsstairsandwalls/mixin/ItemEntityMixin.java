@@ -11,6 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.Packet;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -50,5 +51,10 @@ public class ItemEntityMixin extends Entity {
     @Shadow
     protected void writeCustomDataToNbt(NbtCompound nbt) {
 
+    }
+
+    @Shadow
+    public Packet<?> createSpawnPacket() {
+        return null;
     }
 }

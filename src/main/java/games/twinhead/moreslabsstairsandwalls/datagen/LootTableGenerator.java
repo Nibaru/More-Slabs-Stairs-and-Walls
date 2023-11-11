@@ -3,25 +3,22 @@ package games.twinhead.moreslabsstairsandwalls.datagen;
 
 import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
 import net.minecraft.block.Block;
+import net.minecraft.data.server.BlockLootTableGenerator;
 import net.minecraft.loot.LootTable;
+import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.util.Identifier;
 
 import java.util.function.BiConsumer;
 
-public class LootTableGenerator extends FabricBlockLootTableProvider {
+public class LootTableGenerator extends SimpleFabricLootTableProvider {
 
 
-    public LootTableGenerator(FabricDataOutput dataGenerator) {
-        super(dataGenerator);
-    }
-
-    @Override
-    public void generate() {
-
+    public LootTableGenerator(FabricDataGenerator dataGenerator) {
+        super(dataGenerator, LootContextTypes.BLOCK);
     }
 
     @Override
@@ -29,7 +26,7 @@ public class LootTableGenerator extends FabricBlockLootTableProvider {
         for (ModBlocks block: ModBlocks.values()) {
 
             if(block.hasSlab)
-                identifierBuilderBiConsumer.accept(new Identifier(MoreSlabsStairsAndWalls.MOD_ID, "blocks/" + block.toString().toLowerCase() + "_slab"), this.slabDrops(block.getBlock(ModBlocks.BlockType.SLAB)));
+                identifierBuilderBiConsumer.accept(new Identifier(MoreSlabsStairsAndWalls.MOD_ID, "blocks/" + block.toString().toLowerCase() + "_slab"), BlockLootTableGenerator.slabDrops(block.getBlock(ModBlocks.BlockType.SLAB)));
 
             if(block.hasStairs)
                 addBlock(identifierBuilderBiConsumer, block.toString().toLowerCase() + "_stairs", block.getBlock(ModBlocks.BlockType.STAIRS));
@@ -39,6 +36,6 @@ public class LootTableGenerator extends FabricBlockLootTableProvider {
     }
 
     public void addBlock(BiConsumer<Identifier, LootTable.Builder> identifierBuilderBiConsumer, String name, Block block){
-        identifierBuilderBiConsumer.accept(new Identifier(MoreSlabsStairsAndWalls.MOD_ID, "blocks/" + name), this.drops(block, block.asItem(), ConstantLootNumberProvider.create(1.0F)));
+        identifierBuilderBiConsumer.accept(new Identifier(MoreSlabsStairsAndWalls.MOD_ID, "blocks/" + name), BlockLootTableGenerator.drops(block, block.asItem(), ConstantLootNumberProvider.create(1.0F)));
     }
 }

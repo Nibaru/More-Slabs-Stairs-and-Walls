@@ -48,13 +48,11 @@ import games.twinhead.moreslabsstairsandwalls.block.terracotta.GlazedTerracottaS
 import games.twinhead.moreslabsstairsandwalls.block.terracotta.GlazedTerracottaWall;
 import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentSlab;
 import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentStairs;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.item.*;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -94,21 +92,10 @@ public class ModRegistry {
             .build());
 
     public static void registerBlocks(){
-           for (ModBlocks modBlock : ModBlocks.values()) {
+        modGroup  = FabricItemGroupBuilder.build(new Identifier(MoreSlabsStairsAndWalls.MOD_ID, "creative_tab"), () -> new ItemStack(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.STAIRS)));
+        for (ModBlocks modBlock : ModBlocks.values()) {
                 addBlock(modBlock);
            }
-
-            modGroup  = FabricItemGroup.builder(new Identifier(MoreSlabsStairsAndWalls.MOD_ID, "creative_tab"))
-                .icon(()-> new ItemStack(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.STAIRS)))
-                .displayName(Text.translatable("itemGroup.more_slabs_stairs_and_walls.creative_tab"))
-                .entries((displayContext, entries) -> {
-                    for (ModBlocks block: ModBlocks.values())
-                        for (ModBlocks.BlockType type : ModBlocks.BlockType.values())
-                            if (block.hasBlock(type)) entries.add(block.getBlock(type));
-                })
-                .build();
-
-
     }
 
     public static void addBlock(ModBlocks block) {
@@ -144,10 +131,7 @@ public class ModRegistry {
                  WARPED_STEM,
                  WARPED_HYPHAE,
                  CRIMSON_STEM,
-                CRIMSON_HYPHAE,
-            CHERRY_LOG,
-                    CHERRY_WOOD,
-                        BAMBOO_BLOCK-> registerBlock(block,
+                CRIMSON_HYPHAE-> registerBlock(block,
                         (block.hasSlab ? new StrippableSlab(block.associatedBlock, block.getSettings()) : null),
                         (block.hasStairs ? new StrippableStairs(block.parentBlock.getDefaultState(),block.associatedBlock, block.getSettings()) : null),
                         (block.hasWall ? new StrippableWall(block.associatedBlock, block.getSettings()) : null));
@@ -162,8 +146,7 @@ public class ModRegistry {
                     AZALEA_LEAVES,
                     FLOWERING_AZALEA_LEAVES,
                     CRIMSON_WART,
-                    WARPED_WART,
-                        CHERRY_LEAVES-> registerBlock(block,
+                    WARPED_WART -> registerBlock(block,
                         (block.hasSlab ? new LeavesSlab(block.getSettings()) : null),
                         (block.hasStairs ? new LeavesStairs(block.parentBlock.getDefaultState(), block.getSettings()) : null),
                         (block.hasWall ? new BaseWall(block.getSettings()) : null));
@@ -300,17 +283,17 @@ public class ModRegistry {
 
     public static void registerBlock(ModBlocks block, @Nullable Block slab, @Nullable Block stair, @Nullable Block wall) {
         if (block.hasSlab) {
-            MOD_BLOCKS.put(block.getId(ModBlocks.BlockType.SLAB), net.minecraft.registry.Registry.register(Registries.BLOCK, block.getId(ModBlocks.BlockType.SLAB), slab));
+            MOD_BLOCKS.put(block.getId(ModBlocks.BlockType.SLAB), Registry.register(Registry.BLOCK, block.getId(ModBlocks.BlockType.SLAB), slab));
             registerItem(block.getId(ModBlocks.BlockType.SLAB), slab);
         }
 
         if (block.hasStairs) {
-            MOD_BLOCKS.put(block.getId(ModBlocks.BlockType.STAIRS), net.minecraft.registry.Registry.register(Registries.BLOCK, block.getId(ModBlocks.BlockType.STAIRS), stair));
+            MOD_BLOCKS.put(block.getId(ModBlocks.BlockType.STAIRS), Registry.register(Registry.BLOCK, block.getId(ModBlocks.BlockType.STAIRS), stair));
             registerItem(block.getId(ModBlocks.BlockType.STAIRS), stair);
         }
 
         if (block.hasWall) {
-            MOD_BLOCKS.put(block.getId(ModBlocks.BlockType.WALL), net.minecraft.registry.Registry.register(Registries.BLOCK, block.getId(ModBlocks.BlockType.WALL), wall));
+            MOD_BLOCKS.put(block.getId(ModBlocks.BlockType.WALL), Registry.register(Registry.BLOCK, block.getId(ModBlocks.BlockType.WALL), wall));
             registerItem(block.getId(ModBlocks.BlockType.WALL), wall);
         }
 
@@ -319,6 +302,6 @@ public class ModRegistry {
 
 
     public static void registerItem(Identifier id, Block block){
-        net.minecraft.registry.Registry.register(Registries.ITEM, id, new BlockItem(block, new Item.Settings()));
+        Registry.register(Registry.ITEM, id, new BlockItem(block, new Item.Settings().group(modGroup)));
     }
 }

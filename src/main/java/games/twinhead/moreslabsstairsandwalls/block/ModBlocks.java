@@ -6,8 +6,8 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Oxidizable;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.tag.BlockTags;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 
 @SuppressWarnings("unchecked")
@@ -70,18 +70,6 @@ public enum ModBlocks {
     MANGROVE_WOOD(Blocks.MANGROVE_WOOD, ModelType.LOG_ALL, STRIPPED_MANGROVE_WOOD , BlockTags.AXE_MINEABLE),
     MANGROVE_LEAVES(Blocks.MANGROVE_LEAVES, ModelType.LEAVES  , BlockTags.LEAVES, BlockTags.HOE_MINEABLE),
     MANGROVE_PLANKS(Blocks.MANGROVE_PLANKS, true, BlockTags.AXE_MINEABLE),
-
-    STRIPPED_CHERRY_LOG(Blocks.STRIPPED_CHERRY_LOG, ModelType.LOG, BlockTags.AXE_MINEABLE),
-    STRIPPED_CHERRY_WOOD(Blocks.STRIPPED_CHERRY_WOOD, ModelType.LOG_ALL, BlockTags.AXE_MINEABLE),
-    CHERRY_LOG(Blocks.CHERRY_LOG, ModelType.LOG, ModBlocks.STRIPPED_CHERRY_LOG ,BlockTags.AXE_MINEABLE),
-    CHERRY_WOOD(Blocks.CHERRY_WOOD, ModelType.LOG_ALL, STRIPPED_CHERRY_WOOD , BlockTags.AXE_MINEABLE),
-    CHERRY_LEAVES(Blocks.CHERRY_LEAVES, ModelType.LEAVES  , BlockTags.LEAVES, BlockTags.HOE_MINEABLE),
-    CHERRY_PLANKS(Blocks.CHERRY_PLANKS, true, BlockTags.AXE_MINEABLE),
-
-    STRIPPED_BAMBOO_BLOCK(Blocks.STRIPPED_BAMBOO_BLOCK, ModelType.LOG, BlockTags.AXE_MINEABLE),
-    BAMBOO_BLOCK(Blocks.BAMBOO_BLOCK, ModelType.LOG, ModBlocks.STRIPPED_BAMBOO_BLOCK, BlockTags.AXE_MINEABLE),
-    BAMBOO_PLANKS(Blocks.BAMBOO_PLANKS, true, BlockTags.AXE_MINEABLE),
-    BAMBOO_MOSAIC(Blocks.BAMBOO_MOSAIC, true, BlockTags.AXE_MINEABLE),
 
     AZALEA_LEAVES(Blocks.AZALEA_LEAVES, ModelType.LEAVES  , BlockTags.LEAVES, BlockTags.HOE_MINEABLE),
     FLOWERING_AZALEA_LEAVES(Blocks.FLOWERING_AZALEA_LEAVES, ModelType.LEAVES  , BlockTags.LEAVES, BlockTags.HOE_MINEABLE),
