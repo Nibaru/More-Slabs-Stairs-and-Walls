@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.2-SNAPSHOT'
+    id 'fabric-loom' version "1.4-SNAPSHOT"
     id 'maven-publish'
     id 'com.matthewprenger.cursegradle' version '1.4.0'
     id "com.modrinth.minotaur" version "2.+"
@@ -9,33 +9,29 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
-    // Add repositories to retrieve artifacts from in here.
-    // You should only use this when depending on other mods because
-    // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-    // See https://docs.gradle.org/current/userguide/declaring_repositories.html
-    // for more information about repositories.
+    mavenCentral()
     maven { url "https://maven.terraformersmc.com/releases/" }
     maven { url "https://maven.shedaniel.me/" }
 }
 
 dependencies {
-    // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-//    modApi "com.terraformersmc:modmenu:7.1.0"
-//    modApi "me.shedaniel:RoughlyEnoughItems-fabric:12.0.645"
-//    modApi "me.shedaniel.cloth:cloth-config-fabric:11.1.106"
+    modApi "com.terraformersmc:modmenu:${project.project.mod_menu_version}"
+    modApi "me.shedaniel:RoughlyEnoughItems-fabric:${project.project.rei_version}"
+    modApi "me.shedaniel.cloth:cloth-config-fabric:${project.project.cloth_config_version}"
 
-        // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    }
+}
 
 processResources {
     inputs.property "version", project.version
     inputs.property "minecraft_version", project.minecraft_version
     inputs.property "loader_version", project.loader_version
+    inputs.property "mod_id", project.mod_id
+    inputs.property "mod_name", project.mod_id
 
     duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
 
@@ -44,36 +40,32 @@ processResources {
     filesMatching("fabric.mod.json") {
         expand "version": project.version,
                 "minecraft_version": project.minecraft_version,
-                "loader_version": project.loader_version
+                "loader_version": project.loader_version,
+                "mod_id": project.mod_id,
+                "mod_name": project.mod_name
+
     }
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 def targetJavaVersion = 17
 tasks.withType(JavaCompile).configureEach {
-    // ensure that the encoding is set to UTF-8, no matter what the system default is
-    // this fixes some edge cases with special characters not displaying correctly
-    // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-    // If Javadoc is generated, this must be specified in that task too.
     it.options.encoding = "UTF-8"
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-        it.options.release = targetJavaVersion
-    }
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {it.options.release = targetJavaVersion}
 }
 
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
-    if (JavaVersion.current() < javaVersion) {
-        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
-    }
+    if (JavaVersion.current() < javaVersion) {toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)}
     archivesBaseName = project.archives_base_name
-    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-    // if it is present.
-    // If you remove this line, sources will not be generated.
     withSourcesJar()
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/more_slabs_stairs_and_walls.accesswidener")
+    accessWidenerPath = file("src/main/resources/${project.mod_id}.accesswidener")
     runs {
         //
         // This adds a new gradle task that runs the datagen API: "gradlew runDatagenClient"
@@ -108,23 +100,6 @@ jar {
     }
 }
 
-// configure the maven publication
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
-    }
-
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-    repositories {
-        // Add repositories to publish to here.
-        // Notice: This block does NOT have the same function as the block in the top level.
-        // The repositories here will be used for publishing your artifact, not for
-        // retrieving dependencies.
-    }
-}
-
 curseforge {
     apiKey = "${System.getenv("CURSEFORGE_KEY")}"
     project {
@@ -133,6 +108,7 @@ curseforge {
             displayName = "v" + project.mod_version + "+" + project.minecraft_version  + " Fabric"
         }
         changelogType = 'markdown'
+        changelog = rootProject.file("CHANGELOG.md").text
         releaseType = 'release'
         addGameVersion "Fabric"
         addGameVersion project.minecraft_version
@@ -140,12 +116,16 @@ curseforge {
 }
 
 modrinth {
-    token = "${System.getenv("MODRINTH_KEY")}" // Please use an environment variable for this! The default is `$MODRINTH_TOKEN`.
-    projectId = project.modrinth_id // The ID of your Modrinth project. Slugs will not work.
-    versionNumber = project.mod_version + "+" + project.minecraft_version // The (preferably SemVer) version of the mod. If not specified, it'll use the `version` declaration
-    versionType = "release" // This is the default -- can also be `beta` or `alpha`
+    token = "${System.getenv("MODRINTH_KEY")}"
+    projectId = project.modrinth_id
+    versionNumber = project.mod_version + "+" + project.minecraft_version
+    versionType = "release"
     versionName =  "v" + project.mod_version + "+" + project.minecraft_version  + " Fabric"
-    uploadFile = remapJar // Tells Minotaur to use the remapped jar
-    gameVersions = [project.minecraft_version] // An array of game versions the version supports
-    loaders = ['fabric', 'quilt'] // Self-explanatory.
+    uploadFile = remapJar
+    gameVersions = [project.minecraft_version]
+    loaders = ['fabric', 'quilt']
+    changelog = rootProject.file("CHANGELOG.md").text
+    dependencies {
+        required.project "fabric-api"
+    }
 }

@@ -8,7 +8,7 @@ import net.minecraft.util.math.Direction;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(SlimeBlock.class)
-public class SlimeBlockMixin extends TransparentBlock {
+public class SlimeBlockMixin extends TranslucentBlock {
 
     protected SlimeBlockMixin(Settings settings) {
         super(settings);

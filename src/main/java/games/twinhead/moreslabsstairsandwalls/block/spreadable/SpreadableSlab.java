@@ -105,7 +105,7 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
 
     public void growBoneMeal(ServerWorld world, Random random, BlockPos pos) {
         BlockPos blockPos = pos.up();
-        BlockState blockState = Blocks.GRASS.getDefaultState();
+        BlockState blockState = Blocks.SHORT_GRASS.getDefaultState();
         Optional<RegistryEntry.Reference<PlacedFeature>> optional = world.getRegistryManager().get(RegistryKeys.PLACED_FEATURE).getEntry(VegetationPlacedFeatures.GRASS_BONEMEAL);
 
         label49:

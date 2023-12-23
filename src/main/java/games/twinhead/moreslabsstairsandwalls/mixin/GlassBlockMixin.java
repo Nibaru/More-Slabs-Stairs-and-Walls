@@ -7,8 +7,8 @@ import net.minecraft.block.enums.SlabType;
 import net.minecraft.util.math.Direction;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(GlassBlock.class)
-public class GlassBlockMixin extends AbstractGlassBlock {
+@Mixin(TransparentBlock.class)
+public class GlassBlockMixin extends TranslucentBlock {
 
     protected GlassBlockMixin(Settings settings) {
         super(settings);

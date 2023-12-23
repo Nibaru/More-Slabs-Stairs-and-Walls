@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "more_slabs_stairs_and_walls",
+  "id": "${mod_id}",
   "version": "${version}",
-  "name": "More Slabs Stairs & Walls",
+  "name": "${mod_name}",
   "description": "Expand your building options with More Slabs, Stairs, & Walls.",
   "authors": ["Nibaru"],
   "contact": {

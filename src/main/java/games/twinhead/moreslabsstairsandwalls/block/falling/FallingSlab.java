@@ -1,5 +1,6 @@
 package games.twinhead.moreslabsstairsandwalls.block.falling;
 
+import com.mojang.serialization.MapCodec;
 import games.twinhead.moreslabsstairsandwalls.block.entity.FallingSlabBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.SlabType;
@@ -30,6 +31,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class FallingSlab extends FallingBlock implements LandingBlock, Waterloggable {
 
+    public static final MapCodec<FallingSlab> CODEC = createCodec(FallingSlab::new);
+
     public static final EnumProperty<SlabType> TYPE;
     public static final BooleanProperty WATERLOGGED;
     protected static final VoxelShape BOTTOM_SHAPE;
@@ -38,6 +41,11 @@ public class FallingSlab extends FallingBlock implements LandingBlock, Waterlogg
 
     public FallingSlab(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends FallingBlock> getCodec() {
+        return CODEC;
     }
 
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
