@@ -1,8 +1,0 @@
-{
-  "parent": "more_slabs_stairs_and_walls:block/log_wall_post",
-  "textures": {
-    "bottom": "minecraft:block/polished_basalt_top",
-    "side": "minecraft:block/polished_basalt_side",
-    "top": "minecraft:block/polished_basalt_top"
-  }
-}

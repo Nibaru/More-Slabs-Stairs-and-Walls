@@ -1,8 +1,0 @@
-{
-  "parent": "more_slabs_stairs_and_walls:block/log_wall_inventory",
-  "textures": {
-    "bottom": "minecraft:block/acacia_log_top",
-    "side": "minecraft:block/acacia_log",
-    "top": "minecraft:block/acacia_log_top"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "minecraft:dark_oak_leaves"
-  },
-  "result": "more_slabs_stairs_and_walls:dark_oak_leaves_slab"
-}

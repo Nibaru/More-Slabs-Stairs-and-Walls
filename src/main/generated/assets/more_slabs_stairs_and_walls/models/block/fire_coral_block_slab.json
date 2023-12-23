@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "minecraft:block/fire_coral_block",
-    "side": "minecraft:block/fire_coral_block",
-    "top": "minecraft:block/fire_coral_block"
-  }
-}

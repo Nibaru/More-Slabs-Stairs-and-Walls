@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "minecraft:weathered_copper"
-  },
-  "result": "more_slabs_stairs_and_walls:weathered_copper_wall"
-}

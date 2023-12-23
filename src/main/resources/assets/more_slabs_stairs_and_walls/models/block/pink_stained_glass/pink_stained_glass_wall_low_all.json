@@ -1,8 +1,0 @@
-{
-	"credit": "Made with Blockbench",
-	"parent": "more_slabs_stairs_and_walls:block/glass/glass_wall_low_all",
-	"textures": {
-		"wall": "more_slabs_stairs_and_walls:block/pink_stained_glass_wall",
-		"particle": "block/pink_stained_glass"
-	}
-}

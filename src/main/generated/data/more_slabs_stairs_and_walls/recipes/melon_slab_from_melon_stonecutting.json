@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "minecraft:melon"
-  },
-  "result": "more_slabs_stairs_and_walls:melon_slab"
-}

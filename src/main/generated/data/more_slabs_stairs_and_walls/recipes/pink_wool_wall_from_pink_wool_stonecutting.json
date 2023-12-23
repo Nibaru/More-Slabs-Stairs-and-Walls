@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "minecraft:pink_wool"
-  },
-  "result": "more_slabs_stairs_and_walls:pink_wool_wall"
-}

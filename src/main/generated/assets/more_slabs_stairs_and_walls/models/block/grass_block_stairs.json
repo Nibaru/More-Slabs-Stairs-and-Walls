@@ -1,8 +1,0 @@
-{
-  "parent": "more_slabs_stairs_and_walls:block/grass_stairs",
-  "textures": {
-    "bottom": "minecraft:block/dirt",
-    "side": "minecraft:block/grass_block_side",
-    "top": "minecraft:block/grass_block_top"
-  }
-}

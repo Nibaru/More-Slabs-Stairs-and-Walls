@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "minecraft:light_gray_wool"
-  },
-  "result": "more_slabs_stairs_and_walls:light_gray_wool_wall"
-}

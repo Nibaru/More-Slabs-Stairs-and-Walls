@@ -1,8 +1,0 @@
-{
-	"parent": "more_slabs_stairs_and_walls:block/glass/glass_wall_tall_full",
-	"textures": {
-		"glass": "minecraft:block/light_blue_stained_glass",
-		"wall": "more_slabs_stairs_and_walls:block/light_blue_stained_glass_wall",
-		"particle": "#glass"
-	}
-}

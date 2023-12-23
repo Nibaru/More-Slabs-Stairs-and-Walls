@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "minecraft:diamond_block"
-  },
-  "result": "more_slabs_stairs_and_walls:diamond_block_wall"
-}

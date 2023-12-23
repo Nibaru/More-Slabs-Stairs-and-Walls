@@ -1,6 +1,0 @@
-{
-	"parent": "more_slabs_stairs_and_walls:block/glass/glass_wall_side_tall",
-	"textures": {
-		"wall": "block/light_blue_stained_glass"
-	}
-}

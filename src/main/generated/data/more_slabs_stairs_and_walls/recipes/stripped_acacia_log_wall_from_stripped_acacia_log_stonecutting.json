@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "minecraft:stripped_acacia_log"
-  },
-  "result": "more_slabs_stairs_and_walls:stripped_acacia_log_wall"
-}

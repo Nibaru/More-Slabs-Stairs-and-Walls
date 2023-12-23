@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "minecraft:soul_soil"
-  },
-  "result": "more_slabs_stairs_and_walls:soul_soil_slab"
-}

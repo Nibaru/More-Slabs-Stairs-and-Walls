@@ -1,8 +1,0 @@
-{
-  "parent": "more_slabs_stairs_and_walls:block/glazed_terracotta_stairs_outer",
-  "textures": {
-    "bottom": "minecraft:block/light_gray_glazed_terracotta",
-    "side": "minecraft:block/light_gray_glazed_terracotta",
-    "top": "minecraft:block/light_gray_glazed_terracotta"
-  }
-}

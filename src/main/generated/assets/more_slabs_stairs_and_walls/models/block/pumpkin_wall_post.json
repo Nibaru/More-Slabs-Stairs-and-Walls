@@ -1,8 +1,0 @@
-{
-  "parent": "more_slabs_stairs_and_walls:block/log_wall_post",
-  "textures": {
-    "bottom": "minecraft:block/pumpkin_top",
-    "side": "minecraft:block/pumpkin_side",
-    "top": "minecraft:block/pumpkin_top"
-  }
-}

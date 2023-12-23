@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "minecraft:white_glazed_terracotta"
-  },
-  "result": "more_slabs_stairs_and_walls:white_glazed_terracotta_wall"
-}

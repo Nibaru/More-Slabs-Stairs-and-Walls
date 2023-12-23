@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "minecraft:hay_block"
-  },
-  "result": "more_slabs_stairs_and_walls:hay_block_stairs"
-}

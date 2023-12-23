@@ -1,8 +1,0 @@
-{
-  "parent": "more_slabs_stairs_and_walls:block/log_wall_post",
-  "textures": {
-    "bottom": "minecraft:block/melon_top",
-    "side": "minecraft:block/melon_side",
-    "top": "minecraft:block/melon_top"
-  }
-}

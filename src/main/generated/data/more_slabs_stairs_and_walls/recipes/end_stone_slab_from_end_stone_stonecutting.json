@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "minecraft:end_stone"
-  },
-  "result": "more_slabs_stairs_and_walls:end_stone_slab"
-}
