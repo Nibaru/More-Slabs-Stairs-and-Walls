@@ -1,6 +1,10 @@
 # Changelog
 
-## Version 3.1.0 - For Fabric 1.20.2
+## Version 3.1.1 - For Fabric 1.20.4
+### Bug Fixes
+- Fixed crafting recipes for Cherry Plank Walls and Bamboo Plank Walls
+
+## Version 3.1.0 - For Fabric 1.20.4
 
 ### Bug Fixes
 - Fixed various issues related to spreadable blocks. (Thanks to @stratecide)

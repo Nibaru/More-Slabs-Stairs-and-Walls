@@ -28,7 +28,9 @@ public class RecipeGenerator extends FabricRecipeProvider {
             ModBlocks.OAK_PLANKS,
             ModBlocks.SPRUCE_PLANKS,
             ModBlocks.WARPED_PLANKS,
-            ModBlocks.MANGROVE_PLANKS});
+            ModBlocks.MANGROVE_PLANKS,
+            ModBlocks.CHERRY_PLANKS,
+            ModBlocks.BAMBOO_PLANKS});
 
     public final List<ModBlocks> glass = List.of(ModBlocks.GLASS,
             ModBlocks.WHITE_STAINED_GLASS,
@@ -73,10 +75,12 @@ public class RecipeGenerator extends FabricRecipeProvider {
                         case SPRUCE_PLANKS -> Blocks.SPRUCE_FENCE;
                         case WARPED_PLANKS -> Blocks.WARPED_FENCE;
                         case MANGROVE_PLANKS -> Blocks.MANGROVE_FENCE;
+                        case CHERRY_PLANKS -> Blocks.CHERRY_FENCE;
+                        case BAMBOO_PLANKS -> Blocks.BAMBOO_FENCE;
                         default -> Blocks.OAK_FENCE;
                     };
                     //RecipeProvider.offerShapelessRecipe(exporter, block.getWallBlock(), fence, "plank_walls", 1);
-                    ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, block.getBlock(ModBlocks.BlockType.WALL), 1).criterion(hasItem(block.parentBlock), conditionsFromItem(block.parentBlock)).criterion(hasItem(block.getBlock(ModBlocks.BlockType.WALL)), conditionsFromItem(block.getBlock(ModBlocks.BlockType.WALL))).input(fence).group("more_walls").offerTo(exporter);
+                    ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, block.getBlock(ModBlocks.BlockType.WALL), 1).criterion(hasItem(fence), conditionsFromItem(fence)).criterion(hasItem(block.getBlock(ModBlocks.BlockType.WALL)), conditionsFromItem(block.getBlock(ModBlocks.BlockType.WALL))).input(fence).group("more_walls").offerTo(exporter);
                 } else if(!glass.contains(block)){
                     ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, block.getBlock(ModBlocks.BlockType.WALL), 6).criterion(hasItem(block.parentBlock), conditionsFromItem(block.parentBlock)).criterion(hasItem(block.getBlock(ModBlocks.BlockType.WALL)), conditionsFromItem(block.getBlock(ModBlocks.BlockType.WALL))).input('#', block.parentBlock).pattern("###").pattern("###").group("more_walls").offerTo(exporter);
                 }
