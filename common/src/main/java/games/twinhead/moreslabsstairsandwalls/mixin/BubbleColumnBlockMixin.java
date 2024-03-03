@@ -24,12 +24,11 @@ public class BubbleColumnBlockMixin  extends Block implements FluidDrainable {
         super(settings);
     }
 
-
     @Inject(method = "getBubbleState", at = @At(value = "HEAD"), cancellable = true)
     private static void getState(BlockState state, CallbackInfoReturnable<BlockState> cir){
         for (ModBlocks.BlockType type: ModBlocks.BlockType.values()) {
-            if (state.isOf(ModBlocks.SOUL_SAND.getBlock(type))) cir.setReturnValue((BlockState) Blocks.BUBBLE_COLUMN.getDefaultState().with(DRAG, false));
-            if (state.isOf(ModBlocks.MAGMA_BLOCK.getBlock(type))) cir.setReturnValue((BlockState)Blocks.BUBBLE_COLUMN.getDefaultState().with(DRAG, true));
+            if (state.isOf(ModBlocks.SOUL_SAND.getBlock(type))) cir.setReturnValue(Blocks.BUBBLE_COLUMN.getDefaultState().with(DRAG, false));
+            if (state.isOf(ModBlocks.MAGMA_BLOCK.getBlock(type))) cir.setReturnValue(Blocks.BUBBLE_COLUMN.getDefaultState().with(DRAG, true));
         }
     }
 

@@ -48,15 +48,20 @@ import games.twinhead.moreslabsstairsandwalls.block.terracotta.GlazedTerracottaS
 import games.twinhead.moreslabsstairsandwalls.block.terracotta.GlazedTerracottaWall;
 import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentSlab;
 import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentStairs;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
@@ -77,6 +82,17 @@ public class ModRegistry {
 
 //    public static ItemGroup modGroup;
 
+    public static ItemGroup modGroup = Registry.register(Registries.ITEM_GROUP, new Identifier(MoreSlabsStairsAndWalls.MOD_ID, "creative_tab"),
+                   FabricItemGroup.builder()
+                           .icon(() -> new ItemStack(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.STAIRS)))
+            .displayName(Text.translatable("itemGroup.more_slabs_stairs_and_walls.creative_tab"))
+            .entries((displayContext, entries) -> {
+        for (ModBlocks block: ModBlocks.values())
+            for (ModBlocks.BlockType type : ModBlocks.BlockType.values())
+                if (block.hasBlock(type)) entries.add(block.getBlock(type));})
+                                   .build());
+
+
     public static void registerBlocks(){
         for (ModBlocks modBlock : ModBlocks.values())
         {
@@ -88,9 +104,16 @@ public class ModRegistry {
                     Registry.register(Registries.BLOCK, modBlock.getId(type), block);
                     registerItem(modBlock.getId(type), block);
                     MOD_BLOCKS.put(modBlock.getId(type), block);
+
+                    if (modBlock.parentBlock.getDefaultState().isBurnable()){
+                        FlammableBlockRegistry.getDefaultInstance().add(block, games.twinhead.moreslabsstairsandwalls.registry.ModRegistry.getBurnChance(modBlock), games.twinhead.moreslabsstairsandwalls.registry.ModRegistry.getSpreadChance(modBlock));
+                    }
+
                 }
             }
         }
+
+
     }
 
     public static void registerItem(Identifier id, Block block){

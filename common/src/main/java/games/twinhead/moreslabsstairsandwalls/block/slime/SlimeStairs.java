@@ -13,8 +13,8 @@ import net.minecraft.world.World;
 public class SlimeStairs extends TranslucentStairs {
 
 
-    public SlimeStairs(ModBlocks modblock,BlockState state, Settings settings) {
-        super(modblock,state, settings);
+    public SlimeStairs(ModBlocks block,BlockState state, Settings settings) {
+        super(block,state, settings);
     }
 
     public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {

@@ -4,7 +4,6 @@ import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.entity.FallingSlabBlockEntity;
 import games.twinhead.moreslabsstairsandwalls.block.falling.FallingSlab;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;

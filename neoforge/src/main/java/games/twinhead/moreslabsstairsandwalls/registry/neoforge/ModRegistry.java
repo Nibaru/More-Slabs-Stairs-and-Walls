@@ -14,12 +14,18 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.text.Text;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.*;
+
+import java.util.function.Supplier;
 
 
 public class ModRegistry {
@@ -73,6 +79,23 @@ public class ModRegistry {
                 }
             });
     }
+
+    public static final DeferredRegister<ItemGroup> ITEM_GROUPS = DeferredRegister.create(Registries.ITEM_GROUP, MoreSlabsStairsAndWalls.MOD_ID);
+
+    public static final DeferredHolder<ItemGroup,ItemGroup> CREATIVE_TAB = ITEM_GROUPS.register("creative_tab", () -> ItemGroup.builder()
+            //Set the title of the tab. Don't forget to add a translation!
+            .displayName(Text.translatable("itemGroup." + MoreSlabsStairsAndWalls.MOD_ID + ".creative_tab"))
+            //Set the icon of the tab.
+            .icon(() -> new ItemStack(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.STAIRS)))
+            //Add your items to the tab.
+            .entries((params, output) -> {
+                for (ModBlocks block: ModBlocks.values())
+                    for (ModBlocks.BlockType type : ModBlocks.BlockType.values())
+                        if (block.hasBlock(type)) output.add(block.getBlock(type));
+            })
+            .build()
+    );
+
     @SubscribeEvent
     public void registerBlockColors(RegisterColorHandlersEvent.Block event){
         for (ModBlocks block: ModBlocks.values()) {

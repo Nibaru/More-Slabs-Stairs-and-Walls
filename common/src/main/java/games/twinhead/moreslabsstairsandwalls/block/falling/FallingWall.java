@@ -4,7 +4,6 @@ import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseWall;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LandingBlock;
-import net.minecraft.block.WallBlock;
 import net.minecraft.block.Waterloggable;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.particle.BlockStateParticleEffect;
@@ -35,7 +34,7 @@ public class FallingWall extends BaseWall implements Waterloggable, LandingBlock
 
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (canFallThrough(world.getBlockState(pos.down())) && pos.getY() >= world.getBottomY()) {
-            FallingBlockEntity fallingBlockEntity = FallingBlockEntity.spawnFromBlock(world, pos, state);
+            FallingBlockEntity.spawnFromBlock(world, pos, state);
         }
     }
 

@@ -15,6 +15,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("deprecation")
 public class CoralSlab extends BaseSlab {
 
     private final ModBlocks deadCoralBlock;
@@ -24,22 +25,34 @@ public class CoralSlab extends BaseSlab {
         this.deadCoralBlock = deadCoralBlock;
     }
 
-    @SuppressWarnings("deprecation")
+
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (!this.isInWater(world, pos) && !state.get(WATERLOGGED)) {
+        if (!isInWater(world, pos) && !state.get(WATERLOGGED)) {
             world.setBlockState(pos, this.deadCoralBlock.getBlock(getBlockType()).getStateWithProperties(state), Block.NOTIFY_LISTENERS);
         }
     }
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if (!this.isInWater(world, pos)) {
+        if (!isInWater(world, pos)) {
             world.scheduleBlockTick(pos, this, 60 + world.getRandom().nextInt(40));
         }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    protected boolean isInWater(BlockView world, BlockPos pos) {
+
+
+    @Nullable
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        if (!isInWater(ctx.getWorld(), ctx.getBlockPos())) {
+            ctx.getWorld().scheduleBlockTick(ctx.getBlockPos(), this, 60 + ctx.getWorld().getRandom().nextInt(40));
+        }
+
+        return super.getPlacementState(ctx);
+    }
+
+
+    public static boolean isInWater(BlockView world, BlockPos pos) {
         Direction[] var3 = Direction.values();
         int var4 = var3.length;
 
@@ -52,15 +65,6 @@ public class CoralSlab extends BaseSlab {
         }
 
         return false;
-    }
-
-    @Nullable
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        if (!this.isInWater(ctx.getWorld(), ctx.getBlockPos())) {
-            ctx.getWorld().scheduleBlockTick(ctx.getBlockPos(), this, 60 + ctx.getWorld().getRandom().nextInt(40));
-        }
-
-        return super.getPlacementState(ctx);
     }
 
 

@@ -12,18 +12,16 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
+@SuppressWarnings("deprecation")
 public class StrippableSlab extends BaseSlab {
 
     private final ModBlocks strippedBlock;
 
-    public StrippableSlab(ModBlocks modblock,ModBlocks strippedBlock, Settings settings) {
-        super(modblock,settings);
+    public StrippableSlab(ModBlocks block,ModBlocks strippedBlock, Settings settings) {
+        super(block,settings);
         this.strippedBlock = strippedBlock;
     }
 
-
-    @SuppressWarnings("deprecation")
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if(!(player.getMainHandStack().getItem() instanceof AxeItem)) return ActionResult.PASS;

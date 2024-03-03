@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
-
+@SuppressWarnings("deprecation")
 public class HoneyWall extends BaseWall {
 
     public HoneyWall(ModBlocks modBlocks, Settings settings) {
@@ -29,7 +29,6 @@ public class HoneyWall extends BaseWall {
         }
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (isSliding(pos, entity)) {

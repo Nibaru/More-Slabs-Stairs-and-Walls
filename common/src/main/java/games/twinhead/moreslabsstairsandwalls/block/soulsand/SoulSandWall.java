@@ -12,14 +12,13 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
-
+@SuppressWarnings("deprecation")
 public class SoulSandWall extends BaseWall {
 
-    public SoulSandWall(ModBlocks modblock, Settings settings) {
-        super(modblock,settings);
+    public SoulSandWall(ModBlocks block, Settings settings) {
+        super(block,settings);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         BubbleColumnBlock.update(world, pos.up(), state);
@@ -33,7 +32,6 @@ public class SoulSandWall extends BaseWall {
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    @SuppressWarnings("deprecation")
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
         world.scheduleBlockTick(pos, this, 20);
     }

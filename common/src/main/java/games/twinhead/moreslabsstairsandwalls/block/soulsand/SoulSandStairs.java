@@ -4,7 +4,6 @@ import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseStairs;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.BlockHalf;
-import net.minecraft.block.enums.StairShape;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -15,6 +14,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
+@SuppressWarnings("deprecation")
 public class SoulSandStairs extends BaseStairs {
 
     protected static final VoxelShape COLLISION_BOTTOM_NORTH_WEST_CORNER_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 8.0, 8.0, 8.0);
@@ -34,18 +34,18 @@ public class SoulSandStairs extends BaseStairs {
 
     private static final int[] SHAPE_INDICES = new int[]{12, 5, 3, 10, 14, 13, 7, 11, 13, 7, 11, 14, 8, 4, 1, 2, 4, 1, 2, 8};
 
-    public SoulSandStairs(ModBlocks modblock, BlockState state, Settings settings) {
-        super(modblock,state, settings);
+    public SoulSandStairs(ModBlocks block, BlockState state, Settings settings) {
+        super(block,state, settings);
     }
 
-    @SuppressWarnings("deprecation")
+
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return (state.get(HALF) == BlockHalf.TOP ? TOP_SHAPES : BOTTOM_SHAPES)[SHAPE_INDICES[getShapeIndexIndex(state)]];
     }
 
     private int getShapeIndexIndex(BlockState state) {
-        return ((StairShape)state.get(SHAPE)).ordinal() * 4 + ((Direction)state.get(FACING)).getHorizontal();
+        return state.get(SHAPE).ordinal() * 4 + state.get(FACING).getHorizontal();
     }
 
     @Override

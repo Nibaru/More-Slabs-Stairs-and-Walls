@@ -53,18 +53,16 @@ public class MoreSlabsStairsAndWallsFabricClient implements ClientModInitializer
     public BlockColorProvider getBlockColor(ModBlocks block){
         if(block.equals(ModBlocks.GRASS_BLOCK)) return (state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.getColor(0.5, 1.0);
         return switch (block.modelType){
-            case LEAVES -> {
-                yield switch (block) {
-                    case    OAK_LEAVES,
-                            JUNGLE_LEAVES,
-                            ACACIA_LEAVES,
-                            DARK_OAK_LEAVES,
-                            MANGROVE_LEAVES -> (state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.getDefaultColor();
-                    case SPRUCE_LEAVES -> (state, world, pos, tintIndex) -> FoliageColors.getSpruceColor();
-                    case BIRCH_LEAVES -> (state, world, pos, tintIndex) -> FoliageColors.getBirchColor();
-                    default -> null;
-                };
-            }
+            case LEAVES -> switch (block) {
+                case    OAK_LEAVES,
+                        JUNGLE_LEAVES,
+                        ACACIA_LEAVES,
+                        DARK_OAK_LEAVES,
+                        MANGROVE_LEAVES -> (state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.getDefaultColor();
+                case SPRUCE_LEAVES -> (state, world, pos, tintIndex) -> FoliageColors.getSpruceColor();
+                case BIRCH_LEAVES -> (state, world, pos, tintIndex) -> FoliageColors.getBirchColor();
+                default -> null;
+            };
             default -> null;
         };
     }
@@ -72,18 +70,16 @@ public class MoreSlabsStairsAndWallsFabricClient implements ClientModInitializer
     public ItemColorProvider getItemColor(ModBlocks block){
         if(block.equals(ModBlocks.GRASS_BLOCK)) return (stack, tintIndex) -> GrassColors.getColor(0.5, 1.0);
         return switch (block.modelType){
-            case LEAVES -> {
-                yield switch (block) {
-                    case    OAK_LEAVES,
-                            JUNGLE_LEAVES,
-                            ACACIA_LEAVES,
-                            DARK_OAK_LEAVES,
-                            MANGROVE_LEAVES -> (stack, tintIndex) -> FoliageColors.getDefaultColor();
-                    case SPRUCE_LEAVES -> (stack, tintIndex) -> FoliageColors.getSpruceColor();
-                    case BIRCH_LEAVES -> (stack, tintIndex) -> FoliageColors.getBirchColor();
-                    default -> null;
-                };
-            }
+            case LEAVES -> switch (block) {
+                case    OAK_LEAVES,
+                        JUNGLE_LEAVES,
+                        ACACIA_LEAVES,
+                        DARK_OAK_LEAVES,
+                        MANGROVE_LEAVES -> (stack, tintIndex) -> FoliageColors.getDefaultColor();
+                case SPRUCE_LEAVES -> (stack, tintIndex) -> FoliageColors.getSpruceColor();
+                case BIRCH_LEAVES -> (stack, tintIndex) -> FoliageColors.getBirchColor();
+                default -> null;
+            };
             default -> null;
         };
     }

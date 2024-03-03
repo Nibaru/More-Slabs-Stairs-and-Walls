@@ -1,6 +1,5 @@
 package games.twinhead.moreslabsstairsandwalls.block.slime;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentSlab;
 import net.minecraft.block.BlockState;
@@ -15,8 +14,8 @@ import net.minecraft.world.World;
 public class SlimeSlab extends TranslucentSlab {
 
 
-    public SlimeSlab(ModBlocks modblock,Settings settings) {
-        super(modblock, settings);
+    public SlimeSlab(ModBlocks block,Settings settings) {
+        super(block, settings);
     }
 
 

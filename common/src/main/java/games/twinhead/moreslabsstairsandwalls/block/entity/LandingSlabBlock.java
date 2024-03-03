@@ -7,13 +7,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public interface LandingSlabBlock {
-    default public void onLanding(World world, BlockPos pos, BlockState fallingBlockState, BlockState currentStateInPos, FallingSlabBlockEntity fallingBlockEntity) {
+    default void onLanding(World world, BlockPos pos, BlockState fallingBlockState, BlockState currentStateInPos, FallingSlabBlockEntity fallingBlockEntity) {
     }
 
-    default public void onDestroyedOnLanding(World world, BlockPos pos, FallingSlabBlockEntity fallingBlockEntity) {
+    default void onDestroyedOnLanding(World world, BlockPos pos, FallingSlabBlockEntity fallingBlockEntity) {
     }
 
-    default public DamageSource getDamageSource(Entity attacker) {
+    default DamageSource getDamageSource(Entity attacker) {
         return attacker.getDamageSources().fallingBlock(attacker);
     }
 }

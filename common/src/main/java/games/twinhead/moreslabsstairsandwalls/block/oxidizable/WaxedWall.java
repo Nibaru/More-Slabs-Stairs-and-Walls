@@ -15,17 +15,16 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.World;
-
+@SuppressWarnings("deprecation")
 public class WaxedWall extends BaseWall {
 
     private final ModBlocks block;
 
-    public WaxedWall(ModBlocks modblock,ModBlocks block, Settings settings) {
-        super(modblock,settings);
+    public WaxedWall(ModBlocks modBlock,ModBlocks block, Settings settings) {
+        super(modBlock,settings);
         this.block = block;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if(!(player.getMainHandStack().getItem() instanceof AxeItem)) return ActionResult.PASS;

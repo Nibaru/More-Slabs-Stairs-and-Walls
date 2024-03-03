@@ -20,11 +20,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("deprecation")
 public class FallingSlab extends BaseSlab implements LandingSlabBlock, Waterloggable {
 
     public static final EnumProperty<SlabType> TYPE;
@@ -52,22 +52,21 @@ public class FallingSlab extends BaseSlab implements LandingSlabBlock, Waterlogg
         BlockPos blockPos = ctx.getBlockPos();
         BlockState blockState = ctx.getWorld().getBlockState(blockPos);
         if (blockState.isOf(this)) {
-            return (BlockState)((BlockState)blockState.with(TYPE, SlabType.DOUBLE)).with(WATERLOGGED, false);
+            return blockState.with(TYPE, SlabType.DOUBLE).with(WATERLOGGED, false);
         } else {
             FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
-            return (BlockState)((BlockState)this.getDefaultState().with(TYPE, SlabType.BOTTOM)).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+            return this.getDefaultState().with(TYPE, SlabType.BOTTOM).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
         }
     }
 
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (canFallThrough(world.getBlockState(pos.down())) && pos.getY() >= world.getBottomY()) {
             FallingSlabBlockEntity.spawnFromBlock(world, pos, state.with(TYPE, state.get(TYPE).equals(SlabType.TOP) ? SlabType.BOTTOM : state.get(TYPE)));
-            //this.configureFallingBlockEntity(fallingBlockEntity);
         } else if (state.get(TYPE) == SlabType.TOP) {
             world.setBlockState(pos, state.with(TYPE, SlabType.BOTTOM));
         }
 
-        if(world.getBlockState(pos.down()).isOf(this) && this == ((FallingSlab) world.getBlockState(pos.down()).getBlock())){
+        if(world.getBlockState(pos.down()).isOf(this) && this == world.getBlockState(pos.down()).getBlock()){
             if(world.getBlockState(pos.down()).get(TYPE) == SlabType.BOTTOM){
                 if (world.getBlockState(pos.down()).get(TYPE) == SlabType.DOUBLE){
                     world.setBlockState(pos, world.getBlockState(pos.down()).with(TYPE, SlabType.BOTTOM));
@@ -97,7 +96,7 @@ public class FallingSlab extends BaseSlab implements LandingSlabBlock, Waterlogg
         fallingBlockEntity.dropItem = true;
 
         // check if the block in postition is a slab and if it is the same type as the one that is falling
-        if(world.getBlockState(pos).getBlock() instanceof FallingSlab slab && slab == ((FallingSlab) fallingBlockEntity.getBlockState().getBlock())){
+        if(world.getBlockState(pos).getBlock() instanceof FallingSlab slab && slab == fallingBlockEntity.getBlockState().getBlock()){
             if(world.getBlockState(pos).get(TYPE) == SlabType.BOTTOM){
                 if(fallingBlockEntity.getBlockState().get(TYPE) == SlabType.DOUBLE){
                     world.setBlockState(pos.up(), fallingBlockEntity.getBlockState().with(TYPE, SlabType.BOTTOM));
@@ -115,12 +114,10 @@ public class FallingSlab extends BaseSlab implements LandingSlabBlock, Waterlogg
         return 2;
     }
 
-    @SuppressWarnings("deprecation")
+
     public static boolean canFallThrough(BlockState state) {
         return state.isAir() || state.isIn(BlockTags.FIRE) || state.isLiquid() || state.isReplaceable();
     }
-
-
 
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (random.nextInt(16) == 0) {
@@ -134,13 +131,8 @@ public class FallingSlab extends BaseSlab implements LandingSlabBlock, Waterlogg
         }
     }
 
-    public int getColor(BlockState state, BlockView world, BlockPos pos) {
-        return -16777216;
-    }
-
-    @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state) {
-        return (Boolean)state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }
 
 

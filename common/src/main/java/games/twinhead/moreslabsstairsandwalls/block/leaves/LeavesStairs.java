@@ -4,11 +4,9 @@ import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseStairs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -22,13 +20,14 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
+@SuppressWarnings("deprecation")
 public class LeavesStairs extends BaseStairs {
 
     public static final IntProperty DISTANCE = Properties.DISTANCE_1_7;
     public static final BooleanProperty PERSISTENT = Properties.PERSISTENT;
 
-    public LeavesStairs(ModBlocks modblock,  BlockState baseBlockState, Settings settings) {
-        super(modblock, baseBlockState, settings);
+    public LeavesStairs(ModBlocks block,  BlockState baseBlockState, Settings settings) {
+        super(block, baseBlockState, settings);
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -36,7 +35,7 @@ public class LeavesStairs extends BaseStairs {
     }
 
     public boolean hasRandomTicks(BlockState state) {
-        return (Integer)state.get(DISTANCE) == 7 && !(Boolean)state.get(PERSISTENT);
+        return state.get(DISTANCE) == 7 && !(Boolean)state.get(PERSISTENT);
     }
 
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
@@ -44,15 +43,14 @@ public class LeavesStairs extends BaseStairs {
             dropStacks(state, world, pos);
             world.removeBlock(pos, false);
         }
-
     }
 
     public boolean shouldDecay(BlockState state) {
-        return !(Boolean)state.get(PERSISTENT) && (Integer)state.get(DISTANCE) == 7;
+        return !(Boolean)state.get(PERSISTENT) && state.get(DISTANCE) == 7;
     }
 
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        world.setBlockState(pos, updateDistanceFromLogs(state, world, pos), 3);
+        world.setBlockState(pos, LeavesSlab.updateDistanceFromLogs(state, world, pos), 3);
     }
 
     public int getOpacity(BlockState state, BlockView world, BlockPos pos) {
@@ -60,43 +58,18 @@ public class LeavesStairs extends BaseStairs {
     }
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if ((Boolean)state.get(WATERLOGGED)) {
+        if (state.get(WATERLOGGED)) {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
 
-        int i = getDistanceFromLog(neighborState) + 1;
-        if (i != 1 || (Integer)state.get(DISTANCE) != i) {
+        int i = LeavesSlab.getDistanceFromLog(neighborState) + 1;
+        if (i != 1 || state.get(DISTANCE) != i) {
             world.scheduleBlockTick(pos, this, 1);
         }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    private static BlockState updateDistanceFromLogs(BlockState state, WorldAccess world, BlockPos pos) {
-        int i = 7;
-        BlockPos.Mutable mutable = new BlockPos.Mutable();
-        Direction[] var5 = Direction.values();
-        int var6 = var5.length;
-
-        for(int var7 = 0; var7 < var6; ++var7) {
-            Direction direction = var5[var7];
-            mutable.set(pos, direction);
-            i = Math.min(i, getDistanceFromLog(world.getBlockState(mutable)) + 1);
-            if (i == 1) {
-                break;
-            }
-        }
-
-        return (BlockState)state.with(DISTANCE, i);
-    }
-
-    private static int getDistanceFromLog(BlockState state) {
-        if (state.isIn(BlockTags.LOGS)) {
-            return 0;
-        } else {
-            return state.getBlock() instanceof LeavesBlock ? (Integer)state.get(DISTANCE) : 7;
-        }
-    }
 
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (world.hasRain(pos.up())) {

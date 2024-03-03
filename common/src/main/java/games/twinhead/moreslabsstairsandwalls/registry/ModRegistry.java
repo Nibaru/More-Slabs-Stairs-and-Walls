@@ -63,11 +63,6 @@ public class ModRegistry {
         throw new AssertionError();
     }
 
-    @ExpectPlatform
-    public static Block getCustomBubbleColumnBlock(){
-        throw new AssertionError();
-    }
-
     public static Block getBlock(ModBlocks block, ModBlocks.BlockType type)
     {
         return switch (block) {
@@ -332,6 +327,77 @@ public class ModRegistry {
                 };
             }
             default -> null;
+        };
+    }
+
+    public static int getBurnChance(ModBlocks block){
+        return switch (block){
+            case ACACIA_LEAVES,
+                    OAK_LEAVES,
+                    SPRUCE_LEAVES,
+                    BIRCH_LEAVES,
+                    JUNGLE_LEAVES,
+                    CHERRY_LEAVES,
+                    DARK_OAK_LEAVES,
+                    MANGROVE_LEAVES,
+                    AZALEA_LEAVES,
+                    FLOWERING_AZALEA_LEAVES,
+                    DRIED_KELP_BLOCK,
+                    BOOKSHELF -> 30;
+            case HAY_BLOCK -> 60;
+            default -> 5;
+        };
+    }
+
+    public static int getSpreadChance(ModBlocks block){
+        return switch (block){
+            case ACACIA_LEAVES,
+                    OAK_LEAVES,
+                    SPRUCE_LEAVES,
+                    BIRCH_LEAVES,
+                    JUNGLE_LEAVES,
+                    CHERRY_LEAVES,
+                    DARK_OAK_LEAVES,
+                    MANGROVE_LEAVES,
+                    AZALEA_LEAVES,
+                    FLOWERING_AZALEA_LEAVES,
+                    DRIED_KELP_BLOCK, WHITE_WOOL, ORANGE_WOOL, MAGENTA_WOOL, LIGHT_BLUE_WOOL, YELLOW_WOOL, LIME_WOOL, PINK_WOOL, GRAY_WOOL, LIGHT_GRAY_WOOL, CYAN_WOOL, PURPLE_WOOL, BLUE_WOOL, BROWN_WOOL, GREEN_WOOL, RED_WOOL, BLACK_WOOL -> 60;
+            case OAK_LOG,
+                    SPRUCE_LOG,
+                    BIRCH_LOG,
+                    JUNGLE_LOG,
+                    ACACIA_LOG,
+                    CHERRY_LOG,
+                    DARK_OAK_LOG,
+                    MANGROVE_LOG,
+                    BAMBOO_BLOCK,
+                    STRIPPED_OAK_LOG,
+                    STRIPPED_SPRUCE_LOG,
+                    STRIPPED_BIRCH_LOG,
+                    STRIPPED_JUNGLE_LOG,
+                    STRIPPED_ACACIA_LOG,
+                    STRIPPED_CHERRY_LOG,
+                    STRIPPED_DARK_OAK_LOG,
+                    STRIPPED_MANGROVE_LOG,
+                    STRIPPED_BAMBOO_BLOCK,
+                    STRIPPED_OAK_WOOD,
+                    STRIPPED_SPRUCE_WOOD,
+                    STRIPPED_BIRCH_WOOD,
+                    STRIPPED_JUNGLE_WOOD,
+                    STRIPPED_ACACIA_WOOD,
+                    STRIPPED_CHERRY_WOOD,
+                    STRIPPED_DARK_OAK_WOOD,
+                    STRIPPED_MANGROVE_WOOD,
+                    OAK_WOOD,
+                    SPRUCE_WOOD,
+                    BIRCH_WOOD,
+                    JUNGLE_WOOD,
+                    ACACIA_WOOD,
+                    CHERRY_WOOD,
+                    DARK_OAK_WOOD,
+                    MANGROVE_WOOD,
+                    COAL_BLOCK-> 5;
+            default -> 20;
         };
     }
 }

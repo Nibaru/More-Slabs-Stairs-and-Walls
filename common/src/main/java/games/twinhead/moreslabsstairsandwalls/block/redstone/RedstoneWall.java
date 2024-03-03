@@ -6,20 +6,17 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
-
+@SuppressWarnings("deprecation")
 public class RedstoneWall extends BaseWall {
 
-
-    public RedstoneWall(ModBlocks modblock, Settings settings) {
-        super(modblock,settings);
+    public RedstoneWall(ModBlocks block, Settings settings) {
+        super(block,settings);
     }
 
-    @SuppressWarnings("deprecation")
     public boolean emitsRedstonePower(BlockState state) {
         return true;
     }
 
-    @SuppressWarnings("deprecation")
     public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
         return 15;
     }

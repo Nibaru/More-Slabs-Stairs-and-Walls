@@ -18,14 +18,12 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-
+@SuppressWarnings("deprecation")
 public class PathSlab extends BaseSlab {
-
 
     public static final VoxelShape BOTTOM_SHAPE;
     public static final VoxelShape TOP_SHAPE;
     public static final VoxelShape FULL_SHAPE;
-
 
     public PathSlab(ModBlocks modBlocks, Settings settings) {
         super(modBlocks,settings);
@@ -39,20 +37,17 @@ public class PathSlab extends BaseSlab {
         BlockPos blockPos = ctx.getBlockPos();
         BlockState blockState = ctx.getWorld().getBlockState(blockPos);
         if (blockState.isOf(this)) {
-            return (BlockState)((BlockState)blockState.with(TYPE, SlabType.DOUBLE)).with(WATERLOGGED, false);
+            return blockState.with(TYPE, SlabType.DOUBLE).with(WATERLOGGED, false);
         } else {
             FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
-            BlockState blockState2 = (BlockState)((BlockState)this.getDefaultState().with(TYPE, SlabType.BOTTOM)).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+            BlockState blockState2 = this.getDefaultState().with(TYPE, SlabType.BOTTOM).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
             Direction direction = ctx.getSide();
-            return direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double)blockPos.getY() > 0.5)) ? blockState2 : (BlockState)blockState2.with(TYPE, SlabType.TOP);
+            return direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double)blockPos.getY() > 0.5)) ? blockState2 : blockState2.with(TYPE, SlabType.TOP);
         }
     }
 
-
-
-
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        SlabType slabType = (SlabType)state.get(TYPE);
+        SlabType slabType = state.get(TYPE);
         return switch (slabType) {
             case DOUBLE -> FULL_SHAPE;
             case TOP -> TOP_SHAPE;
@@ -68,12 +63,11 @@ public class PathSlab extends BaseSlab {
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    @SuppressWarnings("deprecation")
+
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         world.setBlockState(pos, pushEntitiesUpBeforeBlockChange(state, ModBlocks.DIRT.getBlock(ModBlocks.BlockType.SLAB).getDefaultState().with(TYPE, world.getBlockState(pos).get(TYPE)), world, pos));
     }
 
-    @SuppressWarnings("deprecation")
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockState blockState = world.getBlockState(pos.up());
         return !blockState.isSolidBlock(world, pos) || blockState.getBlock() instanceof FenceGateBlock;

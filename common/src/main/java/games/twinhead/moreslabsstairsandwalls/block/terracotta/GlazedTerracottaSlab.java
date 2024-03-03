@@ -9,13 +9,12 @@ import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
-
 public class GlazedTerracottaSlab extends BaseSlab {
 
     public static final DirectionProperty FACING;
 
-    public GlazedTerracottaSlab(ModBlocks modblock, Settings settings) {
-        super(modblock,settings);
+    public GlazedTerracottaSlab(ModBlocks block, Settings settings) {
+        super(block,settings);
     }
 
     public BlockState getPlacementState(ItemPlacementContext ctx) {
@@ -31,7 +30,6 @@ public class GlazedTerracottaSlab extends BaseSlab {
         builder.add(FACING);
     }
 
-    @SuppressWarnings("deprecation")
     public PistonBehavior getPistonBehavior(BlockState state) {
         return PistonBehavior.PUSH_ONLY;
     }

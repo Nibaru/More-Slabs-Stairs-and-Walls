@@ -20,8 +20,6 @@ public class PathWall extends BaseWall {
         super(modBlocks,settings);
     }
 
-
-
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         if(!this.canPlaceAt(ctx.getWorld().getBlockState(ctx.getBlockPos()), ctx.getWorld(), ctx.getBlockPos())){
             return Block.pushEntitiesUpBeforeBlockChange(this.getDefaultState(), ModBlocks.DIRT.getBlock(ModBlocks.BlockType.WALL).getPlacementState(ctx), ctx.getWorld(), ctx.getBlockPos());

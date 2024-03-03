@@ -15,13 +15,14 @@ import net.minecraft.world.World;
 
 import java.util.Optional;
 
+@SuppressWarnings("deprecation")
 public class OxidizableStairs extends BaseStairs implements CustomOxidizable {
 
     private final Oxidizable.OxidationLevel oxidationLevel;
     private final ModBlocks nextBlock;
 
-    public OxidizableStairs(ModBlocks modblock,BlockState defaultState, Oxidizable.OxidationLevel oxidationLevel, ModBlocks nextBlock, Settings arg) {
-        super(modblock,defaultState, arg);
+    public OxidizableStairs(ModBlocks block,BlockState defaultState, Oxidizable.OxidationLevel oxidationLevel, ModBlocks nextBlock, Settings arg) {
+        super(block,defaultState, arg);
         this.oxidationLevel = oxidationLevel;
         this.nextBlock = nextBlock;
     }

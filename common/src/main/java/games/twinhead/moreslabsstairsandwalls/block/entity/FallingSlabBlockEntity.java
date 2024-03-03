@@ -1,7 +1,5 @@
 package games.twinhead.moreslabsstairsandwalls.block.entity;
 
-import com.mojang.logging.LogUtils;
-import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.registry.ModRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -35,14 +33,12 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
 
 import java.util.Iterator;
 
 public class FallingSlabBlockEntity extends FallingBlockEntity {
 
     private BlockState block;
-    private static final Logger LOGGER = LogUtils.getLogger();
     public int timeFalling;
     public boolean dropItem = true;
     private boolean destroyedOnLanding;
@@ -117,7 +113,7 @@ public class FallingSlabBlockEntity extends FallingBlockEntity {
                         boolean bl5 = this.block.canPlaceAt(this.getWorld(), blockPos) && !bl4;
                         if (bl3 && bl5) {
                             if (this.block.contains(Properties.WATERLOGGED) && this.getWorld().getFluidState(blockPos).getFluid() == Fluids.WATER) {
-                                this.block = (BlockState)this.block.with(Properties.WATERLOGGED, true);
+                                this.block = this.block.with(Properties.WATERLOGGED, true);
                             }
 
                             if (this.getWorld().setBlockState(blockPos, this.block, 3)) {
@@ -132,10 +128,8 @@ public class FallingSlabBlockEntity extends FallingBlockEntity {
                                     BlockEntity blockEntity = this.getWorld().getBlockEntity(blockPos);
                                     if (blockEntity != null) {
                                         NbtCompound nbtCompound = blockEntity.createNbt();
-                                        Iterator var13 = this.blockEntityData.getKeys().iterator();
 
-                                        while(var13.hasNext()) {
-                                            String string = (String)var13.next();
+                                        for (String string : this.blockEntityData.getKeys()) {
                                             nbtCompound.put(string, this.blockEntityData.get(string).copy());
                                         }
 
@@ -167,7 +161,7 @@ public class FallingSlabBlockEntity extends FallingBlockEntity {
     }
     public void onDestroyedOnLanding(Block block, BlockPos pos) {
         if (block instanceof LandingSlabBlock) {
-            ((LandingSlabBlock)((Object)block)).onDestroyedOnLanding(this.getWorld(), pos, this);
+            ((LandingSlabBlock) block).onDestroyedOnLanding(this.getWorld(), pos, this);
         }
     }
 

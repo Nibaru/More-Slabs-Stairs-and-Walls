@@ -11,8 +11,8 @@ import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.block.enums.StairShape;
 import net.minecraft.util.math.Direction;
-import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("deprecation")
 public class TranslucentStairs extends BaseStairs {
 
 
@@ -20,8 +20,6 @@ public class TranslucentStairs extends BaseStairs {
         super(modBlocks,blockState, settings);
     }
 
-
-    @SuppressWarnings("deprecation")
     @Override
     @Environment(EnvType.CLIENT)
     public boolean isSideInvisible(BlockState state1, BlockState state2, Direction direction) {
@@ -30,7 +28,6 @@ public class TranslucentStairs extends BaseStairs {
         if (state2.getBlock() instanceof TranslucentSlab slab && slab.getModBlock() == getModBlock())
             if (slabInvisible(state1, state2, direction))
                 return true;
-
 
         if (state2.getBlock() instanceof TranslucentStairs stairs && stairs.getModBlock() == getModBlock())
             if (stairsInvisible(state1, state2, direction)) return true;

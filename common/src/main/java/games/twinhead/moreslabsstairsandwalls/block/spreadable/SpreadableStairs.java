@@ -4,7 +4,6 @@ import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.dirt.DirtStairs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SideShapeType;
 import net.minecraft.block.Waterloggable;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -16,29 +15,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.chunk.light.ChunkLightProvider;
 
+@SuppressWarnings("deprecation")
 public class SpreadableStairs extends DirtStairs implements Waterloggable {
 
     public static final BooleanProperty SNOWY;
 
-    public SpreadableStairs(ModBlocks modblock,BlockState defaultState, Settings settings) {
-        super(modblock,defaultState, settings);
-    }
-
-
-    private static boolean canSurvive(BlockState state, WorldView world, BlockPos pos) {
-        BlockPos blockPos = pos.up();
-        BlockState blockState = world.getBlockState(blockPos);
-        if (!blockState.isSideSolid(world, pos, Direction.DOWN, SideShapeType.FULL)) {
-            return true;
-        } else if (blockState.getFluidState().getLevel() == 8) {
-            return false;
-        } else {
-            int i = ChunkLightProvider.getRealisticOpacity(world, state, pos, blockState, blockPos, Direction.UP, blockState.getOpacity(world, blockPos));
-            return i < world.getMaxLightLevel();
-        }
+    public SpreadableStairs(ModBlocks block,BlockState defaultState, Settings settings) {
+        super(block,defaultState, settings);
     }
 
 

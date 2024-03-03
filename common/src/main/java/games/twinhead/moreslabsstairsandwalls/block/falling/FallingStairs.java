@@ -17,7 +17,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
-
+@SuppressWarnings("deprecation")
 public class FallingStairs extends BaseStairs implements Waterloggable, LandingBlock {
 
     public FallingStairs(ModBlocks modBlocks, BlockState baseBlockState, Settings settings) {
@@ -40,12 +40,8 @@ public class FallingStairs extends BaseStairs implements Waterloggable, LandingB
 
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (canFallThrough(world.getBlockState(pos.down())) && pos.getY() >= world.getBottomY()) {
-            FallingBlockEntity fallingBlockEntity = FallingBlockEntity.spawnFromBlock(world, pos, state);
-            this.configureFallingBlockEntity(fallingBlockEntity);
+            FallingBlockEntity.spawnFromBlock(world, pos, state);
         }
-    }
-
-    protected void configureFallingBlockEntity(FallingBlockEntity entity) {
     }
 
     protected int getFallDelay() {

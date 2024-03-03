@@ -13,13 +13,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
-import java.util.stream.IntStream;
-
+@SuppressWarnings("deprecation")
 public class PathStairs extends BaseStairs {
     protected static final VoxelShape TOP_SHAPE;
     protected static final VoxelShape BOTTOM_SHAPE;
@@ -35,8 +33,6 @@ public class PathStairs extends BaseStairs {
     protected static final VoxelShape[] BOTTOM_SHAPES;
     private static final int[] SHAPE_INDICES = new int[]{12, 5, 3, 10, 14, 13, 7, 11, 13, 7, 11, 14, 8, 4, 1, 2, 4, 1, 2, 8};
 
-
-
     public PathStairs(ModBlocks modBlocks, BlockState defaultState, Settings settings) {
         super(modBlocks, defaultState, settings);
     }
@@ -49,8 +45,8 @@ public class PathStairs extends BaseStairs {
         Direction direction = ctx.getSide();
         BlockPos blockPos = ctx.getBlockPos();
         FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
-        BlockState blockState = (BlockState)((BlockState)((BlockState)this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing())).with(HALF, direction == Direction.DOWN || direction != Direction.UP && ctx.getHitPos().y - (double)blockPos.getY() > 0.5 ? BlockHalf.TOP : BlockHalf.BOTTOM)).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
-        return (BlockState)blockState.with(SHAPE, getStairShape(blockState, ctx.getWorld(), blockPos));
+        BlockState blockState = this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing()).with(HALF, direction == Direction.DOWN || direction != Direction.UP && ctx.getHitPos().y - (double)blockPos.getY() > 0.5 ? BlockHalf.TOP : BlockHalf.BOTTOM).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+        return blockState.with(SHAPE, getStairShape(blockState, ctx.getWorld(), blockPos));
     }
 
 
@@ -70,8 +66,6 @@ public class PathStairs extends BaseStairs {
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         world.setBlockState(pos, pushEntitiesUpBeforeBlockChange(state, ModBlocks.DIRT.getBlock(ModBlocks.BlockType.STAIRS).getStateWithProperties(state), world, pos));
     }
-
-
 
     private static StairShape getStairShape(BlockState state, BlockView world, BlockPos pos) {
         Direction direction3;
@@ -99,9 +93,6 @@ public class PathStairs extends BaseStairs {
         return !StairsBlock.isStairs(blockState) || blockState.get(FACING) != state.get(FACING) || blockState.get(HALF) != state.get(HALF);
     }
 
-
-
-    @SuppressWarnings("deprecation")
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockState blockState = world.getBlockState(pos.up());
         return !blockState.isSolidBlock(world, pos) || blockState.getBlock() instanceof FenceGateBlock;

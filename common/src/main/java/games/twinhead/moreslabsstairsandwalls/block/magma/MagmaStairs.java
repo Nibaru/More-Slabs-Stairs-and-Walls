@@ -15,10 +15,11 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
+@SuppressWarnings("deprecation")
 public class MagmaStairs extends BaseStairs {
 
-    public MagmaStairs(ModBlocks modblock, BlockState defaultState, Settings settings) {
-        super(modblock,defaultState, settings);
+    public MagmaStairs(ModBlocks block, BlockState defaultState, Settings settings) {
+        super(block,defaultState, settings);
     }
 
     @Override

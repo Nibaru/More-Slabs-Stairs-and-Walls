@@ -14,6 +14,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+@SuppressWarnings("deprecation")
 public class DirtStairs extends BaseStairs {
 
     public DirtStairs(ModBlocks modBlocks, BlockState defaultState, Settings settings) {

@@ -6,7 +6,6 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Oxidizable;
-import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
@@ -491,7 +490,7 @@ public enum ModBlocks {
         Block block = this.parentBlock;
         AbstractBlock.Settings settings = AbstractBlock.Settings.create()
                 .sounds(block.getDefaultState().getSoundGroup())
-                .luminance((view) -> block.getDefaultState().getLuminance())
+                .luminance(state -> block.getDefaultState().getLuminance())
                 .mapColor(block.getDefaultMapColor())
                 .hardness(block.getHardness())
                 .resistance(block.getBlastResistance())
@@ -502,9 +501,14 @@ public enum ModBlocks {
                 .jumpVelocityMultiplier(block.getJumpVelocityMultiplier())
                 ;
 
+        if (block.getDefaultState().isBurnable()){
+            settings = settings.burnable();
+        }
+
         if (!block.getDefaultState().isOpaque()){
             settings = settings.nonOpaque();
         }
+
         if (block.getDefaultState().isToolRequired()){
             settings = settings.requiresTool();
         }
@@ -522,7 +526,7 @@ public enum ModBlocks {
     }
 
     public Identifier getId(BlockType type){
-        return new Identifier(MoreSlabsStairsAndWalls.MOD_ID, this.toString() + "_" + type.toString().toLowerCase());
+        return new Identifier(MoreSlabsStairsAndWalls.MOD_ID, this + "_" + type.toString().toLowerCase());
     }
 
 

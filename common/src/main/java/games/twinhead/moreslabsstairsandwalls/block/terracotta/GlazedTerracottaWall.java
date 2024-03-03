@@ -7,11 +7,10 @@ import net.minecraft.block.piston.PistonBehavior;
 
 public class GlazedTerracottaWall extends BaseWall {
 
-    public GlazedTerracottaWall(ModBlocks modblock, Settings settings) {
-        super(modblock,settings);
+    public GlazedTerracottaWall(ModBlocks block, Settings settings) {
+        super(block,settings);
     }
 
-    @SuppressWarnings("deprecation")
     public PistonBehavior getPistonBehavior(BlockState state) {
         return PistonBehavior.PUSH_ONLY;
     }

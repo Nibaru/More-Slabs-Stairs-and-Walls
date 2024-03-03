@@ -12,8 +12,8 @@ import net.minecraft.world.World;
 
 public class SlimeWall extends BaseWall {
 
-    public SlimeWall(ModBlocks modblock, Settings settings) {
-        super(modblock,settings);
+    public SlimeWall(ModBlocks block, Settings settings) {
+        super(block,settings);
     }
 
     public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {

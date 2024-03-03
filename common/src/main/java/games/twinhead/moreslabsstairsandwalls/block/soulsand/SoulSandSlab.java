@@ -12,19 +12,17 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
-
+@SuppressWarnings("deprecation")
 public class SoulSandSlab extends BaseSlab {
 
     protected static final VoxelShape COLLISION_SHAPE_BOTTOM = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 6.0, 16.0);
     protected static final VoxelShape COLLISION_SHAPE_TOP = Block.createCuboidShape(0.0, 8.0, 0.0, 16.0, 14.0, 16.0);
     protected static final VoxelShape COLLISION_SHAPE_FULL = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 14.0, 16.0);
 
-    public SoulSandSlab(ModBlocks modblock, Settings settings) {
-        super(modblock,settings);
+    public SoulSandSlab(ModBlocks block, Settings settings) {
+        super(block,settings);
     }
 
-
-    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return switch (state.get(SlabBlock.TYPE)){
@@ -34,7 +32,6 @@ public class SoulSandSlab extends BaseSlab {
         };
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         BubbleColumnBlock.update(world, pos.up(), state);
@@ -48,7 +45,6 @@ public class SoulSandSlab extends BaseSlab {
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    @SuppressWarnings("deprecation")
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
         world.scheduleBlockTick(pos, this, 20);
     }

@@ -7,11 +7,10 @@ import net.minecraft.block.piston.PistonBehavior;
 
 public class GlazedTerracottaStairs extends BaseStairs {
 
-    public GlazedTerracottaStairs(ModBlocks modblock, BlockState baseBlockState, Settings settings) {
-        super(modblock,baseBlockState, settings);
+    public GlazedTerracottaStairs(ModBlocks block, BlockState baseBlockState, Settings settings) {
+        super(block,baseBlockState, settings);
     }
 
-    @SuppressWarnings("deprecation")
     public PistonBehavior getPistonBehavior(BlockState state) {
         return PistonBehavior.PUSH_ONLY;
     }

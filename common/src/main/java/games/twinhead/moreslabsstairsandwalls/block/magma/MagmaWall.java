@@ -18,8 +18,8 @@ import net.minecraft.world.WorldAccess;
 @SuppressWarnings("deprecation")
 public class MagmaWall extends BaseWall {
 
-    public MagmaWall(ModBlocks modblock, Settings settings) {
-        super(modblock,settings);
+    public MagmaWall(ModBlocks block, Settings settings) {
+        super(block,settings);
     }
 
     @Override

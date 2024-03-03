@@ -18,8 +18,8 @@ import net.minecraft.world.WorldAccess;
 @SuppressWarnings("deprecation")
 public class MagmaSlab extends BaseSlab {
 
-    public MagmaSlab(ModBlocks modblock,  Settings settings) {
-        super(modblock,settings);
+    public MagmaSlab(ModBlocks block,  Settings settings) {
+        super(block,settings);
     }
 
     @Override

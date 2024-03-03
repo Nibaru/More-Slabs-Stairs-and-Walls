@@ -15,13 +15,13 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.World;
-
+@SuppressWarnings("deprecation")
 public class WaxedStairs extends BaseStairs {
 
     private final ModBlocks block;
 
-    public WaxedStairs(ModBlocks modblock,BlockState state, ModBlocks block, Settings settings) {
-        super(modblock,state, settings);
+    public WaxedStairs(ModBlocks modBlock,BlockState state, ModBlocks block, Settings settings) {
+        super(modBlock,state, settings);
         this.block = block;
     }
 

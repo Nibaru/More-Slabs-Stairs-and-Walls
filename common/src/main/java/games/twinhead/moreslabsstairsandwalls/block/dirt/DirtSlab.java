@@ -14,14 +14,14 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
+@SuppressWarnings("deprecation")
 public class DirtSlab extends BaseSlab {
 
     public DirtSlab(ModBlocks modBlocks, Settings settings) {
         super(modBlocks, settings);
     }
 
-    @SuppressWarnings("deprecation")
+
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if(!(player.getMainHandStack().getItem() instanceof ShovelItem)) return ActionResult.PASS;

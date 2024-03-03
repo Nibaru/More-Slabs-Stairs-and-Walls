@@ -10,6 +10,7 @@ import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 
 import java.util.List;
@@ -22,8 +23,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
 
 
 
-    public final List<ModBlocks> planks = List.of(new ModBlocks[]{
-            ModBlocks.ACACIA_PLANKS,
+    private final List<ModBlocks> planks = List.of(ModBlocks.ACACIA_PLANKS,
             ModBlocks.BIRCH_PLANKS,
             ModBlocks.CRIMSON_PLANKS,
             ModBlocks.DARK_OAK_PLANKS,
@@ -33,9 +33,31 @@ public class RecipeGenerator extends FabricRecipeProvider {
             ModBlocks.WARPED_PLANKS,
             ModBlocks.MANGROVE_PLANKS,
             ModBlocks.CHERRY_PLANKS,
-            ModBlocks.BAMBOO_PLANKS});
+            ModBlocks.BAMBOO_PLANKS);
 
-    public final List<ModBlocks> glass = List.of(ModBlocks.GLASS,
+    private final List<ModBlocks> copper = List.of(
+            ModBlocks.COPPER_BLOCK,
+            ModBlocks.OXIDIZED_COPPER,
+            ModBlocks.WEATHERED_COPPER,
+            ModBlocks.EXPOSED_COPPER,
+            ModBlocks.WAXED_COPPER_BLOCK,
+            ModBlocks.WAXED_OXIDIZED_COPPER,
+            ModBlocks.WAXED_WEATHERED_COPPER,
+            ModBlocks.WAXED_EXPOSED_COPPER
+    );
+
+    private final List<ModBlocks> waxedCopper = List.of(
+            ModBlocks.WAXED_COPPER_BLOCK,
+            ModBlocks.WAXED_OXIDIZED_COPPER,
+            ModBlocks.WAXED_WEATHERED_COPPER,
+            ModBlocks.WAXED_EXPOSED_COPPER,
+            ModBlocks.WAXED_CUT_COPPER,
+            ModBlocks.WAXED_OXIDIZED_CUT_COPPER,
+            ModBlocks.WAXED_WEATHERED_CUT_COPPER,
+            ModBlocks.WAXED_EXPOSED_CUT_COPPER
+    );
+
+    private final List<ModBlocks> glass = List.of(ModBlocks.GLASS,
             ModBlocks.WHITE_STAINED_GLASS,
             ModBlocks.YELLOW_STAINED_GLASS,
             ModBlocks.BLACK_STAINED_GLASS,
@@ -55,10 +77,18 @@ public class RecipeGenerator extends FabricRecipeProvider {
 
     @Override
     public void generate(RecipeExporter exporter) {
+
+        addWaxedCopperRecipes(exporter);
+
         for (ModBlocks block: ModBlocks.values()) {
             if(block.hasBlock(ModBlocks.BlockType.SLAB)){
+                if (block.equals(ModBlocks.SNOW_BLOCK)) {
+                    ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, block.getBlock(ModBlocks.BlockType.SLAB), 1).criterion(hasItem(Blocks.SNOW), conditionsFromItem(Blocks.SNOW)).criterion(hasItem(block.getBlock(ModBlocks.BlockType.SLAB)), conditionsFromItem(block.getBlock(ModBlocks.BlockType.SLAB))).input(Blocks.SNOW).input(Blocks.SNOW).group("more_slabs").offerTo(exporter);
+                } else {
+                    ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, block.getBlock(ModBlocks.BlockType.SLAB), 6).criterion(hasItem(block.parentBlock), conditionsFromItem(block.parentBlock)).criterion(hasItem(block.getBlock(ModBlocks.BlockType.SLAB)), conditionsFromItem(block.getBlock(ModBlocks.BlockType.SLAB))).input('#', block.parentBlock).pattern("###").group("more_slabs").offerTo(exporter);
+                }
                 RecipeProvider.offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, block.getBlock(ModBlocks.BlockType.SLAB), block.parentBlock, 2);
-                ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, block.getBlock(ModBlocks.BlockType.SLAB), 6).criterion(hasItem(block.parentBlock), conditionsFromItem(block.parentBlock)).criterion(hasItem(block.getBlock(ModBlocks.BlockType.SLAB)), conditionsFromItem(block.getBlock(ModBlocks.BlockType.SLAB))).input('#', block.parentBlock).pattern("###").group("more_slabs").offerTo(exporter);
+
             }
 
             if(block.hasBlock(ModBlocks.BlockType.STAIRS)){
@@ -84,11 +114,24 @@ public class RecipeGenerator extends FabricRecipeProvider {
                     };
                     //RecipeProvider.offerShapelessRecipe(exporter, block.getWallBlock(), fence, "plank_walls", 1);
                     ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, block.getBlock(ModBlocks.BlockType.WALL), 1).criterion(hasItem(fence), conditionsFromItem(fence)).criterion(hasItem(block.getBlock(ModBlocks.BlockType.WALL)), conditionsFromItem(block.getBlock(ModBlocks.BlockType.WALL))).input(fence).group("more_walls").offerTo(exporter);
+                } else if(copper.contains(block)){
+                    ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, block.getBlock(ModBlocks.BlockType.WALL), 2).criterion(hasItem(block.parentBlock), conditionsFromItem(block.parentBlock)).criterion(hasItem(block.getBlock(ModBlocks.BlockType.WALL)), conditionsFromItem(block.getBlock(ModBlocks.BlockType.WALL))).input('#', block.parentBlock).pattern("#").pattern("#").group("more_walls").offerTo(exporter);
                 } else if(!glass.contains(block)){
                     ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, block.getBlock(ModBlocks.BlockType.WALL), 6).criterion(hasItem(block.parentBlock), conditionsFromItem(block.parentBlock)).criterion(hasItem(block.getBlock(ModBlocks.BlockType.WALL)), conditionsFromItem(block.getBlock(ModBlocks.BlockType.WALL))).input('#', block.parentBlock).pattern("###").pattern("###").group("more_walls").offerTo(exporter);
                 }
                 RecipeProvider.offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, block.getBlock(ModBlocks.BlockType.WALL), block.parentBlock);
             }
         }
+    }
+
+
+    public void addWaxedCopperRecipes(RecipeExporter exporter){
+        for (ModBlocks block: waxedCopper) {
+            for (ModBlocks.BlockType type : ModBlocks.BlockType.values()) {
+                if (block.hasBlock(type))
+                    ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, block.getBlock(type), 1).criterion(hasItem(block.associatedBlock.parentBlock), conditionsFromItem(block.associatedBlock.parentBlock)).criterion(hasItem(block.associatedBlock.getBlock(type)), conditionsFromItem(block.associatedBlock.getBlock(type))).input(block.associatedBlock.getBlock(type)).input(Items.HONEYCOMB).group("more_waxed_copper").offerTo(exporter, block.toString() + "_" + type.toString().toLowerCase() + "_honeycomb");
+            }
+        }
+
     }
 }

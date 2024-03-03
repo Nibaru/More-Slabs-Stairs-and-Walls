@@ -7,19 +7,17 @@ import net.minecraft.block.enums.SlabType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
-
+@SuppressWarnings("deprecation")
 public class RedstoneSlab extends BaseSlab {
 
-    public RedstoneSlab(ModBlocks modblock, Settings settings) {
-        super(modblock,settings);
+    public RedstoneSlab(ModBlocks block, Settings settings) {
+        super(block,settings);
     }
 
-    @SuppressWarnings("deprecation")
     public boolean emitsRedstonePower(BlockState state) {
         return true;
     }
 
-    @SuppressWarnings("deprecation")
     public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
         return direction.equals(Direction.UP) && state.get(TYPE) == SlabType.TOP ? 0 : 15;
     }

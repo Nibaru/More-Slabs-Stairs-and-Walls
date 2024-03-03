@@ -22,7 +22,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-
+@SuppressWarnings("deprecation")
 public class HoneySlab extends TranslucentSlab {
 
     protected static final VoxelShape FULL_SHAPE = Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 15.0, 15.0);
@@ -38,7 +38,6 @@ public class HoneySlab extends TranslucentSlab {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         SlabType slabType = state.get(TYPE);
         return switch (slabType) {
@@ -59,7 +58,6 @@ public class HoneySlab extends TranslucentSlab {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (isSliding(pos, entity)) {
             triggerAdvancement(entity, pos);
@@ -119,6 +117,7 @@ public class HoneySlab extends TranslucentSlab {
     }
 
     /**
+     * used on neoForge to determine if the block is sticky block which used for pull or push adjacent blocks (use by piston)
      * @return true if the block is sticky block which used for pull or push adjacent blocks (use by piston)
      */
     public boolean isStickyBlock(BlockState state) {
@@ -126,6 +125,7 @@ public class HoneySlab extends TranslucentSlab {
     }
 
     /**
+     * Used on NeoForge to determine if this block can stick to another block when pushed by a piston.
      * Determines if this block can stick to another block when pushed by a piston.
      *
      * @param other Other block

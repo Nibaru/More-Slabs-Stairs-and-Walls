@@ -15,24 +15,23 @@ import net.minecraft.world.World;
 
 import java.util.Optional;
 
+@SuppressWarnings("deprecation")
 public class OxidizableSlab extends BaseSlab implements CustomOxidizable {
 
     private final Oxidizable.OxidationLevel oxidationLevel;
     private final ModBlocks nextBlock;
 
-    public OxidizableSlab(ModBlocks modblock, Oxidizable.OxidationLevel oxidationLevel, ModBlocks nextBlock, Settings arg) {
-        super(modblock,arg);
+    public OxidizableSlab(ModBlocks block, Oxidizable.OxidationLevel oxidationLevel, ModBlocks nextBlock, Settings arg) {
+        super(block,arg);
         this.oxidationLevel = oxidationLevel;
         this.nextBlock = nextBlock;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         return useItem(state, world, pos, player, hand);
     }
 
-    @SuppressWarnings("deprecation")
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         tickDegradation(state, world, pos, random);
     }

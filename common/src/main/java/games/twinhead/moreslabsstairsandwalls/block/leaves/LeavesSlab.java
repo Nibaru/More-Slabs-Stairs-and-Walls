@@ -7,7 +7,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.enums.SlabType;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
@@ -26,14 +25,13 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
-
+@SuppressWarnings("deprecation")
 public class LeavesSlab extends BaseSlab {
-    public static final int MAX_DISTANCE = 7;
     public static final IntProperty DISTANCE = Properties.DISTANCE_1_7;
     public static final BooleanProperty PERSISTENT = Properties.PERSISTENT;
 
-    public LeavesSlab(ModBlocks modblock, Settings settings) {
-        super(modblock,settings);
+    public LeavesSlab(ModBlocks block, Settings settings) {
+        super(block, settings);
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -41,10 +39,10 @@ public class LeavesSlab extends BaseSlab {
     }
 
     public boolean hasRandomTicks(BlockState state) {
-        return (Integer)state.get(DISTANCE) == 7 && !(Boolean)state.get(PERSISTENT);
+        return state.get(DISTANCE) == 7 && !(Boolean)state.get(PERSISTENT);
     }
 
-    @SuppressWarnings("deprecation")
+
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (this.shouldDecay(state)) {
             dropStacks(state, world, pos);
@@ -53,24 +51,19 @@ public class LeavesSlab extends BaseSlab {
     }
 
     public FluidState getFluidState(BlockState state) {
-        return (Boolean)state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }
 
     public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!(Boolean)state.get(Properties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
             if (!world.isClient()) {
-                world.setBlockState(pos, (BlockState)state.with(Properties.WATERLOGGED, true), 3);
+                world.setBlockState(pos, state.with(Properties.WATERLOGGED, true), 3);
                 world.scheduleFluidTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             }
-
             return true;
         } else {
             return false;
         }
-    }
-
-    public boolean canFillWithFluid(BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
-        return fluid == Fluids.WATER;
     }
 
     @Nullable
@@ -79,16 +72,16 @@ public class LeavesSlab extends BaseSlab {
         BlockState blockState = ctx.getWorld().getBlockState(blockPos);
         FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
         if (blockState.isOf(this)) {
-            return (BlockState)((BlockState)blockState.with(TYPE, SlabType.DOUBLE)).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+            return blockState.with(TYPE, SlabType.DOUBLE).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
         } else {
-            BlockState blockState2 = (BlockState)((BlockState)this.getDefaultState().with(TYPE, SlabType.BOTTOM)).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+            BlockState blockState2 = this.getDefaultState().with(TYPE, SlabType.BOTTOM).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
             Direction direction = ctx.getSide();
-            return direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double)blockPos.getY() > 0.5)) ? blockState2 : (BlockState)blockState2.with(TYPE, SlabType.TOP);
+            return direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double)blockPos.getY() > 0.5)) ? blockState2 : blockState2.with(TYPE, SlabType.TOP);
         }
     }
 
     protected boolean shouldDecay(BlockState state) {
-        return !(Boolean)state.get(PERSISTENT) && (Integer)state.get(DISTANCE) == 7;
+        return !(Boolean)state.get(PERSISTENT) && state.get(DISTANCE) == 7;
     }
 
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
@@ -100,19 +93,19 @@ public class LeavesSlab extends BaseSlab {
     }
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if ((Boolean)state.get(WATERLOGGED)) {
+        if (state.get(WATERLOGGED)) {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
 
         int i = getDistanceFromLog(neighborState) + 1;
-        if (i != 1 || (Integer)state.get(DISTANCE) != i) {
+        if (i != 1 || state.get(DISTANCE) != i) {
             world.scheduleBlockTick(pos, this, 1);
         }
 
         return state;
     }
 
-    private static BlockState updateDistanceFromLogs(BlockState state, WorldAccess world, BlockPos pos) {
+    public static BlockState updateDistanceFromLogs(BlockState state, WorldAccess world, BlockPos pos) {
         int i = 7;
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         Direction[] var5 = Direction.values();
@@ -127,14 +120,14 @@ public class LeavesSlab extends BaseSlab {
             }
         }
 
-        return (BlockState)state.with(DISTANCE, i);
+        return state.with(DISTANCE, i);
     }
 
-    private static int getDistanceFromLog(BlockState state) {
+    public static int getDistanceFromLog(BlockState state) {
         if (state.isIn(BlockTags.LOGS)) {
             return 0;
         } else {
-            return state.getBlock() instanceof LeavesBlock ? (Integer)state.get(DISTANCE) : 7;
+            return state.getBlock() instanceof LeavesBlock ? state.get(DISTANCE) : 7;
         }
     }
 

@@ -24,7 +24,6 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.light.ChunkLightProvider;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.PlacedFeature;
@@ -35,6 +34,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
+@SuppressWarnings("deprecation")
 public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertilizable {
 
     public static final BooleanProperty SNOWY;
@@ -43,8 +43,8 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
     protected static final VoxelShape BOTTOM_SHAPE;
     protected static final VoxelShape TOP_SHAPE;
 
-    public SpreadableSlab(ModBlocks modblock, Settings settings) {
-        super(modblock,settings);
+    public SpreadableSlab(ModBlocks block, Settings settings) {
+        super(block,settings);
     }
 
     public static boolean canSurvive(BlockState state, WorldView world, BlockPos pos) {
@@ -122,14 +122,14 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
             }
 
             if (blockState2.isAir()) {
-                RegistryEntry registryEntry;
+                RegistryEntry<PlacedFeature> registryEntry;
                 if (random.nextInt(8) == 0) {
-                    List<ConfiguredFeature<?, ?>> list = ((Biome)world.getBiome(blockPos2).value()).getGenerationSettings().getFlowerFeatures();
+                    List<ConfiguredFeature<?, ?>> list = world.getBiome(blockPos2).value().getGenerationSettings().getFlowerFeatures();
                     if (list.isEmpty()) {
                         continue;
                     }
 
-                    registryEntry = ((RandomPatchFeatureConfig)((ConfiguredFeature)list.get(0)).config()).feature();
+                    registryEntry = ((RandomPatchFeatureConfig) list.get(0).config()).feature();
                 } else {
                     if (optional.isEmpty()) {
                         continue;
@@ -138,7 +138,7 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
                     registryEntry = optional.get();
                 }
 
-                ((PlacedFeature)registryEntry.value()).generateUnregistered(world, world.getChunkManager().getChunkGenerator(), random, blockPos2);
+                registryEntry.value().generateUnregistered(world, world.getChunkManager().getChunkGenerator(), random, blockPos2);
             }
         }
 

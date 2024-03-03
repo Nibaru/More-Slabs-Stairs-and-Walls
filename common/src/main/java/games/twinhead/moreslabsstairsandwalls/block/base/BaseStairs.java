@@ -1,13 +1,16 @@
 package games.twinhead.moreslabsstairsandwalls.block.base;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
+import games.twinhead.moreslabsstairsandwalls.registry.ModRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.StairShape;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
 
 import java.util.stream.IntStream;
 
@@ -30,11 +33,7 @@ public class BaseStairs extends StairsBlock {
     }
 
     public static VoxelShape[] composeShapes(VoxelShape base, VoxelShape northWest, VoxelShape northEast, VoxelShape southWest, VoxelShape southEast) {
-        return (VoxelShape[]) IntStream.range(0, 16).mapToObj((i) -> {
-            return composeShape(i, base, northWest, northEast, southWest, southEast);
-        }).toArray((i) -> {
-            return new VoxelShape[i];
-        });
+        return IntStream.range(0, 16).mapToObj((i) -> composeShape(i, base, northWest, northEast, southWest, southEast)).toArray(VoxelShape[]::new);
     }
 
     public static VoxelShape composeShape(int i, VoxelShape base, VoxelShape northWest, VoxelShape northEast, VoxelShape southWest, VoxelShape southEast) {
@@ -56,5 +55,15 @@ public class BaseStairs extends StairsBlock {
         }
 
         return voxelShape;
+    }
+
+    //Used to get the flammability of the block on NeoForge
+    public int getFlammability(BlockState state, BlockView level, BlockPos pos, Direction face) {
+        return getDefaultState().isBurnable() ? ModRegistry.getBurnChance(this.modBlock) : 0;
+    }
+
+    //Used to get the fire spread speed of the block on NeoForge
+    public int getFireSpreadSpeed(BlockState state,BlockView level, BlockPos pos, Direction face) {
+        return getDefaultState().isBurnable() ?  ModRegistry.getSpreadChance(this.modBlock) : 0;
     }
 }
