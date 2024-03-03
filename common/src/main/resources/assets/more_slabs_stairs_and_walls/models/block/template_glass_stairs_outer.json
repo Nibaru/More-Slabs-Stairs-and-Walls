@@ -1,0 +1,35 @@
+{
+	"render_type": "translucent",
+	"textures": {
+		"side": "more_slabs_stairs_and_walls:block/glass_stair_side",
+		"bottom": "block/glass",
+		"front": "more_slabs_stairs_and_walls:block/glass_slab_side",
+		"top": "more_slabs_stairs_and_walls:block/glass_stair_small",
+		"particle": "#bottom"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 8, 16],
+			"faces": {
+				"north": {"uv": [0, 8, 16, 16], "texture": "#front", "cullface": "north"},
+				"east": {"uv": [0, 8, 16, 16], "texture": "#side", "cullface": "east"},
+				"south": {"uv": [0, 0, 8, 16], "rotation": 270, "texture": "#side", "cullface": "south"},
+				"west": {"uv": [0, 8, 16, 16], "texture": "#front", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#side"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#bottom", "cullface": "down"}
+			}
+		},
+		{
+			"from": [8, 8, 8],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 8, 8], "texture": "#top"},
+				"east": {"uv": [0, 0, 8, 8], "texture": "#side", "cullface": "east"},
+				"south": {"uv": [0, 0, 8, 8], "texture": "#side", "cullface": "south"},
+				"west": {"uv": [0, 0, 8, 8], "texture": "#top"},
+				"up": {"uv": [0, 0, 8, 8], "texture": "#top", "cullface": "up"}
+			}
+		}
+	]
+}

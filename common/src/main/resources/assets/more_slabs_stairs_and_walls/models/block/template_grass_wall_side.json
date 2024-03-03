@@ -1,0 +1,30 @@
+{
+	"parent": "block/block",
+	"render_type": "cutout",
+	"textures": {
+		"particle": "#bottom"
+	},
+	"elements": [
+		{   "from": [ 5, 0, 0 ],
+			"to": [ 11, 14, 8 ],
+			"faces": {
+				"down":  { "texture": "#bottom", "cullface": "down" },
+				"up":    { "texture": "#top" },
+				"north": { "texture": "#side", "cullface": "north" },
+				"west":  { "uv": [0, 0, 8, 12], "texture": "#side" },
+				"east":  { "uv": [8, 0, 16, 12],"texture": "#side" }
+			},
+			"__comment": "wall"
+		},
+		{   "from": [ 5, 0, 0 ],
+			"to": [ 11, 14, 8 ],
+			"faces": {
+				"up":    { "texture": "#top", "tintindex": 0},
+				"north": { "texture": "#layer0", "cullface": "north" },
+				"west":  {"uv": [0, 0, 8, 12], "texture": "#layer0", "tintindex": 0},
+				"east":  {"uv": [8, 0, 16, 12], "texture": "#layer0", "tintindex": 0}
+			},
+			"__comment": "wall"
+		}
+	]
+}
