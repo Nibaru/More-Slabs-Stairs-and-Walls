@@ -34,8 +34,6 @@ import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Iterator;
-
 public class FallingSlabBlockEntity extends FallingBlockEntity {
 
     private BlockState block;

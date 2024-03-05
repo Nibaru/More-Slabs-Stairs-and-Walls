@@ -3,55 +3,13 @@ package games.twinhead.moreslabsstairsandwalls.registry.fabric;
 import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.entity.FallingSlabBlockEntity;
-import games.twinhead.moreslabsstairsandwalls.block.oxidizable.WaxedSlab;
-import games.twinhead.moreslabsstairsandwalls.block.base.BaseSlab;
-import games.twinhead.moreslabsstairsandwalls.block.base.BaseStairs;
-import games.twinhead.moreslabsstairsandwalls.block.base.BaseWall;
-import games.twinhead.moreslabsstairsandwalls.block.concretepowder.ConcretePowderSlab;
-import games.twinhead.moreslabsstairsandwalls.block.concretepowder.ConcretePowderStairs;
-import games.twinhead.moreslabsstairsandwalls.block.concretepowder.ConcretePowderWall;
-import games.twinhead.moreslabsstairsandwalls.block.coral.CoralSlab;
-import games.twinhead.moreslabsstairsandwalls.block.coral.CoralStairs;
-import games.twinhead.moreslabsstairsandwalls.block.coral.CoralWall;
-import games.twinhead.moreslabsstairsandwalls.block.dirt.*;
-import games.twinhead.moreslabsstairsandwalls.block.falling.FallingSlab;
-import games.twinhead.moreslabsstairsandwalls.block.falling.FallingStairs;
-import games.twinhead.moreslabsstairsandwalls.block.falling.FallingWall;
-import games.twinhead.moreslabsstairsandwalls.block.honey.HoneySlab;
-import games.twinhead.moreslabsstairsandwalls.block.honey.HoneyStairs;
-import games.twinhead.moreslabsstairsandwalls.block.honey.HoneyWall;
-import games.twinhead.moreslabsstairsandwalls.block.ice.IceSlab;
-import games.twinhead.moreslabsstairsandwalls.block.ice.IceStairs;
-import games.twinhead.moreslabsstairsandwalls.block.leaves.LeavesSlab;
-import games.twinhead.moreslabsstairsandwalls.block.leaves.LeavesStairs;
-import games.twinhead.moreslabsstairsandwalls.block.magma.MagmaSlab;
-import games.twinhead.moreslabsstairsandwalls.block.magma.MagmaStairs;
-import games.twinhead.moreslabsstairsandwalls.block.magma.MagmaWall;
-import games.twinhead.moreslabsstairsandwalls.block.oxidizable.*;
-import games.twinhead.moreslabsstairsandwalls.block.redstone.RedstoneSlab;
-import games.twinhead.moreslabsstairsandwalls.block.redstone.RedstoneStairs;
-import games.twinhead.moreslabsstairsandwalls.block.redstone.RedstoneWall;
-import games.twinhead.moreslabsstairsandwalls.block.slime.SlimeSlab;
-import games.twinhead.moreslabsstairsandwalls.block.slime.SlimeStairs;
-import games.twinhead.moreslabsstairsandwalls.block.slime.SlimeWall;
-import games.twinhead.moreslabsstairsandwalls.block.soulsand.SoulSandSlab;
-import games.twinhead.moreslabsstairsandwalls.block.soulsand.SoulSandStairs;
-import games.twinhead.moreslabsstairsandwalls.block.soulsand.SoulSandWall;
-import games.twinhead.moreslabsstairsandwalls.block.spreadable.SpreadableSlab;
-import games.twinhead.moreslabsstairsandwalls.block.spreadable.SpreadableStairs;
-import games.twinhead.moreslabsstairsandwalls.block.spreadable.SpreadableWall;
-import games.twinhead.moreslabsstairsandwalls.block.strippable.StrippableSlab;
-import games.twinhead.moreslabsstairsandwalls.block.strippable.StrippableStairs;
-import games.twinhead.moreslabsstairsandwalls.block.strippable.StrippableWall;
-import games.twinhead.moreslabsstairsandwalls.block.terracotta.GlazedTerracottaSlab;
-import games.twinhead.moreslabsstairsandwalls.block.terracotta.GlazedTerracottaStairs;
-import games.twinhead.moreslabsstairsandwalls.block.terracotta.GlazedTerracottaWall;
-import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentSlab;
-import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentStairs;
+import games.twinhead.moreslabsstairsandwalls.datagen.RecipeGenerator;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -61,11 +19,13 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class ModRegistry {
 
@@ -109,14 +69,95 @@ public class ModRegistry {
                         FlammableBlockRegistry.getDefaultInstance().add(block, games.twinhead.moreslabsstairsandwalls.registry.ModRegistry.getBurnChance(modBlock), games.twinhead.moreslabsstairsandwalls.registry.ModRegistry.getSpreadChance(modBlock));
                     }
 
+
+
+
+
+                    if (FuelRegistry.INSTANCE.get(modBlock.parentBlock) != null && FuelRegistry.INSTANCE.get(modBlock.parentBlock) > 0){
+                        FuelRegistry.INSTANCE.add(block, type == ModBlocks.BlockType.SLAB ? FuelRegistry.INSTANCE.get(modBlock.parentBlock) / 2 : FuelRegistry.INSTANCE.get(modBlock.parentBlock));
+                    } else {
+                        if (fuelLogBlocks.contains(modBlock) || planks.contains(modBlock)){
+                            if (modBlock != ModBlocks.CRIMSON_PLANKS && modBlock != ModBlocks.WARPED_PLANKS)
+                                FuelRegistry.INSTANCE.add(block, type == ModBlocks.BlockType.SLAB ? 300 / 2 : 300);
+                        }
+                        if (wool.contains(modBlock)){
+                            FuelRegistry.INSTANCE.add(block, type == ModBlocks.BlockType.SLAB ? 100 / 2 : 100);
+                        }
+                    }
                 }
             }
         }
-
-
     }
 
     public static void registerItem(Identifier id, Block block){
         net.minecraft.registry.Registry.register(Registries.ITEM, id, new BlockItem(block, new Item.Settings()));
     }
+
+    public static final List<ModBlocks> fuelLogBlocks = List.of(
+            ModBlocks.ACACIA_LOG,
+            ModBlocks.BIRCH_LOG,
+            ModBlocks.DARK_OAK_LOG,
+            ModBlocks.JUNGLE_LOG,
+            ModBlocks.OAK_LOG,
+            ModBlocks.SPRUCE_LOG,
+            ModBlocks.MANGROVE_LOG,
+            ModBlocks.CHERRY_LOG,
+            ModBlocks.BAMBOO_BLOCK,
+            ModBlocks.STRIPPED_ACACIA_LOG,
+            ModBlocks.STRIPPED_BIRCH_LOG,
+            ModBlocks.STRIPPED_DARK_OAK_LOG,
+            ModBlocks.STRIPPED_JUNGLE_LOG,
+            ModBlocks.STRIPPED_OAK_LOG,
+            ModBlocks.STRIPPED_SPRUCE_LOG,
+            ModBlocks.STRIPPED_MANGROVE_LOG,
+            ModBlocks.STRIPPED_CHERRY_LOG,
+            ModBlocks.STRIPPED_BAMBOO_BLOCK,
+            ModBlocks.ACACIA_WOOD,
+            ModBlocks.BIRCH_WOOD,
+            ModBlocks.DARK_OAK_WOOD,
+            ModBlocks.JUNGLE_WOOD,
+            ModBlocks.OAK_WOOD,
+            ModBlocks.SPRUCE_WOOD,
+            ModBlocks.MANGROVE_WOOD,
+            ModBlocks.CHERRY_WOOD,
+            ModBlocks.STRIPPED_ACACIA_WOOD,
+            ModBlocks.STRIPPED_BIRCH_WOOD,
+            ModBlocks.STRIPPED_DARK_OAK_WOOD,
+            ModBlocks.STRIPPED_JUNGLE_WOOD,
+            ModBlocks.STRIPPED_OAK_WOOD,
+            ModBlocks.STRIPPED_SPRUCE_WOOD,
+            ModBlocks.STRIPPED_MANGROVE_WOOD,
+            ModBlocks.STRIPPED_CHERRY_WOOD
+    );
+
+    public static final List<ModBlocks> wool = List.of(
+            ModBlocks.WHITE_WOOL,
+            ModBlocks.ORANGE_WOOL,
+            ModBlocks.MAGENTA_WOOL,
+            ModBlocks.LIGHT_BLUE_WOOL,
+            ModBlocks.YELLOW_WOOL,
+            ModBlocks.LIME_WOOL,
+            ModBlocks.PINK_WOOL,
+            ModBlocks.GRAY_WOOL,
+            ModBlocks.LIGHT_GRAY_WOOL,
+            ModBlocks.CYAN_WOOL,
+            ModBlocks.PURPLE_WOOL,
+            ModBlocks.BLUE_WOOL,
+            ModBlocks.BROWN_WOOL,
+            ModBlocks.GREEN_WOOL,
+            ModBlocks.RED_WOOL,
+            ModBlocks.BLACK_WOOL
+    );
+
+    public static final List<ModBlocks> planks = List.of(ModBlocks.ACACIA_PLANKS,
+            ModBlocks.BIRCH_PLANKS,
+            ModBlocks.CRIMSON_PLANKS,
+            ModBlocks.DARK_OAK_PLANKS,
+            ModBlocks.JUNGLE_PLANKS,
+            ModBlocks.OAK_PLANKS,
+            ModBlocks.SPRUCE_PLANKS,
+            ModBlocks.WARPED_PLANKS,
+            ModBlocks.MANGROVE_PLANKS,
+            ModBlocks.CHERRY_PLANKS,
+            ModBlocks.BAMBOO_PLANKS);
 }

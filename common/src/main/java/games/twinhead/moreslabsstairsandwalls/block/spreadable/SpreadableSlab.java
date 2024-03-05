@@ -2,6 +2,7 @@ package games.twinhead.moreslabsstairsandwalls.block.spreadable;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.dirt.DirtSlab;
+import games.twinhead.moreslabsstairsandwalls.registry.ModTags;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.SlabType;
@@ -82,7 +83,6 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
     @Override
     public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
         if(state.get(SlabBlock.TYPE) == SlabType.BOTTOM) return false;
-
         return world.getBlockState(pos.up()).isAir();
     }
 
@@ -94,13 +94,13 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         BlockState blockState = world.getBlockState(pos);
-        if (blockState.isOf(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.SLAB))) {
+        if (blockState.isIn(ModTags.GRASS_BLOCKS)) {
             growBoneMeal(world,random,pos);
         }
-
     }
 
-    public void growBoneMeal(ServerWorld world, Random random, BlockPos pos) {
+
+    public static void growBoneMeal(ServerWorld world, Random random, BlockPos pos) {
         BlockPos blockPos = pos.up();
         BlockState blockState = Blocks.SHORT_GRASS.getDefaultState();
         Optional<RegistryEntry.Reference<PlacedFeature>> optional = world.getRegistryManager().get(RegistryKeys.PLACED_FEATURE).getEntry(VegetationPlacedFeatures.GRASS_BONEMEAL);
@@ -111,7 +111,7 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
 
             for(int j = 0; j < i / 16; ++j) {
                 blockPos2 = blockPos2.add(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
-                if (!world.getBlockState(blockPos2.down()).isOf(this) || world.getBlockState(blockPos2).isFullCube(world, blockPos2)) {
+                if (!world.getBlockState(blockPos2.down()).isIn(ModTags.GRASS_BLOCKS) || world.getBlockState(blockPos2).isFullCube(world, blockPos2)) {
                     continue label49;
                 }
             }
@@ -128,16 +128,13 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
                     if (list.isEmpty()) {
                         continue;
                     }
-
                     registryEntry = ((RandomPatchFeatureConfig) list.get(0).config()).feature();
                 } else {
                     if (optional.isEmpty()) {
                         continue;
                     }
-
                     registryEntry = optional.get();
                 }
-
                 registryEntry.value().generateUnregistered(world, world.getChunkManager().getChunkGenerator(), random, blockPos2);
             }
         }

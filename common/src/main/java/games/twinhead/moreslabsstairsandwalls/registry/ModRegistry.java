@@ -19,8 +19,6 @@ import games.twinhead.moreslabsstairsandwalls.block.falling.FallingWall;
 import games.twinhead.moreslabsstairsandwalls.block.honey.HoneySlab;
 import games.twinhead.moreslabsstairsandwalls.block.honey.HoneyStairs;
 import games.twinhead.moreslabsstairsandwalls.block.honey.HoneyWall;
-import games.twinhead.moreslabsstairsandwalls.block.ice.IceSlab;
-import games.twinhead.moreslabsstairsandwalls.block.ice.IceStairs;
 import games.twinhead.moreslabsstairsandwalls.block.leaves.LeavesSlab;
 import games.twinhead.moreslabsstairsandwalls.block.leaves.LeavesStairs;
 import games.twinhead.moreslabsstairsandwalls.block.magma.MagmaSlab;
@@ -152,7 +150,8 @@ public class ModRegistry {
                     GRAY_STAINED_GLASS,
                     CYAN_STAINED_GLASS,
                     BROWN_STAINED_GLASS,
-                    BLUE_STAINED_GLASS
+                    BLUE_STAINED_GLASS,
+                    ICE
                     -> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new TranslucentSlab(block, block.getSettings()) : null);
@@ -268,13 +267,6 @@ public class ModRegistry {
                 case SLAB ->(block.hasSlab ? new RedstoneSlab(block, block.getSettings()) : null);
                 case STAIRS ->(block.hasStairs ?  new RedstoneStairs(block, block.parentBlock.getDefaultState(), block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new RedstoneWall(block, block.getSettings()) : null);
-            };
-
-            case ICE -> switch (type)
-            {
-                case SLAB ->(block.hasSlab ? new IceSlab(block, block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new IceStairs(block, block.parentBlock.getDefaultState(), block.getSettings()) : null);
-                case WALL ->(block.hasWall ? new BaseWall(block, block.getSettings()) : null);
             };
             case OBSIDIAN, CRYING_OBSIDIAN -> switch (type)
             {

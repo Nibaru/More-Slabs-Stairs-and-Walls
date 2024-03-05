@@ -3,12 +3,8 @@ package games.twinhead.moreslabsstairsandwalls.registry.neoforge;
 import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 
+import games.twinhead.moreslabsstairsandwalls.block.MoreBlockItem;
 import games.twinhead.moreslabsstairsandwalls.block.entity.FallingSlabBlockEntity;
-import net.minecraft.client.color.block.BlockColorProvider;
-import net.minecraft.client.color.item.ItemColorProvider;
-import net.minecraft.client.color.world.BiomeColors;
-import net.minecraft.client.color.world.FoliageColors;
-import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.client.render.entity.FallingBlockEntityRenderer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -16,16 +12,15 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.BuiltinRegistries;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.neoforged.neoforge.registries.*;
-
-import java.util.function.Supplier;
 
 
 public class ModRegistry {
@@ -72,7 +67,7 @@ public class ModRegistry {
                     {
                         if (modBlock.hasBlock(type))
                         {
-                            BlockItem blockItem = new BlockItem(modBlock.getBlock(type), new Item.Settings());
+                            BlockItem blockItem = new MoreBlockItem(modBlock, type, new Item.Settings());
                             helper.register(modBlock.getId(type), blockItem);
                         }
                     }

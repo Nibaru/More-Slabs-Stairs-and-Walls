@@ -2,10 +2,8 @@ package games.twinhead.moreslabsstairsandwalls.fabric.mixin;
 
 
 
-import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.slime.SlimeSlab;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.piston.PistonHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

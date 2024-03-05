@@ -180,7 +180,7 @@ public class ModelGenerator extends FabricModelProvider {
         if(inner == null) inner = Models.INNER_STAIRS.upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.STAIRS)), "_inner"),  textureMap, blockStateModelGenerator.modelCollector);
         if(outer == null) outer = Models.OUTER_STAIRS.upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.STAIRS)), "_outer"),  textureMap, blockStateModelGenerator.modelCollector);
 
-        blockStateModelGenerator.blockStateCollector.accept(createStairsBlockState(block.getBlock(ModBlocks.BlockType.STAIRS), stair, inner, outer, block.modelType == ModBlocks.ModelType.GRASS));
+        blockStateModelGenerator.blockStateCollector.accept(createStairsBlockState(block.getBlock(ModBlocks.BlockType.STAIRS), stair, inner, outer, block.modelType != ModBlocks.ModelType.GLASS && block.modelType != ModBlocks.ModelType.GLAZED_TERRACOTTA));
     }
 
     private void createWallBlockState(ModBlocks block, BlockStateModelGenerator blockStateModelGenerator) {

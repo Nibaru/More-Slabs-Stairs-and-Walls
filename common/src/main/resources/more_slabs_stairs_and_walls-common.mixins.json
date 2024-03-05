@@ -6,12 +6,11 @@
   "mixins": [
     "BubbleColumnBlockMixin",
     "EntityMixin",
-    "GlassBlockMixin",
     "ItemEntityMixin",
     "PlantBlockMixin",
     "PointedDripstoneBlockMixin",
-    "SlimeBlockMixin",
     "SpreadableBlockMixin",
+    "TranslucentBlockMixin",
     "TreeDecoratorGeneratorMixin"
   ],
   "client": [

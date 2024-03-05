@@ -10,7 +10,6 @@ public class MoreSlabsStairsAndWallsNeoForge {
 
     public MoreSlabsStairsAndWallsNeoForge(IEventBus modEventBus) {
         MoreSlabsStairsAndWalls.init();
-        //ModRegistry.BLOCKS.register(modEventBus);
         ModRegistry registry = new ModRegistry();
         modEventBus.register(registry);
         ModRegistry.ENTITIES.register(modEventBus);

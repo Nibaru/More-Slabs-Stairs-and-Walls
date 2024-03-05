@@ -2,9 +2,9 @@ package games.twinhead.moreslabsstairsandwalls.block.spreadable;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.dirt.DirtWall;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Waterloggable;
+import games.twinhead.moreslabsstairsandwalls.registry.ModTags;
+import net.minecraft.block.*;
+import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.server.world.ServerWorld;
@@ -13,10 +13,12 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 
 @SuppressWarnings("deprecation")
-public class SpreadableWall extends DirtWall implements Waterloggable {
+public class SpreadableWall extends DirtWall implements Waterloggable, Fertilizable {
 
     public static final BooleanProperty SNOWY;
 
@@ -39,6 +41,24 @@ public class SpreadableWall extends DirtWall implements Waterloggable {
                     SpreadableSlab.trySpread(world, getModBlock().parentBlock, blockPos);
                 }
             }
+        }
+    }
+
+    @Override
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
+        return world.getBlockState(pos.up()).isAir();
+    }
+
+    @Override
+    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+        return true;
+    }
+
+    @Override
+    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+        BlockState blockState = world.getBlockState(pos);
+        if (blockState.isIn(ModTags.GRASS_BLOCKS)) {
+            SpreadableSlab.growBoneMeal(world,random,pos);
         }
     }
 
