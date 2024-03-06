@@ -54,10 +54,8 @@ public class CoralSlab extends BaseSlab {
 
     public static boolean isInWater(BlockView world, BlockPos pos) {
         Direction[] var3 = Direction.values();
-        int var4 = var3.length;
 
-        for(int var5 = 0; var5 < var4; ++var5) {
-            Direction direction = var3[var5];
+        for (Direction direction : var3) {
             FluidState fluidState = world.getFluidState(pos.offset(direction));
             if (fluidState.isIn(FluidTags.WATER)) {
                 return true;

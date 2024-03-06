@@ -9,7 +9,7 @@
   "contact": {},
 
   "license": "${mod_license}",
-  "icon": "icon.png",
+  "icon": "assets/more_slabs_stairs_and_walls/icon.png",
 
   "environment": "*",
   "entrypoints": {

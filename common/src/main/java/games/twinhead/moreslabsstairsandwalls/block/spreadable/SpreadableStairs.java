@@ -5,7 +5,6 @@ import games.twinhead.moreslabsstairsandwalls.block.dirt.DirtStairs;
 import games.twinhead.moreslabsstairsandwalls.registry.ModTags;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.BlockHalf;
-import net.minecraft.block.enums.SlabType;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.server.world.ServerWorld;

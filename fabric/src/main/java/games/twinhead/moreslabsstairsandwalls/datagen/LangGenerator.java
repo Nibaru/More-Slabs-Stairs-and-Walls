@@ -1,7 +1,6 @@
 package games.twinhead.moreslabsstairsandwalls.datagen;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
-import games.twinhead.moreslabsstairsandwalls.registry.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 

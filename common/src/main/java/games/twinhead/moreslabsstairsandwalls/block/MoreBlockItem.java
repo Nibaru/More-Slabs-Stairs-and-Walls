@@ -10,8 +10,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class MoreBlockItem extends BlockItem {
 
-    private ModBlocks block;
-    private ModBlocks.BlockType type;
+    private final ModBlocks block;
+    private final ModBlocks.BlockType type;
 
     public MoreBlockItem(ModBlocks blocks, ModBlocks.BlockType type,  Item.Settings settings) {
         super(blocks.getBlock(type), settings);
