@@ -30,7 +30,7 @@ public class MoreSlabsStairsAndWallsFabricClient implements ClientModInitializer
             for (ModBlocks.BlockType type: ModBlocks.BlockType.values()) {
                 switch (block.modelType){
                     case LEAVES -> BlockRenderLayerMap.INSTANCE.putBlock(block.getBlock(type), RenderLayer.getCutoutMipped());
-                    case GRASS -> BlockRenderLayerMap.INSTANCE.putBlock(block.getBlock(type), RenderLayer.getCutout());
+                    case GRASS, ROOTS -> BlockRenderLayerMap.INSTANCE.putBlock(block.getBlock(type), RenderLayer.getCutout());
                     case GLASS, SLIME -> BlockRenderLayerMap.INSTANCE.putBlock(block.getBlock(type), RenderLayer.getTranslucent());
                 }
                 if(block == ModBlocks.HONEY_BLOCK

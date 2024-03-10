@@ -76,7 +76,7 @@ public class ModelGenerator extends FabricModelProvider {
                 slabDouble = getTemplateModel("template_glass_slab_double", TextureKey.ALL).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.SLAB)), "_double"),  textureMap, blockStateModelGenerator.modelCollector);
 
             }
-            case PATH, SLIME, HONEY -> {
+            case PATH, SLIME, HONEY, ROOTS -> {
                 return;
             }
 
@@ -171,7 +171,7 @@ public class ModelGenerator extends FabricModelProvider {
                 outer = getTemplateModel("translucent_stairs_outer", TextureKey.ALL).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.STAIRS)), "_outer"),  textureMap, blockStateModelGenerator.modelCollector);
             }
 
-            case PATH, SLIME, HONEY -> {
+            case PATH, SLIME, HONEY, ROOTS -> {
                 return;
             }
         }
@@ -235,7 +235,7 @@ public class ModelGenerator extends FabricModelProvider {
                 tall = getTemplateModel("template_leaves_wall_side_tall", TextureKey.WALL).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.WALL)), "_side_tall"),  textureMap, blockStateModelGenerator.modelCollector);
                 inventory = getTemplateModel("template_leaves_wall_inventory", TextureKey.WALL).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.WALL)), "_inventory"),  textureMap, blockStateModelGenerator.modelCollector);
             }
-            case CUBE_BOTTOM_TOP -> {
+            case CUBE_BOTTOM_TOP, ROOTS -> {
                 textureMap.put(TextureKey.BOTTOM, new Identifier("minecraft", "block/" + Registries.BLOCK.getId(block.parentBlock).toString().split(":")[1] + "_top"));
 
                 post = getTemplateModel("template_column_wall_post", TextureKey.BOTTOM, TextureKey.TOP, TextureKey.SIDE).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.WALL)), "_post"),  textureMap, blockStateModelGenerator.modelCollector);
@@ -280,6 +280,8 @@ public class ModelGenerator extends FabricModelProvider {
                     .put(TextureKey.BOTTOM, new Identifier("minecraft", "block/" + block.bottomId))
                     .put(TextureKey.TOP, new Identifier("minecraft", "block/" + block.topId));
             case SLIME -> new TextureMap().put(TextureKey.ALL, new Identifier("minecraft", "block/slime_block"));
+            case ROOTS -> new TextureMap().put(TextureKey.SIDE, new Identifier("minecraft", "block/mangrove_roots_side"))
+                    .put(TextureKey.TOP, new Identifier("minecraft", "block/mangrove_roots_top"));
             case HONEY -> new TextureMap().put(TextureKey.ALL, new Identifier("minecraft", "block/honey_block_bottom"));
             default -> TexturedModel.CUBE_ALL.get(block.parentBlock).getTextures();
         };

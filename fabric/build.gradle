@@ -50,6 +50,11 @@ loom {
         //
         // This adds a new gradle task that runs the datagen API: "gradlew runDatagenClient"
         //
+
+        client {
+
+        }
+
         datagenClient {
             inherit client
             name "Data Generation"

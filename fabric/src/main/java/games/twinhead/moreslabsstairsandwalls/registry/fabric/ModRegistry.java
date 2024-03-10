@@ -20,7 +20,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class ModRegistry {
@@ -30,10 +29,8 @@ public class ModRegistry {
             new Identifier(MoreSlabsStairsAndWalls.MOD_ID, "falling_slab"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, FallingSlabBlockEntity::new).dimensions(EntityDimensions.fixed(0.98f, 0.98f)).trackRangeBlocks(10).trackedUpdateRate(20).build());
 
-    public static final HashMap<Identifier, Block> MOD_BLOCKS = new HashMap<>();
-
     public static Block getBlock(Identifier id) {
-        return MOD_BLOCKS.get(id);
+        return Registries.BLOCK.get(id);
     }
 
     public static ItemGroup modGroup = Registry.register(Registries.ITEM_GROUP, new Identifier(MoreSlabsStairsAndWalls.MOD_ID, "creative_tab"),
@@ -57,15 +54,10 @@ public class ModRegistry {
                     Block block = games.twinhead.moreslabsstairsandwalls.registry.ModRegistry.getBlock(modBlock, type);
                     Registry.register(Registries.BLOCK, modBlock.getId(type), block);
                     registerItem(modBlock.getId(type), block);
-                    MOD_BLOCKS.put(modBlock.getId(type), block);
 
                     if (modBlock.parentBlock.getDefaultState().isBurnable()){
                         FlammableBlockRegistry.getDefaultInstance().add(block, games.twinhead.moreslabsstairsandwalls.registry.ModRegistry.getBurnChance(modBlock), games.twinhead.moreslabsstairsandwalls.registry.ModRegistry.getSpreadChance(modBlock));
                     }
-
-
-
-
 
                     if (FuelRegistry.INSTANCE.get(modBlock.parentBlock) != null && FuelRegistry.INSTANCE.get(modBlock.parentBlock) > 0){
                         FuelRegistry.INSTANCE.add(block, type == ModBlocks.BlockType.SLAB ? FuelRegistry.INSTANCE.get(modBlock.parentBlock) / 2 : FuelRegistry.INSTANCE.get(modBlock.parentBlock));
@@ -84,7 +76,7 @@ public class ModRegistry {
     }
 
     public static void registerItem(Identifier id, Block block){
-        net.minecraft.registry.Registry.register(Registries.ITEM, id, new BlockItem(block, new Item.Settings()));
+        Registry.register(Registries.ITEM, id, new BlockItem(block, new Item.Settings()));
     }
 
     public static final List<ModBlocks> fuelLogBlocks = List.of(

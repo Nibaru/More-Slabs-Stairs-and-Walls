@@ -1,10 +1,11 @@
 {
+	"credit": "Made with Blockbench",
 	"render_type": "translucent",
 	"textures": {
+		"particle": "block/glass",
 		"bottom": "block/glass",
 		"side": "more_slabs_stairs_and_walls:block/glass_stair_side",
-		"top": "more_slabs_stairs_and_walls:block/glass_stair_small",
-		"particle": "#bottom"
+		"top": "more_slabs_stairs_and_walls:block/glass_stair_small"
 	},
 	"elements": [
 		{
@@ -43,7 +44,7 @@
 				"east": {"uv": [0, 0, 8, 16], "texture": "#bottom", "cullface": "east"},
 				"south": {"uv": [8, 0, 16, 16], "texture": "#bottom", "cullface": "south"},
 				"up": {"uv": [0, 8, 8, 16], "rotation": 270, "texture": "#side", "cullface": "up"},
-				"down": {"uv": [8, 0, 16, 8], "texture": "#bottom","cullface": "down"}
+				"down": {"uv": [8, 0, 16, 8], "texture": "#bottom", "cullface": "down"}
 			}
 		},
 		{
@@ -51,7 +52,7 @@
 			"to": [8, 16, 16],
 			"faces": {
 				"north": {"uv": [0, 0, 8, 8], "texture": "#top"},
-				"south": {"uv": [0, 0, 8, 8], "texture": "#bottom", "cullface": "south"},
+				"south": {"uv": [0, 0, 8, 8], "texture": "#bottom"},
 				"west": {"uv": [8, 0, 0, 9], "texture": "#side", "cullface": "west"},
 				"up": {"uv": [16, 8, 8, 16], "texture": "#side", "cullface": "up"}
 			}
