@@ -477,7 +477,7 @@ public enum ModBlocks {
     }
     
     private static Builder builder(Block block){
-        return builder(block);
+        return new Builder(block);
     }
 
     private static class Builder {

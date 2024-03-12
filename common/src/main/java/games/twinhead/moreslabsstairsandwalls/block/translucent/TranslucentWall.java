@@ -11,6 +11,7 @@ import net.minecraft.block.enums.WallShape;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.Direction;
 
+@SuppressWarnings("deprecation")
 public class TranslucentWall extends BaseWall {
 
     public TranslucentWall(ModBlocks modBlock, Settings settings) {
