@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_post"
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_post"
       },
       "when": {
         "up": "true"
@@ -10,7 +10,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_low_full",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_low_full",
         "uvlock": false,
         "y": 90
       },
@@ -24,7 +24,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_low_full",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_low_full",
         "uvlock": false,
         "y": 180
       },
@@ -38,7 +38,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_low_all",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_low_all",
         "uvlock": false
       },
       "when": {
@@ -51,7 +51,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_side_low",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_side_low",
         "uvlock": false
       },
       "when": {
@@ -61,7 +61,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_side_low",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_side_low",
         "uvlock": false,
         "y": 90
       },
@@ -72,7 +72,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_side_low",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_side_low",
         "uvlock": false,
         "y": 180
       },
@@ -83,7 +83,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_side_low",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_side_low",
         "uvlock": false,
         "y": 270
       },
@@ -96,7 +96,7 @@
 
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_tall_full",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_tall_full",
         "uvlock": false
       },
       "when": {
@@ -110,7 +110,7 @@
 
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_tall_full",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_tall_full",
         "uvlock": false,
         "y": 90
       },
@@ -125,7 +125,7 @@
 
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_side_tall",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_side_tall",
         "uvlock": false
       },
       "when": {
@@ -135,7 +135,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_side_tall",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_side_tall",
         "uvlock": false,
         "y": 90
       },
@@ -146,7 +146,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_side_tall",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_side_tall",
         "uvlock": false,
         "y": 180
       },
@@ -157,7 +157,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_side_tall",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_side_tall",
         "uvlock": false,
         "y": 270
       },
@@ -168,7 +168,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_side_low",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_side_low",
         "uvlock": false
       },
       "when": {
@@ -179,7 +179,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_side_low",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_side_low",
         "uvlock": false,
         "y": 180
       },
@@ -191,7 +191,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_side_low",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_side_low",
         "uvlock": false,
         "y": 180
       },
@@ -203,7 +203,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_side_low",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_side_low",
         "uvlock": false,
         "y": 270
       },
@@ -215,7 +215,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_tall_all",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_tall_all",
         "uvlock": false
       },
       "when": {
@@ -228,7 +228,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_post",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_post",
         "uvlock": false
       },
       "when": {
@@ -240,7 +240,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_side_tall",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_side_tall",
         "uvlock": false,
         "y": 90
       },
@@ -253,7 +253,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_side_tall",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_side_tall",
         "uvlock": false,
         "y": 270
       },
@@ -266,7 +266,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_post",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_post",
         "uvlock": false
       },
       "when": {
@@ -278,7 +278,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_side_tall",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_side_tall",
         "uvlock": false
       },
       "when": {
@@ -290,7 +290,7 @@
     },
     {
       "apply": {
-        "model": "more_slabs_stairs_and_walls:block/yellow_stained_glass/yellow_stained_glass_wall_side_tall",
+        "model": "more_slabs_stairs_and_walls:block/ice/ice_wall_side_tall",
         "uvlock": false,
         "y": 180
       },

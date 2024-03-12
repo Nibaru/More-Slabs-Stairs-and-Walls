@@ -1,6 +1,7 @@
 {
   "parent": "more_slabs_stairs_and_walls:block/glass/glass_wall_side_tall",
   "textures": {
-    "wall": "minecraft:block/orange_stained_glass"
+    "glass": "minecraft:block/orange_stained_glass",
+    "wall": "more_slabs_stairs_and_walls:block/orange_stained_glass_wall"
   }
 }

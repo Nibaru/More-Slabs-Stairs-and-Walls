@@ -12,7 +12,7 @@ public class BaseWall extends WallBlock {
 
     ModBlocks modBlock;
 
-    public BaseWall(ModBlocks modBlock,Settings settings) {
+    public BaseWall(ModBlocks modBlock, Settings settings) {
         super(settings);
         this.modBlock = modBlock;
     }

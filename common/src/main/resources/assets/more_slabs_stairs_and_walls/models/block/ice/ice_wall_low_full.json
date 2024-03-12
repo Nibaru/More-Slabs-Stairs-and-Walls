@@ -1,0 +1,23 @@
+{
+	"credit": "Made with Blockbench",
+	"render_type": "translucent",
+	"textures": {
+		"particle": "block/ice",
+		"wall": "block/ice"
+	},
+	"elements": [
+		{
+			"name": "Full wall",
+			"from": [5, 0, 0],
+			"to": [11, 14, 16],
+			"faces": {
+				"north": {"uv": [5, 2, 11, 16], "texture": "#wall", "cullface": "north"},
+				"east": {"uv": [0, 2, 16, 16], "texture": "#wall"},
+				"south": {"uv": [5, 2, 11, 16], "texture": "#wall", "cullface": "south"},
+				"west": {"uv": [0, 2, 16, 16], "texture": "#wall"},
+				"up": {"uv": [5, 0, 11, 16], "texture": "#wall"},
+				"down": {"uv": [5, 0, 11, 16], "texture": "#wall", "cullface": "down"}
+			}
+		}
+	]
+}

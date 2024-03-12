@@ -1,17 +1,22 @@
 {
-  "render_type": "translucent",
-  "textures": {
-    "wall": "minecraft:block/glass"
-  },
-  "elements": [
-    {
-      "from": [5, 0, 0],
-      "to": [11, 15.99, 4],
-      "faces": {
-        "east": {"uv": [12, 0.01, 16, 16], "texture": "#wall"},
-        "west": {"uv": [0, 0.01, 4, 16], "texture": "#wall"},
-        "down": {"uv": [5, 12, 11, 16], "texture": "#wall", "cullface": "down"}
-      }
-    }
-  ]
+	"credit": "Made with Blockbench",
+	"render_type": "translucent",
+	"textures": {
+		"glass": "block/glass",
+		"particle": "more_slabs_stairs_and_walls:block/glass_wall",
+		"wall": "more_slabs_stairs_and_walls:block/glass_wall"
+	},
+	"elements": [
+		{
+			"from": [5, 0, 0],
+			"to": [11, 16, 4],
+			"faces": {
+				"north": {"uv": [2.33333, 0.01, 4.33333, 16], "texture": "#wall", "cullface": "north"},
+				"east": {"uv": [12, 0.01, 16, 16], "texture": "#glass"},
+				"west": {"uv": [0, 0.01, 4, 16], "texture": "#glass"},
+				"up": {"uv": [2.33333, 0, 4.33333, 4], "texture": "#wall", "cullface": "up"},
+				"down": {"uv": [2.33333, 12, 4.33333, 16], "texture": "#wall", "cullface": "down"}
+			}
+		}
+	]
 }

@@ -45,6 +45,7 @@ import games.twinhead.moreslabsstairsandwalls.block.terracotta.GlazedTerracottaS
 import games.twinhead.moreslabsstairsandwalls.block.terracotta.GlazedTerracottaWall;
 import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentSlab;
 import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentStairs;
+import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentWall;
 import net.minecraft.block.Block;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.client.color.block.BlockColorProvider;
@@ -156,7 +157,7 @@ public class ModRegistry {
             {
                 case SLAB ->(block.hasSlab ? new TranslucentSlab(block, block.getSettings()) : null);
                 case STAIRS ->(block.hasStairs ?  new TranslucentStairs(block, block.parentBlock.getDefaultState(), block.getSettings()) : null);
-                case WALL ->(block.hasWall ? new BaseWall(block, block.getSettings()) : null);
+                case WALL ->(block.hasWall ? new TranslucentWall(block, block.getSettings()) : null);
             };
 
             case SAND,
