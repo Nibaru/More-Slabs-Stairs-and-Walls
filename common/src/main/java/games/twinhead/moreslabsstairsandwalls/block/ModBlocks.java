@@ -514,19 +514,9 @@ public enum ModBlocks {
             return this;
         }
 
-        public Builder addBlockTag(TagKey<Block> blockTag) {
-            this.blockTags.add(blockTag);
-            return this;
-        }
-
         @SafeVarargs
         public final Builder addItemTags(TagKey<Item>... itemTags) {
             this.itemTags.addAll(List.of(itemTags));
-            return this;
-        }
-
-        public Builder addItemTag(TagKey<Item> itemTag) {
-            this.itemTags.add(itemTag);
             return this;
         }
 

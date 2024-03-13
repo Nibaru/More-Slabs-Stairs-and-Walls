@@ -167,7 +167,7 @@ public class ModelGenerator extends FabricModelProvider {
     }
 
     private void createWallBlockState(ModBlocks block, BlockStateModelGenerator blockStateModelGenerator) {
-        if(block.modelType == ModBlocks.ModelType.PATH || block.modelType == ModBlocks.ModelType.GLASS || block.equals(ModBlocks.ICE))  return;
+        if(block.modelType == ModBlocks.ModelType.PATH || block.modelType == ModBlocks.ModelType.GLASS || block.equals(ModBlocks.ICE) || block.equals(ModBlocks.SLIME_BLOCK))  return;
         Identifier inventory;
         TextureMap textureMap = getTextureMap(block);
         Identifier post;
