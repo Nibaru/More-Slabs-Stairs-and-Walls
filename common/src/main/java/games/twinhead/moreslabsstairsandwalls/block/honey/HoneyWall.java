@@ -3,6 +3,7 @@ package games.twinhead.moreslabsstairsandwalls.block.honey;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseWall;
 import games.twinhead.moreslabsstairsandwalls.block.slime.SlimeSlab;
+import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentWall;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
@@ -13,7 +14,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 @SuppressWarnings("deprecation")
-public class HoneyWall extends BaseWall {
+public class HoneyWall extends TranslucentWall {
 
     public HoneyWall(ModBlocks modBlocks, Settings settings) {
         super(modBlocks, settings);

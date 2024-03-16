@@ -1,7 +1,6 @@
 package games.twinhead.moreslabsstairsandwalls.block.slime;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
-import games.twinhead.moreslabsstairsandwalls.block.base.BaseWall;
 import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentWall;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
