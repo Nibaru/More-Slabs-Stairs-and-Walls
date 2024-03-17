@@ -1,5 +1,7 @@
 plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
+    id "com.modrinth.minotaur" version "2.+"
 }
 architectury {
     platformSetupLoomIde()
@@ -97,6 +99,33 @@ tasks.withType(JavaCompile) {
     // If Javadoc is generated, this must be specified in that task too.
     options.encoding = "UTF-8"
     options.release = 17
+}
+
+curseforge {
+    apiKey = "${System.getenv("CURSEFORGE_KEY")}"
+    project {
+        id = "${project.curseforge_id}"
+        mainArtifact (remapJar){
+            displayName = "v" + project.mod_version + "+" + project.minecraft_version  + " NeoForge"
+        }
+        changelogType = 'markdown'
+        changelog = rootProject.file("CHANGELOG.md").text
+        releaseType = 'release'
+        addGameVersion "NeoForge"
+        addGameVersion project.minecraft_version
+    }
+}
+
+modrinth {
+    token = "${System.getenv("MODRINTH_KEY")}"
+    projectId = project.modrinth_id
+    versionNumber = project.mod_version + "+" + project.minecraft_version
+    versionType = "release"
+    versionName =  "v" + project.mod_version + "+" + project.minecraft_version  + " NeoForge"
+    uploadFile = remapJar
+    gameVersions = [project.minecraft_version]
+    loaders = ["neoforge"]
+    changelog = rootProject.file("CHANGELOG.md").text
 }
 
 

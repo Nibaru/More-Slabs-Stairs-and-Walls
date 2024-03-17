@@ -6,7 +6,11 @@
   "name": "${mod_name}",
   "description": "${mod_description}",
   "authors": ["${mod_authors}"],
-  "contact": {},
+  "contact": {
+    "homepage": "${homepage}",
+    "sources": "${sources}",
+    "issues": "${issues}"
+  },
 
   "license": "${mod_license}",
   "icon": "assets/more_slabs_stairs_and_walls/icon.png",
