@@ -8,11 +8,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 
-@Mod.EventBusSubscriber(modid = MoreSlabsStairsAndWalls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = MoreSlabsStairsAndWalls.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class MoreSlabsStairsAndWallsForgeClient {
 
     @SubscribeEvent
-    public void registerBlockColors(RegisterColorHandlersEvent.Block event){
+    public static void registerBlockColors(RegisterColorHandlersEvent.Block event){
         for (ModBlocks block: ModBlocks.values()) {
             for (ModBlocks.BlockType type : ModBlocks.BlockType.values()) {
                 if (games.twinhead.moreslabsstairsandwalls.registry.ModRegistry.getBlockColor(block) != null){
@@ -23,7 +23,7 @@ public class MoreSlabsStairsAndWallsForgeClient {
     }
 
     @SubscribeEvent
-    public void registerItemColors(RegisterColorHandlersEvent.Item event){
+    public static void registerItemColors(RegisterColorHandlersEvent.Item event){
         for (ModBlocks block: ModBlocks.values()) {
             for (ModBlocks.BlockType type : ModBlocks.BlockType.values()) {
                 if (games.twinhead.moreslabsstairsandwalls.registry.ModRegistry.getBlockColor(block) != null){
