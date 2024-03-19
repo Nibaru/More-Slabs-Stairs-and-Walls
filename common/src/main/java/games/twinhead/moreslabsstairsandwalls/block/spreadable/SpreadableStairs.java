@@ -47,7 +47,7 @@ public class SpreadableStairs extends DirtStairs implements Waterloggable, Ferti
     }
 
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         if(state.get(StairsBlock.HALF) == BlockHalf.BOTTOM) return false;
         return world.getBlockState(pos.up()).isAir();
     }

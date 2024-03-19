@@ -1,4 +1,4 @@
-package games.twinhead.moreslabsstairsandwalls.registry.neoforge;
+package games.twinhead.moreslabsstairsandwalls.registry.forge;
 
 import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
@@ -15,17 +15,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-import net.neoforged.neoforge.registries.*;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegisterEvent;
+import net.minecraftforge.registries.RegistryObject;
 
 @SuppressWarnings("unused")
 public class ModRegistry {
 
-    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(Registries.ENTITY_TYPE, MoreSlabsStairsAndWalls.MOD_ID);
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(RegistryKeys.ENTITY_TYPE, MoreSlabsStairsAndWalls.MOD_ID);
 
-    public static final DeferredHolder<EntityType<?>, EntityType<FallingSlabBlockEntity>> FALLING_SLAB_BLOCK_ENTITY = ENTITIES.register("falling_slab", () -> EntityType.Builder.create(FallingSlabBlockEntity::new, SpawnGroup.MISC).setDimensions(0.98f, 0.98f).setTrackingRange(10).trackingTickInterval(20).build("falling_slab"));
+    public static final RegistryObject<EntityType<FallingSlabBlockEntity>> FALLING_SLAB_BLOCK_ENTITY = ENTITIES.register("falling_slab", () -> EntityType.Builder.create(FallingSlabBlockEntity::new, SpawnGroup.MISC).setDimensions(0.98f, 0.98f).setTrackingRange(10).trackingTickInterval(20).build("falling_slab"));
 
     public ModRegistry() {}
 
@@ -73,9 +75,9 @@ public class ModRegistry {
             });
     }
 
-    public static final DeferredRegister<ItemGroup> ITEM_GROUPS = DeferredRegister.create(Registries.ITEM_GROUP, MoreSlabsStairsAndWalls.MOD_ID);
+    public static final DeferredRegister<ItemGroup> ITEM_GROUPS = DeferredRegister.create(RegistryKeys.ITEM_GROUP, MoreSlabsStairsAndWalls.MOD_ID);
 
-    public static final DeferredHolder<ItemGroup,ItemGroup> CREATIVE_TAB = ITEM_GROUPS.register("creative_tab", () -> ItemGroup.builder()
+    public static final RegistryObject<ItemGroup> CREATIVE_TAB = ITEM_GROUPS.register("creative_tab", () -> ItemGroup.builder()
             //Set the title of the tab. Don't forget to add a translation!
             .displayName(Text.translatable("itemGroup." + MoreSlabsStairsAndWalls.MOD_ID + ".creative_tab"))
             //Set the icon of the tab.

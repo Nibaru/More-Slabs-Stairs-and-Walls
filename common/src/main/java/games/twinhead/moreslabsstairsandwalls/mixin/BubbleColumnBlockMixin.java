@@ -33,7 +33,7 @@ public class BubbleColumnBlockMixin  extends Block implements FluidDrainable {
     }
 
     @Shadow
-    public ItemStack tryDrainFluid(@Nullable PlayerEntity player, WorldAccess world, BlockPos pos, BlockState state) {
+    public ItemStack tryDrainFluid(WorldAccess world, BlockPos pos, BlockState state) {
         return null;
     }
 

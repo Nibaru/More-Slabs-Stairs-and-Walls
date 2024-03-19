@@ -1,0 +1,28 @@
+modLoader="javafml"
+loaderVersion="${forge_version_range}"
+license="${mod_license}"
+issueTrackerURL="${issues}"
+displayURL="${homepage}"
+authors= "${mod_authors}"
+
+[[mods]]
+modId="${mod_id}" #mandatory
+version="${mod_version}" #mandatory
+displayName="${mod_name}" #mandatory
+authors="${mod_authors}" #optional
+description='''${mod_description}'''
+logoFile="assets/more_slabs_stairs_and_walls/icon.png"
+
+[[dependencies.more_slabs_stairs_and_walls]]
+modId = "forge"
+mandatory = true
+versionRange = "${forge_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.more_slabs_stairs_and_walls]]
+modId = "minecraft"
+mandatory = true
+versionRange = "${minecraft_version}"
+ordering = "NONE"
+side = "BOTH"

@@ -16,6 +16,7 @@ import net.minecraft.recipe.book.RecipeCategory;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class RecipeGenerator extends FabricRecipeProvider {
 
@@ -184,7 +185,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
     );
 
     @Override
-    public void generate(RecipeExporter exporter) {
+    public void generate(Consumer<RecipeJsonProvider> exporter) {
 
         addWaxedCopperRecipes(exporter);
         addLogToPlankRecipes(exporter);
@@ -236,7 +237,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
         }
     }
 
-    private void addMiscRecipes(RecipeExporter exporter){
+    private void addMiscRecipes(Consumer<RecipeJsonProvider> exporter){
         addCoarseDirtRecipe(exporter, ModBlocks.BlockType.SLAB);
         addCoarseDirtRecipe(exporter, ModBlocks.BlockType.STAIRS);
         addCoarseDirtRecipe(exporter, ModBlocks.BlockType.WALL);
@@ -249,7 +250,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
         offerTerracottaSlabStairAndWalls(exporter);
     }
 
-    private void offerTerracottaSlabStairAndWalls(RecipeExporter exporter){
+    private void offerTerracottaSlabStairAndWalls(Consumer<RecipeJsonProvider> exporter){
         for (int i = 0; i < dyes.size(); i++) {
             for (ModBlocks.BlockType type: ModBlocks.BlockType.values()){
                 offerTerracottaDyeingRecipe(exporter, type, terracotta.get(i), dyes.get(i));
@@ -257,7 +258,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
         }
     }
 
-    private void offerTerracottaDyeingRecipe(RecipeExporter exporter, ModBlocks.BlockType type, ModBlocks output, ItemConvertible input) {
+    private void offerTerracottaDyeingRecipe(Consumer<RecipeJsonProvider> exporter, ModBlocks.BlockType type, ModBlocks output, ItemConvertible input) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, output.getBlock(type), 8)
                 .input('#', ModBlocks.TERRACOTTA.getBlock(type))
                 .input('X', input)
@@ -269,7 +270,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
                 .offerTo(exporter, output.toString().toLowerCase() + "_" + type.toString().toLowerCase() + "_from_terracotta_and_dye");
     }
 
-    private void addCoarseDirtRecipe(RecipeExporter exporter, ModBlocks.BlockType type){
+    private void addCoarseDirtRecipe(Consumer<RecipeJsonProvider> exporter, ModBlocks.BlockType type){
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.COARSE_DIRT.getBlock(type), 4)
                 .criterion(hasItem(ModBlocks.GRAVEL.getBlock(type)), conditionsFromItem(ModBlocks.GRAVEL.getBlock(type)))
                 .criterion(hasItem(ModBlocks.DIRT.getBlock(type)), conditionsFromItem(ModBlocks.DIRT.getBlock(type)))
@@ -280,7 +281,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
                 .offerTo(exporter , ModBlocks.COARSE_DIRT.toString().toLowerCase() + "_" + type.toString().toLowerCase() + "_from_gravel_and_dirt");
     }
 
-    private void addSmeltingRecipes(RecipeExporter exporter){
+    private void addSmeltingRecipes(Consumer<RecipeJsonProvider> exporter){
         addSmeltingRecipe(exporter,null, ModBlocks.CRACKED_STONE_BRICKS, Blocks.STONE_BRICK_SLAB, Blocks.STONE_BRICK_STAIRS, Blocks.STONE_BRICK_WALL);
         addSmeltingRecipe(exporter,null, ModBlocks.CRACKED_DEEPSLATE_BRICKS, Blocks.DEEPSLATE_BRICK_SLAB, Blocks.DEEPSLATE_BRICK_STAIRS, Blocks.DEEPSLATE_BRICK_WALL);
         addSmeltingRecipe(exporter,null, ModBlocks.CRACKED_DEEPSLATE_TILES, Blocks.DEEPSLATE_TILE_SLAB, Blocks.DEEPSLATE_TILE_STAIRS, Blocks.DEEPSLATE_TILE_WALL);
@@ -303,11 +304,11 @@ public class RecipeGenerator extends FabricRecipeProvider {
 
     }
 
-    private void addSmeltingRecipe(RecipeExporter exporter, @Nullable String suffix, ModBlocks output, ModBlocks input){
+    private void addSmeltingRecipe(Consumer<RecipeJsonProvider> exporter, @Nullable String suffix, ModBlocks output, ModBlocks input){
         addSmeltingRecipe(exporter, suffix, output, input.getBlock(ModBlocks.BlockType.SLAB), input.getBlock(ModBlocks.BlockType.STAIRS), input.getBlock(ModBlocks.BlockType.WALL));
     }
 
-    private void addSmeltingRecipe(RecipeExporter exporter, @Nullable String suffix, ModBlocks block, Block inputSlab, Block inputStairs, Block inputWall){
+    private void addSmeltingRecipe(Consumer<RecipeJsonProvider> exporter, @Nullable String suffix, ModBlocks block, Block inputSlab, Block inputStairs, Block inputWall){
         if (block.hasBlock(ModBlocks.BlockType.SLAB))
             CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(inputSlab), RecipeCategory.BUILDING_BLOCKS, block.getBlock(ModBlocks.BlockType.SLAB), 0.1F, 200)
                 .criterion(hasItem(inputSlab), conditionsFromItem(inputSlab)).offerTo(exporter, block.getId(ModBlocks.BlockType.SLAB).toString()+"_from_smelting"+ suffix);
@@ -319,7 +320,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
                 .criterion(hasItem(inputWall), conditionsFromItem(inputWall)).offerTo(exporter, block.getId(ModBlocks.BlockType.WALL).toString()+"_from_smelting"+ suffix);
     }
 
-    private void addUncraftingRecipes(RecipeExporter exporter){
+    private void addUncraftingRecipes(Consumer<RecipeJsonProvider> exporter){
         addRawBlock(ModBlocks.RAW_COPPER_BLOCK, Items.RAW_COPPER, exporter);
         addRawBlock(ModBlocks.RAW_IRON_BLOCK, Items.RAW_IRON, exporter);
         addRawBlock(ModBlocks.RAW_GOLD_BLOCK, Items.RAW_GOLD, exporter);
@@ -339,7 +340,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
         addRawBlock(ModBlocks.SLIME_BLOCK, Items.SLIME_BALL, exporter);
     }
 
-    private void addRawBlock(ModBlocks block, Item ouput, RecipeExporter exporter){
+    private void addRawBlock(ModBlocks block, Item ouput, Consumer<RecipeJsonProvider> exporter){
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ouput, 9)
                 .input(block.getBlock(ModBlocks.BlockType.SLAB)).group(getRecipeGroup(block, ModBlocks.BlockType.SLAB))
@@ -362,7 +363,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
     }
 
 
-    public void addWaxedCopperRecipes(RecipeExporter exporter){
+    public void addWaxedCopperRecipes(Consumer<RecipeJsonProvider> exporter){
         for (ModBlocks block: waxedCopper) {
             for (ModBlocks.BlockType type : ModBlocks.BlockType.values()) {
                 if (block.hasBlock(type))
@@ -371,7 +372,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
         }
     }
 
-    public void addLogToPlankRecipes(RecipeExporter exporter){
+    public void addLogToPlankRecipes(Consumer<RecipeJsonProvider> exporter){
         for (ModBlocks block: logTypes) {
             for (ModBlocks.BlockType type : ModBlocks.BlockType.values())
                 if (block.hasBlock(type))
@@ -379,7 +380,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
         }
     }
 
-    private void addPlankRecipe(ModBlocks block, ModBlocks.BlockType type, int outputCount, RecipeExporter exporter){
+    private void addPlankRecipe(ModBlocks block, ModBlocks.BlockType type, int outputCount, Consumer<RecipeJsonProvider> exporter){
         ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, getPlank(block), outputCount).criterion(hasItem(block.getBlock(type)), conditionsFromItem(block.getBlock(type))).input(ModTags.getLogTagKey(block, type)).group("more_planks").offerTo(exporter, block.toString() + "_" + type.toString().toLowerCase() + "_to_planks");
     }
 

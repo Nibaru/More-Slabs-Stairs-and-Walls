@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(TranslucentBlock.class)
+@Mixin(TransparentBlock.class)
 public class TranslucentBlockMixin extends Block {
 
     protected TranslucentBlockMixin(Settings settings) {

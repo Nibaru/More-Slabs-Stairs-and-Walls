@@ -1,4 +1,4 @@
-package games.twinhead.moreslabsstairsandwalls.registry.neoforge;
+package games.twinhead.moreslabsstairsandwalls.registry.forge;
 
 import games.twinhead.moreslabsstairsandwalls.block.entity.FallingSlabBlockEntity;
 import net.minecraft.entity.EntityType;

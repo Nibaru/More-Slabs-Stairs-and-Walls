@@ -81,7 +81,7 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
     }
 
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         if(state.get(SlabBlock.TYPE) == SlabType.BOTTOM) return false;
         return world.getBlockState(pos.up()).isAir();
     }
@@ -102,7 +102,7 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
 
     public static void growBoneMeal(ServerWorld world, Random random, BlockPos pos) {
         BlockPos blockPos = pos.up();
-        BlockState blockState = Blocks.SHORT_GRASS.getDefaultState();
+        BlockState blockState = Blocks.GRASS.getDefaultState();
         Optional<RegistryEntry.Reference<PlacedFeature>> optional = world.getRegistryManager().get(RegistryKeys.PLACED_FEATURE).getEntry(VegetationPlacedFeatures.GRASS_BONEMEAL);
 
         label49:

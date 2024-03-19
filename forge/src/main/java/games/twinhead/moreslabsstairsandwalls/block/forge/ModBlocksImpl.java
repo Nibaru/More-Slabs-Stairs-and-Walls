@@ -1,4 +1,4 @@
-package games.twinhead.moreslabsstairsandwalls.block.neoforge;
+package games.twinhead.moreslabsstairsandwalls.block.forge;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import net.minecraft.block.Block;
