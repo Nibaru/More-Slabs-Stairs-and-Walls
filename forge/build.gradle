@@ -99,12 +99,12 @@ curseforge {
     project {
         id = "${project.curseforge_id}"
         mainArtifact (remapJar){
-            displayName = "v" + project.mod_version + "+" + project.minecraft_version  + " Fabric"
+            displayName = "v" + project.mod_version + "+" + project.minecraft_version  + " Forge"
         }
         changelogType = 'markdown'
         changelog = rootProject.file("CHANGELOG.md").text
         releaseType = 'release'
-        addGameVersion "Fabric"
+        addGameVersion "Forge"
         addGameVersion project.minecraft_version
     }
 }
@@ -114,12 +114,10 @@ modrinth {
     projectId = project.modrinth_id
     versionNumber = project.mod_version + "+" + project.minecraft_version
     versionType = "release"
-    versionName =  "v" + project.mod_version + "+" + project.minecraft_version  + " Fabric"
+    versionName =  "v" + project.mod_version + "+" + project.minecraft_version  + " Forge"
     uploadFile = remapJar
     gameVersions = [project.minecraft_version]
-    loaders = ["fabric", "quilt"]
+    loaders = ["forge"]
     changelog = rootProject.file("CHANGELOG.md").text
-    dependencies {
-        required.project "fabric-api"
-    }
+
 }
