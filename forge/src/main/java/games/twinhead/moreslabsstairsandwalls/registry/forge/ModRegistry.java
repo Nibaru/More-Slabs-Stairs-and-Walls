@@ -91,27 +91,6 @@ public class ModRegistry {
             .build()
     );
 
-    @SubscribeEvent
-    public void registerBlockColors(RegisterColorHandlersEvent.Block event){
-        for (ModBlocks block: ModBlocks.values()) {
-            for (ModBlocks.BlockType type : ModBlocks.BlockType.values()) {
-                if (games.twinhead.moreslabsstairsandwalls.registry.ModRegistry.getBlockColor(block) != null){
-                    event.register(games.twinhead.moreslabsstairsandwalls.registry.ModRegistry.getBlockColor(block), block.getBlock(type));
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public void registerItemColors(RegisterColorHandlersEvent.Item event){
-        for (ModBlocks block: ModBlocks.values()) {
-            for (ModBlocks.BlockType type : ModBlocks.BlockType.values()) {
-                if (games.twinhead.moreslabsstairsandwalls.registry.ModRegistry.getBlockColor(block) != null){
-                    event.register(games.twinhead.moreslabsstairsandwalls.registry.ModRegistry.getItemColor(block), block.getBlock(type));
-                }
-            }
-        }
-    }
 
 
 }

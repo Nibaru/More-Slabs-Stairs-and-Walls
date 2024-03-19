@@ -1,5 +1,7 @@
 plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
+    id "com.modrinth.minotaur" version "2.+"
 }
 
 architectury {
@@ -89,5 +91,35 @@ publishing {
     // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
     repositories {
         // Add repositories to publish to here.
+    }
+}
+
+curseforge {
+    apiKey = "${System.getenv("CURSEFORGE_KEY")}"
+    project {
+        id = "${project.curseforge_id}"
+        mainArtifact (remapJar){
+            displayName = "v" + project.mod_version + "+" + project.minecraft_version  + " Fabric"
+        }
+        changelogType = 'markdown'
+        changelog = rootProject.file("CHANGELOG.md").text
+        releaseType = 'release'
+        addGameVersion "Fabric"
+        addGameVersion project.minecraft_version
+    }
+}
+
+modrinth {
+    token = "${System.getenv("MODRINTH_KEY")}"
+    projectId = project.modrinth_id
+    versionNumber = project.mod_version + "+" + project.minecraft_version
+    versionType = "release"
+    versionName =  "v" + project.mod_version + "+" + project.minecraft_version  + " Fabric"
+    uploadFile = remapJar
+    gameVersions = [project.minecraft_version]
+    loaders = ["fabric", "quilt"]
+    changelog = rootProject.file("CHANGELOG.md").text
+    dependencies {
+        required.project "fabric-api"
     }
 }

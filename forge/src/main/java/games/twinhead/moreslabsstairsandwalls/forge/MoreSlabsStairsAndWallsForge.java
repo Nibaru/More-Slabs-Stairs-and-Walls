@@ -15,7 +15,5 @@ public class MoreSlabsStairsAndWallsForge {
         FMLJavaModLoadingContext.get().getModEventBus().register(registry);
         ModRegistry.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModRegistry.ITEM_GROUPS.register(FMLJavaModLoadingContext.get().getModEventBus());
-
-
     }
 }

@@ -346,18 +346,15 @@ public class RecipeGenerator extends FabricRecipeProvider {
                 .input(block.getBlock(ModBlocks.BlockType.SLAB)).group(getRecipeGroup(block, ModBlocks.BlockType.SLAB))
                 .input(block.getBlock(ModBlocks.BlockType.SLAB)).group(getRecipeGroup(block, ModBlocks.BlockType.SLAB))
                 .criterion(hasItem(block.getBlock(ModBlocks.BlockType.SLAB)), conditionsFromItem(block.getBlock(ModBlocks.BlockType.SLAB)))
-                .criterion(hasItem(block.getBlock(ModBlocks.BlockType.SLAB)), conditionsFromItem(block.getBlock(ModBlocks.BlockType.SLAB)))
                 .offerTo(exporter, block.getId(ModBlocks.BlockType.SLAB).toString()+"_uncrafting");
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ouput, 9)
                 .input(block.getBlock(ModBlocks.BlockType.STAIRS)).group(getRecipeGroup(block, ModBlocks.BlockType.STAIRS))
                 .criterion(hasItem(block.getBlock(ModBlocks.BlockType.STAIRS)), conditionsFromItem(block.getBlock(ModBlocks.BlockType.STAIRS)))
-                .criterion(hasItem(block.getBlock(ModBlocks.BlockType.STAIRS)), conditionsFromItem(block.getBlock(ModBlocks.BlockType.STAIRS)))
                 .offerTo(exporter,block.getId(ModBlocks.BlockType.STAIRS).toString()+"_uncrafting");
 
         ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ouput, 9)
                 .input(block.getBlock(ModBlocks.BlockType.WALL)).group(getRecipeGroup(block, ModBlocks.BlockType.WALL))
-                .criterion(hasItem(block.getBlock(ModBlocks.BlockType.WALL)), conditionsFromItem(block.getBlock(ModBlocks.BlockType.WALL)))
                 .criterion(hasItem(block.getBlock(ModBlocks.BlockType.WALL)), conditionsFromItem(block.getBlock(ModBlocks.BlockType.WALL)))
                 .offerTo(exporter, block.getId(ModBlocks.BlockType.WALL).toString()+"_uncrafting");
     }
