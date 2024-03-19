@@ -90,6 +90,8 @@ public class ModelGenerator extends FabricModelProvider {
                 textureMap.put(TextureKey.ALL, getResourceId(Registries.BLOCK.getId(block.parentBlock)));
                 slab = getTemplateModel("translucent_slab", TextureKey.ALL).upload(getResourceId(block.getId(ModBlocks.BlockType.SLAB)), textureMap, blockStateModelGenerator.modelCollector);
                 slabTop = getTemplateModel("translucent_slab_top", TextureKey.ALL).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.SLAB)), "_top"), textureMap, blockStateModelGenerator.modelCollector);
+                slabDouble = getTemplateModel("translucent_slab_double", TextureKey.ALL).upload(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.SLAB)), "_double"), textureMap, blockStateModelGenerator.modelCollector);
+
             }
         }
 
