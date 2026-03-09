@@ -1,6 +1,6 @@
 package games.twinhead.moreslabsstairsandwalls;
 
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 public class MoreSlabsStairsAndWalls
 {
@@ -8,7 +8,7 @@ public class MoreSlabsStairsAndWalls
 
 	public static void init() {}
 
-	public static Identifier id(String path) {
-		return new Identifier(MOD_ID, path);
+	public static ResourceLocation id(String path) {
+		return new ResourceLocation(MOD_ID, path);
 	}
 }

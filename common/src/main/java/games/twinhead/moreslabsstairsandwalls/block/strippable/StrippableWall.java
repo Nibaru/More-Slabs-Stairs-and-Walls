@@ -2,37 +2,37 @@ package games.twinhead.moreslabsstairsandwalls.block.strippable;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseWall;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.AxeItem;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 @SuppressWarnings("deprecation")
 public class StrippableWall extends BaseWall {
 
     private final ModBlocks strippedBlock;
 
-    public StrippableWall(ModBlocks block,ModBlocks strippedBlock, Settings settings) {
+    public StrippableWall(ModBlocks block,ModBlocks strippedBlock, Properties settings) {
         super(block,settings);
         this.strippedBlock = strippedBlock;
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if(!(player.getMainHandStack().getItem() instanceof AxeItem)) return ActionResult.PASS;
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if(!(player.getMainHandItem().getItem() instanceof AxeItem)) return InteractionResult.PASS;
 
-        if (!world.isClient) {
-            world.setBlockState(pos, strippedBlock.getBlock(ModBlocks.BlockType.WALL).getStateWithProperties(state));
-            player.getMainHandStack().damage(1, player, p -> p .sendToolBreakStatus(hand));
+        if (!world.isClientSide) {
+            world.setBlockAndUpdate(pos, strippedBlock.getBlock(ModBlocks.BlockType.WALL).withPropertiesOf(state));
+            player.getMainHandItem().hurtAndBreak(1, player, p -> p .broadcastBreakEvent(hand));
         } else {
-            world.playSound(player, pos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0f, 1.0f);
+            world.playSound(player, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0f, 1.0f);
         }
 
-        return ActionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 }

@@ -4,24 +4,24 @@ import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseSlab;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.enums.BlockHalf;
-import net.minecraft.block.enums.SlabType;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Half;
+import net.minecraft.world.level.block.state.properties.SlabType;
 
 @SuppressWarnings("deprecation")
 public class TranslucentSlab extends BaseSlab {
 
-    public TranslucentSlab(ModBlocks modBlocks, Settings settings) {
+    public TranslucentSlab(ModBlocks modBlocks, Properties settings) {
         super(modBlocks, settings);
     }
 
 
     @Override
     @Environment(EnvType.CLIENT)
-    public boolean isSideInvisible(BlockState state, BlockState state2, Direction dir) {
+    public boolean skipRendering(BlockState state, BlockState state2, Direction dir) {
         if (state2.getBlock() == this.getModBlock().parentBlock) return true;
 
         if (state2.getBlock() instanceof TranslucentSlab slab){
@@ -34,12 +34,12 @@ public class TranslucentSlab extends BaseSlab {
                 if (isInvisibleToGlassStairs(state, state2, dir)) return true;
         }
 
-        return super.isSideInvisible(state, state2, dir);
+        return super.skipRendering(state, state2, dir);
     }
 
     private boolean isInvisibleToGlassSlab(BlockState state, BlockState state2, Direction dir) {
-        SlabType type1 = state.get(SlabBlock.TYPE);
-        SlabType type2 = state2.get(SlabBlock.TYPE);
+        SlabType type1 = state.getValue(SlabBlock.TYPE);
+        SlabType type2 = state2.getValue(SlabBlock.TYPE);
 
         if (type2 == SlabType.DOUBLE) return true;
 
@@ -55,23 +55,23 @@ public class TranslucentSlab extends BaseSlab {
     }
 
     private boolean isInvisibleToGlassStairs(BlockState state, BlockState state2, Direction dir) {
-        SlabType type1 = state.get(SlabBlock.TYPE);
-        BlockHalf half2 = state2.get(StairsBlock.HALF);
-        Direction facing2 = state2.get(StairsBlock.FACING);
+        SlabType type1 = state.getValue(SlabBlock.TYPE);
+        Half half2 = state2.getValue(StairBlock.HALF);
+        Direction facing2 = state2.getValue(StairBlock.FACING);
 
         // up
-        if( dir == Direction.UP && half2 == BlockHalf.BOTTOM) return true;
+        if( dir == Direction.UP && half2 == Half.BOTTOM) return true;
 
         // down
-        if(dir == Direction.DOWN && half2 == BlockHalf.TOP) return true;
+        if(dir == Direction.DOWN && half2 == Half.TOP) return true;
 
         // other stairs rear
         if(facing2 == dir.getOpposite()) return true;
 
         // sides
-        if(dir.getHorizontal() != -1) {
-            if(type1 == SlabType.BOTTOM && half2 == BlockHalf.BOTTOM) return true;
-            return type1 == SlabType.TOP && half2 == BlockHalf.TOP;
+        if(dir.get2DDataValue() != -1) {
+            if(type1 == SlabType.BOTTOM && half2 == Half.BOTTOM) return true;
+            return type1 == SlabType.TOP && half2 == Half.TOP;
         }
         return false;
     }

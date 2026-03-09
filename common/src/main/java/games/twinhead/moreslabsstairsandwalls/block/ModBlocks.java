@@ -2,17 +2,16 @@ package games.twinhead.moreslabsstairsandwalls.block;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Oxidizable;
-import net.minecraft.item.Item;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
-
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public enum ModBlocks {
 
@@ -88,21 +87,21 @@ public enum ModBlocks {
     BAMBOO_PLANKS(builder(Blocks.BAMBOO_PLANKS).axe().wallOnly()),
     BAMBOO_MOSAIC(builder(Blocks.BAMBOO_MOSAIC).axe().wallOnly()),
 
-    AZALEA_LEAVES(builder(Blocks.AZALEA_LEAVES).hoe().modelType(ModelType.LEAVES).addBlockTags(BlockTags.LEAVES, BlockTags.HOE_MINEABLE)),
-    FLOWERING_AZALEA_LEAVES(builder(Blocks.FLOWERING_AZALEA_LEAVES).hoe().modelType(ModelType.LEAVES).addBlockTags(BlockTags.LEAVES, BlockTags.HOE_MINEABLE)),
+    AZALEA_LEAVES(builder(Blocks.AZALEA_LEAVES).hoe().modelType(ModelType.LEAVES).addBlockTags(BlockTags.LEAVES, BlockTags.MINEABLE_WITH_HOE)),
+    FLOWERING_AZALEA_LEAVES(builder(Blocks.FLOWERING_AZALEA_LEAVES).hoe().modelType(ModelType.LEAVES).addBlockTags(BlockTags.LEAVES, BlockTags.MINEABLE_WITH_HOE)),
 
     STRIPPED_WARPED_STEM(builder(Blocks.STRIPPED_WARPED_STEM).axe().modelType(ModelType.LOG)),
     STRIPPED_WARPED_HYPHAE(builder(Blocks.STRIPPED_WARPED_HYPHAE).axe().setAllTexture("stripped_warped_stem")),
     WARPED_STEM(builder(Blocks.WARPED_STEM).axe().modelType(ModelType.LOG).associatedBlock(STRIPPED_WARPED_STEM)),
     WARPED_HYPHAE(builder(Blocks.WARPED_HYPHAE).axe().setAllTexture("warped_stem").associatedBlock(STRIPPED_WARPED_HYPHAE)),
-    WARPED_WART(builder(Blocks.WARPED_WART_BLOCK).hoe().modelType(ModelType.LEAVES).addBlockTags(BlockTags.LEAVES, BlockTags.HOE_MINEABLE)),
+    WARPED_WART(builder(Blocks.WARPED_WART_BLOCK).hoe().modelType(ModelType.LEAVES).addBlockTags(BlockTags.LEAVES, BlockTags.MINEABLE_WITH_HOE)),
     WARPED_PLANKS(builder(Blocks.WARPED_PLANKS).axe().wallOnly()),
 
     STRIPPED_CRIMSON_STEM(builder(Blocks.STRIPPED_CRIMSON_STEM).axe().modelType(ModelType.LOG)),
     STRIPPED_CRIMSON_HYPHAE(builder(Blocks.STRIPPED_CRIMSON_HYPHAE).axe().setAllTexture("stripped_crimson_stem")),
     CRIMSON_STEM(builder(Blocks.CRIMSON_STEM).axe().modelType(ModelType.LOG).associatedBlock(STRIPPED_CRIMSON_STEM)),
     CRIMSON_HYPHAE(builder(Blocks.CRIMSON_HYPHAE).axe().setAllTexture("crimson_stem").associatedBlock(STRIPPED_CRIMSON_HYPHAE)),
-    CRIMSON_WART(builder(Blocks.NETHER_WART_BLOCK).hoe().modelType(ModelType.LEAVES).addBlockTags(BlockTags.LEAVES, BlockTags.HOE_MINEABLE)),
+    CRIMSON_WART(builder(Blocks.NETHER_WART_BLOCK).hoe().modelType(ModelType.LEAVES).addBlockTags(BlockTags.LEAVES, BlockTags.MINEABLE_WITH_HOE)),
     CRIMSON_PLANKS(builder(Blocks.CRIMSON_PLANKS).axe().wallOnly()),
 
     GLASS(builder(Blocks.GLASS).modelType(ModelType.GLASS)),
@@ -257,20 +256,20 @@ public enum ModBlocks {
     POLISHED_BASALT(builder(Blocks.POLISHED_BASALT).modelType(ModelType.CUBE_BOTTOM_TOP).pickaxe()),
     SMOOTH_BASALT(builder(Blocks.SMOOTH_BASALT).pickaxe()),
 
-    OXIDIZED_COPPER(builder(Blocks.OXIDIZED_COPPER).setOxidationLevel(Oxidizable.OxidationLevel.OXIDIZED).pickaxe()),
-    WEATHERED_COPPER(builder(Blocks.WEATHERED_COPPER).setOxidationLevel(Oxidizable.OxidationLevel.WEATHERED).associatedBlock(OXIDIZED_COPPER).pickaxe()),
-    EXPOSED_COPPER(builder(Blocks.EXPOSED_COPPER).setOxidationLevel(Oxidizable.OxidationLevel.EXPOSED).associatedBlock(WEATHERED_COPPER).pickaxe()),
-    COPPER_BLOCK(builder(Blocks.COPPER_BLOCK).setOxidationLevel(Oxidizable.OxidationLevel.UNAFFECTED).associatedBlock(EXPOSED_COPPER).pickaxe()),
+    OXIDIZED_COPPER(builder(Blocks.OXIDIZED_COPPER).setOxidationLevel(WeatheringCopper.WeatherState.OXIDIZED).pickaxe()),
+    WEATHERED_COPPER(builder(Blocks.WEATHERED_COPPER).setOxidationLevel(WeatheringCopper.WeatherState.WEATHERED).associatedBlock(OXIDIZED_COPPER).pickaxe()),
+    EXPOSED_COPPER(builder(Blocks.EXPOSED_COPPER).setOxidationLevel(WeatheringCopper.WeatherState.EXPOSED).associatedBlock(WEATHERED_COPPER).pickaxe()),
+    COPPER_BLOCK(builder(Blocks.COPPER_BLOCK).setOxidationLevel(WeatheringCopper.WeatherState.UNAFFECTED).associatedBlock(EXPOSED_COPPER).pickaxe()),
 
     WAXED_COPPER_BLOCK(builder(Blocks.WAXED_COPPER_BLOCK).setAllTexture("copper_block").associatedBlock(COPPER_BLOCK).pickaxe()),
     WAXED_EXPOSED_COPPER(builder(Blocks.WAXED_EXPOSED_COPPER).setAllTexture("exposed_copper").associatedBlock(EXPOSED_COPPER).pickaxe()),
     WAXED_WEATHERED_COPPER(builder(Blocks.WAXED_WEATHERED_COPPER).setAllTexture("weathered_copper").associatedBlock(WEATHERED_COPPER).pickaxe()),
     WAXED_OXIDIZED_COPPER(builder(Blocks.WAXED_OXIDIZED_COPPER).setAllTexture("oxidized_copper").associatedBlock(OXIDIZED_COPPER).pickaxe()),
 
-    OXIDIZED_CUT_COPPER(builder(Blocks.OXIDIZED_CUT_COPPER).setOxidationLevel(Oxidizable.OxidationLevel.OXIDIZED).wallOnly().pickaxe()),
-    WEATHERED_CUT_COPPER(builder(Blocks.WEATHERED_CUT_COPPER).setOxidationLevel(Oxidizable.OxidationLevel.WEATHERED).associatedBlock(OXIDIZED_CUT_COPPER).wallOnly().pickaxe()),
-    EXPOSED_CUT_COPPER(builder(Blocks.EXPOSED_CUT_COPPER).setOxidationLevel(Oxidizable.OxidationLevel.EXPOSED).associatedBlock(WEATHERED_CUT_COPPER).wallOnly().pickaxe()),
-    CUT_COPPER(builder(Blocks.CUT_COPPER).setOxidationLevel(Oxidizable.OxidationLevel.UNAFFECTED).associatedBlock(EXPOSED_CUT_COPPER).wallOnly().pickaxe()),
+    OXIDIZED_CUT_COPPER(builder(Blocks.OXIDIZED_CUT_COPPER).setOxidationLevel(WeatheringCopper.WeatherState.OXIDIZED).wallOnly().pickaxe()),
+    WEATHERED_CUT_COPPER(builder(Blocks.WEATHERED_CUT_COPPER).setOxidationLevel(WeatheringCopper.WeatherState.WEATHERED).associatedBlock(OXIDIZED_CUT_COPPER).wallOnly().pickaxe()),
+    EXPOSED_CUT_COPPER(builder(Blocks.EXPOSED_CUT_COPPER).setOxidationLevel(WeatheringCopper.WeatherState.EXPOSED).associatedBlock(WEATHERED_CUT_COPPER).wallOnly().pickaxe()),
+    CUT_COPPER(builder(Blocks.CUT_COPPER).setOxidationLevel(WeatheringCopper.WeatherState.UNAFFECTED).associatedBlock(EXPOSED_CUT_COPPER).wallOnly().pickaxe()),
 
     WAXED_CUT_COPPER(builder(Blocks.WAXED_CUT_COPPER).setAllTexture("cut_copper").associatedBlock(CUT_COPPER).wallOnly().pickaxe()),
     WAXED_EXPOSED_CUT_COPPER(builder(Blocks.WAXED_EXPOSED_CUT_COPPER).setAllTexture("exposed_cut_copper").associatedBlock(EXPOSED_CUT_COPPER).wallOnly().pickaxe()),
@@ -390,7 +389,7 @@ public enum ModBlocks {
     public final String bottomId;
     public final String topId;
 
-    public final Oxidizable.OxidationLevel oxidationLevel;
+    public final WeatheringCopper.WeatherState oxidationLevel;
 
     ModBlocks(Builder builder){
         this.parentBlock = builder.parentBlock;
@@ -417,35 +416,35 @@ public enum ModBlocks {
         };
     }
 
-    public AbstractBlock.Settings getSettings(){
+    public BlockBehaviour.Properties getSettings(){
         Block block = this.parentBlock;
-        AbstractBlock.Settings settings = AbstractBlock.Settings.create()
-                .sounds(block.getDefaultState().getSoundGroup())
-                .luminance(state -> block.getDefaultState().getLuminance())
-                .mapColor(block.getDefaultMapColor())
-                .hardness(block.getHardness())
-                .resistance(block.getBlastResistance())
-                .slipperiness(block.getSlipperiness())
-                .velocityMultiplier(block.getVelocityMultiplier())
-                .pistonBehavior(block.getDefaultState().getPistonBehavior())
-                .instrument(block.getDefaultState().getInstrument())
-                .jumpVelocityMultiplier(block.getJumpVelocityMultiplier())
+        BlockBehaviour.Properties settings = BlockBehaviour.Properties.of()
+                .sound(block.defaultBlockState().getSoundType())
+                .lightLevel(state -> block.defaultBlockState().getLightEmission())
+                .mapColor(block.defaultMapColor())
+                .destroyTime(block.defaultDestroyTime())
+                .explosionResistance(block.getExplosionResistance())
+                .friction(block.getFriction())
+                .speedFactor(block.getSpeedFactor())
+                .pushReaction(block.defaultBlockState().getPistonPushReaction())
+                .instrument(block.defaultBlockState().instrument())
+                .jumpFactor(block.getJumpFactor())
                 ;
 
-        if (block.getDefaultState().isBurnable()){
-            settings = settings.burnable();
+        if (block.defaultBlockState().ignitedByLava()){
+            settings = settings.ignitedByLava();
         }
 
-        if (!block.getDefaultState().isOpaque()){
-            settings = settings.nonOpaque();
+        if (!block.defaultBlockState().canOcclude()){
+            settings = settings.noOcclusion();
         }
 
-        if (block.getDefaultState().isToolRequired()){
-            settings = settings.requiresTool();
+        if (block.defaultBlockState().requiresCorrectToolForDrops()){
+            settings = settings.requiresCorrectToolForDrops();
         }
 
-        if (block.getDefaultState().hasRandomTicks()){
-            settings = settings.ticksRandomly();
+        if (block.defaultBlockState().isRandomlyTicking()){
+            settings = settings.randomTicks();
         }
 
         return settings;
@@ -456,8 +455,8 @@ public enum ModBlocks {
         return super.toString().toLowerCase();
     }
 
-    public Identifier getId(BlockType type){
-        return new Identifier(MoreSlabsStairsAndWalls.MOD_ID, this + "_" + type.toString().toLowerCase());
+    public ResourceLocation getId(BlockType type){
+        return new ResourceLocation(MoreSlabsStairsAndWalls.MOD_ID, this + "_" + type.toString().toLowerCase());
     }
 
 
@@ -495,7 +494,7 @@ public enum ModBlocks {
         private String bottomTexture = "";
         private String topTexture = "";
 
-        private Oxidizable.OxidationLevel oxidationLevel = null;
+        private WeatheringCopper.WeatherState oxidationLevel = null;
 
         public Builder(Block parentBlock) {
             this.parentBlock = parentBlock;
@@ -541,22 +540,22 @@ public enum ModBlocks {
         }
 
         public Builder shovel() {
-            this.blockTags.add(BlockTags.SHOVEL_MINEABLE);
+            this.blockTags.add(BlockTags.MINEABLE_WITH_SHOVEL);
             return this;
         }
 
         public Builder pickaxe() {
-            this.blockTags.add(BlockTags.PICKAXE_MINEABLE);
+            this.blockTags.add(BlockTags.MINEABLE_WITH_PICKAXE);
             return this;
         }
 
         public Builder axe() {
-            this.blockTags.add(BlockTags.AXE_MINEABLE);
+            this.blockTags.add(BlockTags.MINEABLE_WITH_AXE);
             return this;
         }
 
         public Builder hoe() {
-            this.blockTags.add(BlockTags.HOE_MINEABLE);
+            this.blockTags.add(BlockTags.MINEABLE_WITH_HOE);
             return this;
         }
 
@@ -595,7 +594,7 @@ public enum ModBlocks {
             return this;
         }
 
-        public Builder setOxidationLevel(Oxidizable.OxidationLevel oxidationLevel) {
+        public Builder setOxidationLevel(WeatheringCopper.WeatherState oxidationLevel) {
             this.oxidationLevel = oxidationLevel;
             return this;
         }

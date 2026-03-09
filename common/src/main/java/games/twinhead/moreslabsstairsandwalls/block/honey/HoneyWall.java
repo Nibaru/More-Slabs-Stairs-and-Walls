@@ -4,58 +4,58 @@ import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseWall;
 import games.twinhead.moreslabsstairsandwalls.block.slime.SlimeSlab;
 import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentWall;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityStatuses;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityEvent;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 @SuppressWarnings("deprecation")
 public class HoneyWall extends TranslucentWall {
 
-    public HoneyWall(ModBlocks modBlocks, Settings settings) {
+    public HoneyWall(ModBlocks modBlocks, Properties settings) {
         super(modBlocks, settings);
     }
 
-    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-        entity.playSound(SoundEvents.BLOCK_HONEY_BLOCK_SLIDE, 1.0f, 1.0f);
-        if (!world.isClient) {
-            world.sendEntityStatus(entity, EntityStatuses.DRIP_RICH_HONEY);
+    public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+        entity.playSound(SoundEvents.HONEY_BLOCK_SLIDE, 1.0f, 1.0f);
+        if (!world.isClientSide) {
+            world.broadcastEntityEvent(entity, EntityEvent.HONEY_JUMP);
         }
-        if (entity.handleFallDamage(fallDistance, 0.2f, world.getDamageSources().fall())) {
-            entity.playSound(this.soundGroup.getFallSound(), this.soundGroup.getVolume() * 0.5f, this.soundGroup.getPitch() * 0.75f);
+        if (entity.causeFallDamage(fallDistance, 0.2f, world.damageSources().fall())) {
+            entity.playSound(this.soundType.getFallSound(), this.soundType.getVolume() * 0.5f, this.soundType.getPitch() * 0.75f);
         }
     }
 
     @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
         if (isSliding(pos, entity)) {
             HoneySlab.triggerAdvancement(entity, pos);
             HoneySlab.updateSlidingVelocity(entity);
             HoneySlab.addCollisionEffects(world, entity);
         }
-        super.onEntityCollision(state, world, pos, entity);
+        super.entityInside(state, world, pos, entity);
     }
 
     private boolean isSliding(BlockPos pos, Entity entity) {
-        if (entity.isOnGround()) {
+        if (entity.onGround()) {
             return false;
         }
         if (entity.getY() > (double)pos.getY() + 1.4375 - 1.0E-7) {
             return false;
         }
-        if (entity.getVelocity().y >= -0.08) {
+        if (entity.getDeltaMovement().y >= -0.08) {
             return false;
         }
-        VoxelShape shape = this.getCollisionShape(entity.getWorld().getBlockState(pos), entity.getWorld(), pos, ShapeContext.absent());
-        double entityRadius = entity.getWidth() / 2.0f;
-        return entity.getX() - entityRadius + 1.0E-7 > shape.getMax(Direction.Axis.X) ||
-                entity.getZ() - entityRadius + 1.0E-7 > shape.getMax(Direction.Axis.Z) ||
-                entity.getX() + entityRadius - 1.0E-7 < shape.getMin(Direction.Axis.X) ||
-                entity.getZ() + entityRadius - 1.0E-7 < shape.getMin(Direction.Axis.Z);
+        VoxelShape shape = this.getCollisionShape(entity.level().getBlockState(pos), entity.level(), pos, CollisionContext.empty());
+        double entityRadius = entity.getBbWidth() / 2.0f;
+        return entity.getX() - entityRadius + 1.0E-7 > shape.max(Direction.Axis.X) ||
+                entity.getZ() - entityRadius + 1.0E-7 > shape.max(Direction.Axis.Z) ||
+                entity.getX() + entityRadius - 1.0E-7 < shape.min(Direction.Axis.X) ||
+                entity.getZ() + entityRadius - 1.0E-7 < shape.min(Direction.Axis.Z);
     }
 
     /**

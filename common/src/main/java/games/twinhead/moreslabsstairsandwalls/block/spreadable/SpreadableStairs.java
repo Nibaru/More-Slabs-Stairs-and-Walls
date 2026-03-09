@@ -4,42 +4,47 @@ import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.dirt.DirtStairs;
 import games.twinhead.moreslabsstairsandwalls.registry.ModTags;
 import net.minecraft.block.*;
-import net.minecraft.block.enums.BlockHalf;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.Half;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 
 @SuppressWarnings("deprecation")
-public class SpreadableStairs extends DirtStairs implements Waterloggable, Fertilizable {
+public class SpreadableStairs extends DirtStairs implements SimpleWaterloggedBlock, BonemealableBlock {
 
     public static final BooleanProperty SNOWY;
 
-    public SpreadableStairs(ModBlocks block,BlockState defaultState, Settings settings) {
+    public SpreadableStairs(ModBlocks block,BlockState defaultState, Properties settings) {
         super(block,defaultState, settings);
     }
 
 
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (!SpreadableSlab.canSurvive(state, world, pos)) {
             ModBlocks deadBase = ModBlocks.DIRT;
-            if (state.isOf(ModBlocks.WARPED_NYLIUM.getBlock(ModBlocks.BlockType.STAIRS))
-                    || state.isOf(ModBlocks.CRIMSON_NYLIUM.getBlock(ModBlocks.BlockType.STAIRS))) {
+            if (state.is(ModBlocks.WARPED_NYLIUM.getBlock(ModBlocks.BlockType.STAIRS))
+                    || state.is(ModBlocks.CRIMSON_NYLIUM.getBlock(ModBlocks.BlockType.STAIRS))) {
                 deadBase = ModBlocks.NETHERRACK;
             }
-            world.setBlockState(pos, deadBase.getBlock(ModBlocks.BlockType.STAIRS).getStateWithProperties(world.getBlockState(pos)), Block.NOTIFY_LISTENERS);
+            world.setBlock(pos, deadBase.getBlock(ModBlocks.BlockType.STAIRS).withPropertiesOf(world.getBlockState(pos)), Block.UPDATE_CLIENTS);
         } else {
-            if (world.getLightLevel(pos.up()) >= 9) {
+            if (world.getMaxLocalRawBrightness(pos.above()) >= 9) {
                 for(int i = 0; i < 4; ++i) {
-                    BlockPos blockPos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
+                    BlockPos blockPos = pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
                     SpreadableSlab.trySpread(world, getModBlock().parentBlock, blockPos);
                 }
             }
@@ -47,42 +52,42 @@ public class SpreadableStairs extends DirtStairs implements Waterloggable, Ferti
     }
 
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
-        if(state.get(StairsBlock.HALF) == BlockHalf.BOTTOM) return false;
-        return world.getBlockState(pos.up()).isAir();
+    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
+        if(state.getValue(StairBlock.HALF) == Half.BOTTOM) return false;
+        return world.getBlockState(pos.above()).isAir();
     }
 
     @Override
-    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
         return true;
     }
 
     @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+    public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
         BlockState blockState = world.getBlockState(pos);
-        if (blockState.isIn(ModTags.GRASS_BLOCKS)) {
+        if (blockState.is(ModTags.GRASS_BLOCKS)) {
             SpreadableSlab.growBoneMeal(world,random,pos);
         }
     }
 
     public FluidState getFluidState(BlockState state) {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if (state.get(WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+        if (state.getValue(WATERLOGGED)) {
+            world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
         }
 
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        return super.updateShape(state, direction, neighborState, world, pos, neighborPos);
     }
 
 
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, HALF, SHAPE, WATERLOGGED, SNOWY);
     }
 
     static {
-        SNOWY = Properties.SNOWY;
+        SNOWY = BlockStateProperties.SNOWY;
     }
 }

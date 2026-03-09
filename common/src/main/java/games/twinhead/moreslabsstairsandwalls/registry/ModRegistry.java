@@ -46,14 +46,14 @@ import games.twinhead.moreslabsstairsandwalls.block.terracotta.GlazedTerracottaW
 import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentSlab;
 import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentStairs;
 import games.twinhead.moreslabsstairsandwalls.block.translucent.TranslucentWall;
-import net.minecraft.block.Block;
-import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.client.color.block.BlockColorProvider;
-import net.minecraft.client.color.item.ItemColorProvider;
-import net.minecraft.client.color.world.BiomeColors;
-import net.minecraft.client.color.world.FoliageColors;
-import net.minecraft.client.color.world.GrassColors;
-import net.minecraft.entity.EntityType;
+import net.minecraft.client.color.block.BlockColor;
+import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.FoliageColor;
+import net.minecraft.world.level.GrassColor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.PushReaction;
 
 public class ModRegistry {
 
@@ -68,27 +68,27 @@ public class ModRegistry {
             case GRASS_BLOCK, MYCELIUM -> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new SpreadableSlab(block, block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new SpreadableStairs(block, block.parentBlock.getDefaultState(), block.getSettings()) : null);
+                case STAIRS ->(block.hasStairs ?  new SpreadableStairs(block, block.parentBlock.defaultBlockState(), block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new SpreadableWall(block, block.getSettings()) : null);
             };
 
             case DIRT, COARSE_DIRT, ROOTED_DIRT -> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new DirtSlab(block, block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new DirtStairs(block, block.parentBlock.getDefaultState(), block.getSettings()) : null);
+                case STAIRS ->(block.hasStairs ?  new DirtStairs(block, block.parentBlock.defaultBlockState(), block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new DirtWall(block, block.getSettings()) : null);
             };
             case DIRT_PATH -> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new PathSlab(block, block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new PathStairs(block, block.parentBlock.getDefaultState(), block.getSettings()) : null);
+                case STAIRS ->(block.hasStairs ?  new PathStairs(block, block.parentBlock.defaultBlockState(), block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new PathWall(block, block.getSettings()) : null);
             };
 
             case BRAIN_CORAL_BLOCK, BUBBLE_CORAL_BLOCK, FIRE_CORAL_BLOCK, HORN_CORAL_BLOCK, TUBE_CORAL_BLOCK -> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new CoralSlab(block, block.associatedBlock, block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new CoralStairs(block, block.parentBlock.getDefaultState(), block.associatedBlock,block.getSettings()) : null);
+                case STAIRS ->(block.hasStairs ?  new CoralStairs(block, block.parentBlock.defaultBlockState(), block.associatedBlock,block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new CoralWall(block, block.associatedBlock, block.getSettings()) : null);
             };
             case OAK_LOG,
@@ -114,7 +114,7 @@ public class ModRegistry {
                     BAMBOO_BLOCK-> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new StrippableSlab(block, block.associatedBlock, block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new StrippableStairs(block,  block.parentBlock.getDefaultState(), block.associatedBlock, block.getSettings()) : null);
+                case STAIRS ->(block.hasStairs ?  new StrippableStairs(block,  block.parentBlock.defaultBlockState(), block.associatedBlock, block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new StrippableWall(block, block.associatedBlock, block.getSettings()) : null);
             };
 
@@ -132,7 +132,7 @@ public class ModRegistry {
                     CHERRY_LEAVES-> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new LeavesSlab(block,  block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new LeavesStairs(block,  block.parentBlock.getDefaultState(),  block.getSettings()) : null);
+                case STAIRS ->(block.hasStairs ?  new LeavesStairs(block,  block.parentBlock.defaultBlockState(),  block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new BaseWall(block,  block.getSettings()) : null);
             };
             case GLASS,
@@ -156,7 +156,7 @@ public class ModRegistry {
                     -> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new TranslucentSlab(block, block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new TranslucentStairs(block, block.parentBlock.getDefaultState(), block.getSettings()) : null);
+                case STAIRS ->(block.hasStairs ?  new TranslucentStairs(block, block.parentBlock.defaultBlockState(), block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new TranslucentWall(block, block.getSettings()) : null);
             };
 
@@ -165,7 +165,7 @@ public class ModRegistry {
                     RED_SAND -> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new FallingSlab(block, block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new FallingStairs(block, block.parentBlock.getDefaultState(), block.getSettings()) : null);
+                case STAIRS ->(block.hasStairs ?  new FallingStairs(block, block.parentBlock.defaultBlockState(), block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new FallingWall(block, block.getSettings()) : null);
             };
             case BLACK_CONCRETE_POWDER,
@@ -186,7 +186,7 @@ public class ModRegistry {
                     YELLOW_CONCRETE_POWDER -> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new ConcretePowderSlab(block, block.associatedBlock, block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new ConcretePowderStairs(block, block.parentBlock.getDefaultState(), block.associatedBlock, block.getSettings()) : null);
+                case STAIRS ->(block.hasStairs ?  new ConcretePowderStairs(block, block.parentBlock.defaultBlockState(), block.associatedBlock, block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new ConcretePowderWall(block, block.associatedBlock, block.getSettings()) : null);
             };
 
@@ -208,7 +208,7 @@ public class ModRegistry {
                     BLUE_GLAZED_TERRACOTTA -> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new GlazedTerracottaSlab(block, block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new GlazedTerracottaStairs(block, block.parentBlock.getDefaultState(), block.getSettings()) : null);
+                case STAIRS ->(block.hasStairs ?  new GlazedTerracottaStairs(block, block.parentBlock.defaultBlockState(), block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new GlazedTerracottaWall(block, block.getSettings()) : null);
             };
 
@@ -222,7 +222,7 @@ public class ModRegistry {
                     CUT_COPPER -> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new OxidizableSlab(block, block.oxidationLevel, block.associatedBlock, block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new OxidizableStairs(block, block.parentBlock.getDefaultState(), block.oxidationLevel, block.associatedBlock, block.getSettings()) : null);
+                case STAIRS ->(block.hasStairs ?  new OxidizableStairs(block, block.parentBlock.defaultBlockState(), block.oxidationLevel, block.associatedBlock, block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new OxidizableWall(block, block.oxidationLevel, block.associatedBlock, block.getSettings()) : null);
             };
             case WAXED_COPPER_BLOCK,
@@ -235,84 +235,84 @@ public class ModRegistry {
                     WAXED_OXIDIZED_CUT_COPPER -> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new WaxedSlab(block, block.associatedBlock, block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new WaxedStairs(block, block.parentBlock.getDefaultState(), block.associatedBlock, block.getSettings()) : null);
+                case STAIRS ->(block.hasStairs ?  new WaxedStairs(block, block.parentBlock.defaultBlockState(), block.associatedBlock, block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new WaxedWall(block, block.associatedBlock, block.getSettings()) : null);
             };
 
             case MAGMA_BLOCK -> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new MagmaSlab(block, block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new MagmaStairs(block, block.parentBlock.getDefaultState(), block.getSettings()) : null);
+                case STAIRS ->(block.hasStairs ?  new MagmaStairs(block, block.parentBlock.defaultBlockState(), block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new MagmaWall(block, block.getSettings()) : null);
             };
             case SOUL_SAND -> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new SoulSandSlab(block, block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new SoulSandStairs(block, block.parentBlock.getDefaultState(), block.getSettings()) : null);
+                case STAIRS ->(block.hasStairs ?  new SoulSandStairs(block, block.parentBlock.defaultBlockState(), block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new SoulSandWall(block, block.getSettings()) : null);
             };
             case SLIME_BLOCK -> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new SlimeSlab(block, block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new SlimeStairs(block, block.parentBlock.getDefaultState(), block.getSettings()) : null);
+                case STAIRS ->(block.hasStairs ?  new SlimeStairs(block, block.parentBlock.defaultBlockState(), block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new SlimeWall(block, block.getSettings()) : null);
             };
             case HONEY_BLOCK -> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new HoneySlab(block, block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new HoneyStairs(block, block.parentBlock.getDefaultState(), block.getSettings()) : null);
+                case STAIRS ->(block.hasStairs ?  new HoneyStairs(block, block.parentBlock.defaultBlockState(), block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new HoneyWall(block, block.getSettings()) : null);
             };
             case REDSTONE_BLOCK -> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new RedstoneSlab(block, block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new RedstoneStairs(block, block.parentBlock.getDefaultState(), block.getSettings()) : null);
+                case STAIRS ->(block.hasStairs ?  new RedstoneStairs(block, block.parentBlock.defaultBlockState(), block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new RedstoneWall(block, block.getSettings()) : null);
             };
             case OBSIDIAN, CRYING_OBSIDIAN -> switch (type)
             {
-                case SLAB ->(block.hasSlab ? new BaseSlab(block, block.getSettings().pistonBehavior(PistonBehavior.BLOCK)) : null);
-                case STAIRS ->(block.hasStairs ?  new BaseStairs(block, block.parentBlock.getDefaultState(), block.getSettings().pistonBehavior(PistonBehavior.BLOCK)) : null);
-                case WALL ->(block.hasWall ? new BaseWall(block, block.getSettings().pistonBehavior(PistonBehavior.BLOCK)) : null);
+                case SLAB ->(block.hasSlab ? new BaseSlab(block, block.getSettings().pushReaction(PushReaction.BLOCK)) : null);
+                case STAIRS ->(block.hasStairs ?  new BaseStairs(block, block.parentBlock.defaultBlockState(), block.getSettings().pushReaction(PushReaction.BLOCK)) : null);
+                case WALL ->(block.hasWall ? new BaseWall(block, block.getSettings().pushReaction(PushReaction.BLOCK)) : null);
             };
                 
             default -> switch (type)
             {
                 case SLAB ->(block.hasSlab ? new BaseSlab(block, block.getSettings()) : null);
-                case STAIRS ->(block.hasStairs ?  new BaseStairs(block, block.parentBlock.getDefaultState(), block.getSettings()) : null);
+                case STAIRS ->(block.hasStairs ?  new BaseStairs(block, block.parentBlock.defaultBlockState(), block.getSettings()) : null);
                 case WALL ->(block.hasWall ? new BaseWall(block, block.getSettings()) : null);
             };
         };
     }
 
-    public static BlockColorProvider getBlockColor(ModBlocks block){
-        if(block.equals(ModBlocks.GRASS_BLOCK)) return (state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.getColor(0.5, 1.0);
+    public static BlockColor getBlockColor(ModBlocks block){
+        if(block.equals(ModBlocks.GRASS_BLOCK)) return (state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getAverageGrassColor(world, pos) : GrassColor.get(0.5, 1.0);
         return switch (block.modelType){
             case LEAVES -> switch (block) {
                 case    OAK_LEAVES,
                         JUNGLE_LEAVES,
                         ACACIA_LEAVES,
                         DARK_OAK_LEAVES,
-                        MANGROVE_LEAVES -> (state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.getDefaultColor();
-                case SPRUCE_LEAVES -> (state, world, pos, tintIndex) -> FoliageColors.getSpruceColor();
-                case BIRCH_LEAVES -> (state, world, pos, tintIndex) -> FoliageColors.getBirchColor();
+                        MANGROVE_LEAVES -> (state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getAverageFoliageColor(world, pos) : FoliageColor.getDefaultColor();
+                case SPRUCE_LEAVES -> (state, world, pos, tintIndex) -> FoliageColor.getEvergreenColor();
+                case BIRCH_LEAVES -> (state, world, pos, tintIndex) -> FoliageColor.getBirchColor();
                 default -> null;
             };
             default -> null;
         };
     }
 
-    public static ItemColorProvider getItemColor(ModBlocks block){
-        if(block.equals(ModBlocks.GRASS_BLOCK)) return (stack, tintIndex) -> GrassColors.getColor(0.5, 1.0);
+    public static ItemColor getItemColor(ModBlocks block){
+        if(block.equals(ModBlocks.GRASS_BLOCK)) return (stack, tintIndex) -> GrassColor.get(0.5, 1.0);
         return switch (block.modelType){
             case LEAVES -> switch (block) {
                 case    OAK_LEAVES,
                         JUNGLE_LEAVES,
                         ACACIA_LEAVES,
                         DARK_OAK_LEAVES,
-                        MANGROVE_LEAVES -> (stack, tintIndex) -> FoliageColors.getDefaultColor();
-                case SPRUCE_LEAVES -> (stack, tintIndex) -> FoliageColors.getSpruceColor();
-                case BIRCH_LEAVES -> (stack, tintIndex) -> FoliageColors.getBirchColor();
+                        MANGROVE_LEAVES -> (stack, tintIndex) -> FoliageColor.getDefaultColor();
+                case SPRUCE_LEAVES -> (stack, tintIndex) -> FoliageColor.getEvergreenColor();
+                case BIRCH_LEAVES -> (stack, tintIndex) -> FoliageColor.getBirchColor();
                 default -> null;
             };
             default -> null;

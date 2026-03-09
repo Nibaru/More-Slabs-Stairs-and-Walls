@@ -4,39 +4,47 @@ import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.dirt.DirtSlab;
 import games.twinhead.moreslabsstairsandwalls.registry.ModTags;
 import net.minecraft.block.*;
-import net.minecraft.block.enums.BlockHalf;
-import net.minecraft.block.enums.SlabType;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.chunk.light.ChunkLightProvider;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.PlacedFeature;
-import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
-import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.SnowLayerBlock;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.Half;
+import net.minecraft.world.level.block.state.properties.SlabType;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.lighting.LightEngine;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
 
 @SuppressWarnings("deprecation")
-public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertilizable {
+public class SpreadableSlab extends DirtSlab implements SimpleWaterloggedBlock, BonemealableBlock {
 
     public static final BooleanProperty SNOWY;
     public static final EnumProperty<SlabType> TYPE;
@@ -44,115 +52,115 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
     protected static final VoxelShape BOTTOM_SHAPE;
     protected static final VoxelShape TOP_SHAPE;
 
-    public SpreadableSlab(ModBlocks block, Settings settings) {
+    public SpreadableSlab(ModBlocks block, Properties settings) {
         super(block,settings);
     }
 
-    public static boolean canSurvive(BlockState state, WorldView world, BlockPos pos) {
-        BlockPos blockPos = pos.up();
+    public static boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+        BlockPos blockPos = pos.above();
         BlockState blockState = world.getBlockState(blockPos);
 
-        if (state.getBlock() instanceof DirtSlab && state.get(SlabBlock.TYPE) == SlabType.BOTTOM) {
-            return !state.get(SlabBlock.WATERLOGGED);
+        if (state.getBlock() instanceof DirtSlab && state.getValue(SlabBlock.TYPE) == SlabType.BOTTOM) {
+            return !state.getValue(SlabBlock.WATERLOGGED);
         }
 
-        if (blockState.isOf(Blocks.SNOW) && blockState.get(SnowBlock.LAYERS) == 1) {
+        if (blockState.is(Blocks.SNOW) && blockState.getValue(SnowLayerBlock.LAYERS) == 1) {
             return true;
         }
 
-        if (blockState.getFluidState().getLevel() == 8) {
+        if (blockState.getFluidState().getAmount() == 8) {
             return false;
         }
 
-        if (state.isIn(BlockTags.WALLS) && blockState.isIn(BlockTags.WALLS) && blockState.isOpaque()) {
+        if (state.is(BlockTags.WALLS) && blockState.is(BlockTags.WALLS) && blockState.canOcclude()) {
             return false;
         }
 
-        if (blockState.getBlock() instanceof SlabBlock && blockState.get(SlabBlock.TYPE) == SlabType.TOP){
+        if (blockState.getBlock() instanceof SlabBlock && blockState.getValue(SlabBlock.TYPE) == SlabType.TOP){
             return true;
         }
 
-        if (blockState.getBlock() instanceof StairsBlock && blockState.get(StairsBlock.HALF) == BlockHalf.TOP){
+        if (blockState.getBlock() instanceof StairBlock && blockState.getValue(StairBlock.HALF) == Half.TOP){
             return true;
         }
 
-        int i = ChunkLightProvider.getRealisticOpacity(world, ModBlocks.GRASS_BLOCK.parentBlock.getDefaultState(), pos, blockState, blockPos, Direction.UP, blockState.getOpacity(world, blockPos));
+        int i = LightEngine.getLightBlockInto(world, ModBlocks.GRASS_BLOCK.parentBlock.defaultBlockState(), pos, blockState, blockPos, Direction.UP, blockState.getLightBlock(world, blockPos));
         return i < world.getMaxLightLevel();
     }
 
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
-        if(state.get(SlabBlock.TYPE) == SlabType.BOTTOM) return false;
-        return world.getBlockState(pos.up()).isAir();
+    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
+        if(state.getValue(SlabBlock.TYPE) == SlabType.BOTTOM) return false;
+        return world.getBlockState(pos.above()).isAir();
     }
 
     @Override
-    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
         return true;
     }
 
     @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+    public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
         BlockState blockState = world.getBlockState(pos);
-        if (blockState.isIn(ModTags.GRASS_BLOCKS)) {
+        if (blockState.is(ModTags.GRASS_BLOCKS)) {
             growBoneMeal(world,random,pos);
         }
     }
 
 
-    public static void growBoneMeal(ServerWorld world, Random random, BlockPos pos) {
-        BlockPos blockPos = pos.up();
-        BlockState blockState = Blocks.SHORT_GRASS.getDefaultState();
-        Optional<RegistryEntry.Reference<PlacedFeature>> optional = world.getRegistryManager().get(RegistryKeys.PLACED_FEATURE).getEntry(VegetationPlacedFeatures.GRASS_BONEMEAL);
+    public static void growBoneMeal(ServerLevel world, RandomSource random, BlockPos pos) {
+        BlockPos blockPos = pos.above();
+        BlockState blockState = Blocks.SHORT_GRASS.defaultBlockState();
+        Optional<Holder.Reference<PlacedFeature>> optional = world.registryAccess().registryOrThrow(Registries.PLACED_FEATURE).getHolder(VegetationPlacements.GRASS_BONEMEAL);
 
         label49:
         for(int i = 0; i < 128; ++i) {
             BlockPos blockPos2 = blockPos;
 
             for(int j = 0; j < i / 16; ++j) {
-                blockPos2 = blockPos2.add(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
-                if (!world.getBlockState(blockPos2.down()).isIn(ModTags.GRASS_BLOCKS) || world.getBlockState(blockPos2).isFullCube(world, blockPos2)) {
+                blockPos2 = blockPos2.offset(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
+                if (!world.getBlockState(blockPos2.below()).is(ModTags.GRASS_BLOCKS) || world.getBlockState(blockPos2).isCollisionShapeFullBlock(world, blockPos2)) {
                     continue label49;
                 }
             }
 
             BlockState blockState2 = world.getBlockState(blockPos2);
-            if (blockState2.isOf(blockState.getBlock()) && random.nextInt(10) == 0) {
-                ((Fertilizable)blockState.getBlock()).grow(world, random, blockPos2, blockState2);
+            if (blockState2.is(blockState.getBlock()) && random.nextInt(10) == 0) {
+                ((BonemealableBlock)blockState.getBlock()).performBonemeal(world, random, blockPos2, blockState2);
             }
 
             if (blockState2.isAir()) {
-                RegistryEntry<PlacedFeature> registryEntry;
+                Holder<PlacedFeature> registryEntry;
                 if (random.nextInt(8) == 0) {
                     List<ConfiguredFeature<?, ?>> list = world.getBiome(blockPos2).value().getGenerationSettings().getFlowerFeatures();
                     if (list.isEmpty()) {
                         continue;
                     }
-                    registryEntry = ((RandomPatchFeatureConfig) list.get(0).config()).feature();
+                    registryEntry = ((RandomPatchConfiguration) list.get(0).config()).feature();
                 } else {
                     if (optional.isEmpty()) {
                         continue;
                     }
                     registryEntry = optional.get();
                 }
-                registryEntry.value().generateUnregistered(world, world.getChunkManager().getChunkGenerator(), random, blockPos2);
+                registryEntry.value().place(world, world.getChunkSource().getGenerator(), random, blockPos2);
             }
         }
 
     }
 
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (!canSurvive(state, world, pos)) {
             ModBlocks deadBase = ModBlocks.DIRT;
-            if (state.isOf(ModBlocks.WARPED_NYLIUM.getBlock(ModBlocks.BlockType.SLAB))
-                    || state.isOf(ModBlocks.CRIMSON_NYLIUM.getBlock(ModBlocks.BlockType.SLAB))) {
+            if (state.is(ModBlocks.WARPED_NYLIUM.getBlock(ModBlocks.BlockType.SLAB))
+                    || state.is(ModBlocks.CRIMSON_NYLIUM.getBlock(ModBlocks.BlockType.SLAB))) {
                 deadBase = ModBlocks.NETHERRACK;
             }
-            world.setBlockState(pos, deadBase.getBlock(ModBlocks.BlockType.SLAB).getStateWithProperties(world.getBlockState(pos)), Block.NOTIFY_LISTENERS);
+            world.setBlock(pos, deadBase.getBlock(ModBlocks.BlockType.SLAB).withPropertiesOf(world.getBlockState(pos)), Block.UPDATE_CLIENTS);
         } else {
-            if (world.getLightLevel(pos.up()) >= 9) {
+            if (world.getMaxLocalRawBrightness(pos.above()) >= 9) {
                 for(int i = 0; i < 4; ++i) {
-                    BlockPos blockPos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
+                    BlockPos blockPos = pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
                     trySpread(world, getModBlock().parentBlock, blockPos);
                 }
             }
@@ -160,7 +168,7 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
     }
 
 
-    public static void trySpread(ServerWorld world, Block parentBlock, BlockPos spreadPos) {
+    public static void trySpread(ServerLevel world, Block parentBlock, BlockPos spreadPos) {
         BlockState newState = null;
         BlockState oldState = world.getBlockState(spreadPos);
         ModBlocks[] fromDirt = {ModBlocks.GRASS_BLOCK, ModBlocks.MYCELIUM};
@@ -168,67 +176,67 @@ public class SpreadableSlab extends DirtSlab implements Waterloggable, Fertiliza
 
 
 
-        if (oldState.isOf(Blocks.DIRT)) {
+        if (oldState.is(Blocks.DIRT)) {
             // target is a full dirt block
             for (ModBlocks modBlock : fromDirt) {
                 if (parentBlock.equals(modBlock.parentBlock)) {
-                    newState = modBlock.parentBlock.getDefaultState().with(SNOWY, world.getBlockState(spreadPos.up()).isOf(Blocks.SNOW));
+                    newState = modBlock.parentBlock.defaultBlockState().setValue(SNOWY, world.getBlockState(spreadPos.above()).is(Blocks.SNOW));
                 }
             }
         } else {
             // luckily all properties except "SNOWY" can be copied using getStateWithProperties(...)
             for (ModBlocks.BlockType blockType :ModBlocks.BlockType.values()) {
-                if (oldState.isOf(ModBlocks.DIRT.getBlock(blockType))) {
+                if (oldState.is(ModBlocks.DIRT.getBlock(blockType))) {
                     // target is dirt slab/stairs/wall
                     for (ModBlocks modBlock : fromDirt) {
                         if (parentBlock.equals(modBlock.parentBlock)) {
                             newState = modBlock.getBlock(blockType)
-                                    .getStateWithProperties(world.getBlockState(spreadPos));
-                            if (newState.contains(Properties.SNOWY))
-                                newState = newState.with(Properties.SNOWY, world.getBlockState(spreadPos.up()).isOf(Blocks.SNOW));
+                                    .withPropertiesOf(world.getBlockState(spreadPos));
+                            if (newState.hasProperty(BlockStateProperties.SNOWY))
+                                newState = newState.setValue(BlockStateProperties.SNOWY, world.getBlockState(spreadPos.above()).is(Blocks.SNOW));
                         }
                     }
                 }
             }
         }
-        if (newState != null && canSurvive(newState, world, spreadPos) && !world.getFluidState(spreadPos.up()).isIn(FluidTags.WATER))
-            world.setBlockState(spreadPos, newState);
+        if (newState != null && canSurvive(newState, world, spreadPos) && !world.getFluidState(spreadPos.above()).is(FluidTags.WATER))
+            world.setBlockAndUpdate(spreadPos, newState);
     }
 
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(TYPE, WATERLOGGED, SNOWY);
     }
 
     @Nullable
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        BlockPos blockPos = ctx.getBlockPos();
-        BlockState blockState = ctx.getWorld().getBlockState(blockPos);
-        if (blockState.isOf(this)) {
-            return blockState.with(TYPE, SlabType.DOUBLE).with(WATERLOGGED, false).with(SNOWY, ctx.getWorld().getBlockState(ctx.getBlockPos().up()).isIn(BlockTags.SNOW));
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        BlockPos blockPos = ctx.getClickedPos();
+        BlockState blockState = ctx.getLevel().getBlockState(blockPos);
+        if (blockState.is(this)) {
+            return blockState.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, false).setValue(SNOWY, ctx.getLevel().getBlockState(ctx.getClickedPos().above()).is(BlockTags.SNOW));
         } else {
-            FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
-            BlockState blockState2 = this.getDefaultState().with(TYPE, SlabType.BOTTOM).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER).with(SNOWY, ctx.getWorld().getBlockState(ctx.getBlockPos().up()).isIn(BlockTags.SNOW));
-            Direction direction = ctx.getSide();
-            return direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double)blockPos.getY() > 0.5)) ? blockState2 : blockState2.with(TYPE, SlabType.TOP);
+            FluidState fluidState = ctx.getLevel().getFluidState(blockPos);
+            BlockState blockState2 = this.defaultBlockState().setValue(TYPE, SlabType.BOTTOM).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER).setValue(SNOWY, ctx.getLevel().getBlockState(ctx.getClickedPos().above()).is(BlockTags.SNOW));
+            Direction direction = ctx.getClickedFace();
+            return direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getClickLocation().y - (double)blockPos.getY() > 0.5)) ? blockState2 : blockState2.setValue(TYPE, SlabType.TOP);
         }
     }
 
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if (state.get(WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+        if (state.getValue(WATERLOGGED)) {
+            world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
         }
 
-        state = state.with(SNOWY, world.getBlockState(pos.up()).isIn(BlockTags.SNOW));
+        state = state.setValue(SNOWY, world.getBlockState(pos.above()).is(BlockTags.SNOW));
 
 
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        return super.updateShape(state, direction, neighborState, world, pos, neighborPos);
     }
 
     static {
-        TYPE = Properties.SLAB_TYPE;
-        WATERLOGGED = Properties.WATERLOGGED;
-        BOTTOM_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
-        TOP_SHAPE = Block.createCuboidShape(0.0, 8.0, 0.0, 16.0, 16.0, 16.0);
-        SNOWY = Properties.SNOWY;
+        TYPE = BlockStateProperties.SLAB_TYPE;
+        WATERLOGGED = BlockStateProperties.WATERLOGGED;
+        BOTTOM_AABB = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
+        TOP_AABB = Block.box(0.0, 8.0, 0.0, 16.0, 16.0, 16.0);
+        SNOWY = BlockStateProperties.SNOWY;
     }
 }

@@ -5,16 +5,15 @@ import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.minecraft.block.Block;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.enums.SlabType;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
-import net.minecraft.loot.function.SetCountLootFunction;
-import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
-import net.minecraft.predicate.StatePredicate;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.state.properties.SlabType;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import java.util.function.BiConsumer;
 
 public class LootTableGenerator extends FabricBlockLootTableProvider {
@@ -30,7 +29,7 @@ public class LootTableGenerator extends FabricBlockLootTableProvider {
     }
 
     @Override
-    public void accept(BiConsumer<Identifier, LootTable.Builder> identifierBuilderBiConsumer) {
+    public void generate(BiConsumer<ResourceLocation, LootTable.Builder> identifierBuilderBiConsumer) {
         for (ModBlocks block: ModBlocks.values()) {
             for (ModBlocks.BlockType type: ModBlocks.BlockType.values()) {
                 if(block.hasBlock(type))
@@ -48,17 +47,17 @@ public class LootTableGenerator extends FabricBlockLootTableProvider {
 
 
 
-    private void addBlock(ModBlocks block, ModBlocks.BlockType type, BiConsumer<Identifier, LootTable.Builder> identifierBuilderBiConsumer) {
+    private void addBlock(ModBlocks block, ModBlocks.BlockType type, BiConsumer<ResourceLocation, LootTable.Builder> identifierBuilderBiConsumer) {
         Block drop = block.getBlock(type);
         if (block.equals(ModBlocks.GRASS_BLOCK) || block.equals(ModBlocks.MYCELIUM) || block.equals(ModBlocks.PODZOL) || block.equals(ModBlocks.DIRT_PATH))
             drop = ModBlocks.DIRT.getBlock(type);
 
         if(block.hasBlock(type)){
             if (type.equals(ModBlocks.BlockType.SLAB)){
-                identifierBuilderBiConsumer.accept(new Identifier(MoreSlabsStairsAndWalls.MOD_ID, "blocks/" + block.toString().toLowerCase() + "_" + type.toString().toLowerCase()), this.drops(block.getBlock(type), drop, ConstantLootNumberProvider.create(1.0F)).apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2.0f)).conditionally(BlockStatePropertyLootCondition.builder(block.getBlock(type)).properties(StatePredicate.Builder.create().exactMatch(SlabBlock.TYPE, SlabType.DOUBLE)))));
+                identifierBuilderBiConsumer.accept(new ResourceLocation(MoreSlabsStairsAndWalls.MOD_ID, "blocks/" + block.toString().toLowerCase() + "_" + type.toString().toLowerCase()), this.createSingleItemTableWithSilkTouch(block.getBlock(type), drop, ConstantValue.exactly(1.0F)).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0f)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block.getBlock(type)).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SlabBlock.TYPE, SlabType.DOUBLE)))));
 
             } else {
-                identifierBuilderBiConsumer.accept(new Identifier(MoreSlabsStairsAndWalls.MOD_ID, "blocks/" + block.toString().toLowerCase() + "_" + type.toString().toLowerCase()), this.drops(block.getBlock(type), drop, ConstantLootNumberProvider.create(1.0F)));
+                identifierBuilderBiConsumer.accept(new ResourceLocation(MoreSlabsStairsAndWalls.MOD_ID, "blocks/" + block.toString().toLowerCase() + "_" + type.toString().toLowerCase()), this.createSingleItemTableWithSilkTouch(block.getBlock(type), drop, ConstantValue.exactly(1.0F)));
 
             }
         }

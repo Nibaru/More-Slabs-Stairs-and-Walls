@@ -2,14 +2,14 @@ package games.twinhead.moreslabsstairsandwalls.registry;
 
 import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 public class ModTags {
 
-    public static final TagKey<Block> GRASS_BLOCKS = TagKey.of(RegistryKeys.BLOCK, MoreSlabsStairsAndWalls.id("grass_blocks"));
+    public static final TagKey<Block> GRASS_BLOCKS = TagKey.create(Registries.BLOCK, MoreSlabsStairsAndWalls.id("grass_blocks"));
 
     public static String getLogType(ModBlocks block){
         return switch (block) {
@@ -29,7 +29,7 @@ public class ModTags {
     }
 
     public static TagKey<Item> getLogTagKey(ModBlocks blocks, ModBlocks.BlockType type) {
-        return TagKey.of(RegistryKeys.ITEM, MoreSlabsStairsAndWalls.id(getLogType(blocks) + "_" + type.toString().toLowerCase() + (type == ModBlocks.BlockType.STAIRS ? "" : "s")));
+        return TagKey.create(Registries.ITEM, MoreSlabsStairsAndWalls.id(getLogType(blocks) + "_" + type.toString().toLowerCase() + (type == ModBlocks.BlockType.STAIRS ? "" : "s")));
     }
 
 
