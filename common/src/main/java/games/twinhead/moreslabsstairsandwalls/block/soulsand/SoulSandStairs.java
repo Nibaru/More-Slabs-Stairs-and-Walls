@@ -2,7 +2,6 @@ package games.twinhead.moreslabsstairsandwalls.block.soulsand;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseStairs;
-import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

@@ -4,7 +4,6 @@ import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseSlab;
 import games.twinhead.moreslabsstairsandwalls.block.entity.FallingSlabBlockEntity;
 import games.twinhead.moreslabsstairsandwalls.block.entity.LandingSlabBlock;
-import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
@@ -33,8 +32,8 @@ public class FallingSlab extends BaseSlab implements LandingSlabBlock, SimpleWat
 
     public static final EnumProperty<SlabType> TYPE;
     public static final BooleanProperty WATERLOGGED;
-    protected static final VoxelShape BOTTOM_AABB;
-    protected static final VoxelShape TOP_AABB;
+    protected static final VoxelShape BOTTOM_SHAPE;
+    protected static final VoxelShape TOP_SHAPE;
 
 
     public FallingSlab(ModBlocks modBlocks, Properties settings) {
@@ -143,8 +142,8 @@ public class FallingSlab extends BaseSlab implements LandingSlabBlock, SimpleWat
     static {
         TYPE = BlockStateProperties.SLAB_TYPE;
         WATERLOGGED = BlockStateProperties.WATERLOGGED;
-        BOTTOM_AABB = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
-        TOP_AABB = Block.box(0.0, 8.0, 0.0, 16.0, 16.0, 16.0);
+        BOTTOM_SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
+        TOP_SHAPE = Block.box(0.0, 8.0, 0.0, 16.0, 16.0, 16.0);
     }
 
 }

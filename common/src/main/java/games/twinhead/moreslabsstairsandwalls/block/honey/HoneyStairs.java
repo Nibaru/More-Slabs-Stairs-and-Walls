@@ -18,8 +18,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 @SuppressWarnings("deprecation")
 public class HoneyStairs extends TranslucentStairs {
 
-    protected static final VoxelShape TOP_SHAPE = HoneySlab.TOP_AABB;
-    protected static final VoxelShape BOTTOM_SHAPE = HoneySlab.BOTTOM_AABB;
+    protected static final VoxelShape TOP_SHAPE = HoneySlab.TOP_SHAPE;
+    protected static final VoxelShape BOTTOM_SHAPE = HoneySlab.BOTTOM_SHAPE;
     protected static final VoxelShape BOTTOM_NORTH_WEST_CORNER_SHAPE = Block.box(1.0, 0.0, 1.0, 8.0, 8.0, 8.0);
     protected static final VoxelShape BOTTOM_SOUTH_WEST_CORNER_SHAPE = Block.box(1.0, 0.0, 8.0, 8.0, 8.0, 15.0);
     protected static final VoxelShape TOP_NORTH_WEST_CORNER_SHAPE = Block.box(1.0, 7.0, 1.0, 8.0, 15.0, 8.0);

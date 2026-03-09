@@ -19,7 +19,7 @@ public class ItemTagGenerator extends FabricTagProvider.ItemTagProvider {
             for (ModBlocks.BlockType type: ModBlocks.BlockType.values()) {
                 if(!block.hasBlock(type)) continue;
                 if (RecipeGenerator.logBlocks.contains(block)) {
-                    tag(ModTags.getLogTagKey(block, type)).add(block.getId(type));
+                    getOrCreateTagBuilder(ModTags.getLogTagKey(block, type)).add(block.getId(type));
                 }
             }
         }

@@ -27,7 +27,7 @@ public class BlockTagGenerator extends FabricTagProvider.BlockTagProvider {
             for (ModBlocks.BlockType type: ModBlocks.BlockType.values()) {
                 if(!block.hasBlock(type)) continue;
 
-                tag(switch (type){
+                getOrCreateTagBuilder(switch (type){
                     case SLAB -> BlockTags.SLABS;
                     case STAIRS -> BlockTags.STAIRS;
                     case WALL -> BlockTags.WALLS;
@@ -36,10 +36,10 @@ public class BlockTagGenerator extends FabricTagProvider.BlockTagProvider {
 
                 for (TagKey<Block> tag: block.blockTags) {
                     if(tag == BlockTags.BEACON_BASE_BLOCKS && type == ModBlocks.BlockType.SLAB) continue;
-                    tag(tag).add(block.getId(type));
+                    getOrCreateTagBuilder(tag).add(block.getId(type));
                 }
             }
         }
-        tag(ModTags.GRASS_BLOCKS).add(Blocks.GRASS_BLOCK, ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.SLAB), ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.STAIRS), ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.WALL));
+        getOrCreateTagBuilder(ModTags.GRASS_BLOCKS).add(Blocks.GRASS_BLOCK, ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.SLAB), ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.STAIRS), ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.WALL));
     }
 }

@@ -1,7 +1,6 @@
 package games.twinhead.moreslabsstairsandwalls.block.entity;
 
 import games.twinhead.moreslabsstairsandwalls.registry.ModRegistry;
-import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;

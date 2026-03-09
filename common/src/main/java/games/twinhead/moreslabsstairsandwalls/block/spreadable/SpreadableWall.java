@@ -3,7 +3,6 @@ package games.twinhead.moreslabsstairsandwalls.block.spreadable;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.dirt.DirtWall;
 import games.twinhead.moreslabsstairsandwalls.registry.ModTags;
-import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -30,7 +29,7 @@ public class SpreadableWall extends DirtWall implements SimpleWaterloggedBlock, 
     }
 
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        if (!SpreadableSlab.canSurvive(state, world, pos)) {
+        if (!SpreadableSlab.canSurviveBlock(state, world, pos)) {
             ModBlocks deadBase = ModBlocks.DIRT;
             if (state.is(ModBlocks.WARPED_NYLIUM.getBlock(ModBlocks.BlockType.WALL))
                     || state.is(ModBlocks.CRIMSON_NYLIUM.getBlock(ModBlocks.BlockType.WALL))) {

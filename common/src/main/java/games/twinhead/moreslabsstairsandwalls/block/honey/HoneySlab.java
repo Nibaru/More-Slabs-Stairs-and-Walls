@@ -42,8 +42,8 @@ public class HoneySlab extends TranslucentSlab {
         SlabType slabType = state.getValue(TYPE);
         return switch (slabType) {
             case DOUBLE -> FULL_SHAPE;
-            case TOP -> TOP_AABB;
-            default -> BOTTOM_AABB;
+            case TOP -> TOP_SHAPE;
+            default -> BOTTOM_SHAPE;
         };
     }
 

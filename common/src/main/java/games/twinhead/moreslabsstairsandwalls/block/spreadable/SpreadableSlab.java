@@ -3,7 +3,6 @@ package games.twinhead.moreslabsstairsandwalls.block.spreadable;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.dirt.DirtSlab;
 import games.twinhead.moreslabsstairsandwalls.registry.ModTags;
-import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -56,7 +55,7 @@ public class SpreadableSlab extends DirtSlab implements SimpleWaterloggedBlock, 
         super(block,settings);
     }
 
-    public static boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+    public static boolean canSurviveBlock(BlockState state, LevelReader world, BlockPos pos) {
         BlockPos blockPos = pos.above();
         BlockState blockState = world.getBlockState(blockPos);
 
@@ -150,7 +149,7 @@ public class SpreadableSlab extends DirtSlab implements SimpleWaterloggedBlock, 
     }
 
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        if (!canSurvive(state, world, pos)) {
+        if (!canSurviveBlock(state, world, pos)) {
             ModBlocks deadBase = ModBlocks.DIRT;
             if (state.is(ModBlocks.WARPED_NYLIUM.getBlock(ModBlocks.BlockType.SLAB))
                     || state.is(ModBlocks.CRIMSON_NYLIUM.getBlock(ModBlocks.BlockType.SLAB))) {
@@ -199,7 +198,7 @@ public class SpreadableSlab extends DirtSlab implements SimpleWaterloggedBlock, 
                 }
             }
         }
-        if (newState != null && canSurvive(newState, world, spreadPos) && !world.getFluidState(spreadPos.above()).is(FluidTags.WATER))
+        if (newState != null && canSurviveBlock(newState, world, spreadPos) && !world.getFluidState(spreadPos.above()).is(FluidTags.WATER))
             world.setBlockAndUpdate(spreadPos, newState);
     }
 
@@ -235,8 +234,8 @@ public class SpreadableSlab extends DirtSlab implements SimpleWaterloggedBlock, 
     static {
         TYPE = BlockStateProperties.SLAB_TYPE;
         WATERLOGGED = BlockStateProperties.WATERLOGGED;
-        BOTTOM_AABB = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
-        TOP_AABB = Block.box(0.0, 8.0, 0.0, 16.0, 16.0, 16.0);
+        BOTTOM_SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
+        TOP_SHAPE = Block.box(0.0, 8.0, 0.0, 16.0, 16.0, 16.0);
         SNOWY = BlockStateProperties.SNOWY;
     }
 }

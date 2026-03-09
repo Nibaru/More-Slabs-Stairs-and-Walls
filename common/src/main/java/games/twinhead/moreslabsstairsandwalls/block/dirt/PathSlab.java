@@ -50,8 +50,8 @@ public class PathSlab extends BaseSlab {
         SlabType slabType = state.getValue(TYPE);
         return switch (slabType) {
             case DOUBLE -> FULL_SHAPE;
-            case TOP -> TOP_AABB;
-            default -> BOTTOM_AABB;
+            case TOP -> TOP_SHAPE;
+            default -> BOTTOM_SHAPE;
         };
     }
 
@@ -74,8 +74,8 @@ public class PathSlab extends BaseSlab {
     }
 
     static {
-        BOTTOM_AABB = Block.box(0.0, 0.0, 0.0, 16.0, 7.0, 16.0);
-        TOP_AABB = Block.box(0.0, 7.0, 0.0, 16.0, 15.0, 16.0);
+        BOTTOM_SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 7.0, 16.0);
+        TOP_SHAPE = Block.box(0.0, 7.0, 0.0, 16.0, 15.0, 16.0);
         FULL_SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 15.0, 16.0);
     }
 
