@@ -4,11 +4,13 @@ import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseSlab;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
@@ -24,7 +26,13 @@ public class MagmaSlab extends BaseSlab {
 
     @Override
     public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
-        if (!entity.isSteppingCarefully() && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entity)) {
+        if (!entity.isSteppingCarefully() &&
+            entity instanceof LivingEntity living &&
+            world.registryAccess()
+                .lookup(Registries.ENCHANTMENT)
+                .flatMap(reg -> reg.get(Enchantments.FROST_WALKER))
+                .map(e -> EnchantmentHelper.getEnchantmentLevel(e, living) == 0)
+                .orElse(true)) {
             entity.hurt(world.damageSources().hotFloor(), 1.0f);
         }
         super.stepOn(world, pos, state, entity);

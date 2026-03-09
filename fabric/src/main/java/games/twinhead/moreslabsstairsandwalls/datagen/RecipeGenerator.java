@@ -5,6 +5,7 @@ import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.registry.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -20,11 +21,13 @@ import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
 
 public class RecipeGenerator extends FabricRecipeProvider {
 
-    public RecipeGenerator(FabricDataOutput dataGenerator) {
-        super(dataGenerator);
+    public RecipeGenerator(FabricDataOutput dataGenerator, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        super(dataGenerator, registriesFuture);
     }
 
 

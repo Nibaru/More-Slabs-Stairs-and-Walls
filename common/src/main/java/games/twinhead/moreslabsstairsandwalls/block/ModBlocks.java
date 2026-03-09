@@ -456,7 +456,7 @@ public enum ModBlocks {
     }
 
     public ResourceLocation getId(BlockType type){
-        return new ResourceLocation(MoreSlabsStairsAndWalls.MOD_ID, this + "_" + type.toString().toLowerCase());
+        return ResourceLocation.fromNamespaceAndPath(MoreSlabsStairsAndWalls.MOD_ID, this + "_" + type.toString().toLowerCase());
     }
 
 

@@ -14,6 +14,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerEntity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
@@ -129,14 +130,14 @@ public class FallingSlabBlockEntity extends FallingBlockEntity {
                                 if (this.blockData != null && this.block.hasBlockEntity()) {
                                     BlockEntity blockEntity = this.level().getBlockEntity(blockPos);
                                     if (blockEntity != null) {
-                                        CompoundTag nbtCompound = blockEntity.saveWithoutMetadata();
+                                        CompoundTag nbtCompound = blockEntity.saveWithoutMetadata(level().registryAccess());
 
                                         for (String string : this.blockData.getAllKeys()) {
                                             nbtCompound.put(string, this.blockData.get(string).copy());
                                         }
 
                                         try {
-                                            blockEntity.load(nbtCompound);
+                                            blockEntity.loadWithComponents(nbtCompound, level().registryAccess());
                                         } catch (Exception var15) {
                                             //field_36333.error("Failed to load block entity from falling block", var15);
                                         }
@@ -208,9 +209,11 @@ public class FallingSlabBlockEntity extends FallingBlockEntity {
         return this.block;
     }
 
+
     @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
-        return new ClientboundAddEntityPacket(this, Block.getId(this.getBlockState()));
+    public Packet<ClientGamePacketListener> getAddEntityPacket(ServerEntity serverEntity)
+    {
+        return new ClientboundAddEntityPacket(this, serverEntity, Block.getId(this.getBlockState()));
     }
 
     @Override
@@ -235,10 +238,8 @@ public class FallingSlabBlockEntity extends FallingBlockEntity {
     }
 
     @Override
-    protected void defineSynchedData() {
-        this.entityData.define(DATA_START_POS, BlockPos.ZERO);
+    protected void defineSynchedData(SynchedEntityData.Builder builder)
+    {
+        builder.define(DATA_START_POS, BlockPos.ZERO);
     }
-
-
-
 }

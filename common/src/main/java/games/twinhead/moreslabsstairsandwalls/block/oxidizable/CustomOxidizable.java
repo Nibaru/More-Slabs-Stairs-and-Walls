@@ -13,14 +13,19 @@ import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.HoneycombItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ChangeOverTimeBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+
 
 public interface CustomOxidizable extends ChangeOverTimeBlock<WeatheringCopper.WeatherState> {
 
@@ -69,14 +74,14 @@ public interface CustomOxidizable extends ChangeOverTimeBlock<WeatheringCopper.W
 
     WeatheringCopper.WeatherState getAge();
 
-    default InteractionResult useItem(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand){
-        if((player.getMainHandItem().getItem() instanceof AxeItem)){
-            if(getAge() == WeatheringCopper.WeatherState.UNAFFECTED) return InteractionResult.PASS;
+    default ItemInteractionResult useItem(ItemStack itemStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand) {
+        if((itemStack.getItem() instanceof AxeItem)){
+            if(getAge() == WeatheringCopper.WeatherState.UNAFFECTED) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             if (!world.isClientSide) {
                 Optional.ofNullable((Block) OXIDATION_LEVEL_DECREASES.get().get(state.getBlock())).ifPresent((stateX) -> {
                     world.setBlockAndUpdate(pos, stateX.withPropertiesOf(state));
                     if (!player.isCreative())
-                        player.getMainHandItem().hurtAndBreak(1, player, p -> p .broadcastBreakEvent(hand));
+                        itemStack.hurtAndBreak(1, player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
                 });
             } else {
                 world.playSound(player, pos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS, 1.0f, 1.0f);
@@ -94,9 +99,9 @@ public interface CustomOxidizable extends ChangeOverTimeBlock<WeatheringCopper.W
                 world.playSound(player, pos, SoundEvents.HONEYCOMB_WAX_ON, SoundSource.BLOCKS, 1.0f, 1.0f);
             }
         }else {
-            return InteractionResult.PASS;
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
-        return InteractionResult.SUCCESS;
+        return ItemInteractionResult.SUCCESS;
     }
 
     static Optional<Block> getIncreasedOxidationBlock(Block block) {

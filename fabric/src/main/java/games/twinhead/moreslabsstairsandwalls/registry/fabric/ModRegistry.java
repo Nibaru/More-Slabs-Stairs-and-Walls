@@ -25,14 +25,14 @@ public class ModRegistry {
 
     public static final EntityType<FallingSlabBlockEntity> FALLING_SLAB_BLOCK_ENTITY = Registry.register(
             BuiltInRegistries.ENTITY_TYPE,
-            new ResourceLocation(MoreSlabsStairsAndWalls.MOD_ID, "falling_slab"),
+            ResourceLocation.fromNamespaceAndPath(MoreSlabsStairsAndWalls.MOD_ID, "falling_slab"),
             FabricEntityTypeBuilder.create(MobCategory.MISC, FallingSlabBlockEntity::new).dimensions(EntityDimensions.fixed(0.98f, 0.98f)).trackRangeBlocks(10).trackedUpdateRate(20).build());
 
     public static Block getBlock(ResourceLocation id) {
         return BuiltInRegistries.BLOCK.get(id);
     }
 
-    public static CreativeModeTab modGroup = Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, new ResourceLocation(MoreSlabsStairsAndWalls.MOD_ID, "creative_tab"),
+    public static CreativeModeTab modGroup = Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(MoreSlabsStairsAndWalls.MOD_ID, "creative_tab"),
                    FabricItemGroup.builder()
                            .icon(() -> new ItemStack(ModBlocks.GRASS_BLOCK.getBlock(ModBlocks.BlockType.STAIRS)))
             .title(Component.translatable("itemGroup.more_slabs_stairs_and_walls.creative_tab"))

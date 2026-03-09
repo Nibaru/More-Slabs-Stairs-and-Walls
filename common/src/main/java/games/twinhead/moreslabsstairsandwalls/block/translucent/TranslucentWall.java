@@ -64,6 +64,7 @@ public class TranslucentWall extends BaseWall {
         if (state.getValue(WallBlock.NORTH_WALL).equals(WallSide.LOW) && state2.getValue(WallBlock.NORTH_WALL).equals(WallSide.TALL)) state = state.setValue(WallBlock.NORTH_WALL, WallSide.TALL);
         if (state.getValue(WallBlock.SOUTH_WALL).equals(WallSide.LOW) && state2.getValue(WallBlock.SOUTH_WALL).equals(WallSide.TALL)) state = state.setValue(WallBlock.SOUTH_WALL, WallSide.TALL);
 
-        return state.getBlock().getShape(state, null, null, null).equals(state2.getBlock().getShape(state2, null, null, null));
+        return state.getShape(null, null, null).
+            equals(state2.getShape(null, null, null));
     }
 }

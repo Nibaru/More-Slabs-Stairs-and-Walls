@@ -54,7 +54,7 @@ public class ModelGenerator extends FabricModelProvider {
         ResourceLocation slabDouble = getResourceId(BuiltInRegistries.BLOCK.getKey(block.parentBlock));
 
         switch (block.modelType){
-            case LOG -> textureMap.put(TextureSlot.SIDE, new ResourceLocation("minecraft", "block/" + BuiltInRegistries.BLOCK.getKey(block.parentBlock).toString().split(":")[1]));
+            case LOG -> textureMap.put(TextureSlot.SIDE, ResourceLocation.fromNamespaceAndPath("minecraft", "block/" + BuiltInRegistries.BLOCK.getKey(block.parentBlock).toString().split(":")[1]));
 
             case GRASS -> {
                 textureMap.put(TextureSlot.LAYER0, getIdWithSuffix(getResourceId(BuiltInRegistries.BLOCK.getKey(block.parentBlock)), block.equals(ModBlocks.GRASS_BLOCK) ? "_side_overlay" : "_side"));
@@ -92,7 +92,7 @@ public class ModelGenerator extends FabricModelProvider {
 
             case CUSTOM -> {
                 if(block.toString().contains("waxed")){
-                    slabDouble = new ResourceLocation("minecraft", "block/" + block.textureId);
+                    slabDouble = ResourceLocation.fromNamespaceAndPath("minecraft", "block/" + block.textureId);
                 }
             }
 
@@ -116,7 +116,7 @@ public class ModelGenerator extends FabricModelProvider {
         ResourceLocation outer = null;
 
         switch (block.modelType){
-            case LOG ->textureMap.put(TextureSlot.SIDE, new ResourceLocation("minecraft", "block/" + BuiltInRegistries.BLOCK.getKey(block.parentBlock).toString().split(":")[1]));
+            case LOG ->textureMap.put(TextureSlot.SIDE, ResourceLocation.fromNamespaceAndPath("minecraft", "block/" + BuiltInRegistries.BLOCK.getKey(block.parentBlock).toString().split(":")[1]));
             case GRASS -> {
                 TextureSlot[] textureKeys = new TextureSlot[]{TextureSlot.SIDE, TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.LAYER0};
 
@@ -199,8 +199,8 @@ public class ModelGenerator extends FabricModelProvider {
             }
 
             case LOG -> {
-                textureMap.put(TextureSlot.SIDE, new ResourceLocation("minecraft", "block/" + BuiltInRegistries.BLOCK.getKey(block.parentBlock).toString().split(":")[1]));
-                textureMap.put(TextureSlot.BOTTOM, new ResourceLocation("minecraft", "block/" + BuiltInRegistries.BLOCK.getKey(block.parentBlock).toString().split(":")[1] + "_top"));
+                textureMap.put(TextureSlot.SIDE, ResourceLocation.fromNamespaceAndPath("minecraft", "block/" + BuiltInRegistries.BLOCK.getKey(block.parentBlock).toString().split(":")[1]));
+                textureMap.put(TextureSlot.BOTTOM, ResourceLocation.fromNamespaceAndPath("minecraft", "block/" + BuiltInRegistries.BLOCK.getKey(block.parentBlock).toString().split(":")[1] + "_top"));
 
                 post = getTemplateModel("template_column_wall_post", TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE).create(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.WALL)), "_post"),  textureMap, blockStateModelGenerator.modelOutput);
                 low = getTemplateModel("template_column_wall_side", TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE).create(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.WALL)), "_side"),  textureMap, blockStateModelGenerator.modelOutput);
@@ -215,7 +215,7 @@ public class ModelGenerator extends FabricModelProvider {
                 inventory = getTemplateModel("template_leaves_wall_inventory", TextureSlot.WALL).create(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.WALL)), "_inventory"),  textureMap, blockStateModelGenerator.modelOutput);
             }
             case CUBE_BOTTOM_TOP, ROOTS -> {
-                textureMap.put(TextureSlot.BOTTOM, new ResourceLocation("minecraft", "block/" + BuiltInRegistries.BLOCK.getKey(block.parentBlock).toString().split(":")[1] + "_top"));
+                textureMap.put(TextureSlot.BOTTOM, ResourceLocation.fromNamespaceAndPath("minecraft", "block/" + BuiltInRegistries.BLOCK.getKey(block.parentBlock).toString().split(":")[1] + "_top"));
 
                 post = getTemplateModel("template_column_wall_post", TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE).create(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.WALL)), "_post"),  textureMap, blockStateModelGenerator.modelOutput);
                 low = getTemplateModel("template_column_wall_side", TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE).create(getIdWithSuffix(getResourceId(block.getId(ModBlocks.BlockType.WALL)), "_side"),  textureMap, blockStateModelGenerator.modelOutput);
@@ -253,30 +253,30 @@ public class ModelGenerator extends FabricModelProvider {
         return switch (block.modelType) {
             case LOG, CUBE_BOTTOM_TOP, GRASS -> TexturedModel.COLUMN.get(block.parentBlock).getMapping();
             case LEAVES -> TexturedModel.LEAVES.get(block.parentBlock).getMapping();
-            case CUSTOM -> new TextureMapping().put(TextureSlot.ALL, new ResourceLocation("minecraft", "block/" + block.textureId));
+            case CUSTOM -> new TextureMapping().put(TextureSlot.ALL, ResourceLocation.fromNamespaceAndPath("minecraft", "block/" + block.textureId));
             case CUSTOM_SIDE_BOTTOM_TOP -> new TextureMapping()
-                    .put(TextureSlot.SIDE, new ResourceLocation("minecraft", "block/" + block.textureId))
-                    .put(TextureSlot.BOTTOM, new ResourceLocation("minecraft", "block/" + block.bottomId))
-                    .put(TextureSlot.TOP, new ResourceLocation("minecraft", "block/" + block.topId));
-            case SLIME -> new TextureMapping().put(TextureSlot.ALL, new ResourceLocation("minecraft", "block/slime_block"));
-            case ROOTS -> new TextureMapping().put(TextureSlot.SIDE, new ResourceLocation("minecraft", "block/mangrove_roots_side"))
-                    .put(TextureSlot.TOP, new ResourceLocation("minecraft", "block/mangrove_roots_top"));
-            case HONEY -> new TextureMapping().put(TextureSlot.ALL, new ResourceLocation("minecraft", "block/honey_block_bottom"));
+                    .put(TextureSlot.SIDE, ResourceLocation.fromNamespaceAndPath("minecraft", "block/" + block.textureId))
+                    .put(TextureSlot.BOTTOM, ResourceLocation.fromNamespaceAndPath("minecraft", "block/" + block.bottomId))
+                    .put(TextureSlot.TOP, ResourceLocation.fromNamespaceAndPath("minecraft", "block/" + block.topId));
+            case SLIME -> new TextureMapping().put(TextureSlot.ALL, ResourceLocation.fromNamespaceAndPath("minecraft", "block/slime_block"));
+            case ROOTS -> new TextureMapping().put(TextureSlot.SIDE, ResourceLocation.fromNamespaceAndPath("minecraft", "block/mangrove_roots_side"))
+                    .put(TextureSlot.TOP, ResourceLocation.fromNamespaceAndPath("minecraft", "block/mangrove_roots_top"));
+            case HONEY -> new TextureMapping().put(TextureSlot.ALL, ResourceLocation.fromNamespaceAndPath("minecraft", "block/honey_block_bottom"));
             default -> TexturedModel.CUBE.get(block.parentBlock).getMapping();
         };
 
     }
 
     private ModelTemplate getTemplateModel(String templateName, TextureSlot... requiredTextureKeys){
-        return new ModelTemplate(Optional.of(new ResourceLocation(MoreSlabsStairsAndWalls.MOD_ID, "block/" + templateName)), Optional.empty(), requiredTextureKeys);
+        return new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(MoreSlabsStairsAndWalls.MOD_ID, "block/" + templateName)), Optional.empty(), requiredTextureKeys);
     }
 
     private ResourceLocation getResourceId(ResourceLocation id) {
-        return new ResourceLocation(id.getNamespace(), "block/" + id.getPath());
+        return ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "block/" + id.getPath());
     }
 
     private ResourceLocation getIdWithSuffix(ResourceLocation id, String suffix) {
-        return new ResourceLocation(id.getNamespace(), id.getPath() + suffix);
+        return ResourceLocation.fromNamespaceAndPath(id.getNamespace(), id.getPath() + suffix);
     }
 
     public static BlockStateGenerator createSlabBlockState(Block slabBlock, ResourceLocation bottomModelId, ResourceLocation topModelId, ResourceLocation fullModelId) {
