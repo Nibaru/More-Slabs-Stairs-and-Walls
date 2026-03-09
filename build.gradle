@@ -58,7 +58,7 @@ allprojects {
         ]
         inputs.properties replaceProperties
 
-        filesMatching(['META-INF/mods.toml', 'fabric.mod.json']) {
+        filesMatching(['META-INF/neoforge.mods.toml', 'fabric.mod.json']) {
             expand replaceProperties + [project: project]
         }
     }
