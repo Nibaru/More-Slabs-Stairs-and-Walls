@@ -16,6 +16,6 @@ public class MoreBlockItemImpl {
             return type == ModBlocks.BlockType.SLAB ? parentBurnTime / 2 : parentBurnTime;
         }
 
-        return -1;
+        return 0;
     }
 }
