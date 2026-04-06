@@ -1,56 +1,85 @@
-![More Slabs, Stairs & Walls banner image](https://i.imgur.com/um1jZGf.png)
+![More Slabs, Stairs & Walls](https://i.imgur.com/um1jZGf.png)
 
-Expand your building options with More Slabs, Stairs, & Walls. This mod adds slabs, stairs, and walls for blocks that don't have them.
+[![Modrinth](https://img.shields.io/modrinth/dt/more-slabs-stairs-and-walls?logo=modrinth&label=Modrinth)](https://modrinth.com/mod/more-slabs-stairs-and-walls)
+[![CurseForge](https://img.shields.io/curseforge/dt/644005?logo=curseforge&label=CurseForge)](https://www.curseforge.com/minecraft/mc-mods/more-slabs-stairs-walls)
+[![GitHub](https://img.shields.io/badge/Source-GitHub-181717?logo=github)](https://github.com/Nibaru/More-Slabs-Stairs-and-Walls/)
+[![Issues](https://img.shields.io/badge/Issues-GitHub-181717?logo=github)](https://github.com/Nibaru/More-Slabs-Stairs-and-Walls/issues)
+[![License](https://img.shields.io/badge/License-LGPL--3.0-blue.svg)](LICENSE)
 
-><details>
->    <summary>Whats new in 4.0.0?</summary>
->
->### New Blocks
->- Bedrock
->- Mangrove Roots
->- Muddy Mangrove Roots
->- Polished Basalt
->- Chiseled Quartz
->- Chiseled Deepslate
->- Chiseled Blackstone Bricks
->- Chiseled Stone Bricks
->
->### Recipe Changes
->- Added Uncrafting Recipes for Raw Ore/Bar Blocks
->- All Log Blocks can now be crafted into planks
->- Waxed Slabs, Stairs and Walls can now be crafted with Honeycomb
->- Copper Wall recipe changed to fix conflict with Copper Trapdoor
->- Added Dying Recipes for all Wool Slabs, Stairs and Walls
->- Added Dying Recipes for Terracotta Slabs, Stairs and Walls
->- Added Smelting Recipes for all Cracked Slabs, Stairs and Walls and Glazed Terracotta Slabs, Stairs and Walls
->
->### Gameplay Changes
->- Bone meal can now spread long grass between Grass Slabs, Stairs, Walls and Grass Blocks
->- All burnable blocks can now be used as fuel in the furnace and will burn in the world
->- Items and entities now properly gain slippery effect when on Lower Ice Slabs and Stairs
->
->### Model Changes
->- All Transparent Slabs, Stairs and Walls render more like their parent block
->- Slime Walls now have an updated model
->- Honey Walls now have an updated model
->- Fixed issue causing glass stairs to render their block face when they shouldn't
->- Fixed issue where glass slabs stairs and walls would prevent weather/clouds from rendering behind them
->
-></details>
+---
 
-### Obtaining:
-To obtain the blocks added by this mod, you can use the following methods:
-- All slab, stair, and wall blocks can be crafted using the standard recipes (Exception for a few blocks where there are conflicts eg. Snow Slab, Plank Walls, Copper Walls)
-- All slab, stair, and wall blocks can be crafted using a stone-cutter
-- All blocks are included in the creative inventory
+### What it does
 
-### Unique Features:
-A unique feature of this mod is that all slabs, stairs, and walls inherit the properties of their parent blocks. For instance;
-- Sand, Gravel, and Concrete Powder blocks are affected by gravity.
-- Grass spreads to Dirt Slabs, Stairs, and Walls
-- Soul Sand and Magma blocks create bubble columns
-- Slime Slabs Stairs and Walls will bounce entities and are sticky with pistons
-- Light blocks will emit light
-- Strippabble blocks can be stripped
-- Oxidizable blocks will oxidize and can be waxed
-- and so on
+Believe it or not, **More Slabs, Stairs & Walls** adds **slabs, stairs, and walls** for many vanilla blocks that were forgotten about or mojang never decided to add. Shapes inherit **behavior from the parent block** where it makes sense (gravity, spread, light, oxidation, stripping, redstone, and more), so builds feel like vanilla, not a separate block set.
+
+---
+
+### At a glance
+
+Think in **three shapes × hundreds of base blocks**: logs, planks, stone, copper, glass, terracotta, concrete, ores, dirt variants, Nether materials, End blocks, and special cases (bedrock, roots, polished basalt, chiseled variants, copper grates, and more). If vanilla has a full block you wish had steps or trim, it is probably here.
+
+---
+
+### Parent behavior
+
+These are examples; the full set follows the same idea: **match the parent** where Minecraft allows it.
+
+- **Gravity:** sand, gravel, concrete powder (and similar) fall like their full blocks.
+- **Spread and growth:** grass and dirt-style blocks interact with bonemeal and spreading where applicable.
+- **Fluids:** soul sand and magma slabs, stairs, and walls participate in **bubble columns** like the originals.
+- **Movement:** **slime** shapes bounce and stick to pistons; **ice** shapes affect slipperiness (including lower ice slabs and stairs).
+- **Light:** light-emitting parents still emit light on the shaped variants.
+- **Stripping:** strippable logs and stems use the same axe interaction pattern.
+- **Copper:** oxidizable copper variants **weather** and can be **waxed** (including waxed recipes with honeycomb where relevant).
+- **Transparency:** glass-style blocks use see-through models tuned so weather and clouds behave sensibly behind them.
+
+---
+
+### Recipes and QoL
+
+- Standard **3×3** recipes where vanilla patterns apply; **stonecutter** for efficient conversion.
+- **Uncrafting**-style recipes for raw ore and bar storage blocks where that fits the pack.
+- **Logs to planks** from log slabs, stairs, and walls where that matches expectations.
+- **Dyeing** for wool and terracotta shaped blocks.
+- **Smelting** cracked and glazed terracotta variants where appropriate.
+- Recipe tweaks where vanilla would conflict (for example some snow, plank wall, and copper wall cases).
+
+---
+
+### What is new in 4.2.0
+
+- **New shapes:** copper **grate** and **chiseled copper** families; **chiseled tuff** and **chiseled tuff bricks** (slab, stair, and wall where applicable).
+- **Added:** **smooth stone stairs**.
+- **Removed:** **tuff** slab, stair, and wall (now in vanilla); **smooth quartz** slab and stair (aligned with vanilla’s set).
+- **Gameplay:** double slabs that should be waterloggable **can be waterlogged** again; **lily pads** can sit on **waterlogged** mod slabs and stairs.
+
+Older highlights (4.0.0): **NeoForge** support alongside Fabric, plus many new materials (bedrock, mangrove roots, polished basalt, chiseled deepslate, chiseled blackstone bricks, chiseled stone bricks, and more), model fixes for transparent blocks, and burnable shapes as fuel.
+
+Full history: see **CHANGELOG.md** in the source repo.
+
+---
+
+### Loaders and reporting
+
+| Loader | Notes |
+|:--|:--|
+| **Fabric** | Use a matching **Fabric API** for your Minecraft version. |
+| **NeoForge** | Use a **NeoForge** build for **1.21.1** in the supported range. |
+
+**Bugs and requests:** [GitHub Issues](https://github.com/Nibaru/More-Slabs-Stairs-and-Walls/issues)
+
+**Downloads:** [Modrinth](https://modrinth.com/mod/more-slabs-stairs-and-walls) · [CurseForge](https://www.curseforge.com/minecraft/mc-mods/more-slabs-stairs-walls)
+
+---
+
+### Screenshots (optional)
+
+Add a few images here when you have them (build examples, creative tab, waterlogged slab with lily pad). Same markdown works on GitHub, Modrinth, and CurseForge:
+
+`![Example caption](https://your-host/example.png)`
+
+---
+
+### License
+
+**LGPL-3.0** — see [LICENSE](LICENSE) in the repository.

@@ -1,12 +1,11 @@
 package games.twinhead.moreslabsstairsandwalls.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.TagKey;
-
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 public class ModBlock {
 
@@ -49,7 +48,7 @@ public class ModBlock {
         private final List<TagKey<Block>> blockTags;
         private final List<TagKey<Item>> itemTags;
 
-        List<TagKey<Block>> mineableTags = List.of(BlockTags.PICKAXE_MINEABLE, BlockTags.AXE_MINEABLE, BlockTags.SHOVEL_MINEABLE, BlockTags.HOE_MINEABLE);
+        List<TagKey<Block>> mineableTags = List.of(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.MINEABLE_WITH_AXE, BlockTags.MINEABLE_WITH_SHOVEL, BlockTags.MINEABLE_WITH_HOE);
 
 
         public Builder(Block parentBlock) {
@@ -58,7 +57,7 @@ public class ModBlock {
             this.itemTags = new ArrayList<>();
 
             for (TagKey<Block> tag : mineableTags) {
-                if (parentBlock.getDefaultState().isIn(tag))
+                if (parentBlock.defaultBlockState().is(tag))
                     this.blockTags.add(tag);
             }
         }

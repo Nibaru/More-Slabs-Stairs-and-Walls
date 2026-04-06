@@ -4,30 +4,33 @@ import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseWall;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.WallBlock;
-import net.minecraft.block.enums.SlabType;
-import net.minecraft.block.enums.WallShape;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.EmptyBlockGetter;
+import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.SlabType;
+import net.minecraft.world.level.block.state.properties.WallSide;
+import net.minecraft.world.phys.shapes.CollisionContext;
 
 @SuppressWarnings("deprecation")
 public class TranslucentWall extends BaseWall {
 
-    public TranslucentWall(ModBlocks modBlock, Settings settings) {
+    public TranslucentWall(ModBlocks modBlock, Properties settings) {
         super(modBlock, settings);
     }
 
     @Override
     @Environment(EnvType.CLIENT)
-    public boolean isSideInvisible(BlockState state, BlockState state2, Direction dir) {
+    public boolean skipRendering(BlockState state, BlockState state2, Direction dir) {
         if (state2.getBlock() == this.getModBlock().parentBlock) return true;
 
         if (dir.equals(Direction.DOWN)){
 
             if (state2.getBlock() instanceof TranslucentSlab slab){
                 if (slab.getModBlock() == getModBlock())
-                    if (state2.get(Properties.SLAB_TYPE).equals(SlabType.TOP)) return true;
+                    if (state2.getValue(BlockStateProperties.SLAB_TYPE).equals(SlabType.TOP)) return true;
             }
 
             if (state2.getBlock() instanceof TranslucentWall wall){
@@ -39,7 +42,7 @@ public class TranslucentWall extends BaseWall {
         } else if (dir.equals(Direction.UP)){
             if (state2.getBlock() instanceof TranslucentSlab slab){
                 if (slab.getModBlock() == getModBlock())
-                    if (state2.get(Properties.SLAB_TYPE).equals(SlabType.BOTTOM)) return true;
+                    if (state2.getValue(BlockStateProperties.SLAB_TYPE).equals(SlabType.BOTTOM)) return true;
             }
 
             if (state2.getBlock() instanceof TranslucentWall wall){
@@ -54,16 +57,17 @@ public class TranslucentWall extends BaseWall {
                 return true;
         }
 
-        return super.isSideInvisible(state, state2, dir);
+        return super.skipRendering(state, state2, dir);
     }
 
 
     private boolean isMatchingBelow(BlockState state, BlockState state2){
-        if (state.get(WallBlock.EAST_SHAPE).equals(WallShape.LOW) && state2.get(WallBlock.EAST_SHAPE).equals(WallShape.TALL)) state = state.with(WallBlock.EAST_SHAPE, WallShape.TALL);
-        if (state.get(WallBlock.WEST_SHAPE).equals(WallShape.LOW) && state2.get(WallBlock.WEST_SHAPE).equals(WallShape.TALL)) state = state.with(WallBlock.WEST_SHAPE, WallShape.TALL);
-        if (state.get(WallBlock.NORTH_SHAPE).equals(WallShape.LOW) && state2.get(WallBlock.NORTH_SHAPE).equals(WallShape.TALL)) state = state.with(WallBlock.NORTH_SHAPE, WallShape.TALL);
-        if (state.get(WallBlock.SOUTH_SHAPE).equals(WallShape.LOW) && state2.get(WallBlock.SOUTH_SHAPE).equals(WallShape.TALL)) state = state.with(WallBlock.SOUTH_SHAPE, WallShape.TALL);
+        if (state.getValue(WallBlock.EAST_WALL).equals(WallSide.LOW) && state2.getValue(WallBlock.EAST_WALL).equals(WallSide.TALL)) state = state.setValue(WallBlock.EAST_WALL, WallSide.TALL);
+        if (state.getValue(WallBlock.WEST_WALL).equals(WallSide.LOW) && state2.getValue(WallBlock.WEST_WALL).equals(WallSide.TALL)) state = state.setValue(WallBlock.WEST_WALL, WallSide.TALL);
+        if (state.getValue(WallBlock.NORTH_WALL).equals(WallSide.LOW) && state2.getValue(WallBlock.NORTH_WALL).equals(WallSide.TALL)) state = state.setValue(WallBlock.NORTH_WALL, WallSide.TALL);
+        if (state.getValue(WallBlock.SOUTH_WALL).equals(WallSide.LOW) && state2.getValue(WallBlock.SOUTH_WALL).equals(WallSide.TALL)) state = state.setValue(WallBlock.SOUTH_WALL, WallSide.TALL);
 
-        return state.getBlock().getOutlineShape(state, null, null, null).equals(state2.getBlock().getOutlineShape(state2, null, null, null));
+        return state.getShape(EmptyBlockGetter.INSTANCE, BlockPos.ZERO, CollisionContext.empty())
+                .equals(state2.getShape(EmptyBlockGetter.INSTANCE, BlockPos.ZERO, CollisionContext.empty()));
     }
 }

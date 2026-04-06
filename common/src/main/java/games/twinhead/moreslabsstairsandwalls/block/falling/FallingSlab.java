@@ -4,108 +4,112 @@ import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseSlab;
 import games.twinhead.moreslabsstairsandwalls.block.entity.FallingSlabBlockEntity;
 import games.twinhead.moreslabsstairsandwalls.block.entity.LandingSlabBlock;
-import net.minecraft.block.*;
-import net.minecraft.block.enums.SlabType;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.particle.BlockStateParticleEffect;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.level.block.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.SlabType;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
-public class FallingSlab extends BaseSlab implements LandingSlabBlock, Waterloggable {
+public class FallingSlab extends BaseSlab implements LandingSlabBlock, SimpleWaterloggedBlock {
 
     public static final EnumProperty<SlabType> TYPE;
     public static final BooleanProperty WATERLOGGED;
-    protected static final VoxelShape BOTTOM_SHAPE;
-    protected static final VoxelShape TOP_SHAPE;
+    protected static final VoxelShape BOTTOM_AABB;
+    protected static final VoxelShape TOP_AABB;
 
 
-    public FallingSlab(ModBlocks modBlocks, Settings settings) {
+    public FallingSlab(ModBlocks modBlocks, Properties settings) {
         super(modBlocks,settings);
     }
 
 
-    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        world.scheduleBlockTick(pos, this, this.getFallDelay());
+    public void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean notify) {
+        world.scheduleTick(pos, this, this.getFallDelay());
     }
 
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        world.scheduleBlockTick(pos, this, this.getFallDelay());
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+        world.scheduleTick(pos, this, this.getFallDelay());
+        return super.updateShape(state, direction, neighborState, world, pos, neighborPos);
     }
 
     @Nullable
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        BlockPos blockPos = ctx.getBlockPos();
-        BlockState blockState = ctx.getWorld().getBlockState(blockPos);
-        if (blockState.isOf(this)) {
-            return blockState.with(TYPE, SlabType.DOUBLE).with(WATERLOGGED, false);
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        BlockPos blockPos = ctx.getClickedPos();
+        BlockState blockState = ctx.getLevel().getBlockState(blockPos);
+        if (blockState.is(this)) {
+            return blockState.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, false);
         } else {
-            FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
-            return this.getDefaultState().with(TYPE, SlabType.BOTTOM).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+            FluidState fluidState = ctx.getLevel().getFluidState(blockPos);
+            return this.defaultBlockState().setValue(TYPE, SlabType.BOTTOM).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
         }
     }
 
-    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (canFallThrough(world.getBlockState(pos.down())) && pos.getY() >= world.getBottomY()) {
-            FallingSlabBlockEntity.spawnFromBlock(world, pos, state.with(TYPE, state.get(TYPE).equals(SlabType.TOP) ? SlabType.BOTTOM : state.get(TYPE)));
-        } else if (state.get(TYPE) == SlabType.TOP) {
-            world.setBlockState(pos, state.with(TYPE, SlabType.BOTTOM));
+    public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+        if (canFallThrough(world.getBlockState(pos.below())) && pos.getY() >= world.getMinBuildHeight()) {
+            FallingSlabBlockEntity.fall(world, pos, state.setValue(TYPE, state.getValue(TYPE).equals(SlabType.TOP) ? SlabType.BOTTOM : state.getValue(TYPE)));
+        } else if (state.getValue(TYPE) == SlabType.TOP) {
+            world.setBlockAndUpdate(pos, state.setValue(TYPE, SlabType.BOTTOM));
         }
 
-        if(world.getBlockState(pos.down()).isOf(this) && this == world.getBlockState(pos.down()).getBlock()){
-            if(world.getBlockState(pos.down()).get(TYPE) == SlabType.BOTTOM){
-                if (world.getBlockState(pos.down()).get(TYPE) == SlabType.DOUBLE){
-                    world.setBlockState(pos, world.getBlockState(pos.down()).with(TYPE, SlabType.BOTTOM));
+        if(world.getBlockState(pos.below()).is(this) && this == world.getBlockState(pos.below()).getBlock()){
+            if(world.getBlockState(pos.below()).getValue(TYPE) == SlabType.BOTTOM){
+                if (world.getBlockState(pos.below()).getValue(TYPE) == SlabType.DOUBLE){
+                    world.setBlockAndUpdate(pos, world.getBlockState(pos.below()).setValue(TYPE, SlabType.BOTTOM));
                 } else {
-                    world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                    world.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                 }
-                world.setBlockState(pos.down(), world.getBlockState(pos.down()).with(TYPE, SlabType.DOUBLE));
+                world.setBlockAndUpdate(pos.below(), world.getBlockState(pos.below()).setValue(TYPE, SlabType.DOUBLE));
             }
         }
     }
 
     @Override
-    public void onLanding(World world, BlockPos pos, BlockState fallingBlockState, BlockState currentStateInPos, FallingSlabBlockEntity fallingBlockEntity) {
+    public void onLanding(Level world, BlockPos pos, BlockState fallingBlockState, BlockState currentStateInPos, FallingSlabBlockEntity fallingBlockEntity) {
         if(currentStateInPos.getBlock() instanceof FallingSlab slab && slab == this)
-            if(currentStateInPos.get(TYPE) == SlabType.BOTTOM && fallingBlockState.get(TYPE) == SlabType.DOUBLE){
-                world.setBlockState(pos, fallingBlockState.with(TYPE, SlabType.DOUBLE));
-                world.setBlockState(pos.up(), fallingBlockState.with(TYPE, SlabType.BOTTOM));
-            } else if (fallingBlockState.get(TYPE).equals(SlabType.TOP)) {
-                world.setBlockState(pos, fallingBlockState.with(TYPE, SlabType.BOTTOM));
+            if(currentStateInPos.getValue(TYPE) == SlabType.BOTTOM && fallingBlockState.getValue(TYPE) == SlabType.DOUBLE){
+                world.setBlockAndUpdate(pos, fallingBlockState.setValue(TYPE, SlabType.DOUBLE));
+                world.setBlockAndUpdate(pos.above(), fallingBlockState.setValue(TYPE, SlabType.BOTTOM));
+            } else if (fallingBlockState.getValue(TYPE).equals(SlabType.TOP)) {
+                world.setBlockAndUpdate(pos, fallingBlockState.setValue(TYPE, SlabType.BOTTOM));
             } else{
-                world.setBlockState(pos, fallingBlockState);
+                world.setBlockAndUpdate(pos, fallingBlockState);
             }
     }
 
     @Override
-    public void onDestroyedOnLanding(World world, BlockPos pos, FallingSlabBlockEntity fallingBlockEntity) {
+    public void onDestroyedOnLanding(Level world, BlockPos pos, FallingSlabBlockEntity fallingBlockEntity) {
         fallingBlockEntity.dropItem = true;
 
         // check if the block in postition is a slab and if it is the same type as the one that is falling
         if(world.getBlockState(pos).getBlock() instanceof FallingSlab slab && slab == fallingBlockEntity.getBlockState().getBlock()){
-            if(world.getBlockState(pos).get(TYPE) == SlabType.BOTTOM){
-                if(fallingBlockEntity.getBlockState().get(TYPE) == SlabType.DOUBLE){
-                    world.setBlockState(pos.up(), fallingBlockEntity.getBlockState().with(TYPE, SlabType.BOTTOM));
+            if(world.getBlockState(pos).getValue(TYPE) == SlabType.BOTTOM){
+                if(fallingBlockEntity.getBlockState().getValue(TYPE) == SlabType.DOUBLE){
+                    world.setBlockAndUpdate(pos.above(), fallingBlockEntity.getBlockState().setValue(TYPE, SlabType.BOTTOM));
                 }
-                world.setBlockState(pos, fallingBlockEntity.getBlockState().with(TYPE, SlabType.DOUBLE));
+                world.setBlockAndUpdate(pos, fallingBlockEntity.getBlockState().setValue(TYPE, SlabType.DOUBLE));
             }
         } else {
-            if(fallingBlockEntity.getBlockState().get(TYPE) == SlabType.DOUBLE) fallingBlockEntity.dropItem(this);
-            fallingBlockEntity.dropItem(this);
+            if(fallingBlockEntity.getBlockState().getValue(TYPE) == SlabType.DOUBLE) fallingBlockEntity.spawnAtLocation(this);
+            fallingBlockEntity.spawnAtLocation(this);
         }
 
     }
@@ -116,31 +120,31 @@ public class FallingSlab extends BaseSlab implements LandingSlabBlock, Waterlogg
 
 
     public static boolean canFallThrough(BlockState state) {
-        return state.isAir() || state.isIn(BlockTags.FIRE) || state.isLiquid() || state.isReplaceable();
+        return state.isAir() || state.is(BlockTags.FIRE) || state.liquid() || state.canBeReplaced();
     }
 
-    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         if (random.nextInt(16) == 0) {
-            BlockPos blockPos = pos.down();
+            BlockPos blockPos = pos.below();
             if (canFallThrough(world.getBlockState(blockPos))) {
                 double d = (double)pos.getX() + random.nextDouble();
                 double e = (double)pos.getY() - 0.05;
                 double f = (double)pos.getZ() + random.nextDouble();
-                world.addParticle(new BlockStateParticleEffect(ParticleTypes.FALLING_DUST, state), d, e, f, 0.0, 0.0, 0.0);
+                world.addParticle(new BlockParticleOption(ParticleTypes.FALLING_DUST, state), d, e, f, 0.0, 0.0, 0.0);
             }
         }
     }
 
     public FluidState getFluidState(BlockState state) {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
 
     static {
-        TYPE = Properties.SLAB_TYPE;
-        WATERLOGGED = Properties.WATERLOGGED;
-        BOTTOM_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
-        TOP_SHAPE = Block.createCuboidShape(0.0, 8.0, 0.0, 16.0, 16.0, 16.0);
+        TYPE = BlockStateProperties.SLAB_TYPE;
+        WATERLOGGED = BlockStateProperties.WATERLOGGED;
+        BOTTOM_AABB = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
+        TOP_AABB = Block.box(0.0, 8.0, 0.0, 16.0, 16.0, 16.0);
     }
 
 }

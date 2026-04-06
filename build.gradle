@@ -1,6 +1,8 @@
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
-    id "dev.architectury.loom" version "1.5-SNAPSHOT" apply false
+    id "dev.architectury.loom" version "1.13.467" apply false
+    // 1.2.30+ requires JVM 25; stay on 1.1.x for Java 21 (Minecraft mod toolchain).
+    id "net.darkhax.curseforgegradle" version "1.1.28"
 }
 
 architectury {
@@ -16,7 +18,7 @@ subprojects {
 
     dependencies {
         minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
-        mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+        mappings loom.officialMojangMappings()
     }
 }
 
@@ -25,7 +27,9 @@ allprojects {
     apply plugin: "architectury-plugin"
     apply plugin: "maven-publish"
 
-    archivesBaseName = rootProject.archives_base_name
+    base {
+        archivesName = rootProject.archives_base_name
+    }
     version = rootProject.mod_version
     group = rootProject.maven_group
 
@@ -35,7 +39,7 @@ allprojects {
     tasks.withType(JavaCompile) {
 
         options.encoding = "UTF-8"
-        options.release.set(17)
+        options.release.set(21)
     }
 
     java {
@@ -58,10 +62,46 @@ allprojects {
         ]
         inputs.properties replaceProperties
 
-        filesMatching(['META-INF/mods.toml', 'fabric.mod.json']) {
+        filesMatching(['META-INF/neoforge.mods.toml', 'fabric.mod.json']) {
             expand replaceProperties + [project: project]
         }
     }
 }
 
+// --- Publish to Modrinth / CurseForge (root project only; uses :fabric:remapJar and :neoforge:remapJar)
+def publishChangelog = rootProject.file("CHANGELOG.md").exists()
+        ? rootProject.file("CHANGELOG.md").getText("UTF-8")
+        : "No changelog was specified."
+
+def fabricRemapJarTask = tasks.getByPath(":fabric:remapJar")
+def neoforgeRemapJarTask = tasks.getByPath(":neoforge:remapJar")
+
+tasks.register("publishCurseForge", net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+    group = "publishing"
+    description = "Upload Fabric (primary) and NeoForge (additional) jars to CurseForge"
+    apiToken = System.getenv("CURSEFORGE_TOKEN") ?: findProperty("curseforge_token")
+    disableVersionDetection()
+
+    def curseProjectId = findProperty("curseforge_id")?.toString()
+    def mcVersion = findProperty("minecraft_version")?.toString()
+
+    def mainFile = upload(curseProjectId, fabricRemapJarTask)
+    mainFile.releaseType = "release"
+    mainFile.changelog = publishChangelog
+    mainFile.changelogType = "markdown"
+    mainFile.addGameVersion(mcVersion)
+    // Mod loaders are game-version tags; sub-files inherit parent versions (cannot set per-child).
+    mainFile.addModLoader("Fabric")
+    mainFile.addModLoader("NeoForge")
+
+    mainFile.withAdditionalFile(neoforgeRemapJarTask)
+
+    dependsOn fabricRemapJarTask, neoforgeRemapJarTask
+}
+
+tasks.register("publishPlatforms") {
+    group = "publishing"
+    description = "Runs modrinth and publishCurseForge"
+    dependsOn tasks.named("modrinth"), tasks.named("publishCurseForge")
+}
 

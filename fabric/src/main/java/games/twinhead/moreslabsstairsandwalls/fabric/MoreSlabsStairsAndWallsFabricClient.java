@@ -6,14 +6,17 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.color.block.BlockColorProvider;
-import net.minecraft.client.color.item.ItemColorProvider;
-import net.minecraft.client.color.world.BiomeColors;
-import net.minecraft.client.color.world.FoliageColors;
-import net.minecraft.client.color.world.GrassColors;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.entity.FallingBlockEntityRenderer;
-
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.color.block.BlockColor;
+import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.FallingBlockRenderer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.FoliageColor;
+import net.minecraft.world.level.GrassColor;
+import net.minecraft.world.level.block.Block;
 
 public class MoreSlabsStairsAndWallsFabricClient implements ClientModInitializer {
 
@@ -22,65 +25,41 @@ public class MoreSlabsStairsAndWallsFabricClient implements ClientModInitializer
         initBlockColorsLayers();
         initRenderLayers();
 
-        EntityRendererRegistry.register(ModRegistry.FALLING_SLAB_BLOCK_ENTITY, FallingBlockEntityRenderer::new);
+        EntityRendererRegistry.register(ModRegistry.FALLING_SLAB_BLOCK_ENTITY, FallingBlockRenderer::new);
     }
 
-    private void initRenderLayers(){
-        for (ModBlocks block: ModBlocks.values()) {
-            for (ModBlocks.BlockType type: ModBlocks.BlockType.values()) {
-                switch (block.modelType){
-                    case LEAVES -> BlockRenderLayerMap.INSTANCE.putBlock(block.getBlock(type), RenderLayer.getCutoutMipped());
-                    case GRASS, ROOTS -> BlockRenderLayerMap.INSTANCE.putBlock(block.getBlock(type), RenderLayer.getCutout());
-                    case GLASS, SLIME -> BlockRenderLayerMap.INSTANCE.putBlock(block.getBlock(type), block.equals(ModBlocks.GLASS) ? RenderLayer.getCutout() : RenderLayer.getTranslucent());
-                }
-                if(block == ModBlocks.HONEY_BLOCK
-                        || block == ModBlocks.ICE) BlockRenderLayerMap.INSTANCE.putBlock(block.getBlock(type), RenderLayer.getTranslucent());
-            }
-        }
-    }
-
-    private void initBlockColorsLayers(){
-        for (ModBlocks block: ModBlocks.values()) {
-            for (ModBlocks.BlockType type: ModBlocks.BlockType.values()) {
-                if (getBlockColor(block) != null && getItemColor(block) != null){
-                    ColorProviderRegistry.BLOCK.register(getBlockColor(block), block.getBlock(type));
-                    ColorProviderRegistry.ITEM.register(getItemColor(block), block.getBlock(type).asItem());
+    private void initRenderLayers() {
+        for (ModBlocks block : ModBlocks.values()) {
+            for (ModBlocks.BlockType type : ModBlocks.BlockType.values()) {
+                if (block.hasBlock(type)) {
+                    BlockRenderLayerMap.INSTANCE.putBlock(block.getBlock(type), block.modelType == ModBlocks.ModelType.LEAVES ? RenderType.cutoutMipped() : ItemBlockRenderTypes.getChunkRenderType(block.parentBlock.defaultBlockState()));
                 }
             }
         }
     }
 
-    public BlockColorProvider getBlockColor(ModBlocks block){
-        if(block.equals(ModBlocks.GRASS_BLOCK)) return (state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.getColor(0.5, 1.0);
-        return switch (block.modelType){
-            case LEAVES -> switch (block) {
-                case    OAK_LEAVES,
-                        JUNGLE_LEAVES,
-                        ACACIA_LEAVES,
-                        DARK_OAK_LEAVES,
-                        MANGROVE_LEAVES -> (state, world, pos, tintIndex) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.getDefaultColor();
-                case SPRUCE_LEAVES -> (state, world, pos, tintIndex) -> FoliageColors.getSpruceColor();
-                case BIRCH_LEAVES -> (state, world, pos, tintIndex) -> FoliageColors.getBirchColor();
-                default -> null;
-            };
-            default -> null;
-        };
+    private void initBlockColorsLayers() {
+        for (ModBlocks block : ModBlocks.values()) {
+            if (!needsParentTint(block)) continue;
+            Block parent = block.parentBlock;
+            for (ModBlocks.BlockType type : ModBlocks.BlockType.values()) {
+                if (!block.hasBlock(type)) continue;
+                Block self = block.getBlock(type);
+                ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> {
+                    var mc = Minecraft.getInstance();
+                    var parentState = parent.defaultBlockState();
+                    return mc.getBlockColors().getColor(parentState, world, pos, tintIndex);
+                }, self);
+                ColorProviderRegistry.ITEM.register((stack, tintIndex) -> Minecraft.getInstance()
+                        .getBlockColors()
+                        .getColor(parent.defaultBlockState(), null, null, tintIndex), self.asItem());
+            }
+        }
     }
-
-    public ItemColorProvider getItemColor(ModBlocks block){
-        if(block.equals(ModBlocks.GRASS_BLOCK)) return (stack, tintIndex) -> GrassColors.getColor(0.5, 1.0);
-        return switch (block.modelType){
-            case LEAVES -> switch (block) {
-                case    OAK_LEAVES,
-                        JUNGLE_LEAVES,
-                        ACACIA_LEAVES,
-                        DARK_OAK_LEAVES,
-                        MANGROVE_LEAVES -> (stack, tintIndex) -> FoliageColors.getDefaultColor();
-                case SPRUCE_LEAVES -> (stack, tintIndex) -> FoliageColors.getSpruceColor();
-                case BIRCH_LEAVES -> (stack, tintIndex) -> FoliageColors.getBirchColor();
-                default -> null;
-            };
-            default -> null;
+    private static boolean needsParentTint(ModBlocks block) {
+        return switch (block.modelType) {
+            case LEAVES, GRASS, ROOTS -> true;
+            default -> false;
         };
     }
 }

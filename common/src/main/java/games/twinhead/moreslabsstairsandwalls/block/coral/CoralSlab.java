@@ -2,17 +2,17 @@ package games.twinhead.moreslabsstairsandwalls.block.coral;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseSlab;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
@@ -20,44 +20,44 @@ public class CoralSlab extends BaseSlab {
 
     private final ModBlocks deadCoralBlock;
 
-    public CoralSlab(ModBlocks modBlocks, ModBlocks deadCoralBlock, Settings settings) {
+    public CoralSlab(ModBlocks modBlocks, ModBlocks deadCoralBlock, Properties settings) {
         super(modBlocks, settings);
         this.deadCoralBlock = deadCoralBlock;
     }
 
 
-    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (!isInWater(world, pos) && !state.get(WATERLOGGED)) {
-            world.setBlockState(pos, this.deadCoralBlock.getBlock(getBlockType()).getStateWithProperties(state), Block.NOTIFY_LISTENERS);
+    public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+        if (!isInWater(world, pos) && !state.getValue(WATERLOGGED)) {
+            world.setBlock(pos, this.deadCoralBlock.getBlock(getBlockType()).withPropertiesOf(state), Block.UPDATE_CLIENTS);
         }
     }
 
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
         if (!isInWater(world, pos)) {
-            world.scheduleBlockTick(pos, this, 60 + world.getRandom().nextInt(40));
+            world.scheduleTick(pos, this, 60 + world.getRandom().nextInt(40));
         }
 
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        return super.updateShape(state, direction, neighborState, world, pos, neighborPos);
     }
 
 
 
     @Nullable
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        if (!isInWater(ctx.getWorld(), ctx.getBlockPos())) {
-            ctx.getWorld().scheduleBlockTick(ctx.getBlockPos(), this, 60 + ctx.getWorld().getRandom().nextInt(40));
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        if (!isInWater(ctx.getLevel(), ctx.getClickedPos())) {
+            ctx.getLevel().scheduleTick(ctx.getClickedPos(), this, 60 + ctx.getLevel().getRandom().nextInt(40));
         }
 
-        return super.getPlacementState(ctx);
+        return super.getStateForPlacement(ctx);
     }
 
 
-    public static boolean isInWater(BlockView world, BlockPos pos) {
+    public static boolean isInWater(BlockGetter world, BlockPos pos) {
         Direction[] var3 = Direction.values();
 
         for (Direction direction : var3) {
-            FluidState fluidState = world.getFluidState(pos.offset(direction));
-            if (fluidState.isIn(FluidTags.WATER)) {
+            FluidState fluidState = world.getFluidState(pos.relative(direction));
+            if (fluidState.is(FluidTags.WATER)) {
                 return true;
             }
         }

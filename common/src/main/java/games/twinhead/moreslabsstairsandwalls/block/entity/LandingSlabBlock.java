@@ -1,19 +1,19 @@
 package games.twinhead.moreslabsstairsandwalls.block.entity;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 public interface LandingSlabBlock {
-    default void onLanding(World world, BlockPos pos, BlockState fallingBlockState, BlockState currentStateInPos, FallingSlabBlockEntity fallingBlockEntity) {
+    default void onLanding(Level world, BlockPos pos, BlockState fallingBlockState, BlockState currentStateInPos, FallingSlabBlockEntity fallingBlockEntity) {
     }
 
-    default void onDestroyedOnLanding(World world, BlockPos pos, FallingSlabBlockEntity fallingBlockEntity) {
+    default void onDestroyedOnLanding(Level world, BlockPos pos, FallingSlabBlockEntity fallingBlockEntity) {
     }
 
     default DamageSource getDamageSource(Entity attacker) {
-        return attacker.getDamageSources().fallingBlock(attacker);
+        return attacker.damageSources().fallingBlock(attacker);
     }
 }

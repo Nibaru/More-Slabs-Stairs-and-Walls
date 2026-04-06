@@ -14,7 +14,5 @@ public class MoreSlabsStairsAndWallsNeoForge {
         modEventBus.register(registry);
         ModRegistry.ENTITIES.register(modEventBus);
         ModRegistry.ITEM_GROUPS.register(modEventBus);
-
-
     }
 }

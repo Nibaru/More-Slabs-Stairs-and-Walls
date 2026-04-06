@@ -2,30 +2,36 @@ package games.twinhead.moreslabsstairsandwalls.block.soulsand;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseSlab;
-import net.minecraft.block.*;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.level.block.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BubbleColumnBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 @SuppressWarnings("deprecation")
 public class SoulSandSlab extends BaseSlab {
 
-    protected static final VoxelShape COLLISION_SHAPE_BOTTOM = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 6.0, 16.0);
-    protected static final VoxelShape COLLISION_SHAPE_TOP = Block.createCuboidShape(0.0, 8.0, 0.0, 16.0, 14.0, 16.0);
-    protected static final VoxelShape COLLISION_SHAPE_FULL = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 14.0, 16.0);
+    protected static final VoxelShape COLLISION_SHAPE_BOTTOM = Block.box(0.0, 0.0, 0.0, 16.0, 6.0, 16.0);
+    protected static final VoxelShape COLLISION_SHAPE_TOP = Block.box(0.0, 8.0, 0.0, 16.0, 14.0, 16.0);
+    protected static final VoxelShape COLLISION_SHAPE_FULL = Block.box(0.0, 0.0, 0.0, 16.0, 14.0, 16.0);
 
-    public SoulSandSlab(ModBlocks block, Settings settings) {
+    public SoulSandSlab(ModBlocks block, Properties settings) {
         super(block,settings);
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return switch (state.get(SlabBlock.TYPE)){
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return switch (state.getValue(SlabBlock.TYPE)){
             case TOP -> COLLISION_SHAPE_TOP;
             case BOTTOM -> COLLISION_SHAPE_BOTTOM;
             case DOUBLE -> COLLISION_SHAPE_FULL;
@@ -33,19 +39,19 @@ public class SoulSandSlab extends BaseSlab {
     }
 
     @Override
-    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        BubbleColumnBlock.update(world, pos.up(), state);
+    public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+        BubbleColumnBlock.updateColumn(world, pos.above(), state);
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if (direction == Direction.UP && neighborState.isOf(Blocks.WATER) || this.getFluidState(state).isOf(Fluids.WATER)) {
-            world.scheduleBlockTick(pos, this, 20);
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+        if (direction == Direction.UP && neighborState.is(Blocks.WATER) || this.getFluidState(state).is(Fluids.WATER)) {
+            world.scheduleTick(pos, this, 20);
         }
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        return super.updateShape(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        world.scheduleBlockTick(pos, this, 20);
+    public void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean notify) {
+        world.scheduleTick(pos, this, 20);
     }
 }

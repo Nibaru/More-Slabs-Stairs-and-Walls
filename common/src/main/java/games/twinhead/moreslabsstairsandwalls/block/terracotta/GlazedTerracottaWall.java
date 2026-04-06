@@ -2,16 +2,16 @@ package games.twinhead.moreslabsstairsandwalls.block.terracotta;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseWall;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.PushReaction;
 
 public class GlazedTerracottaWall extends BaseWall {
 
-    public GlazedTerracottaWall(ModBlocks block, Settings settings) {
+    public GlazedTerracottaWall(ModBlocks block, Properties settings) {
         super(block,settings);
     }
 
-    public PistonBehavior getPistonBehavior(BlockState state) {
-        return PistonBehavior.PUSH_ONLY;
+    public PushReaction getPistonBehavior(BlockState state) {
+        return PushReaction.PUSH_ONLY;
     }
 }

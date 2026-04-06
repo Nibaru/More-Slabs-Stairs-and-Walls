@@ -2,23 +2,23 @@ package games.twinhead.moreslabsstairsandwalls.block.redstone;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseSlab;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.enums.SlabType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.SlabType;
 @SuppressWarnings("deprecation")
 public class RedstoneSlab extends BaseSlab {
 
-    public RedstoneSlab(ModBlocks block, Settings settings) {
+    public RedstoneSlab(ModBlocks block, Properties settings) {
         super(block,settings);
     }
 
-    public boolean emitsRedstonePower(BlockState state) {
+    public boolean isSignalSource(BlockState state) {
         return true;
     }
 
-    public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
-        return direction.equals(Direction.UP) && state.get(TYPE) == SlabType.TOP ? 0 : 15;
+    public int getSignal(BlockState state, BlockGetter world, BlockPos pos, Direction direction) {
+        return direction.equals(Direction.UP) && state.getValue(TYPE) == SlabType.TOP ? 0 : 15;
     }
 }

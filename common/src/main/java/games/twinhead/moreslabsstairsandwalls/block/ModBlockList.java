@@ -1,10 +1,9 @@
 package games.twinhead.moreslabsstairsandwalls.block;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.registry.tag.BlockTags;
-
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
 
 public class ModBlockList {
 

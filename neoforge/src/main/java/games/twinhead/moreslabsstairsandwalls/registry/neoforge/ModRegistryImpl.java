@@ -1,7 +1,7 @@
 package games.twinhead.moreslabsstairsandwalls.registry.neoforge;
 
 import games.twinhead.moreslabsstairsandwalls.block.entity.FallingSlabBlockEntity;
-import net.minecraft.entity.EntityType;
+import net.minecraft.world.entity.EntityType;
 
 public class ModRegistryImpl {
 

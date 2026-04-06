@@ -2,14 +2,48 @@ package games.twinhead.moreslabsstairsandwalls.registry;
 
 import games.twinhead.moreslabsstairsandwalls.MoreSlabsStairsAndWalls;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+
+import java.util.List;
 
 public class ModTags {
 
-    public static final TagKey<Block> GRASS_BLOCKS = TagKey.of(RegistryKeys.BLOCK, MoreSlabsStairsAndWalls.id("grass_blocks"));
+    public static final TagKey<Block> GRASS_BLOCKS = TagKey.create(Registries.BLOCK, MoreSlabsStairsAndWalls.id("grass_blocks"));
+
+    public static final TagKey<Block> WOOL_SLABS = TagKey.create(Registries.BLOCK, MoreSlabsStairsAndWalls.id("wool_slabs"));
+    public static final TagKey<Block> WOOL_STAIRS = TagKey.create(Registries.BLOCK, MoreSlabsStairsAndWalls.id("wool_stairs"));
+    public static final TagKey<Block> WOOL_WALLS = TagKey.create(Registries.BLOCK, MoreSlabsStairsAndWalls.id("wool_walls"));
+
+    /** Item mirrors of {@link #WOOL_SLABS} / {@link #WOOL_STAIRS} / {@link #WOOL_WALLS} (all dye colors). */
+    public static final TagKey<Item> WOOL_SLABS_ITEMS = TagKey.create(Registries.ITEM, MoreSlabsStairsAndWalls.id("wool_slabs"));
+    public static final TagKey<Item> WOOL_STAIRS_ITEMS = TagKey.create(Registries.ITEM, MoreSlabsStairsAndWalls.id("wool_stairs"));
+    public static final TagKey<Item> WOOL_WALLS_ITEMS = TagKey.create(Registries.ITEM, MoreSlabsStairsAndWalls.id("wool_walls"));
+
+    private static final List<Block> VANILLA_WOOL_PARENT_BLOCKS = List.of(
+            Blocks.WHITE_WOOL,
+            Blocks.ORANGE_WOOL,
+            Blocks.MAGENTA_WOOL,
+            Blocks.LIGHT_BLUE_WOOL,
+            Blocks.YELLOW_WOOL,
+            Blocks.LIME_WOOL,
+            Blocks.PINK_WOOL,
+            Blocks.GRAY_WOOL,
+            Blocks.LIGHT_GRAY_WOOL,
+            Blocks.CYAN_WOOL,
+            Blocks.PURPLE_WOOL,
+            Blocks.BLUE_WOOL,
+            Blocks.BROWN_WOOL,
+            Blocks.GREEN_WOOL,
+            Blocks.RED_WOOL,
+            Blocks.BLACK_WOOL);
+
+    public static boolean isVanillaWoolParent(Block parent) {
+        return parent != null && VANILLA_WOOL_PARENT_BLOCKS.contains(parent);
+    }
 
     public static String getLogType(ModBlocks block){
         return switch (block) {
@@ -29,7 +63,7 @@ public class ModTags {
     }
 
     public static TagKey<Item> getLogTagKey(ModBlocks blocks, ModBlocks.BlockType type) {
-        return TagKey.of(RegistryKeys.ITEM, MoreSlabsStairsAndWalls.id(getLogType(blocks) + "_" + type.toString().toLowerCase() + (type == ModBlocks.BlockType.STAIRS ? "" : "s")));
+        return TagKey.create(Registries.ITEM, MoreSlabsStairsAndWalls.id(getLogType(blocks) + "_" + type.toString().toLowerCase() + (type == ModBlocks.BlockType.STAIRS ? "" : "s")));
     }
 
 

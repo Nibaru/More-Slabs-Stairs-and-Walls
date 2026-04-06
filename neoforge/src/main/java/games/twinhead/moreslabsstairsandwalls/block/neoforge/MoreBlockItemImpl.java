@@ -1,18 +1,18 @@
 package games.twinhead.moreslabsstairsandwalls.block.neoforge;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.RecipeType;
-import net.neoforged.neoforge.common.CommonHooks;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
 import org.jetbrains.annotations.Nullable;
 
 public class MoreBlockItemImpl {
-
     public static int getParentBurnTime(ModBlocks block, ModBlocks.BlockType type, ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
-        if (CommonHooks.getBurnTime(block.parentBlock.asItem().getDefaultStack(), recipeType) > 0){
-            int parentBurnTime = CommonHooks.getBurnTime(block.parentBlock.asItem().getDefaultStack(), recipeType);
+        ItemStack parentFuel = new ItemStack(block.parentBlock.asItem());
+        int burn = parentFuel.getBurnTime(recipeType);
+        if (burn > 0) {
+            int parentBurnTime = burn;
             return type == ModBlocks.BlockType.SLAB ? parentBurnTime / 2 : parentBurnTime;
         }
-        return -1;
+        return 0;
     }
 }

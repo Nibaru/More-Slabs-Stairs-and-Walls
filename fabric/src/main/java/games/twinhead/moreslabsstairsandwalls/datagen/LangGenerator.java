@@ -3,15 +3,18 @@ package games.twinhead.moreslabsstairsandwalls.datagen;
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.minecraft.core.HolderLookup;
+
+import java.util.concurrent.CompletableFuture;
 
 public class LangGenerator extends FabricLanguageProvider {
 
-    protected LangGenerator(FabricDataOutput dataGenerator) {
-        super(dataGenerator);
+    protected LangGenerator(FabricDataOutput dataGenerator, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        super(dataGenerator, registriesFuture);
     }
 
     @Override
-    public void generateTranslations(TranslationBuilder translationBuilder) {
+    public void generateTranslations(HolderLookup.Provider registryLookup, TranslationBuilder translationBuilder) {
         translationBuilder.add("itemGroup.more_slabs_stairs_and_walls.creative_tab", "More Slabs, Stairs, & Walls");
         for (ModBlocks block: ModBlocks.values()) {
             for (ModBlocks.BlockType type: ModBlocks.BlockType.values()) {

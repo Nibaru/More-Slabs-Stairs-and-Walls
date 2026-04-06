@@ -2,50 +2,50 @@ package games.twinhead.moreslabsstairsandwalls.block.oxidizable;
 
 import games.twinhead.moreslabsstairsandwalls.block.ModBlocks;
 import games.twinhead.moreslabsstairsandwalls.block.base.BaseWall;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Oxidizable;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
-
 import java.util.Optional;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 
 @SuppressWarnings("deprecation")
 public class OxidizableWall extends BaseWall implements CustomOxidizable {
 
-    private final Oxidizable.OxidationLevel oxidationLevel;
+    private final WeatheringCopper.WeatherState oxidationLevel;
     private final ModBlocks nextBlock;
 
-    public OxidizableWall(ModBlocks block,Oxidizable.OxidationLevel oxidationLevel, ModBlocks nextBlock, Settings arg) {
+    public OxidizableWall(ModBlocks block,WeatheringCopper.WeatherState oxidationLevel, ModBlocks nextBlock, Properties arg) {
         super(block,arg);
         this.oxidationLevel = oxidationLevel;
         this.nextBlock = nextBlock;
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
        return useItem(state, world, pos, player, hand);
     }
 
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        tickDegradation(state, world, pos, random);
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+        changeOverTime(state, world, pos, random);
     }
 
-    public boolean hasRandomTicks(BlockState state) {
-        return this.oxidationLevel != Oxidizable.OxidationLevel.OXIDIZED;
+    public boolean isRandomlyTicking(BlockState state) {
+        return this.oxidationLevel != WeatheringCopper.WeatherState.OXIDIZED;
     }
 
-    public Oxidizable.OxidationLevel getDegradationLevel() {
+    public WeatheringCopper.WeatherState getAge() {
         return this.oxidationLevel;
     }
 
-    public Optional<BlockState> getDegradationResult(BlockState state) {
-        return Optional.ofNullable((this.nextBlock == null ? state : nextBlock.getBlock(getBlockType()).getStateWithProperties(state)));
+    public Optional<BlockState> getNext(BlockState state) {
+        return Optional.ofNullable((this.nextBlock == null ? state : nextBlock.getBlock(getBlockType()).withPropertiesOf(state)));
     }
 
 }

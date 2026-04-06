@@ -1,7 +1,8 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id "com.gradleup.shadow" version "9.3.0"
+    // Legacy com.matthewprenger.cursegradle used removed Gradle APIs; Modrinth/CurseForge publish on the root project.
     id 'com.matthewprenger.cursegradle' version '1.4.0'
-    id "com.modrinth.minotaur" version "2.+"
+    id "com.modrinth.minotaur" version "2.9.0"
 }
 architectury {
     platformSetupLoomIde()
@@ -28,18 +29,32 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionNeoForge")) { transitive = false }
 
-    modCompileOnly "dev.emi:emi-neoforge:${emi_version}:api"
-    modLocalRuntime "dev.emi:emi-neoforge:${emi_version}"
+    //modCompileOnly "dev.emi:emi-neoforge:${emi_version}:api"
+    //modLocalRuntime "dev.emi:emi-neoforge:${emi_version}"
 }
 
 sourceSets.main.resources { srcDir '../common/src/main/generated/' }
 
 
 processResources {
-    inputs.property "version", project.version
+    def expandProps = [
+            version                 : project.version,
+            loader_version_range    : rootProject.findProperty("loader_version_range") ?: "[1,)",
+            mod_license             : rootProject.findProperty("mod_license") ?: "",
+            issues                  : rootProject.findProperty("issues") ?: "",
+            homepage                : rootProject.findProperty("homepage") ?: "",
+            mod_authors             : rootProject.findProperty("mod_authors") ?: "",
+            mod_id                  : rootProject.findProperty("mod_id") ?: "",
+            mod_version             : rootProject.findProperty("mod_version") ?: project.version,
+            mod_name                : rootProject.findProperty("mod_name") ?: "",
+            mod_description         : rootProject.findProperty("mod_description") ?: "",
+            neo_version_range       : rootProject.findProperty("neo_version_range") ?: "",
+            minecraft_version_range : rootProject.findProperty("minecraft_version_range") ?: "",
+    ]
+    expandProps.each { key, value -> inputs.property(key, value.toString()) }
 
-    filesMatching("META-INF/mods.toml") {
-        expand "version": project.version
+    filesMatching("META-INF/neoforge.mods.toml") {
+        expand expandProps
     }
 }
 
@@ -51,6 +66,7 @@ shadowJar {
 }
 
 loom {
+    accessWidenerPath = file("../common/src/main/resources/more_slabs_stairs_and_walls.accesswidener")
     neoForge {
     }
 }
@@ -73,12 +89,6 @@ sourcesJar {
     from commonSources.archiveFile.map { zipTree(it) }
 }
 
-components.java {
-    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
-        skip()
-    }
-}
-
 publishing {
     publications {
         mavenForge(MavenPublication) {
@@ -98,14 +108,34 @@ tasks.withType(JavaCompile) {
     // this fixes some edge cases with special characters not displaying correctly // see [http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html](http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html)
     // If Javadoc is generated, this must be specified in that task too.
     options.encoding = "UTF-8"
-    options.release = 17
+    options.release = 21
+}
+
+// --- Publish to Modrinth / CurseForge (root project only; uses :fabric:remapJar and :neoforge:remapJar)
+def publishChangelog = rootProject.file("CHANGELOG.md").exists()
+        ? rootProject.file("CHANGELOG.md").getText("UTF-8")
+        : "No changelog was specified."
+
+def neoforgeRemapJarTask = tasks.getByPath(":neoforge:remapJar")
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN") ?: findProperty("modrinth_token")
+    projectId = findProperty("modrinth_id")?.toString()
+    versionName = "v" + project.mod_version + "+" + project.minecraft_version + " NeoForge"
+    versionNumber = project.mod_version + "+" + project.minecraft_version
+    versionType = "release"
+    uploadFile = neoforgeRemapJarTask
+    detectLoaders = false
+    gameVersions = [findProperty("minecraft_version")?.toString()]
+    loaders = ["neoforge"]
+    changelog = publishChangelog
 }
 
 curseforge {
     apiKey = "${System.getenv("CURSEFORGE_KEY")}"
     project {
         id = "${project.curseforge_id}"
-        mainArtifact (remapJar){
+        mainArtifact (neoforgeRemapJarTask){
             displayName = "v" + project.mod_version + "+" + project.minecraft_version  + " NeoForge"
         }
         changelogType = 'markdown'
@@ -116,16 +146,12 @@ curseforge {
     }
 }
 
-modrinth {
-    token = "${System.getenv("MODRINTH_KEY")}"
-    projectId = project.modrinth_id
-    versionNumber = project.mod_version + "+" + project.minecraft_version
-    versionType = "release"
-    versionName =  "v" + project.mod_version + "+" + project.minecraft_version  + " NeoForge"
-    uploadFile = remapJar
-    gameVersions = [project.minecraft_version]
-    loaders = ["neoforge"]
-    changelog = rootProject.file("CHANGELOG.md").text
+tasks.named("curseforge").configure {
+    dependsOn neoforgeRemapJarTask
+    group = "publishing"
 }
 
-
+tasks.named("modrinth").configure {
+    dependsOn neoforgeRemapJarTask
+    group = "publishing"
+}
